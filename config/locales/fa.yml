@@ -1,0 +1,11 @@
+en:
+  activerecord:
+    models:
+      story:  "اخبار"
+
+    attributes:
+      story:
+        title:  "عنوان"
+        content:  "محتوا"
+        publish_date: "تاریخ انتشار"
+        excerpt:  "خلاصه"

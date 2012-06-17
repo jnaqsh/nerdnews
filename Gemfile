@@ -20,13 +20,16 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem 'jquery-rails'
+
+#custom gems added after initial project
+
+gem 'rails-i18n'
+
 group :production do
   gem 'execjs'
   gem 'therubyracer'
 end
-
-gem 'jquery-rails'
-
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
