@@ -1,8 +1,10 @@
+<div style="direction:rtl;">
 == سایت خبری
 
 هدف از ایجاد این پروژه، ساخت یک نرم‌افزار وب برای گذاشتن خبرهای مختلف از دنیای آی‌تی و فناوری است. این پروژه به‌طور کامل آزاد و متن‌باز است که توسط چارچوب نرم‌افزاری وب روبی آن ریلز نوشته می‌شود.
 
 این پروژه تجت اجازه‌نامهٔ GPL نسخهٔ ۳ منتشر می‌شود.
+</div>
 
 == LICENSE
 Scripts that help to improve wikimedia projects such as wikipedia, wiktionary and etc.
