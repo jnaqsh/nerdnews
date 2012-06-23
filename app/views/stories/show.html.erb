@@ -1,35 +1,31 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = @story.class -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+</div>
 
-<p>
-  <b>Title:</b>
-  <%= @story.title %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
+  <dd><%= @story.title %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:content) %>:</strong></dt>
+  <dd><%= @story.content %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:publish_date) %>:</strong></dt>
+  <dd><%= @story.publish_date %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
+  <dd><%= @story.user_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:excerpt) %>:</strong></dt>
+  <dd><%= @story.excerpt %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:slug) %>:</strong></dt>
+  <dd><%= @story.slug %></dd>
+</dl>
 
-<p>
-  <b>Content:</b>
-  <%= @story.content %>
-</p>
-
-<p>
-  <b>Publish date:</b>
-  <%= @story.publish_date %>
-</p>
-
-<p>
-  <b>User:</b>
-  <%= @story.user_id %>
-</p>
-
-<p>
-  <b>Excerpt:</b>
-  <%= @story.excerpt %>
-</p>
-
-<p>
-  <b>Slug:</b>
-  <%= @story.slug %>
-</p>
-
-
-<%= link_to 'Edit', edit_story_path(@story) %> |
-<%= link_to 'Back', stories_path %>
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              stories_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_story_path(@story), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              story_path(@story),
+              :method => 'delete',
+              :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
+              :class => 'btn btn-danger' %>
+</div>

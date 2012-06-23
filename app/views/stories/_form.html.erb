@@ -1,33 +1,44 @@
-<%= form_for(@story) do |f| %>
-  <% if @story.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@story.errors.count, "error") %> prohibited this story from being saved:</h2>
-
-      <ul>
-      <% @story.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<%= form_for @story, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :title, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :title, :class => 'text_field' %>
     </div>
-  <% end %>
+  </div>
+  <div class="control-group">
+    <%= f.label :content, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :content, :class => 'text_area' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :publish_date, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.datetime_select :publish_date, :class => 'datetime_select' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :user_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :user_id, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :excerpt, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :excerpt, :class => 'text_area' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :slug, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :slug, :class => 'text_field' %>
+    </div>
+  </div>
 
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :content %><br />
-    <%= f.text_area :content %>
-  </div>
-  <div class="field">
-    <%= f.label :publish_date %><br />
-    <%= f.datetime_select :publish_date %>
-  </div>
-  <div class="field">
-    <%= f.label :excerpt %><br />
-    <%= f.text_area :excerpt %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                stories_path, :class => 'btn' %>
   </div>
 <% end %>
