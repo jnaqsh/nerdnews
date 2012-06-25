@@ -30,6 +30,7 @@ gem 'rails-i18n'
 group :production do
   gem 'execjs'
   gem 'therubyracer'
+  gem 'mysql2'
 end
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
