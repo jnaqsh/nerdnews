@@ -3,20 +3,10 @@
   <h1><%=t '.title', :default => model_class.model_name.human %></h1>
 </div>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
-  <dd><%= @story.title %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:content) %>:</strong></dt>
-  <dd><%= @story.content %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:publish_date) %>:</strong></dt>
-  <dd><%= @story.publish_date %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
-  <dd><%= @story.user_id %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:excerpt) %>:</strong></dt>
-  <dd><%= @story.excerpt %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:slug) %>:</strong></dt>
-  <dd><%= @story.slug %></dd>
-</dl>
+<article>
+  <h2><%= @story.title %></h2>
+  <p><%= @story.content %></p>
+</article>
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),

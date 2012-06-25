@@ -1,7 +1,44 @@
 @import "twitter/bootstrap/bootstrap";
-body { 
+body {
 	padding-top: 60px;
 	padding-left: 20px;
+}
+
+[class*="span"] {
+  float: right;
+  direction: rtl;
+}
+
+.navbar .nav {
+  float: right;
+}
+
+.navbar .brand {
+  float: right;
+  margin-right: -20px;
+}
+
+.form-horizontal{
+
+  .control-label{
+    float: right;
+  }
+
+  .controls {
+    margin-right: 160px;
+  }
+}
+
+textarea {
+  width: 500px;
+}
+
+input[type='text'] {
+  width: 350px;
+}
+
+input, textarea, .uneditable-input {
+  margin-right: 0;
 }
 
 @import "twitter/bootstrap/responsive";
@@ -11,7 +48,7 @@ body {
 @iconWhiteSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings-white.png');
 
 // Set the Font Awesome (Font Awesome is default. You can disable by commenting below lines)
-// Note: If you use asset_path() here, your compiled boostrap_and_overrides.css will not 
+// Note: If you use asset_path() here, your compiled boostrap_and_overrides.css will not
 //       have the proper paths. So for now we use the absolute path.
 @fontAwesomeEotPath: '/assets/fontawesome-webfont.eot';
 @fontAwesomeWoffPath: '/assets/fontawesome-webfont.woff';

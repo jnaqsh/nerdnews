@@ -1,4 +1,19 @@
-en:
+fa:
+  helpers:
+    links:
+      new: "جدید"
+      edit: "ویرایش"
+      destroy: "حذف"
+      confirm: "آیا مطمئن هستید؟"
+
+  stories:
+    index:
+      title: "اخبار"
+  layouts:
+    application:
+      brand_name: "اخبار باز"
+      home: "صفحه اصلی"
+
   activerecord:
     models:
       story:  "اخبار"

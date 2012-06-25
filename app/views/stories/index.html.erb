@@ -2,44 +2,24 @@
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
 </div>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:title) %></th>
-      <th><%= model_class.human_attribute_name(:content) %></th>
-      <th><%= model_class.human_attribute_name(:publish_date) %></th>
-      <th><%= model_class.human_attribute_name(:user_id) %></th>
-      <th><%= model_class.human_attribute_name(:excerpt) %></th>
-      <th><%= model_class.human_attribute_name(:slug) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @stories.each do |story| %>
-      <tr>
-        <td><%= link_to story.id, story_path(story) %></td>
-        <td><%= story.title %></td>
-        <td><%= story.content %></td>
-        <td><%= story.publish_date %></td>
-        <td><%= story.user_id %></td>
-        <td><%= story.excerpt %></td>
-        <td><%= story.slug %></td>
-        <td><%=l story.created_at %></td>
-        <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+
+<% @stories.each do |story| %>
+  <article>
+    <h2><%= story.title %></h2>
+    <p><%= story.excerpt %></p>
+    <div>
+      <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_story_path(story), :class => 'btn btn-mini' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       story_path(story),
                       :method => :delete,
                       :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
                       :class => 'btn btn-mini btn-danger' %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    </div>
+  </article>
+
+  <hr />
+<% end %>
 
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_story_path,

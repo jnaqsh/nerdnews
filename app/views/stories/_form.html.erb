@@ -8,19 +8,7 @@
   <div class="control-group">
     <%= f.label :content, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_area :content, :class => 'text_area' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :publish_date, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.datetime_select :publish_date, :class => 'datetime_select' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :user_id, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.number_field :user_id, :class => 'number_field' %>
+      <%= f.text_area :content, :class => 'text_area', rows: 15 %>
     </div>
   </div>
   <div class="control-group">
@@ -30,9 +18,9 @@
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :slug, :class => 'control-label' %>
+    <%= f.label :publish_date, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :slug, :class => 'text_field' %>
+      <%= f.datetime_select :publish_date, :class => 'datetime_select' %>
     </div>
   </div>
 
