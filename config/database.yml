@@ -21,6 +21,7 @@ test:
 production:
   adapter: mysql2
   encoding: utf8
+  host: localhost
   reconnect: false
   database: opennews
   user: opennews_user
