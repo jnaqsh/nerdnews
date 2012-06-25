@@ -24,7 +24,7 @@ production:
   host: localhost
   reconnect: false
   database: opennews
-  user: opennews_user
+  username: opennews_user
   password: opennews_password
   pool: 5
   timeout: 5000
