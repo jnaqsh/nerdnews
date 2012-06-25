@@ -5,7 +5,7 @@
 
 <% @stories.each do |story| %>
   <article>
-    <h2><%= story.title %></h2>
+    <h2><%= link_to story.title, story %></h2>
     <p><%= story.excerpt %></p>
     <div>
       <%= link_to t('.edit', :default => t("helpers.links.edit")),
