@@ -23,7 +23,7 @@ production:
   encoding: utf8
   reconnect: false
   database: opennews
-  user: opennews
-  password: opennewspassword
+  user: opennews_user
+  password: opennews_password
   pool: 5
   timeout: 5000
