@@ -1,28 +1,8 @@
-<%= form_for @story, :html => { :class => 'form-horizontal' } do |f| %>
-  <div class="control-group">
-    <%= f.label :title, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :title, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :content, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_area :content, :class => 'text_area', rows: 15 %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :excerpt, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_area :excerpt, :class => 'text_area' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :publish_date, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.datetime_select :publish_date, :class => 'datetime_select' %>
-    </div>
-  </div>
+<%= simple_form_for @story, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :title %>
+  <%= f.input :content %>
+  <%= f.input :excerpt %>
+  <%= f.input :publish_date %>
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>

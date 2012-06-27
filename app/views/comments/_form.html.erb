@@ -1,16 +1,6 @@
-<%= form_for [@story, @comment], :html => { :class => 'form-horizontal' } do |f| %>
-  <div class="control-group">
-    <%= f.label :name, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :name, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :content, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_area :content, :class => 'text_area', rows: 10 %>
-    </div>
-  </div>
+<%= simple_form_for [@story, @comment], :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :name %>
+  <%= f.input :content, height: 5 %>
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
