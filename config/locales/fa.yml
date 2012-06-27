@@ -5,10 +5,16 @@ fa:
       edit: "ویرایش"
       destroy: "حذف"
       confirm: "آیا مطمئن هستید؟"
+      back: "برگشت"
+      cancel: "لغو"
 
   stories:
     index:
       title: "اخبار"
+    show:
+      comments: "دیدگاه‌ها"
+      no_comments: "هیچ دیدگاهی وجود ندارد."
+
   layouts:
     application:
       brand_name: "اخبار باز"
@@ -17,6 +23,7 @@ fa:
   activerecord:
     models:
       story:  "اخبار"
+      comment: "دیدگاه"
 
     attributes:
       story:
@@ -24,3 +31,7 @@ fa:
         content:  "محتوا"
         publish_date: "تاریخ انتشار"
         excerpt:  "خلاصه"
+
+      comment:
+        name: "نام"
+        content: "دیدگاه"
