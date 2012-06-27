@@ -46,7 +46,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to @story, notice: 'Comment was successfully created.' }
+        format.html { redirect_to @story, notice: t('controllers.comments.create.flash.success') }
         format.json { render json: @comment, status: :created, location: @comment }
       else
         format.html { render template: "stories/show" }
@@ -62,7 +62,8 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.update_attributes(params[:comment])
-        format.html { redirect_to @comment, notice: 'Comment was successfully updated.' }
+        format.html { redirect_to @comment,
+          notice: t('controllers.comments.update.flash.success') }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

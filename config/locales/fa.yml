@@ -1,4 +1,20 @@
 fa:
+  controllers:
+    stories:
+      create:
+        flash:
+          success:  "خبر جدید با موفقیت ایجاد گردید."
+      update:
+        flash:
+          success:  "خبر با موفقیت به‌روز گردید."
+    comments:
+      create:
+        flash:
+          success: "دیدگاه شما با موفقیت فرستاده شد."
+      update:
+        flash:
+          success:  "دیدگاه شما با موفقیت به‌روز شد."
+
   helpers:
     links:
       new: "جدید"
