@@ -1,5 +1,7 @@
 Nerdnews::Application.routes.draw do
-  resources :stories
+  resources :stories do
+    resources :comments
+  end
 
   root :to => "stories#index"
 
