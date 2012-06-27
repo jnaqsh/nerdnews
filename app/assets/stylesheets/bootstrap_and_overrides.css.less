@@ -3,50 +3,6 @@ body {
 	padding-top: 60px;
 	padding-left: 20px;
 }
-
-[class*="span"] {
-  float: right;
-  direction: rtl;
-}
-
-.navbar .nav {
-  float: right;
-}
-
-.navbar .brand {
-  float: right;
-  margin-right: -20px;
-}
-
-.form-horizontal{
-
-  .control-label{
-    float: right;
-    text-align: left;
-  }
-
-  .controls {
-    margin-right: 160px;
-  }
-}
-
-textarea {
-  width: 500px;
-}
-
-input[type='text'] {
-  width: 350px;
-}
-
-input, textarea, .uneditable-input {
-  margin-right: 0;
-}
-
-.alert {
-  direction: rtl;
-  padding: 8px 14px 8px 35px;
-}
-
 @import "twitter/bootstrap/responsive";
 
 // Set the correct sprite paths
@@ -74,3 +30,61 @@ input, textarea, .uneditable-input {
 //
 // Example:
 // @linkColor: #ff0000;
+
+
+//compatiblity code for rtl languages
+
+[class*="span"] {
+  float: right;
+  direction: rtl;
+}
+
+.navbar .nav {
+  float: right;
+}
+
+.navbar .brand {
+  float: right;
+  margin-right: -20px;
+}
+
+.form-horizontal{
+
+  .control-label{
+    float: right;
+    text-align: left;
+  }
+
+  .controls {
+    margin-right: 160px;
+  }
+}
+
+.alert .close
+{
+  right: 21px;
+}
+
+.close {
+  float: left;
+}
+
+input, textarea, .uneditable-input {
+  margin-right: 0;
+}
+
+.alert {
+  direction: rtl;
+  padding: 8px 14px 8px 35px;
+}
+
+
+// custom code
+
+textarea {
+  width: 500px;
+}
+
+input[type='text'] {
+  width: 350px;
+}
