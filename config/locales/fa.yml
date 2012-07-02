@@ -21,6 +21,11 @@ fa:
       update:
         flash:
           success: "اطلاعات شما با موفقیت به‌روز گردید."
+  users:
+    new:
+      register: "ثبت‌نام"
+    form:
+      submit: "ثبت‌نام"
 
   errors:
     messages:
@@ -35,6 +40,8 @@ fa:
       back: "برگشت"
       cancel: "لغو"
     actions: "عملیات"
+    titles:
+      new: "جدید"
 
   stories:
     index:
@@ -47,6 +54,7 @@ fa:
     application:
       brand_name: "اخبار باز"
       home: "صفحه اصلی"
+      register: "ثبت‌نام"
 
   activerecord:
     models:
