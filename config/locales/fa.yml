@@ -14,6 +14,14 @@ fa:
       update:
         flash:
           success:  "دیدگاه شما با موفقیت به‌روز شد."
+    users:
+      create:
+        flash:
+          success: "شما با موفقیت ثبت‌نام کردید."
+      update:
+        flash:
+          success: "اطلاعات شما با موفقیت به‌روز گردید."
+
   errors:
     messages:
       email_format: "ایمیل نامعتبر است"
@@ -26,7 +34,7 @@ fa:
       confirm: "آیا مطمئن هستید؟"
       back: "برگشت"
       cancel: "لغو"
-      actions: "عملیات"
+    actions: "عملیات"
 
   stories:
     index:
@@ -58,7 +66,9 @@ fa:
         content: "دیدگاه"
 
       user:
+        id: "شماره"
         full_name: "نام و نام خانوادگی"
         email:  "ایمیل"
         password: "رمز عبور"
+        created_at: "ایجاد شده در"
         password_confirmation: "تایید رمز عبور"
