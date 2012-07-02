@@ -40,6 +40,7 @@ fa:
     models:
       story:  "خبر"
       comment: "دیدگاه"
+      user: "کاربر"
 
     attributes:
       story:
@@ -51,3 +52,8 @@ fa:
       comment:
         name: "نام"
         content: "دیدگاه"
+
+      user:
+        full_name: "نام و نام خانوادگی"
+        email:  "ایمیل"
+        password: "رمز عبور"
