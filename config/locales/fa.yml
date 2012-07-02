@@ -14,6 +14,9 @@ fa:
       update:
         flash:
           success:  "دیدگاه شما با موفقیت به‌روز شد."
+  errors:
+    messages:
+      email_format: "ایمیل نامعتبر است"
 
   helpers:
     links:
@@ -23,6 +26,7 @@ fa:
       confirm: "آیا مطمئن هستید؟"
       back: "برگشت"
       cancel: "لغو"
+      actions: "عملیات"
 
   stories:
     index:
