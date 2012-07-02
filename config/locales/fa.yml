@@ -57,3 +57,4 @@ fa:
         full_name: "نام و نام خانوادگی"
         email:  "ایمیل"
         password: "رمز عبور"
+        password_confirmation: "تایید رمز عبور"

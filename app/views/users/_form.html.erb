@@ -2,6 +2,7 @@
   <%= f.input :full_name %>
   <%= f.input :email %>
   <%= f.input :password %>
+  <%= f.input :password_confirmation %>
   <div class="form-actions">
     <%= f.button :submit, :class => 'btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
