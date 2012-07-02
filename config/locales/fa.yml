@@ -21,11 +21,20 @@ fa:
       update:
         flash:
           success: "اطلاعات شما با موفقیت به‌روز گردید."
+    sessions:
+      create:
+        flash:
+          error: "ایمیل یا رمز عبور و یا ترکیبی از این دو اشتباه است."
+          success: "با موفقیت وارد شدید."
   users:
     new:
       register: "ثبت‌نام"
     form:
       submit: "ثبت‌نام"
+
+  sessions:
+    new:
+      login: "ورود"
 
   errors:
     messages:
