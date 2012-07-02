@@ -38,7 +38,7 @@ fa:
 
   activerecord:
     models:
-      story:  "اخبار"
+      story:  "خبر"
       comment: "دیدگاه"
 
     attributes:
