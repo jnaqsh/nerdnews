@@ -25,7 +25,7 @@ gem 'jquery-rails'
 
 #custom gems added after initial project
 
-gem 'rails-i18n'
+gem 'rails-i18n', git: 'https://github.com/iCEAGE/rails-i18n.git'
 
 group :production do
   gem 'execjs'
