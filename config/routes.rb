@@ -1,4 +1,6 @@
 Nerdnews::Application.routes.draw do
+  resources :users
+
   resources :stories do
     resources :comments
   end
