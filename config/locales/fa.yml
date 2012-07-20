@@ -64,6 +64,7 @@ fa:
       brand_name: "اخبار فناوری"
       home: "صفحه اصلی"
       register: "ثبت‌نام"
+      login: "ورود"
 
   activerecord:
     models:
