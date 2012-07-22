@@ -7,9 +7,8 @@ class User < ActiveRecord::Base
 
   validates_presence_of :full_name
   validates :password, confirmation: true, presence: true, on: :create
-  validates :email, email_format: true
+  validates :email, email_format: true, uniqueness: true
   validates_length_of :full_name, maximum: 30, minimum: 7
-
   accepts_nested_attributes_for :roles
 
   def role?(role)
