@@ -3,23 +3,7 @@
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
 </div>
 
-<% @stories.each do |story| %>
-  <article>
-    <h2><%= link_to story.title, story %></h2>
-    <p><%= story.excerpt %></p>
-    <div>
-      <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_story_path(story), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      story_path(story),
-                      :method => :delete,
-                      :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
-                      :class => 'btn btn-mini btn-danger' %>
-    </div>
-  </article>
-
-  <hr />
-<% end %>
+<%= render partial: "story", object: @stories %>
 
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_story_path,
