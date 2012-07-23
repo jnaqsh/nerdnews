@@ -3,7 +3,7 @@ class StoriesController < ApplicationController
   # GET /stories
   # GET /stories.json
   def index
-    @stories = Story.all
+    @stories = Story.order(:created_at).page params[:page]
 
     respond_to do |format|
       format.html # index.html.erb

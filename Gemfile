@@ -49,3 +49,4 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 
 gem 'simple_form'
 gem "cancan"
+gem 'kaminari'

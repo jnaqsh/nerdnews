@@ -90,3 +90,11 @@ fa:
         password: "رمز عبور"
         created_at: "ایجاد شده در"
         password_confirmation: "تایید رمز عبور"
+
+  views:
+    pagination:
+      first: "ابتدا &raquo;"
+      last: "&laquo; انتها"
+      previous: "قبلی &rsaquo;"
+      next: "&lsaquo; بعدی"
+      truncate: "..."
