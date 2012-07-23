@@ -3,8 +3,11 @@
     <h2><%= link_to story.title, story %></h2>
     <p><%= story.excerpt %></p>
     <div>
-      <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_story_path(story), :class => 'btn btn-mini' %>
+      <% if can? :update, story %>
+        <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                        edit_story_path(story), :class => 'btn btn-mini' %>
+      <% end %>
+      <% if can? :destroy, story %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       story_path(story),
                       :method => :delete,

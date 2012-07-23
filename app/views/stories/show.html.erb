@@ -11,13 +11,17 @@
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
               stories_path, :class => 'btn'  %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_story_path(@story), :class => 'btn' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              story_path(@story),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
-              :class => 'btn btn-danger' %>
+  <% if can? :edit, @story %>
+    <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                edit_story_path(@story), :class => 'btn' %>
+  <% end %>
+  <% if can? :destroy, @story %>
+    <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                story_path(@story),
+                :method => 'delete',
+                :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
+                :class => 'btn btn-danger' %>
+  <% end %>
 </div>
 
 <hr />
@@ -26,5 +30,7 @@
   <h2><%= t('.comments') %></h2>
   <%= render(@comments) || t('.no_comments') %>
 
-  <%= render "comments/form" %>
+  <% if can? :create, Comment %>
+    <%= render "comments/form" %>
+  <% end %>
 </div>

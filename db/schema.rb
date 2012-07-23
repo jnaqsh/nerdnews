@@ -21,6 +21,19 @@ ActiveRecord::Schema.define(:version => 20120722173508) do
     t.integer  "story_id"
   end
 
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "roles_users", :id => false, :force => true do |t|
+    t.integer  "role_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "stories", :force => true do |t|
     t.string   "title"
     t.text     "content"

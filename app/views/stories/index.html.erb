@@ -5,6 +5,8 @@
 
 <%= render partial: "story", object: @stories %>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_story_path,
-            :class => 'btn btn-primary' %>
+<% if can? :create, Story %>
+  <%= link_to t('.new', :default => t("helpers.links.new")),
+              new_story_path,
+              :class => 'btn btn-primary' %>
+<% end %>

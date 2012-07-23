@@ -61,9 +61,10 @@ fa:
 
   layouts:
     application:
-      brand_name: "اخبار باز"
+      brand_name: "اخبار فناوری"
       home: "صفحه اصلی"
       register: "ثبت‌نام"
+      login: "ورود"
 
   activerecord:
     models:
