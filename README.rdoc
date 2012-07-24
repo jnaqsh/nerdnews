@@ -2,8 +2,12 @@
 This is a project for creating a free and open source news site by Ruby on Rails framework.
 This project is under GPL 3 license.
 
+== TO DO
+* Write some integration, unit and functional test. (This is mandatory)
+* Add Category
+
 == LICENSE
-Scripts that help to improve wikimedia projects such as wikipedia, wiktionary and etc.
+This project just another free and open source news site that everyone can create news and create comments and so on.
     Copyright (C) 2012  Hamed Ramezanian
 
     This program is free software: you can redistribute it and/or modify
