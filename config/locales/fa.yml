@@ -71,6 +71,7 @@ fa:
       register: "ثبت‌نام"
       login: "ورود"
       logout: "خروج"
+      tags: "تگ‌ها"
 
   activerecord:
     models:

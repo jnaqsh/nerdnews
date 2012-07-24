@@ -56,10 +56,14 @@
     <div class="span3">
       <h2>درباره ما</h2>
       <p>هدف از ایجاد این سایت، اطلاع جدیدترین اخبار روز درباره آی‌تی است. این نرم‌افزار وب، یک نرم‌افزار آزاد است.</p>
-      <h2>تگ‌ها</h2>
-      <% @tags.each do |tag| %>
-        <p><%= link_to tag.name, tags_url(name: tag.name) %></p>
+
+      <% if @tags && !@tags.empty? %>
+        <h2><%= t('.tags') %></h2>
+        <% @tags.each do |tag| %>
+          <p><%= link_to tag.name, tags_url(name: tag.name) %></p>
+        <% end %>
       <% end %>
+
     </div>
   </div>
 </div>
