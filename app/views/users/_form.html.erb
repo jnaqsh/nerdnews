@@ -1,7 +1,7 @@
 <%= simple_form_for @user, :html => { :class => 'form-horizontal' } do |f| %>
   <%= f.input :full_name, :wrapper => :prepend do %>
     <span class="add-on"><i class="icon-user"></i></span>
-      <%= f.input_field :email %>
+      <%= f.input_field :full_name %>
   <% end %>
 
   <%= f.input :email, :wrapper => :prepend do %>
@@ -11,12 +11,12 @@
 
   <%= f.input :password, :wrapper => :prepend do %>
     <span class="add-on"><i class="icon-lock"></i></span>
-    <%= f.input_field :email %>
+    <%= f.input_field :password %>
   <% end %>
 
   <%= f.input :password_confirmation, :wrapper => :prepend do %>
     <span class="add-on"><i class="icon-lock"></i></span>
-    <%= f.input_field :email %>
+    <%= f.input_field :password_confirmation %>
   <% end %>
 
   <div class="form-actions">
