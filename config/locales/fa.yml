@@ -26,6 +26,9 @@ fa:
         flash:
           error: "ایمیل یا رمز عبور و یا ترکیبی از این دو اشتباه است."
           success: "با موفقیت وارد شدید."
+      destroy:
+        flash:
+          success: "با موفقیت خارج شدید."
   users:
     new:
       register: "ثبت‌نام"
@@ -67,6 +70,7 @@ fa:
       home: "صفحه اصلی"
       register: "ثبت‌نام"
       login: "ورود"
+      logout: "خروج"
 
   activerecord:
     models:

@@ -29,8 +29,13 @@
               <li class="active">
                 <%= link_to t('.home'), root_path %>
               </li>
-              <li><%= link_to t('.register'), new_user_path %></li>
-              <li><%= link_to t('.login'), new_session_path %></li>
+              <% unless current_user %>
+                <li><%= link_to t('.register'), new_user_path %></li>
+                <li><%= link_to t('.login'), new_session_path %></li>
+              <% else %>
+                <li><%= link_to t('.logout'), session_path, method: :delete,
+                  data: {confirm: t("helpers.links.confirm")} %></li>
+              <% end %>
             </ul>
           </div>
         </div>
