@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
-  attr_accessible :email, :full_name, :password, :password_confirmation
+  attr_accessible :email, :full_name, :password, :password_confirmation, :role_ids
 
   validates_presence_of :full_name
   validates :password, confirmation: true, presence: true, on: :create

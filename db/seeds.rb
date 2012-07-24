@@ -14,6 +14,6 @@ admin = User.create!(
                     :password_confirmation  => "admin"
                     )
 Role.delete_all
-role = Role.create([{:name => "admin"}, {:name => "manager"}])
+role = Role.create([{:name => "admin"}, {:name => "manager"}, {:name => "user"}])
 
 admin.roles << Role.find_by_name("admin")
