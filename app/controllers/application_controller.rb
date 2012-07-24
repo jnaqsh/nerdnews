@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  before_filter :load_tags
+
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_url, :alert => exception.message
   end
@@ -10,4 +12,10 @@ class ApplicationController < ActionController::Base
     end
   end
   helper_method :current_user
+
+  private
+
+  def load_tags
+    @tags = Tag.order('created_at desc')
+  end
 end
