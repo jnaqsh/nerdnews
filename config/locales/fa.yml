@@ -78,6 +78,7 @@ fa:
       story:  "خبر"
       comment: "دیدگاه"
       user: "کاربر"
+      tag: "تگ"
 
     attributes:
       story:
@@ -85,6 +86,7 @@ fa:
         content:  "محتوا"
         publish_date: "تاریخ انتشار"
         excerpt:  "خلاصه"
+        tag_names: "تگ‌ها"
 
       comment:
         name: "نام"
@@ -97,6 +99,9 @@ fa:
         password: "رمز عبور"
         created_at: "ایجاد شده در"
         password_confirmation: "تایید رمز عبور"
+
+      tag:
+        name: "نام"
 
   views:
     pagination:

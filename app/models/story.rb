@@ -9,19 +9,9 @@ class Story < ActiveRecord::Base
   validates_length_of :content, minimum: 20, maximum: 1000
   validates  :title, :content, :excerpt, presence: true
 
-  attr_writer :tag_names
-  before_save :submit_tags
+  attr_reader :tag_names
 
-  # setter method to grab Tags and show them in edit form
-  def tag_names
-    @tag_names || tags.map(&:name).join(', ')
-  end
-
-  def submit_tags
-    if @tag_names
-      self.tags = @tag_names.strip.split(/,\s?/).map do |name|
-        Tag.find_or_create_by_name(name.strip)
-      end
-    end
+  def tag_names=(tokens)
+    self.tag_ids = Tag.ids_from_tokens(tokens)
   end
 end
