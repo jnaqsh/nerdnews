@@ -1,6 +1,13 @@
 <% @stories.each do |story| %>
   <article>
     <h2><%= link_to story.title, story %></h2>
+    <h5>
+      <p>
+      توسط <%= link_to story.user.full_name, user_path(story.user) %>
+      <!-- TODO: publish date -->
+      در <%=  %>
+      </p>
+    </h5>
     <p><%= story.excerpt %></p>
     <div>
       <% if can? :update, story %>
