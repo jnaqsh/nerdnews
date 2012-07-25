@@ -1,28 +1,26 @@
-<% @stories.each do |story| %>
-  <article>
-    <h2><%= link_to story.title, story %></h2>
-    <h5>
-      <p>
-      توسط <%= link_to story.user.full_name, user_path(story.user) %>
-      <!-- TODO: publish date -->
-      در <%=  %>
-      </p>
-    </h5>
-    <p><%= story.excerpt %></p>
-    <div>
-      <% if can? :update, story %>
-        <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                        edit_story_path(story), :class => 'btn btn-mini' %>
-      <% end %>
-      <% if can? :destroy, story %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      story_path(story),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-mini btn-danger'
-                       %>
-      <% end %>
-    </div>
-  </article>
-  <hr />
-<% end %>
+<article>
+  <h2><%= link_to story.title, story %></h2>
+  <h5>
+    <p>
+    توسط <%= link_to story.user.full_name, user_path(story.user) %>
+    <!-- TODO: publish date -->
+    در <%=  %>
+    </p>
+  </h5>
+  <p><%= story.excerpt %></p>
+  <div>
+    <% if can? :update, story %>
+      <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_story_path(story), :class => 'btn btn-mini' %>
+    <% end %>
+    <% if can? :destroy, story %>
+        <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                    story_path(story),
+                    :method => :delete,
+                    :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                    :class => 'btn btn-mini btn-danger'
+                     %>
+    <% end %>
+  </div>
+</article>
+<hr />
