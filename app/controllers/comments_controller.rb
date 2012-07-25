@@ -36,6 +36,7 @@ class CommentsController < ApplicationController
   # GET /comments/1/edit
   def edit
     @comment = Comment.find(params[:id])
+    @story = Story.find(params[:story_id])
   end
 
   # POST /comments
@@ -60,10 +61,11 @@ class CommentsController < ApplicationController
   # PUT /comments/1.json
   def update
     @comment = Comment.find(params[:id])
+    @story = Story.find(params[:story_id])
 
     respond_to do |format|
       if @comment.update_attributes(params[:comment])
-        format.html { redirect_to @comment,
+        format.html { redirect_to @story,
           notice: t('controllers.comments.update.flash.success') }
         format.json { head :no_content }
       else

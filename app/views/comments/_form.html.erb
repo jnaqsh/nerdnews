@@ -3,7 +3,8 @@
     <%= f.input :name %>
   <% else %>
     <!-- TODO: there's a bug here -->
-    <%= f.input :name, :disabled => true, :input_html => { :value => current_user.full_name } %>
+    <%# f.input :name, :disabled => true, :input_html => { :value => current_user.full_name } %>
+    <%= f.input :name, :input_html => { :value => current_user.full_name } %>
   <% end %>
   <%= f.input :content, input_html: {rows: 10} %>
   <div class="form-actions">
