@@ -5,6 +5,7 @@ This project is under GPL 3 license.
 == TO DO
 * Write some integration, unit and functional test. (This is mandatory)
 * Add Category
+* Add confirmation after a user create a story by a moderator
 
 == LICENSE
 This project just another free and open source news site that everyone can create news and create comments and so on.

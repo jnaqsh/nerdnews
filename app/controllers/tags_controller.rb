@@ -1,11 +1,10 @@
 class TagsController < ApplicationController
   def index
-    
-    @tag = Tag.find_by_name(params[:name])
-    @stories = @tag.stories.order(:created_at).page params[:page]
+    @tags = Tag.order(:name)
 
-    respond_to do |format| 
+    respond_to do |format|
       format.html
+      format.json {render json: @tags.tokens(params[:q])}
     end
   end
 end

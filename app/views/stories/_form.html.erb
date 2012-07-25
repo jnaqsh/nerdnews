@@ -2,8 +2,7 @@
   <%= f.input :title %>
   <%= f.input :content, input_html: {rows: 15} %>
   <%= f.input :excerpt, input_html: {rows: 10} %>
-  <%= f.input :tag_names %>
-  <%= f.input :publish_date %>
+  <%= f.input :tag_names, input_html: {data: {load: @story.tags}}  %>
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
