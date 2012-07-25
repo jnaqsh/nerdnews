@@ -40,6 +40,9 @@
               <ul class="dropdown-menu">
                 <li><%= link_to t('.profile'), user_path(current_user) %></li>
                 <li class="divider"></li>
+                <% if can? :create, Page %>
+                  <li><%= link_to t('.new_page'), new_page_path %></li>
+                <% end %>
                 <li><%= link_to t('.logout'), session_path, method: :delete,
                   data: {confirm: t("helpers.links.confirm")} %></li>
               </ul>
@@ -49,7 +52,7 @@
           <div class="nav-collapse">
             <ul class="nav">
               <li class="active"> <%= link_to t('.home'), root_path %> </li>
-              <li><%= link_to t('.about'), root_path %></li>
+              <li><%= link_to t('.about'), page_by_permalink_path("about-us") %></li>
               <li><%= link_to t('.contact us'), root_path %></li>
             </ul>
           </div>
