@@ -5,8 +5,6 @@
 
 <%= render :partial => "story", :object => @story %>
 
-<hr />
-
 <div class="comments">
   <h2><%= t('.comments') %></h2>
   <%= render(@comments) || t('.no_comments') %>

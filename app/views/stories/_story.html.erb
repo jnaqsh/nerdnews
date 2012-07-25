@@ -21,6 +21,13 @@
                     :class => 'btn btn-mini btn-danger'
                      %>
     <% end %>
+    <div class="btn-group pull-left">
+      <%= link_to story.comments_count, story_path(story), :class => "btn btn-primary btn-mini" %>
+      <%= link_to story_path(story), :class => "btn btn-primary btn-mini" do %>
+        <i class="icon-comment icon-white"></i> <%= t('stories.show.comments') %>
+      <% end %>
+    </div>
+        
   </div>
 </article>
 <hr />
