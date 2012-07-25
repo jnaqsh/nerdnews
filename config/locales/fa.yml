@@ -83,7 +83,6 @@ fa:
         content:  "محتوا"
         publish_date: "تاریخ انتشار"
         excerpt:  "خلاصه"
-        roles: "نقش"
 
       comment:
         name: "نام"
@@ -96,6 +95,7 @@ fa:
         password: "رمز عبور"
         created_at: "ایجاد شده در"
         password_confirmation: "تایید رمز عبور"
+        roles: "نقش"
 
   views:
     pagination:
