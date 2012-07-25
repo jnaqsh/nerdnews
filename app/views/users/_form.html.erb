@@ -1,7 +1,7 @@
 <%= simple_form_for @user, :html => { :class => 'form-horizontal' } do |f| %>
   <%= f.input :full_name, :wrapper => :prepend do %>
     <span class="add-on"><i class="icon-user"></i></span>
-      <%= f.input_field :full_name %>
+      <%= f.input_field :full_name, :disabled => true %>
   <% end %>
 
   <%= f.input :email, :wrapper => :prepend do %>
@@ -17,6 +17,10 @@
   <%= f.input :password_confirmation, :wrapper => :prepend do %>
     <span class="add-on"><i class="icon-lock"></i></span>
     <%= f.input_field :password_confirmation %>
+  <% end %>
+
+  <% if current_user.role? :admin %>
+    <%= f.association :roles, :as => :radio_buttons, :checked => @user.role_ids %>
   <% end %>
 
   <div class="form-actions">

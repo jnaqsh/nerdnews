@@ -26,7 +26,7 @@ fa:
         flash:
           error: "ایمیل یا رمز عبور و یا ترکیبی از این دو اشتباه است."
           success: "با موفقیت وارد شدید."
-      destroy:
+      destroy: 
         flash:
           success: "با موفقیت خارج شدید."
   users:
@@ -34,8 +34,6 @@ fa:
       register: "ثبت‌نام"
     form:
       submit: "ثبت‌نام"
-    edit_form:
-       submit: "ثبت‌"
 
   sessions:
     new:
@@ -85,6 +83,7 @@ fa:
         content:  "محتوا"
         publish_date: "تاریخ انتشار"
         excerpt:  "خلاصه"
+        roles: "نقش"
 
       comment:
         name: "نام"
