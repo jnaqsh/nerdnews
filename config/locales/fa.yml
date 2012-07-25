@@ -83,6 +83,7 @@ fa:
         content:  "محتوا"
         publish_date: "تاریخ انتشار"
         excerpt:  "خلاصه"
+        tag_names: "تگ‌ها"
 
       comment:
         name: "نام"
