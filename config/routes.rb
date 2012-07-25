@@ -1,4 +1,5 @@
 Nerdnews::Application.routes.draw do
+  resources :pages
 
   resources :tags
 
@@ -12,6 +13,7 @@ Nerdnews::Application.routes.draw do
     resources :comments
   end
 
+  get "/:permalink" => "pages#show", as: "page_by_permalink"
   root :to => "stories#index"
 
   # The priority is based upon order of creation:

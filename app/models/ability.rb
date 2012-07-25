@@ -12,6 +12,7 @@ class Ability
          can :read, Story
          can :create, User
          can :show, User
+         can :show, Page
        end
     #
     # The first argument to `can` is the action you are giving the user permission to do.
