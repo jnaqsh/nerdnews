@@ -2,7 +2,12 @@
   <h2><%= link_to story.title, story %></h2>
   <h5>
     <p>
-    توسط <%= link_to story.user.full_name, user_path(story.user) %>
+    توسط
+    <% if story.user %>
+      <%= link_to story.user.full_name, user_path(story.user) %>
+    <% else %>
+      <%= t('.anonymous_user') %>
+    <% end %>
     <!-- TODO: publish date -->
     در <%=  %>
     </p>

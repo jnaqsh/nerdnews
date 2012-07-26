@@ -63,6 +63,9 @@ fa:
     index:
       title: "اخبار"
       new: "خبری جدید بنویسید"
+    story:
+      anonymous_user: "شخص ناشناس"
+
     show:
       comments: "دیدگاه‌ها"
       no_comments: "هیچ دیدگاهی وجود ندارد."
