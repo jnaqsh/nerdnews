@@ -1,10 +1,10 @@
 class User < ActiveRecord::Base
-  has_and_belongs_to_many :roles
-  has_many :stories
-
+  attr_accessible :email, :full_name, :password, :password_confirmation, :role_ids
   has_secure_password
 
-  attr_accessible :email, :full_name, :password, :password_confirmation, :role_ids
+  has_and_belongs_to_many :roles
+  has_many :stories
+  has_many :comments
 
   validates_presence_of :full_name
   validates :password, confirmation: true, presence: true, on: :create
