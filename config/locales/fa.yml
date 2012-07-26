@@ -62,6 +62,7 @@ fa:
   stories:
     index:
       title: "اخبار"
+      new: "خبری جدید بنویسید"
     show:
       comments: "دیدگاه‌ها"
       no_comments: "هیچ دیدگاهی وجود ندارد."
@@ -78,6 +79,7 @@ fa:
       contact us: "تماس با ما"
       tags: "تگ‌ها"
       new_page: "ایجاد صفحه جدید"
+      new_story: "خبری جدید بنویسید"
 
   activerecord:
     models:
