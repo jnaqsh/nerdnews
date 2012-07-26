@@ -7,7 +7,7 @@
     در <%=  %>
     </p>
   </h5>
-  <p><%= story.excerpt %></p>
+  <p><%= story.content %></p>
   <div>
     <% if can? :update, story %>
       <%= link_to t('.edit', :default => t("helpers.links.edit")),
