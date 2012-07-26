@@ -97,6 +97,7 @@ fa:
 
       comment:
         name: "نام"
+        email: "ایمیل"
         content: "دیدگاه"
 
       user:

@@ -14,18 +14,18 @@
     </tr>
   </thead>
   <tbody>
-    <% @comments.each do |comment| %>
+    <% @story.comments.each do |comment| %>
       <tr>
-        <td><%= link_to comment.id, comment_path(comment) %></td>
+        <td><%= link_to comment.id, story_comments_path(comment.story comment) %></td>
         <td><%= comment.name %></td>
         <td><%= comment.content %></td>
         <td><%= comment.story_id %></td>
         <td><%=l comment.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_comment_path(comment), :class => 'btn btn-mini' %>
+                      edit_story_comment_path(comment.story, comment), :class => 'btn btn-mini' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      comment_path(comment),
+                      story_comment_path(comment.story, comment),
                       :method => :delete,
                       :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
                       :class => 'btn btn-mini btn-danger' %>
@@ -36,5 +36,5 @@
 </table>
 
 <%= link_to t('.new', :default => t("helpers.links.new")),
-            new_comment_path,
+            new_story_comment_path,
             :class => 'btn btn-primary' %>

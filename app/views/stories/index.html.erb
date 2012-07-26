@@ -1,13 +1,15 @@
 <%- model_class = Story.new.class -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+  <h1>
+    <%=t '.title', :default => model_class.model_name.human.pluralize %>
+    <% if can? :create, Story %>
+    <%= link_to t('.new', :default => t("helpers.links.new")),
+                new_story_path,
+                :class => 'btn btn-success pull-left' %>
+    <% end %>
+  </h1>
 </div>
 
-<%= render partial: "story", object: @stories %>
+<%= render partial: "story", collection: @stories %>
 
-<% if can? :create, Story %>
-  <%= link_to t('.new', :default => t("helpers.links.new")),
-              new_story_path,
-              :class => 'btn btn-primary' %>
-<% end %>
 <%= paginate @stories %>
