@@ -5,5 +5,5 @@ class Comment < ActiveRecord::Base
   attr_accessible :content, :name, :email, :user_id
 
   validates :name, :content, presence: true
-  validates :email, email_format: true
+  validates :email, email_format: true, presence: true
 end
