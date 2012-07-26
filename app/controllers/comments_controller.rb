@@ -4,6 +4,7 @@ class CommentsController < ApplicationController
   # GET /comments.json
   def index
     @comments = Comment.all
+    @story = Story.find(params[:story_id])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -26,6 +27,7 @@ class CommentsController < ApplicationController
   # GET /comments/new.json
   def new
     @comment = Comment.new
+    @story = Story.find(params[:story_id])
 
     respond_to do |format|
       format.html # new.html.erb
@@ -65,7 +67,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.update_attributes(params[:comment])
-        format.html { redirect_to @story,
+        format.html { redirect_to story_path(@comment.story),
           notice: t('controllers.comments.update.flash.success') }
         format.json { head :no_content }
       else

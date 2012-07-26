@@ -5,20 +5,20 @@
 
 <dl class="dl-horizontal">
   <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
-  <dd><%= @comment.name %></dd>
+  <dd><%= @story.comment.name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:content) %>:</strong></dt>
-  <dd><%= @comment.content %></dd>
+  <dd><%= @story.comment.content %></dd>
   <dt><strong><%= model_class.human_attribute_name(:story_id) %>:</strong></dt>
-  <dd><%= @comment.story_id %></dd>
+  <dd><%= @story.comment.story_id %></dd>
 </dl>
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
-              comments_path, :class => 'btn'  %>
+              story_comments_path, :class => 'btn'  %>
   <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_comment_path(@comment), :class => 'btn' %>
+              edit_story_comment_path(@comment.story, @comment), :class => 'btn' %>
   <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              comment_path(@comment),
+              story_comment_path(@comment.story, @comment),
               :method => 'delete',
               :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
               :class => 'btn btn-danger' %>
