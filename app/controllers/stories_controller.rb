@@ -48,8 +48,12 @@ class StoriesController < ApplicationController
   # POST /stories
   # POST /stories.json
   def create
-    @user = current_user
-    @story = @user.stories.build(params[:story])
+    if current_user
+      @user = current_user
+      @story = @user.stories.build(params[:story])
+    else
+      @story = Story.new(params[:story])
+    end
 
     respond_to do |format|
       if @story.save

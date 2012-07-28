@@ -1,5 +1,5 @@
 class Story < ActiveRecord::Base
-  attr_accessible :content, :excerpt, :publish_date, :title, :tag_names
+  attr_accessible :content, :publish_date, :title, :tag_names
 
   has_many :comments, dependent: :destroy
   has_many :taggings, dependent: :destroy
@@ -8,7 +8,7 @@ class Story < ActiveRecord::Base
 
   validates_length_of :title, maximum: 100, minimum: 10
   validates_length_of :content, minimum: 20, maximum: 1000
-  validates  :title, :content, :excerpt, presence: true
+  validates  :title, :content, presence: true
 
   attr_reader :tag_names
 
