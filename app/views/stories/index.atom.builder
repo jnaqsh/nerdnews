@@ -9,7 +9,7 @@ atom_feed do |feed|
       entry.content(story.content)
 
       entry.author do |author|
-        author.name ("DHH")
+        author.name story.user
       end
     end
   end
