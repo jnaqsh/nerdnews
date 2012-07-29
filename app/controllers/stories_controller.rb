@@ -6,7 +6,7 @@ class StoriesController < ApplicationController
     if params[:tag]
       @stories = Tag.find_by_name(params[:tag]).stories.order(:created_at).page params[:page]
     else
-      @stories = Story.order(:created_at).page params[:page]
+      @stories = Story.order("created_at desc").page params[:page]
     end
 
     respond_to do |format|
