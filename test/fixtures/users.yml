@@ -8,4 +8,4 @@ one:
 two:
   full_name: MyString
   email: MyString
-  password_digest: MyString
+  password_digest: <%= BCrypt::Password.create('secret') %>
