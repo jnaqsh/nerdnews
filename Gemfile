@@ -51,6 +51,7 @@ gem 'simple_form'
 gem "cancan"
 gem 'kaminari'
 gem 'sunspot_rails'
+gem 'RedCloth'
 
 group :development do
   gem 'sunspot_solr' # optional pre-packaged Solr distribution for use in development

@@ -1,17 +1,20 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  title: MyString
-  content: MyText
+  title: MyString MyString 
+  content: MyText MyString MyString MyString MyString
   publish_date: 2012-06-17 13:59:08
   user_id: 1
-  excerpt: MyText
-  slug: MyString
 
 two:
-  title: MyString
-  content: MyText
+  title: MyString MyString 
+  content: MyText MyString MyString MyString MyString
   publish_date: 2012-06-17 13:59:08
   user_id: 1
-  excerpt: MyText
-  slug: MyString
+
+three:
+  title: MyString MyString 
+  content: MyText MyString MyString MyString MyString
+  publish_date: 2012-06-17 13:59:08
+  user_id: 1
+

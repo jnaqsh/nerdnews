@@ -3,6 +3,11 @@ require 'test_helper'
 class PagesControllerTest < ActionController::TestCase
   setup do
     @page = pages(:one)
+    @page_input = {
+      name: "string",
+      permalink: "string",
+      content: "text"
+    }
   end
 
   test "should get index" do
@@ -18,7 +23,7 @@ class PagesControllerTest < ActionController::TestCase
 
   test "should create page" do
     assert_difference('Page.count') do
-      post :create, page: { content: @page.content, name: @page.name, permalink: @page.permalink }
+      post :create, page: @page_input
     end
 
     assert_redirected_to page_path(assigns(:page))
@@ -35,7 +40,7 @@ class PagesControllerTest < ActionController::TestCase
   end
 
   test "should update page" do
-    put :update, id: @page, page: { content: @page.content, name: @page.name, permalink: @page.permalink }
+    put :update, id: @page, page: @page_input
     assert_redirected_to page_path(assigns(:page))
   end
 
