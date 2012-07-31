@@ -8,6 +8,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    RedCloth (4.2.9)
     actionmailer (3.2.7)
       actionpack (= 3.2.7)
       mail (~> 2.4.4)
@@ -134,6 +135,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  RedCloth
   bcrypt-ruby (~> 3.0.0)
   cancan
   coffee-rails (~> 3.2.1)

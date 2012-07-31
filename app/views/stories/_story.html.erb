@@ -12,7 +12,7 @@
     در <%=  %>
     </p>
   </h5>
-  <p><%= story.content %></p>
+  <p><%= sanitize(RedCloth.new(story.content, [:filter_html, :filter_styles]).to_html) %></p>
   <div>
     <% if can? :update, story %>
       <%= link_to t('.edit', :default => t("helpers.links.edit")),
