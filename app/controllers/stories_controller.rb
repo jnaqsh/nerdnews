@@ -3,10 +3,16 @@ class StoriesController < ApplicationController
   # GET /stories
   # GET /stories.json
   def index
+    @search = Story.search do
+      fulltext params[:search]
+      order_by :publish_date, :desc
+      paginate :page => params[:page], :per_page => 5
+    end
+
     if params[:tag]
-      @stories = Tag.find_by_name(params[:tag]).stories.order("created_at desc").page params[:page]
+      @stories = Tag.find_by_name(params[:tag]).stories.order("publish_date desc").page params[:page]
     else
-      @stories = Story.order("created_at desc").page params[:page]
+      @stories = @search.results
     end
 
     respond_to do |format|

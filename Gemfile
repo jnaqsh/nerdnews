@@ -50,3 +50,8 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'simple_form'
 gem "cancan"
 gem 'kaminari'
+gem 'sunspot_rails'
+
+group :development do
+  gem 'sunspot_solr' # optional pre-packaged Solr distribution for use in development
+end
