@@ -35,7 +35,8 @@
           <% else %>
             <div class="btn-group pull-left">
               <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                <i class="icon-user"></i> <%= current_user.full_name %>
+                <%= image_tag avatar_url(current_user) %>
+                <%= current_user.full_name %>
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
@@ -77,13 +78,16 @@
       <h2>درباره ما</h2>
       <p>هدف از ایجاد این سایت، اطلاع جدیدترین اخبار روز درباره آی‌تی است. این نرم‌افزار وب، یک نرم‌افزار آزاد است.</p>
 
-      <% if @tags && !@tags.empty? %>
-        <h2><%= t('.tags') %></h2>
-        <% @tags.each do |tag| %>
-          <%= link_to tag.name, stories_path(tag: tag.name) %>
+      <div class="tags">
+        <% if @tags && !@tags.empty? %>
+          <h2><%= t('.tags') %></h2>
+          <% hash = list_tags(@tags) %>
+          <% hash.each do |name, percent| %>
+            <%= link_to name, stories_path(tag: name), 
+              :style => "font-size: #{percent}%" %>
+          <% end %>
         <% end %>
-      <% end %>
-
+      </div>
     </div>
   </div>
 </div>
