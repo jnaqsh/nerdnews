@@ -51,4 +51,4 @@ gem 'simple_form'
 gem "cancan"
 gem 'kaminari'
 gem 'RedCloth'
-gem 'rack-mini-profiler', group [:development, :test]
+gem 'rack-mini-profiler'
