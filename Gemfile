@@ -45,7 +45,7 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 # gem 'capistrano'
 
 # To use debugger
-# gem 'debugger'
+gem 'debugger'
 
 gem 'simple_form'
 gem "cancan"
@@ -56,3 +56,4 @@ gem 'RedCloth'
 group :development do
   gem 'sunspot_solr' # optional pre-packaged Solr distribution for use in development
 end
+gem 'rack-mini-profiler'

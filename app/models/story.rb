@@ -3,7 +3,9 @@ class Story < ActiveRecord::Base
 
   has_many :comments, dependent: :destroy
   has_many :taggings, dependent: :destroy
-  has_many :tags, :through => :taggings
+  has_many :tags, :through => :taggings,
+                  :after_add => :calculate_count_and_percentage,
+                  :after_remove => :calculate_count_and_percentage
   belongs_to :user
 
   validates_length_of :title, maximum: 100, minimum: 10
@@ -28,7 +30,13 @@ class Story < ActiveRecord::Base
     self.tag_ids = Tag.ids_from_tokens(tokens)
   end
 
-  def comments_count
-    self.comments.count
-  end
+  # def comments_count
+  #   self.comments.count
+  # end
+  private
+
+    def calculate_count_and_percentage(tag)
+      tag.update_attribute :stories_count, tag.stories.count
+      tag.update_attribute :stories_percentage, (tag.stories.count.to_f / Tag.sum(:stories_count).to_f * 100).floor
+    end
 end
