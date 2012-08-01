@@ -83,6 +83,7 @@ fa:
       tags: "تگ‌ها"
       new_page: "ایجاد صفحه جدید"
       new_story: "خبری جدید بنویسید"
+      search: "جستجو"
 
   activerecord:
     models:
