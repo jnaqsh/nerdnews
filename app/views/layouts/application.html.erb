@@ -81,10 +81,9 @@
       <div class="tags">
         <% if @tags && !@tags.empty? %>
           <h2><%= t('.tags') %></h2>
-          <% hash = list_tags(@tags) %>
-          <% hash.each do |name, percent| %>
-            <%= link_to name, stories_path(tag: name), 
-              :style => "font-size: #{percent}%" %>
+          <% @tags.each do |tag| %>
+            <%= link_to tag.name, stories_path(tag: tag.name), 
+              :style => "font-size: #{tag.stories_percentage + 100}%" %>
           <% end %>
         <% end %>
       </div>
