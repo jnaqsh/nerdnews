@@ -18,9 +18,9 @@ class Story < ActiveRecord::Base
     self.tag_ids = Tag.ids_from_tokens(tokens)
   end
 
-  def comments_count
-    self.comments.count
-  end
+  # def comments_count
+  #   self.comments.count
+  # end
   private
 
     def calculate_count_and_percentage(tag)
