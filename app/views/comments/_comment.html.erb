@@ -1,5 +1,6 @@
 <div class="comment">
   <h3><%= comment.name %></h3>
+  <h5><%= to_jalali(comment.created_at) %></h5>
   <p><%= comment.content %></p>
   <div>
   <% if can? :update, comment %>
