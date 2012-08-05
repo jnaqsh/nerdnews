@@ -14,6 +14,6 @@ module ApplicationHelper
 
   def to_jalali(date)
     jalali_date = JalaliDate.new(date)
-    jalali_date.strftime("%A %e %b %Y").to_farsi
+    jalali_date.strftime("%A %e %b %Y - %H:%M").to_farsi
   end
 end
