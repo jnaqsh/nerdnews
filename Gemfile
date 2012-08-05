@@ -58,3 +58,5 @@ group :development do
 end
 
 gem 'rack-mini-profiler'
+gem 'jalalidate'
+gem 'farsifu'

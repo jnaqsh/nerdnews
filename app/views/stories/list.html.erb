@@ -17,7 +17,7 @@
       <tr>
         <td><%= link_to story.id, story_path(story) %></td>
         <td><%= story.title %></td>
-        <td><%=l story.created_at %></td>
+        <td><%= to_jalali(story.created_at) %></td>
         <td><%= story.tag_names %></td>
         <td>
           <%= link_to t('.publish', :default => t("helpers.links.publish")),
