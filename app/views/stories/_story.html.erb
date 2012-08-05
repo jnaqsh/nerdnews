@@ -9,7 +9,7 @@
       <%= t('.anonymous_user') %>
     <% end %>
     <!-- TODO: publish date -->
-    در <%=  %>
+    در <%= story.publish_date %>
     </p>
   </h5>
   <p><%= sanitize(RedCloth.new(story.content, [:filter_html, :filter_styles]).to_html) %></p>

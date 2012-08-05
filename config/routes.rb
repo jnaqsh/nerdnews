@@ -11,6 +11,8 @@ Nerdnews::Application.routes.draw do
 
   resources :stories do
     resources :comments
+    get 'list', :on => :collection
+    put 'publish', :on => :member
   end
 
   get "/:permalink" => "pages#show", as: "page_by_permalink"

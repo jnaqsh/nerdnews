@@ -55,6 +55,7 @@ fa:
       confirm: "آیا مطمئن هستید؟"
       back: "برگشت"
       cancel: "لغو"
+      publish: "انتشار"
     actions: "عملیات"
     titles:
       new: "جدید"
@@ -65,7 +66,6 @@ fa:
       new: "خبری جدید بنویسید"
     story:
       anonymous_user: "شخص ناشناس"
-
     show:
       comments: "دیدگاه‌ها"
       no_comments: "هیچ دیدگاهی وجود ندارد."
@@ -98,6 +98,7 @@ fa:
         title:  "عنوان"
         content:  "محتوا"
         publish_date: "تاریخ انتشار"
+        created_at: "تاریخ ساخت"
         excerpt:  "خلاصه"
         tag_names: "تگ‌ها"
 

@@ -8,6 +8,9 @@ class Story < ActiveRecord::Base
                   :after_remove => :calculate_count_and_percentage
   belongs_to :user
 
+  scope :not_approved, where(:publish_date => nil)
+  scope :approved, where("publish_date", present?)
+
   validates_length_of :title, maximum: 100, minimum: 10
   validates_length_of :content, minimum: 20, maximum: 1000
   validates  :title, :content, presence: true
@@ -30,9 +33,10 @@ class Story < ActiveRecord::Base
     self.tag_ids = Tag.ids_from_tokens(tokens)
   end
 
-  # def comments_count
-  #   self.comments.count
-  # end
+  def mark_as_published
+    self.update_attribute "publish_date", Time.now
+  end
+
   private
 
     def calculate_count_and_percentage(tag)
