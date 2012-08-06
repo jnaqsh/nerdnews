@@ -56,4 +56,7 @@ gem 'RedCloth'
 group :development do
   gem 'sunspot_solr' # optional pre-packaged Solr distribution for use in development
 end
+
 gem 'rack-mini-profiler'
+gem 'jalalidate'
+gem 'farsifu'

@@ -4,6 +4,7 @@ class StoriesController < ApplicationController
   # GET /stories.json
   def index
     @search = Story.search do
+      without(:publish_date, nil)
       fulltext params[:search]
       order_by :publish_date, :desc
       paginate :page => params[:page], :per_page => 5
@@ -97,6 +98,26 @@ class StoriesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to stories_url }
       format.json { head :no_content }
+    end
+  end
+
+  # PUT /stories/1/publish
+  def publish
+    @story = Story.find(params[:id])
+
+    respond_to do |format|
+      if @story.mark_as_published
+        format.html { redirect_to list_stories_url, notice: t('controllers.stories.update.flash.success') }
+      end
+    end
+  end
+
+  # GET /stories/list
+  def list
+    @stories = Story.not_approved.order("created_at DESC")
+
+    respond_to do |format|
+      format.html
     end
   end
 end
