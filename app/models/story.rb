@@ -34,7 +34,7 @@ class Story < ActiveRecord::Base
   end
 
   def mark_as_published
-    self.update_attribute "publish_date", Time.now
+    self.update_attributes publish_date: Time.now
   end
 
   private
