@@ -57,12 +57,16 @@ group :development do
   gem 'sunspot_solr' # optional pre-packaged Solr distribution for use in development
 end
 
-gem 'rspec-rails', group: [:development, :test]
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+
+end
 
 group :test do
-  gem 'factory_girl_rails'
   gem 'capybara'
   gem 'guard-rspec'
+  gem 'faker'
   gem 'sunspot_test'
 end
 
