@@ -3,7 +3,7 @@ require 'spec_helper'
 describe User do
   context 'Validations' do
     it 'has a valid factory' do
-      FactoryGirl.build(:user).should be_valid
+      FactoryGirl.create(:user).should be_valid
     end
 
     it "validates length and presence of full name attribute" do
