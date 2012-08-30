@@ -52,11 +52,23 @@ gem "cancan"
 gem 'kaminari'
 gem 'sunspot_rails'
 gem 'RedCloth'
+gem 'rack-mini-profiler'
+gem 'jalalidate'
+gem 'farsifu'
 
 group :development do
   gem 'sunspot_solr' # optional pre-packaged Solr distribution for use in development
 end
 
-gem 'rack-mini-profiler'
-gem 'jalalidate'
-gem 'farsifu'
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+
+end
+
+group :test do
+  gem 'capybara'
+  gem 'guard-rspec'
+  gem 'faker'
+  gem 'sunspot_test'
+end
