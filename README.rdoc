@@ -3,7 +3,10 @@ This is a project for creating a free and open source news site by Ruby on Rails
 This project is under GPL 3 license.
 
 == TO DO
-* Write some integration, unit and functional test. (This is mandatory)
+* Add pointing system for comments based on views of the news comments, point of the news and point of user who wrote the news.
+* Add pointing system for news based on views of the news and rating the news
+* Add threded comments
+* Make views of comments prettier
 * Add confirmation after a user create a story by a moderator
 
 == LICENSE
