@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   has_many :stories
   has_many :comments
 
-  validates_presence_of :full_name, :password, :password_confirmation
+  validates_presence_of :full_name
   validates :password, confirmation: true, presence: true, on: :create
   validates :email, email_format: true, uniqueness: true
   validates_length_of :full_name, maximum: 30, minimum: 7
