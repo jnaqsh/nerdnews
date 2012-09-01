@@ -71,4 +71,5 @@ group :test do
   gem 'guard-rspec'
   gem 'faker'
   gem 'sunspot_test'
+  gem 'guard-spork'
 end
