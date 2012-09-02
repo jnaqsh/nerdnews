@@ -6,4 +6,6 @@ class Comment < ActiveRecord::Base
 
   validates :name, :content, presence: true
   validates :email, email_format: true, presence: true
+
+  has_ancestry
 end
