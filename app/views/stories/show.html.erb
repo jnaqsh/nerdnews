@@ -7,7 +7,7 @@
 
 <div class="comments">
   <h2><%= t('.comments') %></h2>
-  <%= nested_messages @comments || t('.no_comments') %>
+  <%= nested_comments @comments || t('.no_comments') %>
 
   <% if can? :create, Comment %>
     <%= render "comments/form" %>
