@@ -2,7 +2,7 @@
   <h3><%= comment.name %></h3>
   <h5><%= to_jalali(comment.created_at) %></h5>
   <p><%= comment.content %></p>
-  <div>
+  <div> 
   <% if can? :update, comment %>
     <%= link_to t('.edit', :default => t("helpers.links.edit")),
                     edit_story_comment_path(comment.story, comment), :class => 'btn btn-mini' %>
@@ -14,5 +14,6 @@
                 :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
                 :class => 'btn btn-mini btn-danger' %>
   <% end %>
+  <%= link_to t('.reply', :default => t("helpers.links.reply")), new_story_comment_path(comment.story, parent_id: comment), :class => 'btn btn-mini'%>
   </div>
 </div>

@@ -16,4 +16,10 @@ module ApplicationHelper
     jalali_date = JalaliDate.new(date)
     jalali_date.strftime("%A %e %b %Y - %H:%M").to_farsi
   end
+  
+  def nested_messages(messages)
+    messages.map do |message, sub_messsages|
+      render(message) + content_tag(:div, nested_messages(sub_messsages), class: "nested_messages")
+    end.join.html_safe
+  end
 end

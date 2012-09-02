@@ -28,7 +28,7 @@ class StoriesController < ApplicationController
   def show
     @story = Story.find(params[:id])
     @comment = @story.comments.build
-    @comments = @story.comments.all
+    @comments = @story.comments.arrange(order: :created_at)
 
     respond_to do |format|
       format.html # show.html.erb

@@ -73,4 +73,5 @@ group :test do
   gem 'faker'
   gem 'sunspot_test'
   gem 'guard-spork'
+  gem 'launchy'
 end

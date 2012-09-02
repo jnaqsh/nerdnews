@@ -52,6 +52,7 @@ fa:
       new: "جدید"
       edit: "ویرایش"
       destroy: "حذف"
+      reply: "پاسخ"
       confirm: "آیا مطمئن هستید؟"
       back: "برگشت"
       cancel: "لغو"
