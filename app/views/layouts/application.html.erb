@@ -81,14 +81,11 @@
     <div class="span3">
       <h2>درباره ما</h2>
       <p>هدف از ایجاد این سایت، اطلاع جدیدترین اخبار روز درباره آی‌تی است. این نرم‌افزار وب، یک نرم‌افزار آزاد است.</p>
-
-      <!-- <div class="tags"> -->
         <% if @tags && !@tags.empty? %>
           <h2><%= t('.tags') %></h2>
-          <%= content_tag "div", id: "tags", data: {tags: @tags} do %>
+          <%= content_tag :div, id: "tags", data: {tags: @tags} do %>
           <% end %>
         <% end %>
-      <!-- </div> -->
     </div>
   </div>
 </div>

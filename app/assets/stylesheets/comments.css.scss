@@ -1,3 +1,57 @@
 // Place all the styles related to the comments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.comment {
+
+  .avatar {
+    float: right;
+    border: solid 1px #CCC;
+    color: #FFF;
+    padding: 4px;
+  }
+    img {
+      display: block;
+    }
+
+    .actions {
+      margin-top: 3px;
+    }
+
+    .btn {
+      display: block;
+    }
+ 
+  .main {
+    min-height: 120px;
+    margin-right: 83px;
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: #DDD;
+    border: solid 1px #BBB;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    -moz-border-radius-topright: 5px;
+    -moz-border-radius-bottomright: 5px;
+    background: -webkit-gradient(linear, left top, left bottom, from(#EEE), to(#CCC));
+    background: -moz-linear-gradient(top,  #EEE, #CCC);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#EEE', endColorstr='#CCC');
+  }
+    .owner {
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .date {
+      color: gray;
+      font-size: 10px;
+      font-weight: bold;
+    }
+}
