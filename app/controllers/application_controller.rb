@@ -16,6 +16,11 @@ class ApplicationController < ActionController::Base
   private
 
   def load_tags
-    @tags = Tag.order('created_at desc')
+    tags = Tag.order('created_at desc').select("name, stories_percentage")
+    @tags = []
+    tags.each do |t|
+      @tags << {text: "#{t.name}", weight: "#{t.stories_percentage}",
+                link: "#{stories_path(tag: t.name)}"}
+    end
   end
 end

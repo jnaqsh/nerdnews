@@ -14,5 +14,6 @@
 //= require jquery_ujs
 //= require jquery.tokeninput
 //= require tags.js.coffee
+//= require jqcloud
 //= require twitter/bootstrap
 //= require bootstrap.js.coffee
