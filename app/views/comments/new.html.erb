@@ -3,4 +3,10 @@
   <h1><%=t '.title', :default => t('helpers.titles.new', :model => model_class.model_name.human,
                                  :default => "New #{model_class.model_name.human}") %></h1>
 </div>
+<% if params[:parent_id] %>
+  <h3>درحال پاسخ به:</h3>
+  <%= render @comment.parent if @comment.parent %>
+  <br>
+<% end %>
+
 <%= render :partial => 'form' %>

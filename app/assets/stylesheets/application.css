@@ -10,6 +10,8 @@
  *
  *= require_self
  *= require token-input-facebook
+ *= require jqcloud
  *= require bootstrap_and_overrides.css.less
+ *= require comments.css.scss
  *= require rtl
  */

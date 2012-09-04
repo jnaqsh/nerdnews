@@ -9,3 +9,6 @@ jQuery ->
     hintText: "کلمه مورد نظر را جستجو کنید"
     noResultsText: "یافت نشد"
     searchingText: "در حال جستجو..."
+    
+  tags = $('#tags').data('tags')
+  $("#tags").jQCloud(tags)

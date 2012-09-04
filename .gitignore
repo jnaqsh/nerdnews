@@ -2,7 +2,6 @@
 *.sassc
 .sass-cache
 capybara-*.html
-.rspec
 /.bundle
 /vendor/bundle
 /log/*
@@ -18,4 +17,3 @@ pickle-email-*.html
 /solr
 .tags
 .tags_sorted_by_file
-Guardfile

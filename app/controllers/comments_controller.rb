@@ -26,7 +26,7 @@ class CommentsController < ApplicationController
   # GET /comments/new
   # GET /comments/new.json
   def new
-    @comment = Comment.new
+    @comment = Comment.new(parent_id: params[:parent_id])
     @story = Story.find(params[:story_id])
 
     respond_to do |format|

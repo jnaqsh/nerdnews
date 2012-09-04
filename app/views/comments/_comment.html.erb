@@ -1,18 +1,34 @@
 <div class="comment">
-  <h3><%= comment.name %></h3>
-  <h5><%= to_jalali(comment.created_at) %></h5>
-  <p><%= comment.content %></p>
-  <div>
-  <% if can? :update, comment %>
-    <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                    edit_story_comment_path(comment.story, comment), :class => 'btn btn-mini' %>
-  <% end %>
-  <% if can? :destroy, comment %>
-    <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                [comment.story, comment],
-                :method => :delete,
-                :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
-                :class => 'btn btn-mini btn-danger' %>
-  <% end %>
+  <div class="avatar">
+    <%= image_tag avatar_url(comment, 64) %>
+    <div class='actions <%= find_peoper_class(comment) %>'>
+      <%= link_to t('.reply', :default => t("helpers.links.reply")), new_story_comment_path(comment.story, parent_id: comment), :class => 'btn btn-mini'%>
+      <% if can? :update, comment %>
+        <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                        edit_story_comment_path(comment.story, comment), :class => 'btn btn-mini' %>
+      <% end %>
+      <% if can? :destroy, comment %>
+        <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                    [comment.story, comment],
+                    :method => :delete,
+                    :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
+                    :class => 'btn btn-mini btn-danger' %>
+      <% end %>
+    </div>
+  </div>
+  <div class="main">
+    <p>
+      <span class='owner'>
+      <%= comment.name %>
+      </span>
+      <span class='date'> 
+        «
+        <%= to_jalali(comment.created_at) %>
+        »
+      </span>
+    </p>
+    <p><%= comment.content %></p>
+    <div>    
+    </div>
   </div>
 </div>

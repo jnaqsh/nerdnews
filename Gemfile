@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.7'
+gem 'rails', '3.2.8'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -55,6 +55,7 @@ gem 'RedCloth'
 gem 'rack-mini-profiler'
 gem 'jalalidate'
 gem 'farsifu'
+gem 'ancestry'
 
 group :development do
   gem 'sunspot_solr' # optional pre-packaged Solr distribution for use in development
@@ -63,7 +64,6 @@ end
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
-
 end
 
 group :test do
@@ -71,4 +71,6 @@ group :test do
   gem 'guard-rspec'
   gem 'faker'
   gem 'sunspot_test'
+  gem 'guard-spork'
+  gem 'launchy'
 end
