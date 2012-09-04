@@ -46,7 +46,7 @@ class CommentsController < ApplicationController
   def create
     @story = Story.find(params[:story_id])
     @comment = @story.comments.build(params[:comment])
-    @comments = @story.comments.all
+    @comments = @story.comments.arrange(order: :created_at)
 
     respond_to do |format|
       if @comment.save
