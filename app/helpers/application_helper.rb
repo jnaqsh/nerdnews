@@ -1,11 +1,11 @@
 module ApplicationHelper
-  def list_tags(tags)
-    h = {}
-    tags.each do |tag|
-      h[tag.name] = tag.percentage_of_tag
-    end
-    return h
-  end
+  # def list_tags(tags)
+  #   h = {}
+  #   tags.each do |tag|
+  #     h[tag.name] = tag.percentage_of_tag
+  #   end
+  #   return h
+  # end
 
   def avatar_url(user, size = 20)
     gravater_id = Digest::MD5.hexdigest(user.email.downcase)

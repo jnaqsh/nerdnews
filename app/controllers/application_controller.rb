@@ -16,11 +16,16 @@ class ApplicationController < ActionController::Base
   private
 
   def load_tags
-    tags = Tag.order('created_at desc').select("name, name, stories_percentage")
+    tags = Tag.order('name asc').select("name, stories_count")
+    maximum_font_size = 70
+    minimum_font_size = 10
+    minmum_tag_count = Tag.minimum(:stories_count)
+    maximum_tag_count = Tag.maximum(:stories_count)
     @tags = []
-    tags.each do |t|
-      @tags << {text: "#{t.name}", weight: "#{t.stories_percentage}",
-                link: "#{stories_path(tag: t.name)}"}
+    tags.each do |tag|
+      count = tag.stories_count
+      display_font = (((count - minmum_tag_count) * (maximum_font_size - minimum_font_size)) / (maximum_tag_count - minmum_tag_count)) + minimum_font_size
+      @tags << {title: tag.name, font: display_font, count: count, url: stories_url(tag: tag.name)}
     end
   end
 end

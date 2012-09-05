@@ -83,7 +83,10 @@
       <p>هدف از ایجاد این سایت، اطلاع جدیدترین اخبار روز درباره آی‌تی است. این نرم‌افزار وب، یک نرم‌افزار آزاد است.</p>
         <% if @tags && !@tags.empty? %>
           <h2><%= t('.tags') %></h2>
-          <%= content_tag :div, id: "tags", data: {tags: @tags} do %>
+          <% @tags.each do |tag| %>
+            <%= content_tag :a, href: tag[:url], style: "font-size: #{tag[:font]}px" do %>
+            <%= "#{tag[:title]}" %>
+          <% end %>
           <% end %>
         <% end %>
     </div>
