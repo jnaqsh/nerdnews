@@ -9,7 +9,7 @@ module ApplicationHelper
 
   def avatar_url(user, size = 20)
     gravater_id = Digest::MD5.hexdigest(user.email.downcase)
-    "http://gravatar.com/avatar/#{gravater_id}.png?s=#{size}"
+    "http://gravatar.com/avatar/#{gravater_id}.png?s=#{size}&d=mm"
   end
 
   def to_jalali(date)
