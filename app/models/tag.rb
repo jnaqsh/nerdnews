@@ -5,16 +5,11 @@ class Tag < ActiveRecord::Base
 
   has_many :taggings, dependent: :destroy
   has_many :stories, :through => :taggings
-    
+
   private
 
     def self.tokens(query)
       tags = where("name like ?", "%#{query}%")
-      if tags.empty?
-        [{id: "<<<#{query}>>>", name: "جدید: \"#{query}\""}]
-      else
-        tags
-      end
     end
 
     def self.ids_from_tokens(tokens)
