@@ -107,14 +107,15 @@ class StoriesController < ApplicationController
 
     respond_to do |format|
       if @story.mark_as_published
-        format.html { redirect_to list_stories_url, notice: t('controllers.stories.update.flash.success') }
+        format.html { redirect_to unpublished_stories_path,
+          notice: t('controllers.stories.publish.flash.success') }
       end
     end
   end
 
   # GET /stories/list
-  def list
-    @stories = Story.not_approved.order("created_at DESC")
+  def unpublished
+    @stories = Story.not_approved.order("created_at DESC").page params[:page]
 
     respond_to do |format|
       format.html

@@ -42,6 +42,9 @@
               <ul class="dropdown-menu">
                 <li><%= link_to t('.profile'), user_path(current_user) %></li>
                 <li class="divider"></li>
+                <% if can? :publish, Story %>
+                  <li><%= link_to t('.unpublished_stories'), unpublished_stories_path %></li>
+                <% end %>
                 <% if can? :create, Page %>
                   <li><%= link_to t('.new_page'), new_page_path %></li>
                 <% end %>
@@ -50,7 +53,7 @@
               </ul>
             </div>
           <% end %>
-          <!-- Links --> 
+          <!-- Links -->
           <div class="nav-collapse">
             <ul class="nav">
               <li class="active"> <%= link_to t('.home'), root_path %> </li>

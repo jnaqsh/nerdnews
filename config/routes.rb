@@ -16,7 +16,7 @@ Nerdnews::Application.routes.draw do
 
   resources :stories do
     resources :comments
-    get 'list', :on => :collection
+    get 'unpublished', :on => :collection
     put 'publish', :on => :member
   end
 

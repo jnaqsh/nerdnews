@@ -7,6 +7,9 @@ fa:
       update:
         flash:
           success:  "خبر با موفقیت به‌روز گردید."
+      publish:
+        flash:
+          success: "خبر با موفقیت منتشر گردید."
     comments:
       create:
         flash:
@@ -70,6 +73,8 @@ fa:
     show:
       comments: "دیدگاه‌ها"
       no_comments: "هیچ دیدگاهی وجود ندارد."
+    unpublished:
+      title: "خبرهای منتشرنشده"
 
   layouts:
     application:
@@ -85,6 +90,7 @@ fa:
       new_page: "ایجاد صفحه جدید"
       new_story: "خبری جدید بنویسید"
       search: "جستجو"
+      unpublished_stories: "خبرهای منتشرنشده"
 
   activerecord:
     models:
