@@ -1,17 +1,19 @@
 <article>
   <h2><%= link_to story.title, story %></h2>
-  <h5>
-    <p>
-    توسط
-    <% if story.user %>
-      <%= link_to story.user.full_name, user_path(story.user) %>
-    <% else %>
-      <%= t('.anonymous_user') %>
-    <% end %>
-    در <%= if story.publish_date then to_jalali(story.publish_date) end %>
-    </p>
-  </h5>
-  <p><%= sanitize(RedCloth.new(story.content, [:filter_html, :filter_styles]).to_html) %></p>
+  <h6 class="muted">
+    <small>
+      توسط
+      <%= user_name(story) %>
+      در
+      <%= to_jalali(story.publish_date) if story.publish_date %>
+    </small>
+  </h6>
+  <%= user_name(story) %>
+  می‌نویسد:
+  <blockquote>
+    <%= sanitize(RedCloth.new(story.content, [:filter_html, :filter_styles]).to_html) %>
+  </blockquote>
+
   <div>
     <% if can? :update, story %>
       <%= link_to t('.edit', :default => t("helpers.links.edit")),
@@ -29,7 +31,7 @@
       <%= link_to story_path(story), :class => "btn btn-primary btn-mini" do %>
         <i class="icon-comment icon-white"></i> <%= t('stories.show.comments') %>
         <%= link_to story.comments_count.to_farsi, story_path(story), :class => "btn btn-primary btn-mini" %>
-      <% end %>      
+      <% end %>
     </div>
     <br />
   </div>

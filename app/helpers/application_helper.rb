@@ -22,4 +22,12 @@ module ApplicationHelper
       render(message) + content_tag(:div, nested_comments(sub_messsages), class: "nested_comments")
     end.join.html_safe
   end
+
+  def user_name(story)
+    if story.user
+      link_to story.user.full_name, user_path(story.user)
+    else
+      t('.anonymous_user')
+    end
+  end
 end
