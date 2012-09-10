@@ -9,7 +9,7 @@ module ApplicationHelper
 
   def avatar_url(user, size = 20)
     gravater_id = Digest::MD5.hexdigest(user.email.downcase)
-    "http://gravatar.com/avatar/#{gravater_id}.png?s=#{size}"
+    "http://gravatar.com/avatar/#{gravater_id}.png?s=#{size}&d=mm"
   end
 
   def to_jalali(date)
@@ -21,5 +21,13 @@ module ApplicationHelper
     messages.map do |message, sub_messsages|
       render(message) + content_tag(:div, nested_comments(sub_messsages), class: "nested_comments")
     end.join.html_safe
+  end
+
+  def user_name(story)
+    if story.user
+      link_to story.user.full_name, user_path(story.user)
+    else
+      t('.anonymous_user')
+    end
   end
 end
