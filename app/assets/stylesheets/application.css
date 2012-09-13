@@ -9,9 +9,9 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require bootstrap_and_overrides.css.less
  *= require token-input-facebook
  *= require stories.css.scss
- *= require bootstrap_and_overrides.css.less
  *= require comments.css.scss
  *= require rtl
  */

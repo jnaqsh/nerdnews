@@ -5,3 +5,19 @@
 .inline{
   display: inline;
 }
+
+.story-hint {
+  // margin: auto;
+  margin-bottom: 0;
+  -webkit-border-radius: 4px 4px 0 0;
+   -moz-border-radius: 4px 4px 0 0;
+        border-radius: 4px 4px 0 0;
+  border-bottom: none;
+  padding: 4px 6px 4px 6px;
+}
+
+textarea {
+-webkit-border-radius: 0 0 4px 4px;
+ -moz-border-radius: 0 0 4px 4px;
+      border-radius: 0 0 4px 4px;
+}
