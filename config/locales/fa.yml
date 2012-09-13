@@ -60,6 +60,7 @@ fa:
       back: "برگشت"
       cancel: "لغو"
       publish: "انتشار"
+      preview: "پیش‌نمایش"
     actions: "عملیات"
     titles:
       new: "جدید"

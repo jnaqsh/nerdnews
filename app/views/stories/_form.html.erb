@@ -5,6 +5,7 @@
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= f.submit t('.preview', :default => t("helpers.links.preview")), :class => 'btn btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 stories_path, :class => 'btn' %>
   </div>
