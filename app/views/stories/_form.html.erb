@@ -1,6 +1,12 @@
 <%= simple_form_for @story, :html => { :class => 'form-horizontal' } do |f| %>
-  <%= f.input :title, input_html: {class: "span6"} %>
-  <%= f.input :content, input_html: {rows: 15, class: "span6"} %>
+  <%= f.input :title, 
+              input_html: {class: "span6"},
+              placeholder: "عنوان حداقل باید ۱۰ کاراکتر و حداکثر می‌تواند ۱۰۰ کاراکتر باشد"
+              %>
+  <%= f.input :content, 
+              input_html: {rows: 15, class: "span6"},
+              placeholder: "بدنه اصلی خبر خود را اینجا بنویسید. لطفا سعی کنید از کلمات خود استفاده کنید. اگر از منابع دیگر نقل‌وقول می‌کنید، آدرس‌های مرتبط را در متن وارد کنید. اگر از منبع اصلی خبر مطمئن هستید آنها را در متن بگنجانید. متن خبر می‌تواند حداکثر ۱۰۰۰ کاراکتر باشد."
+              %>
   <%= f.input :tag_names, input_html: {data: {load: @story.tags}}  %>
 
   <div class="form-actions">

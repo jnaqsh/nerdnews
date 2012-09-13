@@ -23,7 +23,7 @@ describe "Stories" do
         content = Faker::Lorem.paragraph
         fill_in "عنوان", with: Faker::Lorem.characters(10)
         fill_in "محتوا", with: content
-        click_button 'preview'
+        click_button 'پیش‌نمایش'
         page.should have_selector 'blockquote', text: content
         page.should have_content 'هشدار'
       end
