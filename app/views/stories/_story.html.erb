@@ -14,34 +14,6 @@
     <%= sanitize(RedCloth.new(story.content, [:filter_html, :filter_styles]).to_html) %>
   </blockquote>
 
-  <div>
-    <% if can? :update, story %>
-      <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_story_path(story), :class => 'btn btn-mini' %>
-    <% end %>
-    <% if can? :destroy, story %>
-        <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                    story_path(story),
-                    :method => :delete,
-                    :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                    :class => 'btn btn-mini btn-danger'
-                     %>
-    <% end %>
-
-    <% if (can? :publish, story) && !story.publish_date %>
-      <%= form_tag publish_story_path(story), :method => :put, class: "inline" do %>
-        <%= submit_tag t('.publish', default: t('helpers.links.publish')),
-          class: "btn btn-mini btn-primary" %>
-      <% end %>
-    <% end %>
-
-    <div class="btn-group pull-left">
-      <%= link_to story_path(story), :class => "btn btn-primary btn-mini" do %>
-        <i class="icon-comment icon-white"></i> <%= t('stories.show.comments') %>
-        <%= link_to story.comments_count.to_farsi, story_path(story), :class => "btn btn-primary btn-mini" %>
-      <% end %>
-    </div>
-    <br />
-  </div>
+  <%= render partial: "story_operation", locals: {story: story} %>
 </article>
 <hr />
