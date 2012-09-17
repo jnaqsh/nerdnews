@@ -48,6 +48,7 @@ Spork.prefork do
     config.order = "random"
 
     config.include AuthMacros
+    config.include MailerMacros
   end
 end
 

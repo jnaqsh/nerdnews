@@ -50,6 +50,8 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
+        UserMailer.comment_reply(@comment).deliver if !@comment.parent.nil?
+        # if !@comment.parent.nil? then UserMailer.comment_reply(@comment).deliver end
         format.html { redirect_to @story, notice: t('controllers.comments.create.flash.success') }
         format.json { render json: @comment, status: :created, location: @comment }
       else
