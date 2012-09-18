@@ -3,15 +3,17 @@
   <h1><%=t '.title', :default => t('helpers.titles.new', :model => model_class.model_name.human,
                                  :default => "New #{model_class.model_name.human}") %></h1>
 </div>
-<% if params[:story] %>
+
+<% if params[:preview_button] %>
   <div class='preview'>
     <div class='alert'>
       <button type="button" class="close" data-dismiss="alert">×</button>
-      <strong>هشدار!</strong> این یک پیش‌نمایش است. خبر شما هنوز ثبت نشده است.
+      <strong>هشدار</strong> این یک پیش‌نمایش است. خبر شما هنوز ثبت نشده است.
     </div>
-    <blockquote>
-    <%= sanitize(RedCloth.new(params[:story][:content], [:filter_html, :filter_styles]).to_html) %>
-    </blockquote>
+
+    <%= render @story %>
+
   </div>
 <% end %>
+
 <%= render :partial => 'form' %>

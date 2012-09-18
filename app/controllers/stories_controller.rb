@@ -64,7 +64,9 @@ class StoriesController < ApplicationController
     end
 
     respond_to do |format|
-      unless params[:commit] == 'پیش‌نمایش'
+      if params[:preview_button]
+        format.html { render action: "new" }
+      else
         if @story.save
           format.html { redirect_to @story, notice: t('controllers.stories.create.flash.success') }
           format.json { render json: @story, status: :created, location: @story }
@@ -72,8 +74,6 @@ class StoriesController < ApplicationController
           format.html { render action: "new" }
           format.json { render json: @story.errors, status: :unprocessable_entity }
         end
-      else
-        format.html { render action: "new" }
       end
     end
   end
