@@ -12,6 +12,7 @@ class Ability
          can :read, Story
          can :create, User
          can :show, User
+         can :edit, User, :id => user.id
          can :show, Page
          can :create, Story
        end
