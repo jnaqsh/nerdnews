@@ -70,7 +70,7 @@ class StoriesController < ApplicationController
         format.html { render action: "new" }
       else
         if @story.save
-          format.html { redirect_to @story, notice: t('controllers.stories.create.flash.success') }
+          format.html { redirect_to @story, only_path: true, notice: t('controllers.stories.create.flash.success') }
           format.json { render json: @story, status: :created, location: @story }
         else
           format.html { render action: "new" }
