@@ -1,5 +1,5 @@
 class Story < ActiveRecord::Base
-  attr_accessible :content, :publish_date, :title, :tag_names
+  attr_accessible :content, :publish_date, :title, :tag_names, :view_counter
 
   has_many :comments, dependent: :destroy
   has_many :taggings, dependent: :destroy

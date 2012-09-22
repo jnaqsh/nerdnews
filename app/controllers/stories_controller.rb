@@ -31,6 +31,8 @@ class StoriesController < ApplicationController
     @comment = @story.comments.build
     @comments = @story.comments.arrange(order: :created_at)
 
+    @story.increment!(:view_counter)
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @story }
