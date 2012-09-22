@@ -6,6 +6,8 @@ class Tag < ActiveRecord::Base
   has_many :taggings, dependent: :destroy
   has_many :stories, :through => :taggings
 
+  validates :name, uniqueness: true, presence: true, on: :create
+
   private
 
     def self.tokens(query)

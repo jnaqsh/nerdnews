@@ -35,6 +35,10 @@ fa:
     pages:
       show:
         page_not_found: "صفحه مورد نظر پیدا نشد."
+    tags:
+      create:
+        flash:
+          success: "تگ با موفقیت ایجاد شد."
 
   users:
     new:
