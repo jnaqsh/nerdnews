@@ -1,6 +1,6 @@
 <article>
-  <% if story.tags.first != nil %>
-    <%= image_tag story.tags.first.thumbnail.url(:thumb), class: 'img-polaroid pull-left' %>
+  <% if story.tags.first %>
+    <%= link_to image_tag(story.tags.first.thumbnail.url(:thumb), class: 'img-polaroid pull-left'), stories_url(tag: story.tags.first.name) %>
   <% end %>
   <h2><%= link_to story.title, story %></h2>
   <h6 class="muted">
