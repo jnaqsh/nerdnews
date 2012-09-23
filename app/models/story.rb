@@ -4,8 +4,8 @@ class Story < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :taggings, dependent: :destroy
   has_many :tags, :through => :taggings,
-                  :after_add => :calculate_count_and_percentage,
-                  :after_remove => :calculate_count_and_percentage
+                  :after_add => :calculate_count,
+                  :after_remove => :calculate_count
   belongs_to :user
 
   scope :not_approved, where(:publish_date => nil)
@@ -39,8 +39,7 @@ class Story < ActiveRecord::Base
 
   private
 
-    def calculate_count_and_percentage(tag)
+    def calculate_count(tag)
       tag.update_attribute :stories_count, tag.stories.count
-      tag.update_attribute :stories_percentage, (tag.stories.count.to_f / Tag.sum(:stories_count).to_f * 100).floor
     end
 end
