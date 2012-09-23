@@ -40,6 +40,7 @@ fa:
         flash:
           success: "تگ با موفقیت ایجاد شد."
 
+
   users:
     new:
       register: "ثبت‌نام"
@@ -130,6 +131,7 @@ fa:
 
       tag:
         name: "نام"
+        thumbnail: "تصویر بندانگشتی"
 
       page:
         id: "شناسه"

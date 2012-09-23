@@ -25,6 +25,7 @@ gem 'rack-mini-profiler'
 gem 'jalalidate'
 gem 'farsifu'
 gem 'ancestry'
+gem 'paperclip'
 
 group :production do
   gem 'execjs'
