@@ -3,7 +3,7 @@
 class Tag < ActiveRecord::Base
   attr_accessible :name, :thumbnail
 
-  has_attached_file :thumbnail
+  has_attached_file :thumbnail, :styles => { thumb: "64x64>" }
 
   has_many :taggings, dependent: :destroy
   has_many :stories, :through => :taggings

@@ -13,4 +13,13 @@ describe "Tags" do
     fill_in 'نام', with: "tag"
     click_button "ایجاد"
   end
+  it "should edit a tag" do
+    tag = FactoryGirl.create(:tag)
+    visit tags_url
+    click_on "ویرایش"
+    fill_in 'نام', with: 'edited'
+    click_button 'تگ'
+    tag.reload.name.should == 'edited'
+    page.should have_content 'موفقیت'
+  end
 end

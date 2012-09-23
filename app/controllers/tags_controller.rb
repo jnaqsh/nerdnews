@@ -33,4 +33,20 @@ class TagsController < ApplicationController
       format.html { redirect_to tags_path }
     end
   end
+
+  def edit
+    @tag = Tag.find(params[:id])
+  end
+
+  def update
+    @tag = Tag.find(params[:id])
+
+    respond_to do |format|
+      if @tag.update_attributes(params[:tag])
+        format.html { redirect_to tags_path, notice: t('controllers.tags.update.flash.success') }
+      else
+        format.html { render action: 'edit' }
+      end
+    end
+  end
 end

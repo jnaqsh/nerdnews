@@ -2,10 +2,14 @@
   <%= f.input :name,
               input_html: {class: "span6"} %>
   <div class='control-group'>
+    <% if @tag.thumbnail.url %>
+      <%= image_tag @tag.thumbnail.url(:thumb), class: 'img-polaroid pull-left' %>
+    <% end %>
     <%= f.label :thumbnail, label: t("activerecord.attributes.tag.thumbnail"), class: 'control-label' %>
     <div class='controls'>
       <%= f.file_field :thumbnail %>
     </div>
+
   </div>
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>

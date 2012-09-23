@@ -39,6 +39,10 @@ fa:
       create:
         flash:
           success: "تگ با موفقیت ایجاد شد."
+      update:
+        flash:
+          success: "تگ با موفقیت ویرایش شد."
+
 
 
   users:
