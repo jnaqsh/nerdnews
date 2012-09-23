@@ -1,7 +1,7 @@
 class TagsController < ApplicationController
   authorize_resource
   def index
-    @tags = Tag.order(:name)
+    @tags = Tag.order('created_at desc').page params[:page]
 
     respond_to do |format|
       format.html
