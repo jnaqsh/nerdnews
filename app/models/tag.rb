@@ -10,7 +10,7 @@ class Tag < ActiveRecord::Base
 
   validates :name, uniqueness: true, presence: true, on: :create
   validates_attachment :thumbnail, :presence => true,
-    :content_type => { :content_type => "image/jpg image/png" },
+    :content_type => {:content_type => ['image/jpeg', 'image/jpg', 'image/png']},
     :size => { :in => 0..100.kilobytes }
 
   private

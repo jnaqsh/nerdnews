@@ -16,4 +16,9 @@ describe Story do
 
     tag2.should have(1).error_on(:name)
   end
+
+  it 'validates presence of thumbnail' do
+    tag = FactoryGirl.build(:tag, thumbnail: nil)
+    tag.should have(1).error_on(:thumbnail)
+  end
 end

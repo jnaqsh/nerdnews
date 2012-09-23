@@ -7,7 +7,6 @@ describe "Tags" do
     login admin
   end
   it "should make a new tag" do
-    # login :admin
     visit tags_url
     click_on "جدید"
     current_path.should eq(new_tag_path)
