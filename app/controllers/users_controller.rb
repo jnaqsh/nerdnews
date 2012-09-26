@@ -3,7 +3,15 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.order('created_at desc').page params[:page]
+    @search = User.search do
+      fulltext params[:user_search] do
+        boost_fields :full_name => 2.0
+      end
+      paginate :page => params[:page], :per_page => 10
+      order_by :created_at, :desc
+    end
+
+    @users = @search.results
 
     respond_to do |format|
       format.html # index.html.erb

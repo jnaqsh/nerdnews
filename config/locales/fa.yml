@@ -43,13 +43,13 @@ fa:
         flash:
           success: "تگ با موفقیت ویرایش شد."
 
-
-
   users:
     new:
       register: "ثبت‌نام"
     form:
       submit: "ثبت‌نام"
+    index:
+      search: جستجو
 
   sessions:
     new:
@@ -85,6 +85,10 @@ fa:
       no_comments: "هیچ دیدگاهی وجود ندارد."
     unpublished:
       title: "خبرهای منتشرنشده"
+
+  tags:
+    index:
+      search: جستجو
 
   layouts:
     application:

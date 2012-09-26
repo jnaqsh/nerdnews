@@ -13,6 +13,11 @@ class Tag < ActiveRecord::Base
     :content_type => {:content_type => ['image/jpeg', 'image/jpg', 'image/png']},
     :size => { :in => 0..100.kilobytes }
 
+  searchable do
+    string :name
+    time :created_at
+  end
+
   private
 
     def self.tokens(query)

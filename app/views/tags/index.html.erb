@@ -2,6 +2,13 @@
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
 </div>
+
+<div class = 'row'>
+  <%= form_tag tags_path, method: :get, class: 'form-search' do %>
+    <%= text_field_tag :tag_search, params[:tag_search], class: "span2 search-query", placeholder: t(".search") %>
+  <% end %>
+</div>
+
 <table class="table table-striped">
   <thead>
     <tr>

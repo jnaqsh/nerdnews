@@ -1,7 +1,13 @@
 class TagsController < ApplicationController
   authorize_resource
   def index
-    @tags = Tag.order('created_at desc').page params[:page]
+    @search = Tag.search do
+      fulltext params[:tag_search]
+      order_by :created_at, :desc
+      paginate :page => params[:page], :per_page => 10
+    end
+
+    @tags = @search.results
 
     respond_to do |format|
       format.html
