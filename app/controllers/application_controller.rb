@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
 
       def rate_user user, rate_weight, event
         user.increment! :user_rate, rate_weight
-        # RatingLog.create user: user, event: event
+        RatingLog.create! user_id: user, event: event
       end
   end
 end

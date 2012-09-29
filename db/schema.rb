@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120927122332) do
+ActiveRecord::Schema.define(:version => 20120929081651) do
 
   create_table "comments", :force => true do |t|
     t.string   "name"
@@ -30,6 +30,13 @@ ActiveRecord::Schema.define(:version => 20120927122332) do
     t.string   "name"
     t.string   "permalink"
     t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "rating_logs", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "event"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

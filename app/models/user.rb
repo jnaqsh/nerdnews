@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :roles
   has_many :stories
   has_many :comments
+  has_many :rating_logs, dependent: :destroy
 
   validates_presence_of :full_name
   validates :password, confirmation: true, presence: true, on: :create
