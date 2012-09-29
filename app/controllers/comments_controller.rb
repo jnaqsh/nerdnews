@@ -51,6 +51,7 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.save
         UserMailer.comment_reply(@comment).deliver if !@comment.parent.nil?
+        rate_user(current_user, 1, "#{current_user.full_name} commented on a story") if current_user.present?
         # if !@comment.parent.nil? then UserMailer.comment_reply(@comment).deliver end
         format.html { redirect_to @story, notice: t('controllers.comments.create.flash.success') }
         format.json { render json: @comment, status: :created, location: @comment }
