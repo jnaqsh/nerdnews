@@ -126,12 +126,14 @@ fa:
       comment:
         name: "نام"
         email: "ایمیل"
+        website: "وب‌سایت"
         content: "دیدگاه"
 
       user:
         id: "شماره"
         full_name: "نام و نام خانوادگی"
         email:  "ایمیل"
+        website: "وب‌سایت"
         password: "رمز عبور"
         created_at: "ایجاد شده در"
         password_confirmation: "تایید رمز عبور"

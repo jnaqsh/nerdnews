@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :email, :full_name, :password, :password_confirmation, :role_ids, :created_at
+  attr_accessible :email, :full_name, :website, :password, :password_confirmation, :role_ids, :created_at
   has_secure_password
 
   has_and_belongs_to_many :roles

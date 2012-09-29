@@ -14,6 +14,7 @@ describe "Comments" do
     visit new_story_comment_path story.id
     fill_in "نام", with: user.full_name
     fill_in "ایمیل", with: user.email
+    fill_in "وب‌سایت", with: user.website
     fill_in "دیدگاه", with: Faker::Lorem.paragraph
     click_button "ایجاد"
     page.should have_content "موفقیت"
@@ -21,6 +22,7 @@ describe "Comments" do
     click_link "پاسخ"
     fill_in "نام", with: user.full_name
     fill_in "ایمیل", with: user.email
+    fill_in "وب‌سایت", with: user.website
     fill_in "دیدگاه", with: Faker::Lorem.paragraph
     click_button "ایجاد"
     page.should have_content("موفقیت")

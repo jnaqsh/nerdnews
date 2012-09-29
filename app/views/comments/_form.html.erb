@@ -2,14 +2,18 @@
   <% if current_user.nil? %>
     <%= f.input :name, input_html: {class: "span5"} %>
     <%= f.input :email, input_html: {class: "span5"} %>
+    <%= f.input :website, input_html: {class: "span5"} %>
   <% elsif ["edit", "update"].include?(params[:action]) %>
     <%= f.input :name, readonly: true, input_html: {class: "span5"} %>
     <%= f.input :email, readonly: true, input_html: {class: "span5"} %>
+    <%= f.input :website, readonly: true, input_html: {class: "span5"} %>
   <% else %>
     <%= f.input :name, readonly: true,
       input_html: {value: current_user.full_name, class: "span5"} %>
     <%= f.input :email, readonly: true,
       input_html: {value: current_user.email, class: "span5"} %>
+    <%= f.input :website, readonly: true,
+      input_html: {value: current_user.website, class: "span5"} %>
     <%= f.input :user_id, as: :hidden,
       input_html: {value: current_user.id} %>
   <% end %>
