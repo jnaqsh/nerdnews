@@ -1,22 +1,49 @@
 <article>
-  <% if story.tags.first %>
-    <%= link_to image_tag(story.tags.first.thumbnail.url(:thumb), class: 'img-polaroid pull-left'), stories_url(tag: story.tags.first.name) %>
-  <% end %>
-  <h2><%= link_to story.title, story %></h2>
-  <h6 class="muted">
-    <small>
-      توسط
-      <%= user_name(story) %>
-      در
-      <%= to_jalali(story.publish_date) if story.publish_date %>
-    </small>
-  </h6>
-  <%= user_name(story) %>
-  می‌نویسد:
-  <blockquote>
-    <%= sanitize(RedCloth.new(story.content, [:filter_html, :filter_styles]).to_html) %>
-  </blockquote>
+  <div class='row'>
+    <div class='span1'>
+      <div class='story-image'>
+      <% if story.tags.first %>
+        <%= link_to image_tag(story.tags.first.thumbnail.url(:thumb), class: 'img-polaroid pull-left'), stories_url(tag: story.tags.first.name) %>
+      <% end %>
+      </div>
+      <div class='tags-holder'>
+        <% story.tags.each do |tag| %>
+          <a href="<%= stories_url(tag: tag.name) %>">
+            <span class="label"><%= tag.name %></span>
+          </a>
+        <% end %>
+      </div>
+    </div>
 
-  <%= render partial: "story_operation", locals: {story: story} %>
+    <div class='span8'>
+      <!-- <a class='btn btn-large pull-left'> -->
+      <%= link_to story_path(story), :class => "btn btn-large pull-left" do %>
+        <i class='icon-comment'></i>
+        <span class='comment-counter'> <%= story.comments_count.to_farsi %></span>
+      <% end %>
+
+        <h1><%= link_to story.title, story %></h1>
+
+      <h6 class="muted">
+        <small>
+          توسط
+          <%= user_name(story) %>
+          در
+          <%= to_jalali(story.publish_date) if story.publish_date %>
+        </small>
+      </h6>
+
+      <p><%= user_name(story) %> می‌نویسد:</p>
+      <blockquote>
+        <%= sanitize(RedCloth.new(story.content, [:filter_html, :filter_styles]).to_html) %>
+       </blockquote>
+
+     <div class='rate pull-right'>
+        <button class="btn btn-success btn-small "><i class='icon-thumbs-up'></i></button>
+        <button class="btn btn-danger btn-small "><i class='icon-thumbs-down'></i></button>
+      </div>
+      <%= render partial: "story_operation", locals: {story: story} %>
+    </div>
+  </div>
 </article>
 <hr />

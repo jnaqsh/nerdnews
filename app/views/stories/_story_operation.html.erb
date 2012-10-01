@@ -1,8 +1,7 @@
 <% if story.id %>
-  <div>
+  <div class='pull-left btn-group'>
     <% if can? :update, story %>
-      <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_story_path(story), :class => 'btn btn-mini' %>
+      <%= link_to t('.edit', :default => t("helpers.links.edit")), edit_story_path(story), :class => 'btn btn-mini' %>
     <% end %>
     <% if can? :destroy, story %>
         <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
@@ -19,19 +18,5 @@
           class: "btn btn-mini btn-primary" %>
       <% end %>
     <% end %>
-    <div class='tags pull-right'>
-      <% story.tags.each do |tag| %>
-        <a href="<%= stories_url(tag: tag.name) %>">
-          <span class="label"><%= tag.name %></span>
-        </a>
-      <% end %>
-    </div>
-    <div class="btn-group pull-left">
-      <%= link_to story_path(story), :class => "btn btn-primary btn-mini" do %>
-        <i class="icon-comment icon-white"></i> <%= t('stories.show.comments') %>
-        <%= link_to story.comments_count.to_farsi, story_path(story), :class => "btn btn-primary btn-mini" %>
-      <% end %>
-    </div>
-    <br />
   </div>
 <% end %>
