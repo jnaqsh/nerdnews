@@ -22,14 +22,21 @@ textarea {
       border-radius: 0 0 4px 4px;
 }
 
-.tags {
-  a:hover {
-    text-decoration: none;
-  }
-}
 .tags-holder {
   margin: 5px auto;
 }
+
 span.comment-counter {
   font-weight: bold;
+}
+
+.thumbs-up-list, .thumbs-down-list {
+  display: none;
+}
+
+.thumbs-up-list, .thumbs-down-list {
+  li {
+  display: inline;
+  list-style: none;
+  }
 }
