@@ -1,12 +1,12 @@
 <% if story.id %>
   <div class='row'>
     <div class='span1'>
-      <div class='rate pull-right'>
-        <button class="btn btn-success btn-small btn-thumbs-up" data-id='<%= story.id %>'><i class='icon-thumbs-up'></i></button>
-        <button class="btn btn-danger btn-small btn-thumbs-down" data-id='<%= story.id %>'><i class='icon-thumbs-down'></i></button>
+      <div class='rate btn-group pull-right'>
+        <button class="btn btn-success btn-thumbs-up" data-id='<%= story.id %>'><i class='icon-thumbs-up'></i></button>
+        <button class="btn btn-danger btn-thumbs-down" data-id='<%= story.id %>'><i class='icon-thumbs-down'></i></button>
       </div>
     </div>
-    <div class='span6 thumbs-up-list' id='<%= story.id %>'>
+    <div class='span5 thumbs-up-list' id='<%= story.id %>'>
       <ul>
         <li class='icon-hand-left'>داغ</li>
         <li class='icon-hand-left'>بامزه</li>
@@ -15,7 +15,7 @@
         <li class='icon-hand-left'>بدنبود</li>
       </ul>
     </div>
-    <div class='span6 thumbs-down-list' id='<%= story.id %>'>
+    <div class='span5 thumbs-down-list' id='<%= story.id %>'>
       <ul>
         <li class='icon-hand-left'>ساده‌لوحانه</li>
         <li class='icon-hand-left'>نامرتبط</li>
