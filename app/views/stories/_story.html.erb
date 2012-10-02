@@ -3,7 +3,7 @@
     <div class='span1'>
       <div class='story-image'>
       <% if story.tags.first %>
-        <%= link_to image_tag(story.tags.first.thumbnail.url(:thumb), class: 'img-polaroid pull-left'), stories_url(tag: story.tags.first.name) %>
+        <%= link_to image_tag(story.tags.first.thumbnail.url(:thumb), class: 'img-polaroid'), stories_url(tag: story.tags.first.name) %>
       <% end %>
       </div>
       <div class='tags-holder'>
