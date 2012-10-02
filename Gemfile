@@ -50,4 +50,5 @@ group :test do
   gem 'guard-spork'
   gem 'launchy'
   gem 'rb-inotify', '~> 0.8.8'
+  gem 'shoulda-matchers'
 end
