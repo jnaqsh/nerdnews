@@ -8,7 +8,7 @@
       </div>
       <div class='tags-holder'>
         <% story.tags.each do |tag| %>
-          <a href="<%= stories_url(tag: tag.name) %>">
+          <a href="<% stories_url(tag: tag.name) %>">
             <span class="label"><%= tag.name %></span>
           </a>
         <% end %>
@@ -16,10 +16,11 @@
     </div>
 
     <div class='span8'>
-      <!-- <a class='btn btn-large pull-left'> -->
-      <%= link_to story_path(story), :class => "btn btn-large pull-left" do %>
-        <i class='icon-comment'></i>
-        <span class='comment-counter'> <%= story.comments_count.to_farsi %></span>
+      <% if story.id %>
+        <%= link_to story_path(story), :class => "btn btn-large pull-left" do %>
+          <i class='icon-comment'></i>
+          <span class='comment-counter'> <%= story.comments_count.to_farsi %></span>
+        <% end %>
       <% end %>
 
         <h1><%= link_to story.title, story %></h1>

@@ -3,7 +3,7 @@
   <h1><%=t '.title', :default => model_class.model_name.human %></h1>
 </div>
 
-<%= render :partial => "stories/story", :object => @story %>
+<%= render @story %>
 
 <div class="comments">
   <h2><%= t('.comments') %></h2>
