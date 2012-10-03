@@ -8,20 +8,16 @@
     </div>
     <div class='span5 thumbs-up-list' id='<%= story.id %>'>
       <ul>
-        <li class='icon-hand-left'>داغ</li>
-        <li class='icon-hand-left'>بامزه</li>
-        <li class='icon-hand-left'>جالب</li>
-        <li class='icon-hand-left'>منطقی</li>
-        <li class='icon-hand-left'>بدنبود</li>
+        <% Rating.positive.each do |rating| %>
+          <li class='icon-hand-left'><%= rating.name %></li>
+        <% end %>
       </ul>
     </div>
     <div class='span5 thumbs-down-list' id='<%= story.id %>'>
       <ul>
-        <li class='icon-hand-left'>ساده‌لوحانه</li>
-        <li class='icon-hand-left'>نامرتبط</li>
-        <li class='icon-hand-left'>قدیمی</li>
-        <li class='icon-hand-left'>احمقانه</li>
-        <li class='icon-hand-left'>اسپم</li>
+        <% Rating.negative.each do |rating| %>
+          <li class='icon-hand-left'><%= rating.name %></li>
+        <% end %>
       </ul>
     </div>
     <div class='pull-left btn-group'>

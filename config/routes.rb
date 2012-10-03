@@ -1,5 +1,7 @@
 Nerdnews::Application.routes.draw do
 
+  resources :ratings
+
   namespace :admin do
     get '', to: 'dashboard#index'
   end

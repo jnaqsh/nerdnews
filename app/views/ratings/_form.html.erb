@@ -1,0 +1,12 @@
+<%= simple_form_for @rating, :html => { :class => 'form-horizontal', :multipart => true } do |f| %>
+  <%= f.input :name,
+              input_html: {class: "span6"} %>
+  <%= f.input :weight,
+              input_html: {class: "span6"} %>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                ratings_path, :class => 'btn' %>
+  </div>
+<% end %>

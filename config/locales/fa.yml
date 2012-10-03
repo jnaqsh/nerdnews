@@ -42,6 +42,13 @@ fa:
       update:
         flash:
           success: "تگ با موفقیت ویرایش شد."
+    ratings:
+      create:
+        flash:
+          success: "گزینه امتیاز با موفقیت اضافه شد"
+      update:
+        flash:
+          success: "گزینه امتیاز با موفقیت ویرایش شد"
 
   users:
     new:
@@ -148,6 +155,10 @@ fa:
         name: "نام"
         permalink: "پیوند دائمی"
         content: "محتوا"
+
+      rating:
+        name: نام
+        weight: وزن
 
   views:
     pagination:
