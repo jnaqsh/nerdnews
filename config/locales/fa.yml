@@ -49,6 +49,10 @@ fa:
       update:
         flash:
           success: "گزینه امتیاز با موفقیت ویرایش شد"
+    stories_ratings:
+      create:
+        flash:
+          success: "با موفقیت ثبت شد"
 
   users:
     new:

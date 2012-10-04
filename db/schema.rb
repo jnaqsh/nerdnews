@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121003085217) do
+ActiveRecord::Schema.define(:version => 20121004071908) do
 
   create_table "comments", :force => true do |t|
     t.string   "name"
@@ -70,6 +70,14 @@ ActiveRecord::Schema.define(:version => 20121003085217) do
     t.datetime "updated_at",                    :null => false
     t.integer  "comments_count", :default => 0
     t.integer  "view_counter",   :default => 0
+  end
+
+  create_table "stories_ratings", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "story_id"
+    t.integer  "rating_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "taggings", :force => true do |t|

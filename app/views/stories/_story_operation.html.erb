@@ -9,14 +9,18 @@
     <div class='span5 thumbs-up-list' id='<%= story.id %>'>
       <ul>
         <% Rating.positive.each do |rating| %>
-          <li class='icon-hand-left'><%= rating.name %></li>
+          <li class='icon-hand-left'>
+            <%= link_to rating.name, stories_ratings_path(user_id: current_user, story_id: story, rating_id: rating), method: :post %>
+          </li>
         <% end %>
       </ul>
     </div>
     <div class='span5 thumbs-down-list' id='<%= story.id %>'>
       <ul>
         <% Rating.negative.each do |rating| %>
-          <li class='icon-hand-left'><%= rating.name %></li>
+          <li class='icon-hand-left'>
+            <%= rating.name %>
+          </li>
         <% end %>
       </ul>
     </div>
