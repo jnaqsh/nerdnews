@@ -19,7 +19,7 @@
       <ul>
         <% Rating.negative.each do |rating| %>
           <li class='icon-hand-left'>
-            <%= rating.name %>
+            <%= link_to rating.name, stories_ratings_path(user_id: current_user, story_id: story, rating_id: rating), method: :post %>
           </li>
         <% end %>
       </ul>
