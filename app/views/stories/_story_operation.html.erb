@@ -36,12 +36,9 @@
                       :class => 'btn btn-mini btn-danger'
                        %>
       <% end %>
-
       <% if (can? :publish, story) && !story.publish_date %>
-        <%= form_tag publish_story_path(story), :method => :put, class: "inline" do %>
-          <%= submit_tag t('.publish', default: t('helpers.links.publish')),
-            class: "btn btn-mini btn-primary" %>
-        <% end %>
+        <%= link_to t('.publish', default: t('helpers.links.publish')), publish_story_path(story),
+            class: "btn btn-mini btn-primary", method: :put %>
       <% end %>
     </div>
   </div>
