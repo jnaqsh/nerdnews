@@ -5,7 +5,9 @@ describe User do
     it { should have_and_belong_to_many :roles }
     it { should have_many :stories}
     it { should have_many :comments }
-    it { should have_many :rating_logs }  end
+    it { should have_many :rating_logs }
+    it { should have_many :votes }
+  end
 
   context 'Validations' do
     it 'has a valid factory' do

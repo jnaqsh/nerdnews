@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-describe StoriesRatingsController do
+describe VotesController do
 
   describe "POST /create" do
     before do

@@ -5,6 +5,7 @@ describe Story do
     it { should have_many :comments }
     it { should have_many :taggings }
     it { should have_many :tags }
+    it { should have_many :votes }
     it { should belong_to :user }
   end
 

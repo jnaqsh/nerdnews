@@ -24,6 +24,9 @@ textarea {
 
 .tags-holder {
   margin: 5px auto;
+  a {
+    text-decoration: none;
+  }
 }
 
 span.comment-counter {

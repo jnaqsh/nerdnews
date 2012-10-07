@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-describe StoriesRating do
+describe Vote do
   context '/Relations' do
     it { should belong_to :user }
     it { should belong_to :story }
