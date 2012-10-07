@@ -4,10 +4,10 @@ class TagsController < ApplicationController
     @search = Tag.search do
       fulltext params[:tag_search]
       order_by :created_at, :desc
-      paginate :page => params[:page], :per_page => 10
+      paginate :page => params[:page], :per_page => 20
     end
 
-    @tags = params[:tag_search].present? ? @search.results : Tag.order(:name).page(params[:page])
+    @tags = params[:tag_search].present? ? @search.results : Tag.order(:name).page(params[:page]).per(20)
     respond_to do |format|
       format.html
       format.json {render json: @tags.tokens(params[:q])}
