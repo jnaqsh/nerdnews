@@ -6,6 +6,7 @@ class Story < ActiveRecord::Base
   has_many :tags, :through => :taggings,
                   :after_add => :calculate_count,
                   :after_remove => :calculate_count
+  has_many :votes
   belongs_to :user, counter_cache: true
 
   scope :not_approved, where(:publish_date => nil)
