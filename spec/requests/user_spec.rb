@@ -32,8 +32,8 @@ describe '/Users' do
     context 'Stories', js: true do
       
       before do
-        @pos = FactoryGirl.create(:neg)
-        @rating = FactoryGirl.create(:negative_rating)
+        @pos = FactoryGirl.create(:rating)
+        @neg = FactoryGirl.create(:negative_rating)
       end 
 
       it 'shows the rating items for story' do
