@@ -40,3 +40,12 @@ span.comment-counter {
   list-style: none;
   }
 }
+
+/* rtl language start from right */
+li.token-input-input-token-facebook, li.token-input-token-facebook {
+  float: right;
+}
+
+ul.token-input-list-facebook {
+  clear:right;
+}
