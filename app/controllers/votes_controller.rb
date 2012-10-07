@@ -7,7 +7,7 @@ class VotesController < ApplicationController
 
     respond_to do |format|
       if @vote.save
-        format.html { redirect_to stories_path, notice: t('controllers.stories_ratings.create.flash.success') }
+        format.html { redirect_to stories_path, notice: t('controllers.votes.create.flash.success') }
       end
     end
   end
