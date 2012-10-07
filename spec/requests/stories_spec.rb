@@ -2,6 +2,14 @@
 require 'spec_helper'
 
 describe "Stories" do
+
+  it "raise the counter by one when visiting a page" do
+    story = FactoryGirl.create(:story)
+    expect {
+      visit story_url story
+      }.to change { story.reload.view_counter }.by(1)
+  end
+
   describe "Post a Story" do
     context "as an unknown user" do
       

@@ -1,6 +1,13 @@
 require 'spec_helper'
 
 describe Story do
+  context '/relations' do
+    it { should have_many :comments }
+    it { should have_many :taggings }
+    it { should have_many :tags }
+    it { should belong_to :user }
+  end
+
   it 'has a valid factory' do
     FactoryGirl.build(:story).should be_valid
   end

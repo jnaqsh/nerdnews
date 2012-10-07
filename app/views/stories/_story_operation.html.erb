@@ -1,31 +1,48 @@
 <% if story.id %>
-  <div>
-    <% if can? :update, story %>
-      <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_story_path(story), :class => 'btn btn-mini' %>
-    <% end %>
-    <% if can? :destroy, story %>
-        <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                    story_path(story),
-                    :method => :delete,
-                    :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                    :class => 'btn btn-mini btn-danger'
-                     %>
-    <% end %>
-
-    <% if (can? :publish, story) && !story.publish_date %>
-      <%= form_tag publish_story_path(story), :method => :put, class: "inline" do %>
-        <%= submit_tag t('.publish', default: t('helpers.links.publish')),
-          class: "btn btn-mini btn-primary" %>
+  <div class='row'>
+    <div class='span1'>
+      <div class='rate btn-group pull-right'>
+        <button class="btn btn-success btn-thumbs-up" data-id='<%= story.id %>' id='btn-thumbs-up'><i class='icon-thumbs-up'></i></button>
+        <button class="btn btn-danger btn-thumbs-down" data-id='<%= story.id %>' id='btn-thumbs-down'><i class='icon-thumbs-down'></i></button>
+      </div>
+    </div>
+    <div class='span5 thumbs-up-list' id='<%= story.id %>'>
+      <ul>
+        <% Rating.positive.each do |rating| %>
+          <li class='icon-hand-left'>
+            <%= link_to rating.name, stories_ratings_path(user_id: current_user, story_id: story, rating_id: rating), method: :post %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class='span5 thumbs-down-list' id='<%= story.id %>'>
+      <ul>
+        <% Rating.negative.each do |rating| %>
+          <li class='icon-hand-left'>
+            <%= link_to rating.name, stories_ratings_path(user_id: current_user, story_id: story, rating_id: rating), method: :post %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class='pull-left btn-group'>
+      <% if can? :update, story %>
+        <%= link_to t('.edit', :default => t("helpers.links.edit")), edit_story_path(story), :class => 'btn btn-mini' %>
       <% end %>
-    <% end %>
+      <% if can? :destroy, story %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      story_path(story),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger'
+                       %>
+      <% end %>
 
-    <div class="btn-group pull-left">
-      <%= link_to story_path(story), :class => "btn btn-primary btn-mini" do %>
-        <i class="icon-comment icon-white"></i> <%= t('stories.show.comments') %>
-        <%= link_to story.comments_count.to_farsi, story_path(story), :class => "btn btn-primary btn-mini" %>
+      <% if (can? :publish, story) && !story.publish_date %>
+        <%= form_tag publish_story_path(story), :method => :put, class: "inline" do %>
+          <%= submit_tag t('.publish', default: t('helpers.links.publish')),
+            class: "btn btn-mini btn-primary" %>
+        <% end %>
       <% end %>
     </div>
-    <br />
   </div>
 <% end %>

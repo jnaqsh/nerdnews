@@ -1,0 +1,19 @@
+<%= simple_form_for @tag, :html => { :class => 'form-horizontal', :multipart => true } do |f| %>
+  <%= f.input :name,
+              input_html: {class: "span6"} %>
+  <div class='control-group'>
+    <% if @tag.thumbnail.url %>
+      <%= image_tag @tag.thumbnail.url(:thumb), class: 'img-polaroid pull-left' %>
+    <% end %>
+    <%= f.label :thumbnail, label: t("activerecord.attributes.tag.thumbnail"), class: 'control-label' %>
+    <div class='controls'>
+      <%= f.file_field :thumbnail %>
+    </div>
+
+  </div>
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                tags_path, :class => 'btn' %>
+  </div>
+<% end %>

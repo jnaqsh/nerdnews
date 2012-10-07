@@ -1,25 +1,21 @@
 Nerdnews::Application.routes.draw do
 
+  resources :stories_ratings
+  resources :ratings
   namespace :admin do
     get '', to: 'dashboard#index'
   end
-
   resources :pages
-
   resources :tags
-
   get "sessions/new", as: "new_session"
   post "sessions" => "sessions#create", as: "sessions"
   delete "sessions" => "sessions#destroy", as: "session"
-
   resources :users
-
   resources :stories do
     resources :comments
     get 'unpublished', :on => :collection
     put 'publish', :on => :member
   end
-
   get "/:permalink" => "pages#show", as: "page_by_permalink"
   root :to => "stories#index"
 

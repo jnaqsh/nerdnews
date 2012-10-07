@@ -27,5 +27,9 @@ blockquote {
   border-right: 5px solid #EEEEEE;
   border-left: none;
   padding: 0 15px 0 0;
+  margin-right: 10px;
+  p {
+    font-size: 14px;
+  }
 }
 /* end blockquote */

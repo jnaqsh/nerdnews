@@ -1,4 +1,4 @@
-<div class="comment">
+<div class="comment" id="comment_<%= comment.id %>">
   <div class="avatar">
     <%= image_tag avatar_url(comment, 64) %>
 
@@ -26,10 +26,9 @@
       <%= comment.name %>
       </span>
       <span class='date'>
-        «
-        <%#= to_jalali(comment.created_at) %>
-        <%= 'حدود ' + time_ago_in_words(comment.created_at) + ' قبل'%>
-        »
+      <%= link_to story_path(comment.story, :anchor => "comment_#{comment.id}") do %>
+        <%= '«در ' + time_ago_in_words(comment.created_at) + ' قبل»'%>
+        <% end %>
       </span>
     </div>
 

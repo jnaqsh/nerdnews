@@ -9,6 +9,11 @@ module AuthMacros
     click_button 'ورود'
   end
 
+  def logout
+    click_link 'user-menu'
+    click_link 'خروج'
+  end
+
   # def set_user_session(user)
   #   session[:user_id] = user.id
   # end

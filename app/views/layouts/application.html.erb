@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Open News</title>
+  <title>NerdNews</title>
   <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
   <![endif]-->
@@ -34,7 +34,7 @@
           </div>
           <% else %>
             <div class="btn-group pull-left">
-              <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+              <a class="btn dropdown-toggle" data-toggle="dropdown" id="user-menu" href="#">
                 <%= image_tag avatar_url(current_user) %>
                 <%= current_user.full_name %>
                 <span class="caret"></span>

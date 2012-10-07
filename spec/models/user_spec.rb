@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe User do
+  context "/relations" do
+    it { should have_and_belong_to_many :roles }
+    it { should have_many :stories}
+    it { should have_many :comments }
+    it { should have_many :rating_logs }  end
+
   context 'Validations' do
     it 'has a valid factory' do
       FactoryGirl.create(:user).should be_valid
@@ -42,6 +48,24 @@ describe User do
     it "returns user upon authentication" do
       @logged_in = @user.authenticate("secret")
       @logged_in.id.should eq(@user.id)
+    end
+  end
+
+  context 'Story/Comment counter cache' do
+    before do
+      @user = FactoryGirl.create(:user)
+    end
+    it 'should update after creating a story' do
+      expect {
+        FactoryGirl.create(:story, user: @user)
+      }.to change { @user.reload.stories_count }.by(1)
+    end
+
+    it 'should update after creating a comment' do
+      story = FactoryGirl.create(:story, user: @user)
+      expect {
+        FactoryGirl.create(:comment, story: story, user: @user)
+      }.to change { @user.reload.comments_count }.by(1)
     end
   end
 end
