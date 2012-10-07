@@ -24,7 +24,7 @@
         <% end %>
       </ul>
     </div>
-    <div class='pull-left btn-group'>
+    <div class='pull-left'>
       <% if can? :update, story %>
         <%= link_to t('.edit', :default => t("helpers.links.edit")), edit_story_path(story), :class => 'btn btn-mini' %>
       <% end %>
