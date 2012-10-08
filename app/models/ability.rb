@@ -15,6 +15,7 @@ class Ability
          can :edit, User, :id => user.id
          can :show, Page
          can :create, Story
+         can :index, Tag
        end
     #
     # The first argument to `can` is the action you are giving the user permission to do.
