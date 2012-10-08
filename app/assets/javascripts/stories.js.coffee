@@ -11,3 +11,5 @@ jQuery ->
     id = $(this).data('id')
     $('.thumbs-up-list#' + id).hide()
     $('.thumbs-down-list#' + id).fadeToggle())
+
+  $('#story_content').popover()
