@@ -53,6 +53,7 @@ fa:
       create:
         flash:
           success: "با موفقیت ثبت شد"
+          notloggedin: "برای رای دادن به حساب خود وارد یا عضو شوید"
 
   users:
     new:

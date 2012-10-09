@@ -21,7 +21,7 @@ describe Story do
   it 'makes the story published' do
     story = FactoryGirl.build(:story)
     story.mark_as_published
-    story.publish_date.should_not be_nil
+    story.reload.publish_date.should_not be_nil
   end
 
   context "Title" do

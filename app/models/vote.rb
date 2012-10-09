@@ -4,4 +4,6 @@ class Vote < ActiveRecord::Base
   belongs_to :user
   belongs_to :story
   belongs_to :rating
+
+  validates_presence_of :story, :rating
 end
