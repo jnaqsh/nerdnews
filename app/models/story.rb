@@ -38,6 +38,10 @@ class Story < ActiveRecord::Base
     self.update_attributes publish_date: Time.now
   end
 
+  def user_voted?(user)
+    !self.votes.where("user_id = ?", user).blank?
+  end
+
   private
 
     def calculate_count(tag)

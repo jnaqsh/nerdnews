@@ -10,7 +10,7 @@ class VotesController < ApplicationController
     respond_to do |format|
       if @vote.save
         increment_story_votes_count(params[:story_id], type)
-        create_cookie(params[:story_id]) unless current_user.present?
+        create_votes_cookie(params[:story_id]) unless current_user.present?
         format.html { redirect_to stories_path, notice: t('controllers.votes.create.flash.success') }
       end
     end
@@ -26,7 +26,7 @@ class VotesController < ApplicationController
       end
     end
 
-    def create_cookie(story)
+    def create_votes_cookie(story)
       story = story.to_i
       cookies[:votes] ? story_list = YAML.load(cookies[:votes]) : story_list = []
       unless story_list.include? story
