@@ -140,7 +140,7 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (>= 0.0.2)
       mime-types
-    poltergeist (0.7.0)
+    poltergeist (1.0.0)
       capybara (~> 1.1)
       childprocess (~> 0.3)
       faye-websocket (~> 0.4, >= 0.4.4)

@@ -58,16 +58,14 @@ describe '/Users' do
         click_button 'btn-thumbs-up'
         click_link @pos.name
         visit story_path @story
-        click_button 'btn-thumbs-up'
-        page.should_not have_content @pos.name
+        page.has_no_button? 'btn-thumbs-up'
       end
 
       it 'known user can\'t vote after voting for first time' do
         click_button 'btn-thumbs-up'
         click_link @pos.name
         visit story_path @story
-        click_button 'btn-thumbs-up'
-        page.should_not have_content @pos.name
+        page.has_no_button? 'btn-thumbs-up'
       end
     end
   end
