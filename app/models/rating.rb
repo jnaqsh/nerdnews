@@ -3,6 +3,6 @@ class Rating < ActiveRecord::Base
 
   has_many :votes
 
-  scope :positive, where('weight > 0')
-  scope :negative, where('weight < 0')
+  scope :positive, where('weight > 0').order('weight DESC')
+  scope :negative, where('weight < 0').order('weight DESC')
 end

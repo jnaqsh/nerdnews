@@ -1,6 +1,6 @@
 class RatingsController < ApplicationController
   def index
-    @ratings = Rating.order(:created_at).page params[:page]
+    @ratings = Rating.order('weight DESC').page params[:page]
     respond_to do |format|
       format.html
     end

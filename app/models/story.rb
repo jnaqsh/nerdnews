@@ -1,12 +1,12 @@
 class Story < ActiveRecord::Base
-  attr_accessible :content, :publish_date, :title, :tag_names, :view_counter
+  attr_accessible :content, :publish_date, :title, :tag_names, :view_counter, :positive_votes_count, :negative_votes_count
 
   has_many :comments, dependent: :destroy
   has_many :taggings, dependent: :destroy
   has_many :tags, :through => :taggings,
                   :after_add => :calculate_count,
                   :after_remove => :calculate_count
-  has_many :votes
+  has_many :votes, after_add: :increment_votes_count
   belongs_to :user, counter_cache: true
 
   scope :not_approved, where(:publish_date => nil)
@@ -38,9 +38,17 @@ class Story < ActiveRecord::Base
     self.update_attributes publish_date: Time.now
   end
 
+  def user_voted?(user)
+    !self.votes.where("user_id = ?", user).blank?
+  end
+
   private
 
     def calculate_count(tag)
       tag.update_attribute :stories_count, tag.stories.count
+    end
+
+    def increment_votes_count
+      self.increment! :positive_votes_count
     end
 end
