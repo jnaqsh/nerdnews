@@ -78,21 +78,10 @@
     </div>
   <% end %>
   <div class="row">
-    <div class="span9">
+    <div class="span12">
       <%= yield %>
     </div>
-    <div class="span3">
-      <h2>درباره ما</h2>
-      <p>هدف از ایجاد این سایت، اطلاع جدیدترین اخبار روز درباره آی‌تی است. این نرم‌افزار وب، یک نرم‌افزار آزاد است.</p>
-        <% if @tags && !@tags.empty? %>
-          <h2><%= t('.tags') %></h2>
-          <% @tags.each do |tag| %>
-            <%= content_tag :a, href: tag[:url], style: "font-size: #{tag[:font]}px" do %>
-            <%= "#{tag[:title]}" %>
-          <% end %>
-          <% end %>
-        <% end %>
-    </div>
+
   </div>
 </div>
 
