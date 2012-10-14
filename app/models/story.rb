@@ -13,7 +13,7 @@ class Story < ActiveRecord::Base
   scope :approved, where("publish_date", present?)
 
   validates_length_of :title, maximum: 100, minimum: 10
-  validates_length_of :content, minimum: 20, maximum: 1000
+  validates_length_of :content, minimum: 20, maximum: 1500
   validates  :title, :content, presence: true
 
   attr_reader :tag_names
