@@ -71,6 +71,9 @@ end
 # Capybara because it starts the web server in a thread.
 ActiveRecord::Base.shared_connection = ActiveRecord::Base.connection
 
+# Set OmniAuth to Mock it's connection
+OmniAuth.config.test_mode = true
+
 # --- Instructions ---
 # Sort the contents of this file into a Spork.prefork and a Spork.each_run
 # block.

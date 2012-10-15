@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :comments
   has_many :rating_logs, dependent: :destroy
   has_many :votes
+  has_many :identities
 
   validates_presence_of :full_name
   validates :password, confirmation: true, presence: true, on: :create

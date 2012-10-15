@@ -26,6 +26,8 @@ gem 'jalalidate'
 gem 'farsifu'
 gem 'ancestry'
 gem 'paperclip'
+gem 'omniauth-github'
+gem 'omniauth-openid'
 
 group :production do
   gem 'execjs'

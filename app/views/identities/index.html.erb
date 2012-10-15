@@ -1,0 +1,29 @@
+<% @identities.each do |identity| %>
+  <div class="well span3">
+    <div class='row'>
+      <div class="span1">
+        <%= image_tag "#{identity.provider}_64.png", :size => "64x64" %>
+      </div>
+      <div class="identity_userdata span2">
+        <b><%= identity.provider.capitalize %>:</b>
+        <% if identity.uid.starts_with?('http') %>
+          <%= identity.uid.scan(/http[s]*:\/\/.*?\//)[0] %>
+        <% else %>
+          <%= identity.uid %>
+        <% end %>
+      <% if session[:service_id] == identity.id %>
+        <span><%=t '.signed_in' %></span>
+      <% else %>
+        <p>
+          <i class="icon-remove-sign"></i>
+          <%= link_to t(".remove_identity"), identity, :confirm => t('helpers.links.confirm'), :method => :delete, :class => "remove" %>
+        </p>
+      <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<div class='span9'>
+  <h2><%=t '.more_accounts' %></h2>
+  <%= render 'identities_list'%>
+</div>

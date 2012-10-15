@@ -9,7 +9,8 @@ describe SessionsController do
   context 'POST /create' do
     it 'should authenticate, assign flash notice and assign session[:user_id]' do
       post :create, email: 'something@something.com', password: 'secret'
-      session[:user_id].should eq(@user.id)
+      # session[:user_id].should eq(@user.id)
+      cookies.signed[:permanent_user_id].should eq(@user.id)
       flash[:notice].should eq('با موفقیت وارد شدید.')
     end
 
@@ -23,11 +24,11 @@ describe SessionsController do
 
   context 'GET /destroy' do
     it "should reset session[:user_id] and assign a flash notice" do
-      session[:user_id] = 1
+      cookies.signed[:permanent_user_id] = 1
       get :destroy
       response.code.should eq("302")
       flash[:notice].should eq("با موفقیت خارج شدید.")
-      session[:user_id].should be_nil
+      cookies.signed[:permanent_user_id].should be_nil
     end
   end
 end

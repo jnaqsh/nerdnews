@@ -1,28 +1,35 @@
 <div class="page-header">
   <h1><%= t '.login' %></h1>
 </div>
-
-<%= form_tag sessions_url, class: 'form-horizontal' do %>
-  <div class="control-group email optional">
-    <label class="email control-label">ایمیل</label>
-    <div class="controls">
-        <div class="input-prepend">
-          <span class="add-on"><i class="icon-envelope"></i></span>
-          <%= email_field_tag :email, params[:email], class: "string email" %>
-        </div>
-    </div>
+<div class='row'>
+  <div class='span4'>
+    <p><%=t '.openid_login' %></p>
+    <%= render 'identities/identities_list' %>
   </div>
-  <div class="control-group password">
-    <label class="password control-label">رمز عبور</label>
-    <div class="controls">
-      <div class="input-prepend">
-          <span class="add-on"><i class="icon-lock"></i></span>
-          <%= password_field_tag :password, params[:password], class: "password" %>
+
+  <div class='span5'>
+  <%= form_tag sessions_url, class: 'form-horizontal' do %>
+    <div class="control-group email optional">
+      <label class="email control-label">ایمیل</label>
+      <div class="controls">
+          <div class="input-prepend">
+            <span class="add-on"><i class="icon-envelope"></i></span>
+            <%= email_field_tag :email, params[:email], class: "string email" %>
+          </div>
       </div>
     </div>
+    <div class="control-group password">
+      <label class="password control-label">رمز عبور</label>
+      <div class="controls">
+        <div class="input-prepend">
+          <span class="add-on"><i class="icon-lock"></i></span>
+          <%= password_field_tag :password, params[:password], class: "password" %>
+        </div>
+      </div>
+    </div>
+    <div class="form-actions">
+      <%= submit_tag t('.login'), class: "btn btn-primary" %>
+    </div>
+  <% end %>
   </div>
-
-  <div class="form-actions">
-    <%= submit_tag t('.login'), class: "btn btn-primary" %>
-  </div>
-<% end %>
+</div>
