@@ -20,6 +20,7 @@ class Ability
          can :destroy, Identity, :user_id => user.id
          can :newaccount, Identity
          can :failure, Identity
+         can :index, Tag
        end
     #
     # The first argument to `can` is the action you are giving the user permission to do.
