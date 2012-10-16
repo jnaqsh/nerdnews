@@ -14,6 +14,7 @@ class Ability
          can :create, User
          can :show, User
          can :edit, User, :id => user.id
+         can :update, User, :id => user.id
          can :show, Page
          can :create, Identity
          can :index, Identity, :user_id => user.id
