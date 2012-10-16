@@ -71,9 +71,23 @@ fa:
     new:
       register: "ثبت‌نام"
     form:
-      submit: "ثبت‌نام"
+      submit: "تایید"
     index:
-      search: جستجو
+      search: 'جستجو'
+    show:
+      edit: 'ویرایش پروفایل'
+      registered_from: 'عضو شده از '
+      website: 'وب‌سایت: %{website}'
+      not_mentioned: 'عنوان نشده'
+      points: 'امتیاز'
+      posts: 'ارسال‌ها'
+      comments: 'کامنت‌ها'
+      favorite_tags: 'تگ‌های مورد علاقه'
+      favorites: 'موردعلاقه‌ها'
+      no_article: 'پست تایید شده‌ای ارسال نشده است.'
+      no_article: 'هیچ نظری ارسال نشده.'
+      no_favorite: 'هیچ موردی ثبت نشده است.'
+
 
   sessions:
     new:
@@ -205,3 +219,7 @@ fa:
       previous: "قبلی &rsaquo;"
       next: "&lsaquo; بعدی"
       truncate: "..."
+
+  unauthorized:
+    manage:
+      all: 'شما اجازه دسترسی به این صفحه را ندارید.'
