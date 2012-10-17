@@ -48,7 +48,7 @@
 
   <div class='span9'>
     <ul class="nav nav-tabs">
-      <li class="<%= 'active' if current_page?(user_path(@user, render: 'posts')) %>">
+      <li class="<%= 'active' if params[:render] == 'posts' || params[:render].nil? %>">
         <%= link_to t('.posts'), user_path(@user, render: 'posts') %>
       </li>
       <li class="<%= 'active' if current_page?(user_path(@user, render: 'comments')) %>">
