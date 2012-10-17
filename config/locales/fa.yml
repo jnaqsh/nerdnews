@@ -79,7 +79,7 @@ fa:
       registered_from: 'عضو شده از '
       website: 'وب‌سایت: %{website}'
       not_mentioned: 'عنوان نشده'
-      points: 'امتیاز'
+      karma: 'کارما'
       posts: 'ارسال‌ها'
       comments: 'کامنت‌ها'
       favorite_tags: 'تگ‌های مورد علاقه'
