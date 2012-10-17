@@ -18,14 +18,14 @@ class IdentitiesController < ApplicationController
       @newuser.password = SecureRandom.uuid
       @newuser.identities.build(provider: session[:authhash][:provider], uid: session[:authhash][:uid])
       
-      if @newuser.save!
+      if @newuser.save
         # signin existing user
         # in the session his user id and the service id used for signing in is stored
         cookies.permanent.signed[:permanent_user_id] = @newuser.id
         session[:service_id] = @newuser.identities.first.id
         redirect_to root_url, notice: t('controllers.identities.flash.created_successfully')
       else
-        redirect_to root_url, notice: t('controllers.identities.flash.error_creating')
+        redirect_to new_session_path
       end  
     end
   end

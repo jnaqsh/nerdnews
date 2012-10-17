@@ -7,8 +7,8 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    if cookies.signed[:permanent_user_id] || session[:user_id]
-      User.find(cookies.signed[:permanent_user_id] || session[:user_id])
+    if cookies.signed[:permanent_user_id]
+      User.find(cookies.signed[:permanent_user_id])
     end
   end
   helper_method :current_user

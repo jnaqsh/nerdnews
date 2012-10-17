@@ -1,3 +1,43 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@mixin user-border {
+  border-top: 1px solid #CCC;
+  padding: 10px 0;
+}
+
+.user {
+  margin-top: 15px;
+  .user-name {
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+  }
+  .user-assets {
+    @include user-border;
+  }
+  .user-rates {
+    @include user-border;
+    li {
+      margin-right: 9px;
+      padding: 5px;
+      list-style: none;
+      text: {
+        align: center;
+      }
+      span {
+        display: block;
+        &.digit{
+          line-height: 1.2em;
+          font: {
+            size: 30px;
+          }
+        }
+      }
+    }
+  }
+  .user-tags {
+    @include user-border;
+  }
+}
+
