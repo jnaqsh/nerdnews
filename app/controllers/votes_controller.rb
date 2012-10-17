@@ -11,6 +11,7 @@ class VotesController < ApplicationController
       if @vote.save
         increment_story_votes_count(params[:story_id], type)
         create_votes_cookie(params[:story_id]) unless current_user.present?
+        rate_user(current_user, 1, "#{current_user.full_name} voted a story with id #{@vote.story.id} and rate id of #{@vote.rating.id}") if current_user.present?
         format.html { redirect_to stories_path, notice: t('controllers.votes.create.flash.success') }
       end
     end
