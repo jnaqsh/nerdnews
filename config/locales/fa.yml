@@ -159,6 +159,8 @@ fa:
       new_story: "خبری جدید بنویسید"
       search: "جستجو"
       unpublished_stories: "خبرهای منتشرنشده"
+      users: 'کاربرها'
+      ratings: 'ایجاد گزینه امتیاز'
 
   activerecord:
     models:

@@ -45,8 +45,14 @@
                 <% if can? :publish, Story %>
                   <li><%= link_to t('.unpublished_stories'), unpublished_stories_path %></li>
                 <% end %>
-                <% if can? :create, Page %>
-                  <li><%= link_to t('.new_page'), new_page_path %></li>
+                <% if can? :create, Tag %>
+                  <li><%= link_to t('.tags'), new_tag_path %></li>
+                <% end %>
+                <% if can? :index, User %>
+                  <li><%= link_to t('.users'), users_path %></li>
+                <% end %>
+                <% if can? :create, Rating %>
+                  <li><%= link_to t('.ratings'), ratings_path %></li>
                 <% end %>
                 <li><%= link_to t('.logout'), session_path, method: :delete,
                   data: {confirm: t("helpers.links.confirm")} %></li>
