@@ -2,6 +2,7 @@ Nerdnews::Application.routes.draw do
 
   match '/auth/:provider/callback' => 'identities#create' 
   match '/auth/failure' => 'identities#failure'
+  match '/users/:id/:render' => 'users#show'
   resources :identities, :only => [:index, :create, :destroy] do
     collection do
       get 'signup'
