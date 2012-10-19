@@ -54,18 +54,57 @@ fa:
         flash:
           success: "با موفقیت ثبت شد"
           notloggedin: "برای رای دادن به حساب خود وارد یا عضو شوید"
+    identities:
+      flash:
+        already_exist: 'حساب شما در %{provider} قبلا در سایت ثبت شده است.'
+        canceled: 'ایجاد حساب لغو شد. شما وارد نشده‌اید.'
+        added_successfully: 'حساب شما در %{provider} برای ورود به سایت با موفقیت اضافه شد.'
+        created_successfully: 'حساب شما به موفقیت ساخته، و شما وارد سایت شده‌اید.'
+        error_creating: 'چه ضایع! یک اشکال هنگام ایجاد حساب شما پیش آمد که کاری از دست ما بر نمیامد.'
+        signedin_successfully: 'به‌وسیله‌ی %{provider} با موفقیت وارد شدید.'
+        authenticating_error: 'هنگام تایید‌هویت توسط %{provider} خطایی پیش‌آمد. سرویس‌دهنده اطلاعات معتبری ارسال نکرد.'
+        signin_error: 'شما در حال حاضر با همین حساب وارد شده‌اید.'
+        successfully_removed: 'حساب انتخاب شدخ با موفقیت حذف شد.'
+        notloggedin: 'خطایی در سرویس‌دهنده رخ داد. شما وارد سیستم نشده‌اید.'
 
   users:
     new:
       register: "ثبت‌نام"
     form:
-      submit: "ثبت‌نام"
+      submit: "تایید"
     index:
-      search: جستجو
+      search: 'جستجو'
+    show:
+      edit: 'ویرایش پروفایل'
+      registered_from: 'عضو شده از '
+      website: 'وب‌سایت: %{website}'
+      not_mentioned: 'عنوان نشده'
+      karma: 'کارما'
+      posts: 'ارسال‌ها'
+      comments: 'کامنت‌ها'
+      favorite_tags: 'تگ‌های مورد علاقه'
+      favorites: 'موردعلاقه‌ها'
+      no_article: 'پست تایید شده‌ای ارسال نشده است.'
+      no_article: 'هیچ نظری ارسال نشده.'
+      no_favorite: 'هیچ موردی ثبت نشده است.'
+
 
   sessions:
     new:
       login: "ورود"
+      openid_login: 'چنانچه در یکی از سایت‌های زیر عضو هستید، می‌توانید مستقیما بدون ثبت‌نام وارد شوید:'
+
+  identities:
+    index:
+      remove_identity: 'حذف این حساب'
+      more_accounts: 'می‌توانید حساب‌های بیشتری اضافه کنید'
+      signed_in: 'با این حساب وارد شده‌اید'
+    signup:
+      new_account: 'حساب جدید'
+      new_account_description: 'این حساب برای NerdNews جدید است'
+      confirm_button: 'تایید و ایجاد حساب جدید'
+      caution: 'اگر از قبل در NerdNews حساب دارید، و فقط می‌خواهید یک حساب OpenID جدید برای ورود به سایت به حساب خود متصل کنید، اینجا جای شما نیست! شما باید ابتدا وارد حساب خود شوید و از طریق پروفایل خود اقدام کنید.'
+
 
   errors:
     messages:
@@ -128,6 +167,7 @@ fa:
       user: "کاربر"
       tag: "تگ"
       page: "صفحه"
+      identities: "حساب‌های OpenID"
 
     attributes:
       story:
@@ -165,8 +205,12 @@ fa:
         content: "محتوا"
 
       rating:
-        name: نام
-        weight: وزن
+        name: "نام"
+        weight: "وزن"
+
+      identities:
+        provider: 'سرویس‌دهنده'
+        uid: 'شناسه'
 
   views:
     pagination:
@@ -175,3 +219,7 @@ fa:
       previous: "قبلی &rsaquo;"
       next: "&lsaquo; بعدی"
       truncate: "..."
+
+  unauthorized:
+    manage:
+      all: 'شما اجازه دسترسی به این صفحه را ندارید.'

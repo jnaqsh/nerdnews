@@ -1,0 +1,35 @@
+<table class="table table-striped">
+  <tbody>
+    <% user_story.each do |user_story| %>
+      <tr>
+        <td>
+          <i class='icon-book'></i>
+          <%= link_to story_path(user_story) do %>
+            <%= user_story.title %>
+          <% end %>
+        </td>
+        <td>
+          <%= to_jalali(user_story.publish_date) %>
+        </td>
+        <td>
+          <i class='icon-comment'></i>
+          <%= user_story.comments_count.to_farsi %>
+        </td>
+        <td>
+          <i class='icon-eye-open'></i>
+          <%= user_story.view_counter.to_farsi %>
+        </td>
+        <td>
+          <i class='icon-thumbs-up'></i>
+          <%= user_story.positive_votes_count.to_farsi %>
+        </td>
+        <td>
+          <i class='icon-thumbs-down'></i>
+          <%= user_story.negative_votes_count.to_farsi %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @stories %>

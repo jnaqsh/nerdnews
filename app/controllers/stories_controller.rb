@@ -70,6 +70,7 @@ class StoriesController < ApplicationController
         format.html { render action: "new" }
       else
         if @story.save
+          rate_user(current_user, 1, "#{current_user.full_name} posted a story with id #{@story.id}") if current_user.present?
           format.html { redirect_to @story, only_path: true, notice: t('controllers.stories.create.flash.success') }
           format.json { render json: @story, status: :created, location: @story }
         else
@@ -114,6 +115,7 @@ class StoriesController < ApplicationController
 
     respond_to do |format|
       if @story.mark_as_published
+        rate_user(@story.user, 3, "a story from #{@story.user.full_name} with id #{@story.id} got approved")
         format.html { redirect_to unpublished_stories_path,
           notice: t('controllers.stories.publish.flash.success') }
       end

@@ -8,10 +8,6 @@ describe '/Users' do
       @user = FactoryGirl.create(:user)
       @story = FactoryGirl.create(:story, user: @user)
     end
-
-    # after(:each) do
-    #   logout
-    # end
     
     context 'Users' do
       before do 
@@ -30,6 +26,27 @@ describe '/Users' do
           click_button 'ایجاد'
         }.to change { @user.reload.user_rate }.by(1)
       end
+
+      it 'should add a point after posting a stroy' do
+        visit new_story_path
+        expect {
+          fill_in 'عنوان', with: @story.title
+          fill_in 'محتوا', with: @story.content
+          click_button 'ایجاد'
+        }.to change { @user.reload.user_rate }.by(1)
+      end
+
+      it 'should add a point after a story approved' do
+        logout
+        admin = FactoryGirl.create(:admin_user)
+        login admin
+        visit unpublished_stories_path
+        expect {
+          click_link 'انتشار'
+        }.to change { @user.reload.user_rate }.by(3)
+      end
+
+      it 'should add a point after ranking a comment'
     end
 
     context 'Stories', js: true do
@@ -47,21 +64,30 @@ describe '/Users' do
         page.should have_content @neg.name
       end
 
-      it 'rates a story' do
+      it 'rates a story successfully' do
         click_button 'btn-thumbs-up'
         click_link @pos.name
         current_path.should eq stories_path
         page.should have_content 'موفقیت'
       end
 
-      it 'unknown user can\'t vote after voting for first time' do
+      it 'gains a point after rating to a story' do
+        login @user
+        visit story_path @story
+        click_button 'btn-thumbs-up'
+        expect {
+          click_link @pos.name
+        }.to change { @user.reload.user_rate }.by(1)
+      end
+
+      it 'wont let unknown user to vote after voting for first time' do
         click_button 'btn-thumbs-up'
         click_link @pos.name
         visit story_path @story
         page.should have_no_button 'btn-thumbs-up'
       end
 
-      it 'known user can\'t vote after voting for first time' do
+      it 'wont let known user to vote after voting for first time' do
         login @user
         visit story_path @story
         click_button 'btn-thumbs-up'

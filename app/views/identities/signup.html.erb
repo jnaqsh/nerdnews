@@ -1,0 +1,24 @@
+<section id="services_new">
+  <h1><%=t '.new_account' %></h1>
+  <div class = 'well'>
+    <h3><%=t '.new_account_description' %></h3>
+    <p class="small">
+      <b><%= t('activerecord.attributes.identities.provider') %>:</b>
+       <%= @authhash[:provider] %><br />
+      <b><%= t('activerecord.attributes.identities.uid') %>:</b>
+      <%= @authhash[:uid] %><br />
+      <b><%= t('activerecord.attributes.user.full_name') %>:</b>
+      <%= @authhash[:name] %><br />
+      <b><%= t('activerecord.attributes.user.email') %>:</b>
+      <%= @authhash[:email] %> <br />
+    </p>
+
+    <%= form_tag :controller => "identities", :action => "newaccount" do %>
+      <%= submit_tag t(".confirm_button") %> 
+      <%= submit_tag t("helpers.links.cancel"), name: 'cancel' %>
+    <% end %>
+  </div>
+  <p class='alert alert-info'>
+    <%=t '.caution' %>
+  </p>
+</section>

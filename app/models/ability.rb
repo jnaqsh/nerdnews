@@ -10,11 +10,17 @@ class Ability
        else
          can :create, Comment
          can :read, Story
+         can :create, Story
          can :create, User
          can :show, User
          can :edit, User, :id => user.id
+         can :update, User, :id => user.id
          can :show, Page
-         can :create, Story
+         can :create, Identity
+         can :index, Identity, :user_id => user.id
+         can :destroy, Identity, :user_id => user.id
+         can :newaccount, Identity
+         can :failure, Identity
          can :index, Tag
        end
     #

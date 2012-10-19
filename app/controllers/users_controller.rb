@@ -24,6 +24,14 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
 
+    if params[:render] == 'comments'
+      @comments = @user.comments.order('created_at desc').page params[:page], per_page: 30
+    elsif params[:render] == 'favorites'
+      @favorites = @user.votes.order('created_at desc').page params[:page], per_page: 30
+    else
+      @stories = @user.stories.approved.order('created_at desc').page params[:page], per_page: 30
+    end
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }
