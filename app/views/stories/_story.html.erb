@@ -8,7 +8,7 @@
       </div>
       <div class='tags-holder'>
         <% story.tags.each do |tag| %>
-          <a href="<% stories_url(tag: tag.name) %>">
+          <a href="<%= stories_url(tag: tag.name) %>">
             <span class="label"><%= tag.name %></span>
           </a>
         <% end %>

@@ -2,10 +2,41 @@
 require 'spec_helper'
 
 describe '/Users' do
+  before { @user = FactoryGirl.create(:user) }
+  
+  it 'can edit his profile page' do
+    login @user
+    visit user_path(@user)
+    click_link 'ویرایش پروفایل'
+    fill_in 'ایمیل', with: 'arash@email.com'
+    click_button 'تایید'
+    @user.reload.email.should == 'arash@email.com'
+  end
+
+  it 'can get users posts' do
+    story = FactoryGirl.create(:approved_story, user_id: @user)
+    visit posts_user_path(@user)
+    page.should have_content story.title
+  end
+
+  it 'can get users comments' do
+    story = FactoryGirl.create(:approved_story, user_id: @user)
+    comment = FactoryGirl.create(:comment, user_id: @user, story_id: story)
+    visit comments_user_path(@user)
+    page.should have_content comment.content[30] #because of truncate
+  end
+
+  it 'can get users favorites' do
+    story = FactoryGirl.create(:approved_story, user_id: @user)
+    rating = FactoryGirl.create(:rating)
+    vote = FactoryGirl.create(:vote, story_id: story, user_id: @user, rating_id: rating)
+    visit favorites_user_path(@user)
+    page.should have_content vote.rating.name
+  end
+
   context '/Rating' do
 
     before(:each) do
-      @user = FactoryGirl.create(:user)
       @story = FactoryGirl.create(:story, user: @user)
     end
     

@@ -74,7 +74,7 @@ fa:
       submit: "تایید"
     index:
       search: 'جستجو'
-    show:
+    profile:
       edit: 'ویرایش پروفایل'
       registered_from: 'عضو شده از '
       website: 'وب‌سایت: %{website}'

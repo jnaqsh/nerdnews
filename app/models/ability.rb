@@ -13,6 +13,9 @@ class Ability
          can :create, Story
          can :create, User
          can :show, User
+         can :posts, User
+         can :comments, User
+         can :favorites, User
          can :edit, User, :id => user.id
          can :update, User, :id => user.id
          can :show, Page
