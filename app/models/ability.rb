@@ -9,22 +9,13 @@ class Ability
          can :manage, :all
        else
          can :create, Comment
-         can :read, Story
-         can :create, Story
-         can :create, User
-         can :show, User
-         can :posts, User
-         can :comments, User
-         can :favorites, User
-         can :edit, User, :id => user.id
-         can :update, User, :id => user.id
-         can :show, Page
-         can :create, Identity
-         can :index, Identity, :user_id => user.id
-         can :destroy, Identity, :user_id => user.id
-         can :newaccount, Identity
-         can :failure, Identity
+         can [:read, :create], Story
+         can [:create, :show, :posts, :comments, :favorites], User
+         can [:edit, :update], User, :id => user.id
+         can [:create,:newaccount, :failure], Identity
+         can [:index, :destroy], Identity, :user_id => user.id
          can :index, Tag
+         can :show, Page
        end
     #
     # The first argument to `can` is the action you are giving the user permission to do.
