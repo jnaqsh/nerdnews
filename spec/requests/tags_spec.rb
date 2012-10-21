@@ -25,8 +25,8 @@ describe "Tags" do
     page.should have_content 'موفقیت'
   end
 
-  it 'filters stories by tag' do
-    story = FactoryGirl.build(:approved_story)
+  it 'filters stories by tag', focus: true do
+    story = FactoryGirl.create(:approved_story)
     tag = FactoryGirl.create(:tag)
     story.tags << tag
     story1 = FactoryGirl.create(:approved_story)

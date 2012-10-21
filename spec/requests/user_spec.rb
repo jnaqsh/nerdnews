@@ -13,6 +13,13 @@ describe '/Users' do
     @user.reload.email.should == 'arash@email.com'
   end
 
+  it 'wont let users to edit others profiles' do
+    user1 = FactoryGirl.create(:user)
+    login user1
+    visit user_path(@user)
+    page.should have_no_button 'ویرایش پروفایل'
+  end
+
   it 'can get users posts' do
     story = FactoryGirl.create(:approved_story, user_id: @user)
     visit posts_user_path(@user)
