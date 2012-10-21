@@ -1,4 +1,5 @@
 Nerdnews::Application.routes.draw do
+  resources :mypage, only: :index
 
   match '/auth/:provider/callback' => 'identities#create' 
   match '/auth/failure' => 'identities#failure'

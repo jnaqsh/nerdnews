@@ -2,43 +2,71 @@
 require 'spec_helper'
 
 describe '/Users' do
-  before { @user = FactoryGirl.create(:user) }
-  
-  it 'can edit his profile page' do
-    login @user
-    visit user_path(@user)
-    click_link 'ویرایش پروفایل'
-    fill_in 'ایمیل', with: 'arash@email.com'
-    click_button 'تایید'
-    @user.reload.email.should == 'arash@email.com'
+  context '/Profile' do
+    before { @user = FactoryGirl.create(:user) }
+    
+    it 'can edit his profile page' do
+      login @user
+      visit user_path(@user)
+      click_link 'ویرایش پروفایل'
+      fill_in 'ایمیل', with: 'arash@email.com'
+      click_button 'تایید'
+      @user.reload.email.should == 'arash@email.com'
+    end
+
+    it 'wont let users to edit others profiles' do
+      user1 = FactoryGirl.create(:user)
+      login user1
+      visit user_path(@user)
+      page.should have_no_button 'ویرایش پروفایل'
+    end
+
+    it 'can get users posts' do
+      story = FactoryGirl.create(:approved_story, user_id: @user)
+      visit posts_user_path(@user)
+      page.should have_content story.title
+    end
+
+    it 'can get users comments' do
+      story = FactoryGirl.create(:approved_story, user_id: @user)
+      comment = FactoryGirl.create(:comment, user_id: @user, story_id: story)
+      visit comments_user_path(@user)
+      page.should have_content comment.content[30] #because of truncate
+    end
+
+    it 'can get users favorites' do
+      story = FactoryGirl.create(:approved_story, user_id: @user)
+      rating = FactoryGirl.create(:rating)
+      vote = FactoryGirl.create(:vote, story_id: story, user_id: @user, rating_id: rating)
+      visit favorites_user_path(@user)
+      page.should have_content vote.rating.name
+    end
   end
 
-  it 'wont let users to edit others profiles' do
-    user1 = FactoryGirl.create(:user)
-    login user1
-    visit user_path(@user)
-    page.should have_no_button 'ویرایش پروفایل'
-  end
+  context '/MyPage', focus: true do
+    it 'shows favorite tags in mypage' do
+      story = FactoryGirl.create(:story)
+      tag = FactoryGirl.create(:tag)
+      story.tags << tag
+      user = FactoryGirl.create(:user, favorite_tags: tag.name)
+      login user
+      visit mypage_index_path
+      page.should have_content tag.name
+    end
 
-  it 'can get users posts' do
-    story = FactoryGirl.create(:approved_story, user_id: @user)
-    visit posts_user_path(@user)
-    page.should have_content story.title
-  end
+    it 'shows a notice if user doesnt have any favorite tags' do
+      user = FactoryGirl.create(:user, favorite_tags: nil)
+      login user
+      visit mypage_index_path
+      page.should have_content 'لطفا تعدادی تگ موردعلاقه به پروفایل خود اضافه کنید'
+    end
 
-  it 'can get users comments' do
-    story = FactoryGirl.create(:approved_story, user_id: @user)
-    comment = FactoryGirl.create(:comment, user_id: @user, story_id: story)
-    visit comments_user_path(@user)
-    page.should have_content comment.content[30] #because of truncate
-  end
-
-  it 'can get users favorites' do
-    story = FactoryGirl.create(:approved_story, user_id: @user)
-    rating = FactoryGirl.create(:rating)
-    vote = FactoryGirl.create(:vote, story_id: story, user_id: @user, rating_id: rating)
-    visit favorites_user_path(@user)
-    page.should have_content vote.rating.name
+    it 'shows a notice if no story found for favorite tags' do
+      user = FactoryGirl.create(:user, favorite_tags: 'gnome')
+      login user
+      visit mypage_index_path
+      page.should have_content 'موردی جهت نمایش پیدا نشد'
+    end
   end
 
   context '/Rating' do
