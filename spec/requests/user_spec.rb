@@ -57,7 +57,7 @@ describe '/Users' do
       user = FactoryGirl.create(:user, favorite_tags: nil)
       login user
       visit mypage_index_path
-      page.should have_content 'لطفا تعدادی تگ موردعلاقه به پروفایل خود اضافه کنید'
+      page.should have_content 'لطفا'
     end
 
     it 'shows a notice if no story found for favorite tags' do

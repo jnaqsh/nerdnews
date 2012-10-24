@@ -16,6 +16,7 @@ class Ability
          can [:index, :destroy], Identity, user: { :id => user.id }
          can :manage, Message, user: { :id => user.id }
          can :show, Message, reciver_id: user.id
+         can :index, :mypage unless user.id.nil?
          can :index, Tag
          can :show, Page
        end
