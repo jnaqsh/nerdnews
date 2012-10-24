@@ -1,4 +1,5 @@
 Nerdnews::Application.routes.draw do
+
   resources :mypage, only: :index
 
   match '/auth/:provider/callback' => 'identities#create' 
@@ -30,6 +31,9 @@ Nerdnews::Application.routes.draw do
     get 'posts', on: :member
     get 'comments', on: :member
     get 'favorites', on: :member
+    resources :messages, except: [:edit, :update, :destroy] do
+      get 'sent', on: :collection
+    end
   end
   
   resources :stories do

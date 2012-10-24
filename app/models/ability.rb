@@ -13,7 +13,9 @@ class Ability
          can [:create, :show, :posts, :comments, :favorites], User
          can [:edit, :update], User, :id => user.id
          can [:create,:newaccount, :failure], Identity
-         can [:index, :destroy], Identity, :user_id => user.id
+         can [:index, :destroy], Identity, user: { :id => user.id }
+         can :manage, Message, user: { :id => user.id }
+         can :show, Message, reciver_id: user.id
          can :index, Tag
          can :show, Page
        end

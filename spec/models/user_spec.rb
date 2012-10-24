@@ -7,7 +7,8 @@ describe User do
     it { should have_many :comments }
     it { should have_many :rating_logs }
     it { should have_many :votes }
-    it { should have_many :identities }    
+    it { should have_many :identities }
+    it { should have_many :messages }
   end
 
   context 'Validations' do

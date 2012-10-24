@@ -1,3 +1,4 @@
+<% unread_messages = current_user.count_unread_messages if current_user %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,6 +38,9 @@
               <a class="btn dropdown-toggle" data-toggle="dropdown" id="user-menu" href="#">
                 <%= image_tag avatar_url(current_user) %>
                 <%= current_user.full_name %>
+                <% if unread_messages > 0 %>
+                  <span class="label label-important"><%= unread_messages.to_farsi %></span>
+                <% end %>
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
@@ -53,6 +57,19 @@
                 <% end %>
                 <% if can? :create, Rating %>
                   <li><%= link_to t('.ratings'), ratings_path %></li>
+                <% end %>
+                <% if can? :create, Message %>
+                  <li>
+                    <%= link_to user_messages_path(current_user) do %>
+                      <%= t('.messages') %>
+                      <% if unread_messages > 0 %>
+                        <span class="label label-important">
+                          <%= unread_messages.to_farsi %>
+                        </span>
+                      <% end %>
+                    <% end %>
+                  </li>
+                  <li class="divider"></li>
                 <% end %>
                 <li><%= link_to t('.logout'), session_path, method: :delete,
                   data: {confirm: t("helpers.links.confirm")} %></li>

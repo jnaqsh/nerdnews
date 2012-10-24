@@ -70,6 +70,11 @@ fa:
       flash:
         add_tags: 'لطفا تعدادی تگ موردعلاقه به پروفایل خود اضافه کنید'
         nothing_found: 'موردی جهت نمایش پیدا نشد'
+    messages:
+      flash:
+        message_sent: 'پیام با موفقیت ارسال شد.'
+        no_sent_message: 'تاکنون پیامی برای کاربران ارسال نکرده‌اید'
+        no_recived_message: 'تاکنون پیامی دریافت نکرده‌اید'
 
   users:
     new:
@@ -108,6 +113,15 @@ fa:
       new_account_description: 'این حساب برای NerdNews جدید است'
       confirm_button: 'تایید و ایجاد حساب جدید'
       caution: 'اگر از قبل در NerdNews حساب دارید، و فقط می‌خواهید یک حساب OpenID جدید برای ورود به سایت به حساب خود متصل کنید، اینجا جای شما نیست! شما باید ابتدا وارد حساب خود شوید و از طریق پروفایل خود اقدام کنید.'
+
+  messages:
+    index:
+      compose: 'ارسال پیام'
+      outbox: 'پیام‌های ارسالی'
+    sent:
+      sent_box: 'ارسال‌ها'
+      sender: 'ارسال کننده'
+      send_date: 'تاریخ ارسال'
 
 
   errors:
@@ -165,6 +179,7 @@ fa:
       unpublished_stories: "خبرهای منتشرنشده"
       users: 'کاربرها'
       ratings: 'ایجاد گزینه امتیاز'
+      messages: 'پیام‌ها'
 
   activerecord:
     models:
@@ -174,6 +189,7 @@ fa:
       tag: "تگ"
       page: "صفحه"
       identities: "حساب‌های OpenID"
+      message: 'پیام‌ها'
 
     attributes:
       story:
@@ -217,6 +233,12 @@ fa:
       identities:
         provider: 'سرویس‌دهنده'
         uid: 'شناسه'
+
+      message:
+        reciver_id: 'دریافت کننده'
+        subject: 'عنوان'
+        message: 'پیام'
+        sender: 'توسط'
 
   views:
     pagination:

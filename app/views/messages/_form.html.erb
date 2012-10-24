@@ -1,0 +1,15 @@
+<%= simple_form_for [@user, @message], :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :reciver_id,
+              input_html: {class: "span6"}
+              %>
+  <%= f.input :subject,
+              input_html: {class: "span6"}
+              %>
+  <%= f.input :message,
+              input_html: {rows: 15, class: "span6", 'data-trigger' => "focus"} %>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")), user_messages_path, :class => 'btn' %>
+  </div>
+<% end %>

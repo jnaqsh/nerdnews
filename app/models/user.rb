@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :rating_logs, dependent: :destroy
   has_many :votes
   has_many :identities
+  has_many :messages
 
   validates_presence_of :full_name
   validates :password, confirmation: true, presence: true, on: :create
@@ -29,5 +30,9 @@ class User < ActiveRecord::Base
     roles.map do |role|
       role.name
     end
+  end
+
+  def count_unread_messages
+    Message.where(unread: true, reciver_id: self.id).count
   end
 end
