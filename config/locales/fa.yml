@@ -66,6 +66,15 @@ fa:
         signin_error: 'شما در حال حاضر با همین حساب وارد شده‌اید.'
         successfully_removed: 'حساب انتخاب شدخ با موفقیت حذف شد.'
         notloggedin: 'خطایی در سرویس‌دهنده رخ داد. شما وارد سیستم نشده‌اید.'
+    mypage:
+      flash:
+        add_tags: 'لطفا تعدادی از تگ‌های موردعلاقه خود را به پروفایل خود اضافه کنید'
+        nothing_found: 'موردی جهت نمایش پیدا نشد'
+    messages:
+      flash:
+        message_sent: 'پیام با موفقیت ارسال شد.'
+        no_sent_message: 'تاکنون پیامی برای کاربران ارسال نکرده‌اید'
+        no_recived_message: 'تاکنون پیامی دریافت نکرده‌اید'
 
   users:
     new:
@@ -74,7 +83,7 @@ fa:
       submit: "تایید"
     index:
       search: 'جستجو'
-    show:
+    profile:
       edit: 'ویرایش پروفایل'
       registered_from: 'عضو شده از '
       website: 'وب‌سایت: %{website}'
@@ -104,6 +113,15 @@ fa:
       new_account_description: 'این حساب برای NerdNews جدید است'
       confirm_button: 'تایید و ایجاد حساب جدید'
       caution: 'اگر از قبل در NerdNews حساب دارید، و فقط می‌خواهید یک حساب OpenID جدید برای ورود به سایت به حساب خود متصل کنید، اینجا جای شما نیست! شما باید ابتدا وارد حساب خود شوید و از طریق پروفایل خود اقدام کنید.'
+
+  messages:
+    index:
+      compose: 'ارسال پیام'
+      outbox: 'پیام‌های ارسالی'
+    sent:
+      sent_box: 'ارسال‌ها'
+      sender: 'ارسال کننده'
+      send_date: 'تاریخ ارسال'
 
 
   errors:
@@ -138,6 +156,7 @@ fa:
       title: "خبرهای منتشرنشده"
     form:
       title_placeholder: "بهترین عنوان ۶ تا ۱۰ کلمه است (حداکثر ۱۰۰ کاراکتر)"
+      source_placeholder: 'چنانچه منبع خبر مشخص است آن را وارد کنید. در غیر این صورت در متن به منابع لینک دهید.'
       content_placeholder: "بدنه اصلی خبر خود را اینجا بنویسید. لطفا سعی کنید از کلمات خود استفاده کنید. اگر از منابع دیگر نقل‌وقول می‌کنید، آدرس‌های مرتبط را در متن وارد کنید. اگر از منبع اصلی خبر مطمئن هستید آنها را در متن بگنجانید. خبری که منبع مشخصی نداشته باشد، حذف می‌گردد. متن خبر می‌تواند حداکثر ۱۵۰۰ کاراکتر باشد."
 
   tags:
@@ -159,6 +178,9 @@ fa:
       new_story: "خبری جدید بنویسید"
       search: "جستجو"
       unpublished_stories: "خبرهای منتشرنشده"
+      users: 'کاربرها'
+      ratings: 'ایجاد گزینه امتیاز'
+      messages: 'پیام‌ها'
 
   activerecord:
     models:
@@ -168,6 +190,7 @@ fa:
       tag: "تگ"
       page: "صفحه"
       identities: "حساب‌های OpenID"
+      message: 'پیام‌ها'
 
     attributes:
       story:
@@ -177,6 +200,7 @@ fa:
         created_at: "تاریخ ساخت"
         excerpt:  "خلاصه"
         tag_names: "تگ‌ها"
+        source: 'منبع'
 
       comment:
         name: "نام"
@@ -211,6 +235,12 @@ fa:
       identities:
         provider: 'سرویس‌دهنده'
         uid: 'شناسه'
+
+      message:
+        reciver_id: 'دریافت کننده'
+        subject: 'عنوان'
+        message: 'پیام'
+        sender: 'توسط'
 
   views:
     pagination:

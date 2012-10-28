@@ -1,0 +1,60 @@
+<%- model_class = @user.class -%>
+
+<div class='row'>
+  <div class='span3'>
+    <%= image_tag avatar_url(@user, 256), class: 'img-polaroid' %>
+    <div class='user info'>
+      
+      <div class='user user-name'>
+        <p><strong><%= @user.full_name %></strong></p>
+      </div>
+      
+      <div class='user user-assets'>
+        <i class="icon-user"></i>
+        <%= t('.registered_from') + time_ago_in_words(@user.created_at) + ' قبل'%></p>
+        <i class="icon-th"></i>
+        <%=t '.website', website: @user.website || t('.not_mentioned') %></p>
+        <i class="icon-envelope"></i>
+        <%= mail_to @user.email, nil, :replace_at => ' at ', replace_dot: ' dot ', encode: 'hex' %>
+      </div>
+      <% if can? :edit, @user %>
+        <div class='user user-edit-button'>
+          <%= link_to t('.edit'), edit_user_path(@user), class: 'btn btn-block' %>
+        </div>
+      <% end %>
+
+      <div class='row'>
+        <ul class='user user-rates'>
+          <li class='span1 well well-small'>
+            <span class='digit'><%= @user.user_rate.to_farsi %></span>
+            <span><%=t '.karma' %></span>
+          </li>
+          <li class='span1 well well-small'>
+            <span class='digit'><%= @user.stories.approved.count.to_farsi %></span>
+            <span><%=t '.posts' %></span>
+          </li>
+          <li class='span1 well well-small'>
+            <span class='digit'><%= @user.comments.count.to_farsi %></span>
+            <span><%=t '.comments' %></span>
+          </li>
+        </ul>
+      </div>
+
+      <div class='user user-tags'>
+        <p><%=t '.favorite_tags' %></p>
+      </div>
+    </div>
+  </div>
+
+  <div class='span9'>
+    <ul class="nav nav-tabs">
+      <li class="<%= 'active' if current_page?(posts_user_path(@user)) || current_page?(user_path(@user)) %>">
+        <%= link_to t('.posts'), posts_user_path(@user) %>
+      </li>
+      <li class="<%= 'active' if current_page?(comments_user_path(@user)) %>">
+        <%= link_to t('.comments'), comments_user_path(@user) %>
+      </li>
+      <li class="<%= 'active' if current_page?(favorites_user_path(@user)) %>">
+        <%= link_to t('.favorites'), favorites_user_path(@user) %>
+      </li>
+    </ul>

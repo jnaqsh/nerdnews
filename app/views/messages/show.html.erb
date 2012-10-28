@@ -1,0 +1,30 @@
+<div class= 'row'>
+  <div id='sender', class='span1 offset2'>
+    <b>
+    <%=t 'activerecord.attributes.message.sender' %>
+    </b>
+  </div>
+  <div class='span7'>
+    <%= @message.user.full_name %>
+  </div>
+</div>
+<div class= 'row'>
+  <div id='subject', class='span1 offset2'>
+    <b>
+    <%=t 'activerecord.attributes.message.subject' %>
+    </b>
+  </div>
+  <div class='span7'>
+    <%= @message.subject %>
+  </div>
+</div>
+<div class= 'row'>
+  <div class='span1 offset2'>
+    <b>
+    <%=t 'activerecord.attributes.message.message' %>
+    </b>
+  </div>
+  <div class='span7'>
+    <%= @message.message %>
+  </div>
+</div>

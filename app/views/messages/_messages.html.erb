@@ -1,0 +1,41 @@
+<%- model_class = Message.new.class -%>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%=t 'messages.sent.sender' %></th>
+      <th><%= model_class.human_attribute_name(:reciver_id) %></th>
+      <th><%= model_class.human_attribute_name(:subject) %></th>
+      <th><%= model_class.human_attribute_name(:message) %></th>
+      <th><%=t 'messages.sent.send_date' %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @messages.each do |message| %>
+      <tr style='<%= message_unread? message %>'>
+        <td>
+          <i class='icon-book'></i>
+          <%= link_to user_path(message.user) do %>
+            <%= message.user.full_name %>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to user_path(message.reciver_id) do %>
+            <%= User.find(message.reciver_id).full_name %>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to user_message_path(message.user, message) do %>
+            <%= message.subject %>
+          <% end %>
+        </td>
+        <td>
+            <%= truncate(message.message) %>
+        </td>
+        <td>
+          <%= to_jalali(message.created_at) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @messages %>

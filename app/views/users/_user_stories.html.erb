@@ -1,6 +1,6 @@
 <table class="table table-striped">
   <tbody>
-    <% user_story.each do |user_story| %>
+    <% user_stories.each do |user_story| %>
       <tr>
         <td>
           <i class='icon-book'></i>
@@ -31,5 +31,4 @@
     <% end %>
   </tbody>
 </table>
-
 <%= paginate @stories %>

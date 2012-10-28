@@ -8,7 +8,7 @@
       </div>
       <div class='tags-holder'>
         <% story.tags.each do |tag| %>
-          <a href="<% stories_url(tag: tag.name) %>">
+          <a href="<%= stories_url(tag: tag.name) %>">
             <span class="label"><%= tag.name %></span>
           </a>
         <% end %>
@@ -39,7 +39,7 @@
         <%= sanitize(RedCloth.new(story.content, [:filter_html, :filter_styles]).to_html) %>
       </blockquote>
 
-      <%= render partial: "story_operation", locals: {story: story} %>
+      <%= render partial: "stories/story_operation", locals: {story: story} %>
     </div>
   </div>
 </article>

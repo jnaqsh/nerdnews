@@ -1,5 +1,7 @@
 Nerdnews::Application.routes.draw do
 
+  resources :mypage, only: :index
+
   match '/auth/:provider/callback' => 'identities#create' 
   match '/auth/failure' => 'identities#failure'
   resources :identities, :only => [:index, :create, :destroy] do
@@ -25,7 +27,14 @@ Nerdnews::Application.routes.draw do
   post "sessions" => "sessions#create", as: "sessions"
   delete "sessions" => "sessions#destroy", as: "session"
   
-  resources :users
+  resources :users do
+    get 'posts', on: :member
+    get 'comments', on: :member
+    get 'favorites', on: :member
+    resources :messages, except: [:edit, :update, :destroy] do
+      get 'sent', on: :collection
+    end
+  end
   
   resources :stories do
     resources :comments

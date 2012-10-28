@@ -1,0 +1,29 @@
+<%= render partial: 'profile' %>
+    <div class='user-activities'>
+      <table class="table table-striped">
+        <tbody>
+          <% @comments.each do |comment| %>
+            <tr>
+              <td>
+                <i class='icon-comment'></i>
+                <%= link_to story_path(comment.story, :anchor => "comment_#{comment.id}") do %>
+                  <%= truncate(comment.content) %>
+                <% end %>
+              </td>
+              <td>
+                <i class='icon-book'></i>
+                <%= link_to story_path(comment.story) do %>
+                  <%= truncate(comment.story.title) %>
+                <% end %>
+              </td>
+              <td>
+                <%= to_jalali(comment.created_at) %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= paginate @comments %>
+    </div>
+  </div>
+</div>

@@ -3,6 +3,10 @@
               input_html: {class: "span6"},
               placeholder: t('.title_placeholder')
               %>
+  <%= f.input :source,
+              input_html: {class: "span6"},
+              placeholder: t('.source_placeholder')
+              %>
   <%= f.input :content,
               input_html: {rows: 15, class: "span6", 'data-trigger' => "focus"},
               placeholder: t('.content_placeholder') %>

@@ -23,14 +23,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
-
-    if params[:render] == 'comments'
-      @comments = @user.comments.order('created_at desc').page params[:page], per_page: 30
-    elsif params[:render] == 'favorites'
-      @favorites = @user.votes.order('created_at desc').page params[:page], per_page: 30
-    else
-      @stories = @user.stories.approved.order('created_at desc').page params[:page], per_page: 30
-    end
+    @stories = @user.stories.approved.order('created_at desc').page params[:page], per_page: 30
 
     respond_to do |format|
       format.html # show.html.erb
@@ -95,6 +88,42 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to users_url }
       format.json { head :no_content }
+    end
+  end
+
+  # GET /users/1/posts
+  # GET /users/1/posts.json
+  def posts
+    @user = User.find(params[:id])
+    @stories = @user.stories.approved.order('created_at desc').page params[:page], per_page: 30
+
+    respond_to do |format|
+      format.html # posts.html.erb
+      format.json { render json: @stories }
+    end
+  end
+
+  # GET /users/1/comments
+  # GET /users/1/comments.json
+  def comments
+    @user = User.find(params[:id])
+    @comments = @user.comments.order('created_at desc').page params[:page], per_page: 30
+
+    respond_to do |format|
+      format.html # comments.html.erb
+      format.json { render json: @comments }
+    end
+  end
+
+  # GET /users/1/favorites
+  # GET /users/1/favorites.json
+  def favorites
+    @user = User.find(params[:id])
+    @favorites = @user.votes.order('created_at desc').page params[:page], per_page: 30
+
+    respond_to do |format|
+      format.html # favorites.html.erb
+      format.json { render json: @favorites }
     end
   end
 end
