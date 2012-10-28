@@ -50,6 +50,11 @@ describe "Omniauths" do
         click_button 'لغو'
         page.should have_content('ایجاد حساب لغو شد')
       end
+
+      it 'doesnt let visit identities page' do
+        visit identities_path
+        page.should have_content('not authorized')
+      end
     end
 
     context 'Error' do

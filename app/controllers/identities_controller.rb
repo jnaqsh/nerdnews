@@ -1,5 +1,6 @@
 class IdentitiesController < ApplicationController
-  load_and_authorize_resource through: :current_user
+  load_and_authorize_resource through: :current_user, only: [:index, :destroy]
+  load_and_authorize_resource only: [:create, :newaccount, :failure]
 
   def index
     @identities = current_user.identities.order('provider asc')
