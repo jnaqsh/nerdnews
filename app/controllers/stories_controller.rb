@@ -65,13 +65,15 @@ class StoriesController < ApplicationController
       @story = Story.new(params[:story])
     end
 
+    @story.mark_as_published if can? :publish, Story
+
     respond_to do |format|
       if params[:preview_button]
         format.html { render action: "new" }
       else
         if @story.save
           rate_user(current_user, 1, "#{current_user.full_name} posted a story with id #{@story.id}") if current_user.present?
-          format.html { redirect_to @story, only_path: true, notice: t('controllers.stories.create.flash.success') }
+          format.html { redirect_to @story, only_path: true, notice: t("#{successful_notice}") }
           format.json { render json: @story, status: :created, location: @story }
         else
           format.html { render action: "new" }
@@ -128,6 +130,15 @@ class StoriesController < ApplicationController
 
     respond_to do |format|
       format.html
+    end
+  end
+
+  private
+  def successful_notice
+    if !current_user #successful message for guest and new users
+      "controllers.stories.create.flash.success_for_guest_and_new_users"
+    else #successful message for approved, admin and founder users
+      "controllers.stories.create.flash.success"
     end
   end
 end

@@ -11,9 +11,9 @@ describe "Stories" do
   end
 
   describe "Post a Story" do
-    context "as an unknown user" do
-      
-      before do 
+    context "as an unknown user or new user" do
+
+      before do
         visit root_url
         click_link "جدید"
         current_path.should eq(new_story_path)
@@ -23,7 +23,8 @@ describe "Stories" do
         fill_in "عنوان", with: Faker::Lorem.characters(10)
         fill_in "محتوا", with: Faker::Lorem.paragraph
         click_button "ایجاد"
-        page.should have_content("موفقیت")
+        page.should have_content("موفقیت") and have_content("مدیرها")
+        Story.last.publish_date.should be_nil
       end
 
       it 'gets preview' do
@@ -36,6 +37,6 @@ describe "Stories" do
       end
     end
 
-    context "as a known user"
+    context "as a approved, admin or founder user"
   end
 end

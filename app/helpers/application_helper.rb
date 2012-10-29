@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 module ApplicationHelper
   # def list_tags(tags)
   #   h = {}
@@ -28,6 +30,24 @@ module ApplicationHelper
       link_to story.user.full_name, user_path(story.user)
     else
       t('.anonymous_user')
+    end
+  end
+
+  def source_of_story(story)
+    if story && story.source
+      link_to "منبع اصلی خبر", story.source
+    end
+  end
+
+  def link_to_li(name, path)
+    if current_page? path
+      content_tag :li, class: "active" do
+        link_to name, path
+      end
+    else
+      content_tag :li do
+        link_to name, path
+      end
     end
   end
 end

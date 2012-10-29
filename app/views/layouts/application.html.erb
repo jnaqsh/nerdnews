@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>NerdNews</title>
+  <title>نرد نیوز</title>
   <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
   <![endif]-->
@@ -79,10 +79,10 @@
           <!-- Links -->
           <div class="nav-collapse">
             <ul class="nav">
-              <li class="active"> <%= link_to t('.home'), root_path %> </li>
-              <li><%= link_to t('.new_story'), new_story_path %></li>
+              <%= link_to_li t('.home'), root_path %>
+              <%= link_to_li t('.new_story'), new_story_path %><!--
               <li><%= link_to t('.about'), page_by_permalink_path("about-us") %></li>
-              <li><%= link_to t('.contact us'), root_path %></li>
+              <li><%= link_to t('.contact us'), root_path %></li>-->
               <%= form_tag stories_path, method: :get, class: "navbar-search pull-left" do %>
                 <%= text_field_tag :search, params[:search], class: "span2 search-query",
                   placeholder: t(".search") %>
