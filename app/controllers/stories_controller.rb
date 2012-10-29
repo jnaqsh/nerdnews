@@ -33,9 +33,8 @@ class StoriesController < ApplicationController
 
     @story.increment!(:view_counter)
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @story }
+    if request.path != story_path(@story)
+      redirect_to @story, status: :moved_permanently
     end
   end
 

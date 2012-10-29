@@ -12,27 +12,27 @@ describe VotesController do
     end
 
     it 'should create a vote' do
-      post :create, user_id: @user, story_id: @story, rating_id: @rating
+      post :create, user_id: @user, story_id: @story.id, rating_id: @rating
       flash[:notice].should eq('با موفقیت ثبت شد')
     end
 
     context '/count' do
       it 'increases Storys positive count' do
         expect {
-          post :create, user_id: @user, story_id: @story, rating_id: @rating, positive: true
+          post :create, user_id: @user, story_id: @story.id, rating_id: @rating, positive: true
         }.to change { @story.reload.positive_votes_count }.by(1)
       end
 
       it 'increases Storys negative count' do
         expect {
-          post :create, user_id: @user, story_id: @story, rating_id: @negative_rating
+          post :create, user_id: @user, story_id: @story.id, rating_id: @negative_rating
         }.to change { @story.reload.negative_votes_count }.by(1)
       end
     end
 
     context '/set cookie' do
-      before do 
-        post :create, user_id: @user, story_id: @story, rating_id: @negative_rating 
+      before do
+        post :create, user_id: @user, story_id: @story.id, rating_id: @negative_rating
       end
 
       it 'should create a cookie when an unknown user votes' do
@@ -40,7 +40,7 @@ describe VotesController do
       end
 
       it 'shouldnt make two keys in cookie for same story' do
-        post :create, user_id: @user, story_id: @story, rating_id: @negative_rating
+        post :create, user_id: @user, story_id: @story.id, rating_id: @negative_rating
         cookies[:votes].should == [@story.id].to_yaml
       end
     end

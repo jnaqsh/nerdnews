@@ -18,7 +18,7 @@ describe "Comments" do
     fill_in "دیدگاه", with: Faker::Lorem.paragraph
     click_button "ایجاد"
     page.should have_content "موفقیت"
-    current_path.should eq(story_path story.id)
+    current_path.should eq(story_path story)
     click_link "پاسخ"
     fill_in "نام", with: user.full_name
     fill_in "ایمیل", with: user.email

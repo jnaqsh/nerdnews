@@ -28,6 +28,7 @@ gem 'ancestry'
 gem 'paperclip'
 gem 'omniauth-github'
 gem 'omniauth-openid'
+gem 'friendly_id'
 
 group :production do
   gem 'execjs'
