@@ -2,6 +2,14 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 jQuery ->
+  if $('.pagination').length
+    $(window).scroll ->
+      url = $('.pagination a[rel="next"]').attr('href')
+      if url && $(window).scrollTop() > $(document).height() - $(window).height() - 50
+        $('.pagination').text("در حال دریافت خبرهای بیشتر...")
+        $.getScript(url)
+    $(window).scroll()
+
   $('.btn-thumbs-up').on('click', ->
     id = $(this).data('id')
     $('.thumbs-down-list#' + id).hide()

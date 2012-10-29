@@ -19,6 +19,7 @@ class StoriesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
+      format.js
       format.atom
       format.json { render json: @stories }
     end
