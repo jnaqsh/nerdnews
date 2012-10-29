@@ -38,4 +38,16 @@ module ApplicationHelper
       link_to "منبع اصلی خبر", story.source
     end
   end
+
+  def link_to_li(name, path)
+    if current_page? path
+      content_tag :li, class: "active" do
+        link_to name, path
+      end
+    else
+      content_tag :li do
+        link_to name, path
+      end
+    end
+  end
 end
