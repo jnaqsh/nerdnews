@@ -36,7 +36,8 @@
 
       <p><%= user_name(story) %> می‌نویسد:</p>
       <blockquote>
-        <%= sanitize(RedCloth.new(story.content, [:filter_html, :filter_styles]).to_html) %>
+        <%= sanitize(RedCloth.new(story.content, [:filter_html, :filter_styles]).to_html) %><br />
+        <%= source_of_story(story) %>
       </blockquote>
 
       <%= render partial: "stories/story_operation", locals: {story: story} %>
