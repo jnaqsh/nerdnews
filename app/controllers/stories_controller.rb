@@ -12,7 +12,7 @@ class StoriesController < ApplicationController
     end
 
     if params[:tag]
-      @stories = Tag.find_by_name(params[:tag]).stories.order("publish_date desc").page params[:page]
+      @stories = Tag.find_by_name!(params[:tag]).stories.order("publish_date desc").page params[:page]
     else
       @stories = @search.results
     end
