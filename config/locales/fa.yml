@@ -90,6 +90,8 @@ fa:
       not_mentioned: 'عنوان نشده'
       karma: 'کارما'
       posts: 'ارسال‌ها'
+      add_favorite_tags: 'از طریق ویرایش پروفایل، تگ‌های مورد علاقه خود را وارد کنید'
+      no_favorite_tags: '%{user} تگ‌های موردعلاقه‌ی خود را اضافه نکرده است'
       comments: 'کامنت‌ها'
       favorite_tags: 'تگ‌های مورد علاقه'
       favorites: 'موردعلاقه‌ها'
@@ -217,6 +219,7 @@ fa:
         created_at: "ایجاد شده در"
         password_confirmation: "تایید رمز عبور"
         roles: "نقش"
+        favorite_tags: 'تگ‌های موردعلاقه'
 
       tag:
         name: "نام"

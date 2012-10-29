@@ -39,9 +39,25 @@
           </li>
         </ul>
       </div>
-
-      <div class='user user-tags'>
+      <div class='user user-tags tags-holder'>
         <p><%=t '.favorite_tags' %></p>
+        <% unless @user.favorite_tags.blank? %>
+          <% @user.favorite_tags_array.each do |tag| %>
+            <%= link_to stories_path(tag: tag) do %>
+              <span class='label'><%= tag %></span>
+            <% end %>
+          <% end %>
+        <% else %>
+          <% if can? :edit, @user %>
+            <div class='well well-small'>
+            <%=t '.add_favorite_tags' %>
+            </div>
+          <% else %>
+            <div class='well well-small'>
+            <%= t('.no_favorite_tags', user: @user.full_name) %>
+            </div>
+          <% end %>
+        <% end %>
       </div>
     </div>
   </div>
