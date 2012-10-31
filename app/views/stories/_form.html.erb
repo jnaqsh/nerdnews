@@ -9,9 +9,9 @@
               %>
   <%= f.input :content,
               input_html: {rows: 15, class: "span6", 'data-trigger' => "focus"},
-              placeholder: t('.content_placeholder') %>
+              placeholder: t('.content_placeholder')%>
 
-  <%= f.input :tag_names, input_html: {data: {load: @story.tags}}  %>
+  <%= f.input :tag_names, input_html: {data: {tags: @story.tags}, class: "span6", value: ' '} %>
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>

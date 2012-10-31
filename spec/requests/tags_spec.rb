@@ -8,17 +8,20 @@ describe "Tags" do
   end
   
   it "should make a new tag" do
-    visit tags_url
+    visit tags_path
     click_on "جدید"
     current_path.should eq(new_tag_path)
     fill_in 'نام', with: "tag"
-    click_button "ایجاد"
+    attach_file('tag_thumbnail', 'app/assets/images/rails.png')
+    click_button "ایجاد تگ"
+    current_path.should eq(tags_path)
+    page.should have_content 'موفقیت'
   end
   
   it "should edit a tag" do
     tag = FactoryGirl.create(:tag)
-    visit tags_path
-    click_on "ویرایش"
+    Sunspot.commit
+    visit edit_tag_path(tag)
     fill_in 'نام', with: 'edited'
     click_button 'تگ'
     tag.reload.name.should == 'edited'
@@ -30,8 +33,7 @@ describe "Tags" do
     tag = FactoryGirl.create(:tag)
     story.tags << tag
     story1 = FactoryGirl.create(:approved_story)
-    visit tags_path
-    click_link tag.name
+    visit stories_path(tag: tag.name)
     page.should have_content(story.title)
     page.should_not have_content(story1.title)
   end

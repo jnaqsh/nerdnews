@@ -18,7 +18,8 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :roles
 
   searchable do
-    text :full_name
+    text :full_name, as: :full_name_textp
+    text :id
     text :email
     time :created_at
   end

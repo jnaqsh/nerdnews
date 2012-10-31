@@ -1,5 +1,5 @@
 class Story < ActiveRecord::Base
-  attr_accessible :content, :publish_date, :title, :source, :tag_names, :view_counter, :positive_votes_count, :negative_votes_count
+  attr_accessible :content, :publish_date, :title, :source, :tag_names, :view_counter, :positive_votes_count, :negative_votes_count, :tags
 
   has_many :comments, dependent: :destroy
   has_many :taggings, dependent: :destroy
@@ -17,8 +17,6 @@ class Story < ActiveRecord::Base
   validates  :title, :content, presence: true
   validates :source, allow_blank: true, uri: { :format => /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix }
 
-
-
   attr_reader :tag_names
 
   searchable do
@@ -34,7 +32,8 @@ class Story < ActiveRecord::Base
   end
 
   def tag_names=(tokens)
-    self.tag_ids = Tag.ids_from_tokens(tokens)
+    # self.tag_ids = Tag.ids_from_tokens(tokens)
+    self.tag_ids = tokens.split(",")
   end
 
   def mark_as_published

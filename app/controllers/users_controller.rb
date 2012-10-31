@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   def index
     @search = User.search do
       fulltext params[:user_search] do
-        boost_fields :full_name => 2.0
+        boost_fields :id => 2.0
       end
       paginate :page => params[:page], :per_page => 10
       order_by :created_at, :desc
@@ -15,7 +15,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @users }
+      format.json { render json: @users, only: [:id, :full_name] }
     end
   end
 
