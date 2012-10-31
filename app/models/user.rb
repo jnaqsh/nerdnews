@@ -1,3 +1,4 @@
+# encoding:utf-8
 class User < ActiveRecord::Base
   attr_accessible :email, :full_name, :website, :password, :password_confirmation, :role_ids, :created_at, :favorite_tags
   has_secure_password
@@ -10,14 +11,15 @@ class User < ActiveRecord::Base
   has_many :identities
   has_many :messages
 
-  validates_presence_of :full_name
+  validates_presence_of :full_name, :email
   validates :password, confirmation: true, presence: true, on: :create
   validates :email, email_format: true, uniqueness: true
   validates_length_of :full_name, maximum: 30, minimum: 7
   accepts_nested_attributes_for :roles
 
   searchable do
-    text :full_name
+    text :full_name, as: :full_name_textp
+    text :id
     text :email
     time :created_at
   end
@@ -34,5 +36,11 @@ class User < ActiveRecord::Base
 
   def count_unread_messages
     Message.where(unread: true, reciver_id: self.id).count
+  end
+
+  def favorite_tags_array
+    unless self.favorite_tags.blank?
+      self.favorite_tags.split(%r{[,|،]\s*})
+    end
   end
 end
