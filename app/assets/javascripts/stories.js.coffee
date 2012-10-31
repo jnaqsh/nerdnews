@@ -10,12 +10,12 @@ jQuery ->
         $.getScript(url)
     $(window).scroll()
 
-  $('.btn-thumbs-up').on('click', ->
+  $('.btn-thumbs-up').live('click', ->
     id = $(this).data('id')
     $('.thumbs-down-list#' + id).hide()
     $('.thumbs-up-list#' + id).fadeToggle())
 
-  $('.btn-thumbs-down').on('click', ->
+  $('.btn-thumbs-down').live('click', ->
     id = $(this).data('id')
     $('.thumbs-up-list#' + id).hide()
     $('.thumbs-down-list#' + id).fadeToggle())
