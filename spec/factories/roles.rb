@@ -1,13 +1,13 @@
 FactoryGirl.define do
-  factory :admin, class: Role do |role|
-    role.name 'admin'
+  factory :founder_role, class: Role do |role|
+    role.name 'founder'
   end
 
-  factory :manager, class: Role do |role|
-    role.name 'manager'
+  factory :approved_role, class: Role do |role|
+    role.name 'approved'
   end
 
-  factory :regular_user, class: Role do |role|
-    role.name 'user'
+  factory :new_user_role, class: Role do |role|
+    role.name 'new_user'
   end
 end

@@ -55,6 +55,7 @@ fa:
         flash:
           success: "با موفقیت ثبت شد"
           notloggedin: "برای رای دادن به حساب خود وارد یا عضو شوید"
+          error: "رای شما ثبت نشد. خطایی رخ داده‌است."
     identities:
       flash:
         already_exist: 'حساب شما در %{provider} قبلا در سایت ثبت شده است.'
