@@ -8,7 +8,7 @@ class Tag < ActiveRecord::Base
   has_many :taggings, dependent: :destroy
   has_many :stories, :through => :taggings
 
-  validates :name, uniqueness: true, presence: true, on: :create
+  validates :name, uniqueness: true, presence: true
   validates_attachment :thumbnail, :presence => true,
     :content_type => {:content_type => ['image/jpeg', 'image/jpg', 'image/png']},
     :size => { :in => 0..100.kilobytes }
