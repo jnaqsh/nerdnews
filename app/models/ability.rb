@@ -5,9 +5,33 @@ class Ability
     # Define abilities for the passed in user here. For example:
     #
        user ||= User.new # guest user (not logged in)
-       if user.role? :admin
+       if user.role? :founder
          can :manage, :all
-       else
+       elsif user.role? :approved
+         can :manage, Comment
+         can [:create,:newaccount, :failure], Identity
+         can [:index, :destroy], Identity, user: { :id => user.id }
+         can :manage, Message, user: { :id => user.id }
+         can :show, Message, reciver_id: user.id
+         can [:index, :show], Page
+         can :manage, Story
+         can :manage, Tag
+         can [:create, :show, :posts, :comments, :favorites], User
+         can [:edit, :update], User, :id => user.id
+         can :create, Vote
+       elsif user.role? :new_user
+         can :create, Comment
+         can [:create,:newaccount, :failure], Identity
+         can [:index, :destroy], Identity, user: { :id => user.id }
+         can :manage, Message, user: { :id => user.id }
+         can :show, Message, reciver_id: user.id
+         can :show, Page
+         can [:read, :create], Story
+         can :index, Tag
+         can [:create, :show, :posts, :comments, :favorites], User
+         can [:edit, :update], User, :id => user.id
+         can :create, Vote
+       else # guest user
          can :create, Comment
          can [:read, :create], Story
          can [:create, :show, :posts, :comments, :favorites], User
@@ -19,6 +43,7 @@ class Ability
          can :index, :mypage unless user.id.nil?
          can :index, Tag
          can :show, Page
+         can :create, Vote
        end
     #
     # The first argument to `can` is the action you are giving the user permission to do.
