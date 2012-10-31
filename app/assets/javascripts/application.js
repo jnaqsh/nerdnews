@@ -12,8 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.tokeninput
+//= require select2
 //= require tags.js.coffee
+//= require users.js.coffee
 //= require stories.js.coffee
 //= require twitter/bootstrap
 //= require bootstrap.js.coffee

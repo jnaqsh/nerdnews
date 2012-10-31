@@ -29,3 +29,37 @@ body {
 //
 // Example:
 // @linkColor: #ff0000;
+
+// Overwrite Select2 properties
+.select2-offscreen {
+  left: 0;
+  right: -10000px;
+}
+
+.select2-search input {
+  padding: 4px 20px 4px 5px;
+}
+
+.select2-container-multi {
+  margin: 0;
+  
+  .select2-choices {
+    border-radius: 3px 3px 3px 3px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: border linear .2s, box-shadow linear .2s;
+    -moz-transition: border linear .2s, box-shadow linear .2s;
+    -o-transition: border linear .2s, box-shadow linear .2s;
+    transition: border linear .2s, box-shadow linear .2s;
+    
+    li {
+      float: right;
+    }
+    
+    .select2-search-choice {
+      padding: 3px 18px 3px 5px;
+      margin: 3px 5px 3px 0px;
+    }
+  }
+}

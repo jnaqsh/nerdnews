@@ -14,18 +14,19 @@ class Tag < ActiveRecord::Base
     :size => { :in => 0..100.kilobytes }
 
   searchable do
-    string :name
+    text :name, as: :name_textp
+    text :id
     time :created_at
   end
 
-  private
+  # private
 
-    def self.tokens(query)
-      tags = where("name like ?", "%#{query}%")
-    end
+  #   def self.tokens(query)
+  #     tags = where("name like ?", "%#{query}%").select(:id, :name)
+  #   end
 
-    def self.ids_from_tokens(tokens)
-      tokens.gsub!(/<<<(.+?)>>>/) { create!(name: $1).id }
-      tokens.split(',')
-    end
+  #   def self.ids_from_tokens(tokens)
+  #     tokens.gsub!(/<<<(.+?)>>>/) { create!(name: $1).id }
+  #     tokens.split(',')
+  #   end
 end
