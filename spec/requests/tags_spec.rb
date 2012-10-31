@@ -3,10 +3,10 @@ require 'spec_helper'
 
 describe "Tags" do
   before do
-    admin = FactoryGirl.create(:admin_user)
-    login admin
+    approved_user = FactoryGirl.create(:approved_user)
+    login approved_user
   end
-  
+
   it "should make a new tag" do
     visit tags_url
     click_on "جدید"
@@ -14,7 +14,7 @@ describe "Tags" do
     fill_in 'نام', with: "tag"
     click_button "ایجاد"
   end
-  
+
   it "should edit a tag" do
     tag = FactoryGirl.create(:tag)
     visit tags_path

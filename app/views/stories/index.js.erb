@@ -1,0 +1,8 @@
+$('#stories').append('<%= j render(@stories) %>');
+<% if @stories.next_page %>
+  $(".pagination").replaceWith('<%= j paginate(@stories) %>');
+<% else %>
+  $('.pagination').remove();
+<% end %>
+
+<% sleep 1 %>

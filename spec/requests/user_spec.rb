@@ -125,9 +125,9 @@ describe '/Users' do
     before(:each) do
       @story = FactoryGirl.create(:story, user: @user)
     end
-    
+
     context 'Users' do
-      before do 
+      before do
         login @user
         visit story_path @story
       end
@@ -155,8 +155,8 @@ describe '/Users' do
 
       it 'should add a point after a story approved' do
         logout
-        admin = FactoryGirl.create(:admin_user)
-        login admin
+        approved_user = FactoryGirl.create(:approved_user)
+        login approved_user
         visit unpublished_stories_path
         expect {
           click_link 'انتشار'
@@ -167,12 +167,12 @@ describe '/Users' do
     end
 
     context 'Stories', js: true do
-      
+
       before(:each) do
         @pos = FactoryGirl.create(:rating)
         @neg = FactoryGirl.create(:negative_rating)
         visit story_path @story
-      end 
+      end
 
       it 'shows the rating items for story' do
         click_button 'btn-thumbs-up'
@@ -184,7 +184,7 @@ describe '/Users' do
       it 'rates a story successfully' do
         click_button 'btn-thumbs-up'
         click_link @pos.name
-        current_path.should eq stories_path
+        current_path.should eq story_path(@story)
         page.should have_content 'موفقیت'
       end
 

@@ -2,7 +2,7 @@ Nerdnews::Application.routes.draw do
 
   resources :mypage, only: :index
 
-  match '/auth/:provider/callback' => 'identities#create' 
+  match '/auth/:provider/callback' => 'identities#create'
   match '/auth/failure' => 'identities#failure'
   resources :identities, :only => [:index, :create, :destroy] do
     collection do
@@ -11,22 +11,22 @@ Nerdnews::Application.routes.draw do
     end
   end
 
-  resources :votes
-  
+
+
   resources :ratings
-  
+
   namespace :admin do
     get '', to: 'dashboard#index'
   end
-  
+
   resources :pages
-  
+
   resources :tags
-  
+
   get "sessions/new", as: "new_session"
   post "sessions" => "sessions#create", as: "sessions"
   delete "sessions" => "sessions#destroy", as: "session"
-  
+
   resources :users do
     get 'posts', on: :member
     get 'comments', on: :member
@@ -35,15 +35,16 @@ Nerdnews::Application.routes.draw do
       get 'sent', on: :collection
     end
   end
-  
+
   resources :stories do
+    resources :votes
     resources :comments
     get 'unpublished', :on => :collection
     put 'publish', :on => :member
   end
-  
+
   get "/:permalink" => "pages#show", as: "page_by_permalink"
-  
+
   root :to => "stories#index"
 
   # The priority is based upon order of creation:

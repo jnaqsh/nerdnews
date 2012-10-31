@@ -19,6 +19,7 @@ class StoriesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
+      format.js
       format.atom
       format.json { render json: @stories }
     end
@@ -33,9 +34,8 @@ class StoriesController < ApplicationController
 
     @story.increment!(:view_counter)
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @story }
+    if request.path != story_path(@story)
+      redirect_to @story, status: :moved_permanently
     end
   end
 

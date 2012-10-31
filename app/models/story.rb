@@ -1,5 +1,29 @@
+#encoding: utf-8
+
 class Story < ActiveRecord::Base
-  attr_accessible :content, :publish_date, :title, :source, :tag_names, :view_counter, :positive_votes_count, :negative_votes_count
+  attr_accessible :content, :publish_date, :title, :source, :tag_names, :view_counter,
+    :positive_votes_count, :negative_votes_count
+
+  extend FriendlyId
+  friendly_id :title_foo, use: [:slugged, :history]
+
+  def title_foo
+    "#{title}"
+  end
+
+  def normalize_friendly_id(string)
+    sep = "-"
+    parameterized_string = string
+    parameterized_string.gsub!(/[^a-z0-9\-_اآبپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیءئؤيإأةك۱۲۳۴۵۶۷۸۹۰ٔ‌]+/i, sep)
+    unless sep.nil? || sep.empty?
+      re_sep = Regexp.escape(sep)
+      # No more than one of the separator in a row.
+      parameterized_string.gsub!(/#{re_sep}{2,}/, sep)
+      # Remove leading/trailing separator.
+      parameterized_string.gsub!(/^#{re_sep}|#{re_sep}$/i, '')
+    end
+    parameterized_string.downcase
+  end
 
   has_many :comments, dependent: :destroy
   has_many :taggings, dependent: :destroy
@@ -16,7 +40,6 @@ class Story < ActiveRecord::Base
   validates_length_of :content, minimum: 20, maximum: 1500
   validates  :title, :content, presence: true
   validates :source, allow_blank: true, uri: { :format => /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix }
-
 
 
   attr_reader :tag_names

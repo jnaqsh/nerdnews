@@ -8,12 +8,16 @@ FactoryGirl.define do
     u.password 'secret'
     u.password_confirmation 'secret'
 
-    factory :admin_user do
-      association :role_ids, factory: :admin
+    factory :new_user do
+      association :role_ids, factory: :new_user_role
     end
 
-    factory :manager_user do
-      association :role_ids, factory: :manager
+    factory :approved_user do
+      association :role_ids, factory: :approved_role
+    end
+
+    factory :founder_user do
+      association :role_ids, factory: :founder_role
     end
   end
 end
