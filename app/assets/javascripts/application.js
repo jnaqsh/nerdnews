@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require select2
 //= require tags.js.coffee
+//= require messages.js.coffee
 //= require users.js.coffee
 //= require stories.js.coffee
 //= require twitter/bootstrap
