@@ -1,0 +1,23 @@
+<li class="span2">
+  <div class="thumbnail">
+    <%= image_tag tag.thumbnail.url(:thumb), alt: tag.name %>
+    <h4><%= link_to tag.name, stories_path(tag: tag.name) %></h4>
+
+    <% if (can? :edit, Tag) or (can? :destroy, Tag) %>
+    <p>
+      <% if can? :edit, Tag %>
+        <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                  edit_tag_path(tag), :class => 'btn btn-mini' %>
+      <% end %>
+
+      <% if can? :destroy, Tag %>
+        <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                  tag_path(tag),
+                  :method => :delete,
+                  :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
+                  :class => 'btn btn-mini btn-danger' %>
+      <% end %>
+    </p>
+    <% end %>
+  </div>
+</li>
