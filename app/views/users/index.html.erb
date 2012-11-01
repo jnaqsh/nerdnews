@@ -1,10 +1,13 @@
 <%- model_class = User.new.class -%>
 <div class="page-header">
+  <%= link_to t('.new', :default => t("helpers.links.new")),
+            new_user_path,
+            :class => 'pull-left btn btn-primary' %>
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
 </div>
 
 <div class = 'row'>
-  <%= form_tag users_path, method: :get, class: 'form-search' do %>
+  <%= form_tag users_path, remote: true, method: :get, class: 'form-search' do %>
     <%= text_field_tag :user_search, params[:user_search], class: "span2 search-query", placeholder: t(".search") %>
   <% end %>
 </div>
@@ -19,28 +22,8 @@
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= link_to user.id, user_path(user) %></td>
-        <td><%= user.full_name %></td>
-        <td><%= user.email %></td>
-        <td><%= to_jalali(user.created_at) %></td>
-        <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_user_path(user), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      user_path(user),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
-                      :class => 'btn btn-mini btn-danger' %>
-        </td>
-      </tr>
-    <% end %>
+  <tbody id='users-row'>
+  <%= render @users %>
   </tbody>
 </table>
-
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_user_path,
-            :class => 'btn btn-primary' %>
 <%= paginate @users %>
