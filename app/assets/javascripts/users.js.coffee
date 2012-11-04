@@ -2,6 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 jQuery ->
+  # used in users/index
   $("#user_search").select2({
     minimumInputLength: 1
     ajax:
@@ -31,6 +32,14 @@ jQuery ->
       minLength + " حرف دیگر وارد کنید"
   })
 
+  # submit the search after selected in users/index
   $("#user_search").on("change", (e)->
     $('.form-search').submit()
     )
+
+  # Used in users/_form
+  $("#user_favorite_tags").select2({
+    tags: ''
+    tokenSeparators: [",", " ", "،"]
+    dropdownCssClass: "bigdrop"
+    })

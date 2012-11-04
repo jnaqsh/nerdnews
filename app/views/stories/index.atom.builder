@@ -1,7 +1,7 @@
 atom_feed do |feed|
   feed.language "fa_IR"
   feed.title("")
-  feed.updated @stories.maximum(:created_at)
+  feed.updated Story.maximum(:created_at)
 
   @stories.each do |story|
     feed.entry story, :published => story.publish_date do |entry|

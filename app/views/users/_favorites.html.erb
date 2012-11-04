@@ -1,0 +1,18 @@
+<table class="table table-striped">
+  <tbody>
+    <% @favorites.each do |vote| %>
+      <tr>
+        <td>
+          به 
+          <%= link_to story_path(vote.story) do %>
+            <%= truncate(vote.story.title) %>
+          <% end %>
+          امتیاز <b> <%= vote.rating.name %> </b> را داد
+        </td>
+        <td>
+          <%= to_jalali(vote.created_at) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

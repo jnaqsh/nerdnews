@@ -65,12 +65,12 @@
   <div class='span9'>
     <ul class="nav nav-tabs">
       <li class="<%= 'active' if current_page?(posts_user_path(@user)) || current_page?(user_path(@user)) %>">
-        <%= link_to t('.posts'), posts_user_path(@user) %>
+        <%= link_to t('.posts'), posts_user_path(@user), remote: true %>
       </li>
       <li class="<%= 'active' if current_page?(comments_user_path(@user)) %>">
-        <%= link_to t('.comments'), comments_user_path(@user) %>
+        <%= link_to t('.comments'), comments_user_path(@user), remote: true %>
       </li>
       <li class="<%= 'active' if current_page?(favorites_user_path(@user)) %>">
-        <%= link_to t('.favorites'), favorites_user_path(@user) %>
+        <%= link_to t('.favorites'), favorites_user_path(@user), remote: true %>
       </li>
     </ul>

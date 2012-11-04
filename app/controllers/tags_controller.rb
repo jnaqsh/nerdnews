@@ -12,6 +12,7 @@ class TagsController < ApplicationController
       format.html
       # format.json {render json: @tags.tokens(params[:q])}
       format.json {render json: @tags}
+      format.js
     end
   end
 
