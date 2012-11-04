@@ -24,10 +24,7 @@
     <%= f.input_field :password_confirmation %>
   <% end %>
 
-  <%= f.input :favorite_tags, :wrapper => :prepend do %>
-    <span class="add-on"><i class="icon-heart"></i></span>
-    <%= f.input_field :favorite_tags %>
-  <% end %>
+  <%= f.input :favorite_tags, input_html: {class: 'span3'} %>
 
   <% if can? :edit, Role %>
     <%= f.association :roles, :as => :radio_buttons, :checked => @user.role_ids %>
