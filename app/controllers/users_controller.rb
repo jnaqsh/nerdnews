@@ -15,7 +15,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @users, only: [:id, :full_name] }
+      format.json { render json: @users, except: [:password_digest] }
       format.js
     end
   end
@@ -28,7 +28,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @user }
+      format.json { render json: @user, except: [:password_digest] }
     end
   end
 
@@ -39,7 +39,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @user }
+      format.json { render json: @user, except: [:password_digest] }
     end
   end
 
