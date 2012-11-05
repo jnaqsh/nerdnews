@@ -32,6 +32,8 @@ class StoriesController < ApplicationController
     @comment = @story.comments.build
     @comments = @story.comments.arrange(order: :created_at)
 
+    flash[:error] = t('controllers.stories.show.flash.not_approved')
+    
     @story.increment!(:view_counter)
 
     if request.path != story_path(@story)
