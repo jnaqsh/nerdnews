@@ -11,14 +11,14 @@ describe SessionsController do
       post :create, email: 'something@something.com', password: 'secret'
       # session[:user_id].should eq(@user.id)
       cookies.signed[:user_id].should eq(@user.id)
-      flash[:notice].should eq('با موفقیت وارد شدید.')
+      flash[:notice].should eq(I18n.t('controllers.sessions.create.flash.success'))
     end
 
 
     it "should assign flash error and set session[:user_id] to nil upon incorrect login" do
       post :create, email: 'something@something.com', password: 'somethingelse'
       session[:user_id].should be_nil
-      flash[:error].should eq('ایمیل یا رمز عبور و یا ترکیبی از این دو اشتباه است.')
+      flash[:error].should eq(I18n.t('controllers.sessions.create.flash.error'))
     end
   end
 
@@ -27,7 +27,7 @@ describe SessionsController do
       cookies.signed[:user_id] = 1
       get :destroy
       response.code.should eq("302")
-      flash[:notice].should eq("با موفقیت خارج شدید.")
+      flash[:notice].should eq(I18n.t('controllers.sessions.destroy.flash.success'))
       cookies.signed[:user_id].should be_nil
     end
   end

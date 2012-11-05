@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 require "spec_helper"
 
 describe UserMailer do
@@ -19,6 +21,18 @@ describe UserMailer do
       mail.body.encoded.should include(comment.name)
       mail.body.encoded.should include(comment.content)
       # mail.body.encoded.should include(story_url)
+    end
+  end
+
+  describe "password_reset" do
+    let(:user) { FactoryGirl.create(:user, :password_reset_token => "anything") }
+    let(:mail) { UserMailer.password_reset(user) }
+
+    it "send user password reset url" do
+      mail.subject.should eq("بازنشانی گذرواژه")
+      mail.to.should eq([user.email])
+      mail.from.should eq(["from@example.com"])
+      mail.body.encoded.should match(edit_password_reset_path(user.password_reset_token))
     end
   end
 end

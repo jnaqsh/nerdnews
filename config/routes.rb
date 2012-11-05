@@ -1,5 +1,4 @@
 Nerdnews::Application.routes.draw do
-
   resources :mypage, only: :index
 
   match '/auth/:provider/callback' => 'identities#create'
@@ -11,9 +10,8 @@ Nerdnews::Application.routes.draw do
     end
   end
 
-
-
   resources :ratings
+  resources :password_resets
 
   namespace :admin do
     get '', to: 'dashboard#index'
