@@ -159,6 +159,7 @@ fa:
       new: "خبری جدید بنویسید"
     story:
       anonymous_user: "شخص ناشناس"
+      story_details: 'توسط %{user} در %{date}'
     show:
       comments: "دیدگاه‌ها"
       no_comments: "هیچ دیدگاهی وجود ندارد."

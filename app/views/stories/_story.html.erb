@@ -27,10 +27,8 @@
 
       <h6 class="muted">
         <small>
-          توسط
-          <%= user_name(story) %>
-          در
-          <%= to_jalali(story.publish_date) if story.publish_date %>
+          <% date = to_jalali(story.publish_date) if story.approved? %>
+          <%= t('stories.story.story_details', user: user_name(story), date: date).html_safe %>
         </small>
       </h6>
 
