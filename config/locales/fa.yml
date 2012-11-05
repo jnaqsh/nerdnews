@@ -184,6 +184,7 @@ fa:
       unpublished_stories: "خبرهای منتشرنشده"
       users: 'کاربرها'
       ratings: 'ایجاد گزینه امتیاز'
+      identities: 'حساب‌های OpenID'
       messages: 'پیام‌ها'
 
   activerecord:
