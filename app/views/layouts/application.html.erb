@@ -69,6 +69,9 @@
                       <% end %>
                     <% end %>
                   </li>
+                  <% if can? :index, Identity %>
+                    <li><%= link_to t('.identities'), identities_path %></li>
+                  <% end %>
                   <li class="divider"></li>
                 <% end %>
                 <li><%= link_to t('.logout'), session_path, method: :delete,
