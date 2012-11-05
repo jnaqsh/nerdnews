@@ -6,31 +6,6 @@ class IdentitiesController < ApplicationController
     @identities = current_user.identities.order('provider asc')
   end
 
-  def newaccount
-    if params[:cancel]
-      session[:authhash] = nil
-      session[:service_id] = nil
-      session.delete :authhash
-      redirect_to root_url, flash: { error: t('controllers.identities.flash.canceled') }
-    else  # create account
-      @newuser = User.new
-      @newuser.full_name = session[:authhash][:name]
-      @newuser.email = session[:authhash][:email]
-      @newuser.password = SecureRandom.uuid
-      @newuser.identities.build(provider: session[:authhash][:provider], uid: session[:authhash][:uid])
-      
-      if @newuser.save
-        # signin existing user
-        # in the session his user id and the service id used for signing in is stored
-        cookies.permanent.signed[:permanent_user_id] = @newuser.id
-        session[:service_id] = @newuser.identities.first.id
-        redirect_to root_url, notice: t('controllers.identities.flash.created_successfully')
-      else
-        redirect_to new_session_path
-      end  
-    end
-  end
-
   # callback: success
   # This handles signing in and adding an authentication provider to existing accounts itself
   def create
@@ -68,7 +43,7 @@ class IdentitiesController < ApplicationController
           else
             # this is a new user; show signup; @authhash is available to the view and stored in the sesssion for creation of a new user
             session[:authhash] = @authhash
-            render signup_identities_path
+            redirect_to new_user_path
           end
         end
       else

@@ -2,4 +2,31 @@
 <div class="page-header">
   <h1><%= t '.register' %></h1>
 </div>
+<% if session[:authhash].present? %>
+  <section id="services_new">
+    <div class = 'well'>
+      <p><%=t '.notice_openid' %></p>
+      <div class='row'>
+        <div class='span1'>
+        <%= image_tag "#{session[:authhash][:provider]}_64.png", :size => "64x64" %>
+        </div>
+      <div class='span7'>
+      <p class="small">
+        <b><%= t('activerecord.attributes.identities.provider') %>:</b>
+         <%= session[:authhash][:provider] %><br />
+        <b><%= t('activerecord.attributes.identities.uid') %>:</b>
+        <%= session[:authhash][:uid] %><br />
+        <b><%= t('activerecord.attributes.user.full_name') %>:</b>
+        <%= session[:authhash][:name] %><br />
+        <b><%= t('activerecord.attributes.user.email') %>:</b>
+        <%= session[:authhash][:email] %> <br />
+      </p>
+      </div>
+    </div>
+    <p class='alert alert-info'>
+      <%=t '.caution' %>
+    </p>
+    </div>
+  </section>
+<% end %>
 <%= render :partial => 'form' %>
