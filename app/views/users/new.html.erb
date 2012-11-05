@@ -2,6 +2,11 @@
 <div class="page-header">
   <h1><%= t '.register' %></h1>
 </div>
+<p>
+  <%=t '.have_account' %> 
+  <%= link_to t('.login'), new_session_path %>
+  <%= t('.use_openid', url: link_to('OpenID',new_session_path)).html_safe %>
+</p>
 <% if session[:authhash].present? %>
   <section id="services_new">
     <div class = 'well'>
