@@ -56,6 +56,7 @@ Spork.prefork do
     config.include AuthMacros
     config.include MailerMacros
     config.include Paperclip::Shoulda::Matchers
+    config.before(:each) { reset_email }
   end
 end
 
