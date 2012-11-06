@@ -39,15 +39,15 @@ describe "Omniauths" do
         page.should have_content '1234'
         page.should have_content 'Arash Joon'
         page.should have_content 'ArashJJ@jmail.com'
-        fill_in 'رمز عبور', with: 'secret'
-        fill_in 'تایید رمز عبور', with: 'secret'
+        fill_in 'گذرواژه', with: 'secret'
+        fill_in 'تایید گذرواژه', with: 'secret'
         click_button 'تایید'
         page.should have_content 'موفقیت'
       end
 
       it 'signes in user if identity exist' do
-        fill_in 'رمز عبور', with: 'secret'
-        fill_in 'تایید رمز عبور', with: 'secret'
+        fill_in 'گذرواژه', with: 'secret'
+        fill_in 'تایید گذرواژه', with: 'secret'
         click_button 'تایید'
         click_link 'خروج' # signe out before testing again
         visit new_session_path

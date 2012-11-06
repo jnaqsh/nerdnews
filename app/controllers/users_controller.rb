@@ -70,7 +70,7 @@ class UsersController < ApplicationController
       respond_to do |format|
         if @user.save
           # login with new user
-          cookies.permanent.signed[:permanent_user_id] = @user.id
+          cookies.permanent.signed[:user_id] = @user.id
           format.html { redirect_to @user, notice: t('controllers.users.create.flash.success') }
           format.json { render json: @user, status: :created, location: @user }
         else
