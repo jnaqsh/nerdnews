@@ -1,32 +1,30 @@
 Nerdnews::Application.routes.draw do
+  root :to => "stories#index"
 
   resources :mypage, only: :index
 
+  # External Auth
   match '/auth/:provider/callback' => 'identities#create'
   match '/auth/failure' => 'identities#failure'
+
+  # Identities (Used for OmniAuth)
   resources :identities, :only => [:index, :create, :destroy] do
     collection do
       get 'signup'
-      post 'newaccount'
     end
   end
 
-
-
+  #Resources
   resources :ratings
-
-  namespace :admin do
-    get '', to: 'dashboard#index'
-  end
-
   resources :pages
-
   resources :tags
 
-  get "sessions/new", as: "new_session"
-  post "sessions" => "sessions#create", as: "sessions"
-  delete "sessions" => "sessions#destroy", as: "session"
+  # Sessions
+  resources :sessions, only: [:new, :create, :destroy]
+  match "/login", :to => "sessions#new"
+  match "/logout", :to => "sessions#destroy", via: :post
 
+  # Users
   resources :users do
     get 'posts', on: :member
     get 'comments', on: :member
@@ -35,7 +33,9 @@ Nerdnews::Application.routes.draw do
       get 'sent', on: :collection
     end
   end
+  match "/register", :to => "users#new"
 
+  # Stories
   resources :stories do
     resources :votes
     resources :comments
@@ -45,7 +45,10 @@ Nerdnews::Application.routes.draw do
 
   get "/:permalink" => "pages#show", as: "page_by_permalink"
 
-  root :to => "stories#index"
+
+  namespace :admin do
+    get '', to: 'dashboard#index'
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
