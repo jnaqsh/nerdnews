@@ -2,7 +2,7 @@
   <div class='row'>
     <div class='span1'>
       <div class='story-image'>
-      <% if story.tags.first %>
+      <% unless story.tags.blank? %>
         <%= link_to image_tag(story.tags.first.thumbnail.url(:thumb), class: 'img-polaroid'), stories_url(tag: story.tags.first.name) %>
       <% end %>
       </div>

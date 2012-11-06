@@ -92,22 +92,6 @@ fa:
       submit: "تایید"
     index:
       search: 'جستجو'
-    profile:
-      edit: 'ویرایش پروفایل'
-      registered_from: 'عضو شده از '
-      website: 'وب‌سایت: %{website}'
-      not_mentioned: 'عنوان نشده'
-      karma: 'کارما'
-      posts: 'ارسال‌ها'
-      add_favorite_tags: 'از طریق ویرایش پروفایل، تگ‌های مورد علاقه خود را وارد کنید'
-      no_favorite_tags: '%{user} تگ‌های موردعلاقه‌ی خود را اضافه نکرده است'
-      comments: 'کامنت‌ها'
-      favorite_tags: 'تگ‌های مورد علاقه'
-      favorites: 'موردعلاقه‌ها'
-      no_article: 'پست تایید شده‌ای ارسال نشده است.'
-      no_article: 'هیچ نظری ارسال نشده.'
-      no_favorite: 'هیچ موردی ثبت نشده است.'
-
 
   sessions:
     new:
@@ -174,8 +158,8 @@ fa:
     index:
       search: جستجو
 
-  layouts:
-    application:
+  shared:
+    header:
       brand_name: "اخبار فناوری"
       home: "صفحه اصلی"
       register: "ثبت‌نام"
@@ -193,6 +177,23 @@ fa:
       ratings: 'ایجاد گزینه امتیاز'
       identities: 'حساب‌های OpenID'
       messages: 'پیام‌ها'
+
+  layouts:
+    user_profile:
+      edit: 'ویرایش پروفایل'
+      registered_from: 'عضو شده از '
+      website: 'وب‌سایت: %{website}'
+      not_mentioned: 'عنوان نشده'
+      karma: 'کارما'
+      posts: 'ارسال‌ها'
+      add_favorite_tags: 'از طریق ویرایش پروفایل، تگ‌های مورد علاقه خود را وارد کنید'
+      no_favorite_tags: '%{user} تگ‌های موردعلاقه‌ی خود را اضافه نکرده است'
+      comments: 'کامنت‌ها'
+      favorite_tags: 'تگ‌های مورد علاقه'
+      favorites: 'موردعلاقه‌ها'
+      no_article: 'پست تایید شده‌ای ارسال نشده است.'
+      no_article: 'هیچ نظری ارسال نشده.'
+      no_favorite: 'هیچ موردی ثبت نشده است.'
 
   activerecord:
     models:

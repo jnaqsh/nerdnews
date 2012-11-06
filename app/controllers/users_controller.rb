@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   load_and_authorize_resource
+  layout 'user_profile', only: [:show, :posts, :comments, :favorites]
+  
   # GET /users
   # GET /users.json
   def index
