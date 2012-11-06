@@ -1,8 +1,6 @@
 Nerdnews::Application.routes.draw do
   root :to => "stories#index"
 
-  resources :mypage, only: :index
-
   # External Auth
   match '/auth/:provider/callback' => 'identities#create'
   match '/auth/failure' => 'identities#failure'
@@ -14,10 +12,12 @@ Nerdnews::Application.routes.draw do
     end
   end
 
-  #Resources
+  # Other Resources
   resources :ratings
+  resources :password_resets
   resources :pages
   resources :tags
+  resources :mypage, only: :index
 
   # Sessions
   resources :sessions, only: [:new, :create, :destroy]

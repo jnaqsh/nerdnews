@@ -32,7 +32,7 @@ fa:
     sessions:
       create:
         flash:
-          error: "ایمیل یا رمز عبور و یا ترکیبی از این دو اشتباه است."
+          error: "ایمیل یا گذرواژه و یا ترکیبی از این دو اشتباه است."
           success: "با موفقیت وارد شدید."
       destroy:
         flash:
@@ -79,6 +79,14 @@ fa:
         message_sent: 'پیام با موفقیت ارسال شد.'
         no_sent_message: 'تاکنون پیامی برای کاربران ارسال نکرده‌اید'
         no_recived_message: 'تاکنون پیامی دریافت نکرده‌اید'
+    password_resets:
+      create:
+        flash:
+          success: "دستور بازنشانی گذرواژه به ایمیل شما فرستاده شد."
+      update:
+        flash:
+          fail: "زمان بازنشانی گذرواژه تمام شده‌است، دوباره سعی کنید."
+          success: "گذرواژه جدید با موفقیت بازنشانی شد."
 
   users:
     new:
@@ -97,6 +105,7 @@ fa:
     new:
       login: "ورود"
       openid_login: 'چنانچه در یکی از سایت‌های زیر عضو هستید، می‌توانید مستقیما وارد شوید:'
+      forgotten_password: "گذرواژهٔ خود را فراموش کرده‌اید؟"
 
   identities:
     index:
@@ -226,9 +235,9 @@ fa:
         full_name: "نام و نام خانوادگی"
         email:  "ایمیل"
         website: "وب‌سایت"
-        password: "رمز عبور"
+        password: "گذرواژه"
         created_at: "ایجاد شده در"
-        password_confirmation: "تایید رمز عبور"
+        password_confirmation: "تایید گذرواژه"
         roles: "نقش"
         favorite_tags: 'تگ‌های موردعلاقه'
 

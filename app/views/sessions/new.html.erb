@@ -2,13 +2,8 @@
   <h1><%= t '.login' %></h1>
 </div>
 <div class='row'>
-  <div class='span4'>
-    <p><%=t '.openid_login' %></p>
-    <%= render 'identities/identities_list' %>
-  </div>
-
-  <div class='span8'>
-  <%= form_tag sessions_url, class: 'form-horizontal' do %>
+  <div class='span5'>
+  <%= form_tag sessions_url do %>
     <div class="control-group email optional">
       <label class="email control-label">ایمیل</label>
       <div class="controls">
@@ -19,7 +14,7 @@
       </div>
     </div>
     <div class="control-group password">
-      <label class="password control-label">رمز عبور</label>
+      <label class="password control-label">گذرواژه</label>
       <div class="controls">
         <div class="input-prepend">
           <span class="add-on"><i class="icon-lock"></i></span>
@@ -27,9 +22,23 @@
         </div>
       </div>
     </div>
-    <div class="form-actions">
-      <%= submit_tag t('.login'), class: "btn btn-primary" %>
+
+    <div class="control-group">
+      <div class="controls">
+        <%= label_tag :remember_me, class: "checkbox" do %>
+          <%= check_box_tag :remember_me, 1, params[:remember_me] %>
+          مرا به خاطر بسپار
+        <% end %>
+        <%= submit_tag t('.login'), class: "btn btn-primary" %>
+
+      </div>
     </div>
+    <div><%= link_to t('.forgotten_password'), new_password_reset_path %></div>
   <% end %>
+  </div>
+
+  <div class='span7'>
+    <p><%=t '.openid_login' %></p>
+    <%= render 'identities/identities_list' %>
   </div>
 </div>

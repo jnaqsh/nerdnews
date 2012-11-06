@@ -5,7 +5,11 @@ class SessionsController < ApplicationController
   def create
     user = User.where(:email => params[:email]).first
     if user && user.authenticate(params[:password])
-      cookies.permanent.signed[:permanent_user_id] = user.id
+      if params[:remember_me]
+        cookies.permanent.signed[:user_id] = user.id
+      else
+        cookies.signed[:user_id] = user.id
+      end
       redirect_to root_path, notice: t('controllers.sessions.create.flash.success')
     else
       redirect_to new_session_path
@@ -14,7 +18,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    cookies.delete(:permanent_user_id)
+    cookies.delete(:user_id)
     if session[:service_id]
       session[:service_id] = nil
     end

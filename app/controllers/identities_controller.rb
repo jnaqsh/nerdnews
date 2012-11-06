@@ -37,7 +37,7 @@ class IdentitiesController < ApplicationController
           if auth
             # signin existing user
             # in the session his user id and the service id used for signing in is stored
-            cookies.permanent.signed[:permanent_user_id] = auth.user.id
+            cookies.permanent.signed[:user_id] = auth.user.id
             session[:service_id] = auth.id
             redirect_to root_url, notice: t('controllers.identities.flash.signedin_successfully', provider: @authhash[:provider].capitalize)
           else
@@ -49,7 +49,7 @@ class IdentitiesController < ApplicationController
       else
         redirect_to root_path, flash: { error: t('controllers.identities.flash.authenticating_error', provider: @authhash[:provider].capitalize) }
       end
-    else 
+    else
       redirect_to root_path, flash: { error: t('controllers.identities.flash.authenticating_error', provider: @authhash[:provider].capitalize) }
     end
   end
@@ -57,7 +57,7 @@ class IdentitiesController < ApplicationController
   def destroy
     # remove an authentication service linked to the current user
     @identity = current_user.identities.find(params[:id])
-    
+
     if session[:service_id] == @identity.id
       flash[:error] = t('controllers.identities.flash.signin_error')
     else
