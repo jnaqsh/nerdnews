@@ -39,7 +39,7 @@ class Story < ActiveRecord::Base
   validates_length_of :title, maximum: 100, minimum: 10
   validates_length_of :content, minimum: 20, maximum: 1500
   validates  :title, :content, presence: true
-  validates :source, allow_blank: true, uri: { :format => /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix }
+  validates :source, allow_blank: true, uri: true
 
   attr_reader :tag_names
 

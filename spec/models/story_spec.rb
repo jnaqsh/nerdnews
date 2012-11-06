@@ -52,9 +52,9 @@ describe Story do
       FactoryGirl.build(:story, source: 'http://railscasts.com/episodes/243-beanstalkd-and-stalker?view=comments').should be_valid
 
       #should not be valid
-      FactoryGirl.build(:story, source: 'http://sdfsdfdsfsiwuery').should_not be_valid      
-      FactoryGirl.build(:story, source: 'http://sdf.sdfd.sfsiwuery.com').should_not be_valid
-      FactoryGirl.build(:story, source: 'http://sdfsdfdsfsiwuery.com').should_not be_valid
+      FactoryGirl.build(:story, source: 'http://sdfsdfdsfsiwuery').should_not be_valid
+      FactoryGirl.build(:story, source: 'http://sdf.sdfd.sfsiwuery.').should_not be_valid
+      FactoryGirl.build(:story, source: 'http:sdfsdfdsfsiwuery.com').should_not be_valid
     end
   end
 end

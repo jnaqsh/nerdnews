@@ -140,6 +140,7 @@ fa:
   errors:
     messages:
       email_format: "ایمیل نامعتبر است"
+      uri_format: "پیوند نامعتبر است"
 
   helpers:
     links:
@@ -266,4 +267,4 @@ fa:
 
   unauthorized:
     manage:
-      all: 'شما اجازه دسترسی به این صفحه را ندارید.'
+      all: 'شما اجازه دسترسی به این صفحه را ندارید، لطفا ابتدا وارد شوید.'
