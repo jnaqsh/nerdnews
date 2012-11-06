@@ -1,7 +1,4 @@
-<%= render partial: 'profile' %>
-    <div id='user-activities'>
-      <%= render 'comments' %>
-      <%= paginate @comments %>
-    </div>
-  </div>
+<div id='user-activities'>
+  <%= render partial: 'comments', object: @comments %>
+  <%= paginate @comments %>
 </div>

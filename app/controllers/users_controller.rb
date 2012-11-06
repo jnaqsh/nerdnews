@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   load_and_authorize_resource
+  layout 'user_profile', only: [:show, :posts, :comments, :favorites]
+  
   # GET /users
   # GET /users.json
   def index
@@ -36,6 +38,10 @@ class UsersController < ApplicationController
   # GET /users/new.json
   def new
     @user = User.new
+    if session[:authhash].present?
+      @user.full_name = session[:authhash][:name] if session[:authhash][:name]
+      @user.email = session[:authhash][:email] if session[:authhash][:email]
+    end
 
     respond_to do |format|
       format.html # new.html.erb
@@ -51,15 +57,26 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(params[:user])
+    if params[:cancel]
+      session.delete :authhash
+      session.delete :service_id
+      redirect_to root_url, flash: { error: t('controllers.users.create.flash.canceled') }
+    else
+      @user = User.new(params[:user])
+      if session[:authhash].present?
+        @user.identities.build(provider: session[:authhash][:provider], uid: session[:authhash][:uid])
+      end
 
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to @user, notice: t('controllers.users.create.flash.success') }
-        format.json { render json: @user, status: :created, location: @user }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @user.save
+          # login with new user
+          cookies.permanent.signed[:user_id] = @user.id
+          format.html { redirect_to @user, notice: t('controllers.users.create.flash.success') }
+          format.json { render json: @user, status: :created, location: @user }
+        else
+          format.html { render action: "new" }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  
+  <%= render 'shared/head' %>
+
+  <body>
+    
+    <div class="navbar navbar-fixed-top navbar-inverse">
+    <%= render partial: 'shared/header' %>
+    </div>
+
+    <div class="container">
+    
+      <%= render partial: 'shared/flash', locals: { flash: flash } %>
+      
+      <%- model_class = @user.class -%>
+
+      <div class='row'>
+        <div class='span3'>
+          <%= image_tag avatar_url(@user, 256), class: 'img-polaroid' %>
+          <div class='user info'>
+            
+            <div class='user user-name'>
+              <p><strong><%= @user.full_name %></strong></p>
+            </div>
+            
+            <div class='user user-assets'>
+              <i class="icon-user"></i>
+              <%= t('.registered_from') + time_ago_in_words(@user.created_at) + ' قبل'%></p>
+              <i class="icon-th"></i>
+              <%=t '.website', website: @user.website || t('.not_mentioned') %></p>
+              <i class="icon-envelope"></i>
+              <%= mail_to @user.email, nil, :replace_at => ' at ', replace_dot: ' dot ', encode: 'hex' %>
+            </div>
+            <% if can? :edit, @user %>
+              <div class='user user-edit-button'>
+                <%= link_to t('.edit'), edit_user_path(@user), class: 'btn btn-block' %>
+              </div>
+            <% end %>
+
+            <div class='row'>
+              <ul class='user user-rates'>
+                <li class='span1 well well-small'>
+                  <span class='digit'><%= @user.user_rate.to_farsi %></span>
+                  <span><%=t '.karma' %></span>
+                </li>
+                <li class='span1 well well-small'>
+                  <span class='digit'><%= @user.stories.approved.count.to_farsi %></span>
+                  <span><%=t '.posts' %></span>
+                </li>
+                <li class='span1 well well-small'>
+                  <span class='digit'><%= @user.comments.count.to_farsi %></span>
+                  <span><%=t '.comments' %></span>
+                </li>
+              </ul>
+            </div>
+            <div class='user user-tags tags-holder'>
+              <p><%=t '.favorite_tags' %></p>
+              <% unless @user.favorite_tags.blank? %>
+                <% @user.favorite_tags_array.each do |tag| %>
+                  <%= link_to stories_path(tag: tag) do %>
+                    <span class='label'><%= tag %></span>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <% if can? :edit, @user %>
+                  <div class='well well-small'>
+                  <%=t '.add_favorite_tags' %>
+                  </div>
+                <% else %>
+                  <div class='well well-small'>
+                  <%= t('.no_favorite_tags', user: @user.full_name) %>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <div class='span9'>
+          <ul class="nav nav-tabs">
+            <%= link_to_li t('.posts'), posts_user_path(@user), user_path(@user), remote: true, id: 'posts_li' %>
+
+            <%= link_to_li t('.comments'), comments_user_path(@user), remote: true, id: 'comments', id: 'comments_li' %>
+
+            <%= link_to_li t('.favorites'), favorites_user_path(@user), remote: true, id: 'favorites_li' %>
+            </li>
+          </ul>
+            <%= yield %>
+        </div>
+      </div>  
+    </div>
+  </body>
+</html>

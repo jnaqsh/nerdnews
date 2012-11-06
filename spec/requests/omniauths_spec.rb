@@ -33,12 +33,21 @@ describe "Omniauths" do
       end
 
       it 'creates account with openid' do
+        current_path.should eq(new_user_path)
+        page.should have_content 'حساب OpenID شما ثبت شده است'
+        page.should have_content 'myopenid'
+        page.should have_content '1234'
+        page.should have_content 'Arash Joon'
+        page.should have_content 'ArashJJ@jmail.com'
+        fill_in 'گذرواژه', with: 'secret'
+        fill_in 'تایید گذرواژه', with: 'secret'
         click_button 'تایید'
-        current_path.should eq(root_path)
-        page.should have_content('موفقیت')
+        page.should have_content 'موفقیت'
       end
 
       it 'signes in user if identity exist' do
+        fill_in 'گذرواژه', with: 'secret'
+        fill_in 'تایید گذرواژه', with: 'secret'
         click_button 'تایید'
         click_link 'خروج' # signe out before testing again
         visit new_session_path

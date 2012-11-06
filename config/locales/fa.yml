@@ -5,6 +5,9 @@ fa:
         flash:
           success:  "خبر شما با موفقیت ایجاد گردید و منتشر شد."
           success_for_guest_and_new_users: "خبر شما با موفقیت ایجاد گردید، بعد از این‌که یکی از مدیرها آن را تایید کرد، منتشر می‌شود."
+      show:
+        flash:
+          not_approved: 'این خبر هنوز تایید نشده است'
       update:
         flash:
           success:  "خبر با موفقیت به‌روز گردید."
@@ -22,6 +25,7 @@ fa:
       create:
         flash:
           success: "شما با موفقیت ثبت‌نام کردید."
+          canceled: 'ایجاد حساب لغو شد. شما وارد نشده‌اید.'
       update:
         flash:
           success: "اطلاعات شما با موفقیت به‌روز گردید."
@@ -59,9 +63,7 @@ fa:
     identities:
       flash:
         already_exist: 'حساب شما در %{provider} قبلا در سایت ثبت شده است.'
-        canceled: 'ایجاد حساب لغو شد. شما وارد نشده‌اید.'
         added_successfully: 'حساب شما در %{provider} برای ورود به سایت با موفقیت اضافه شد.'
-        created_successfully: 'حساب شما به موفقیت ساخته، و شما وارد سایت شده‌اید.'
         error_creating: 'چه ضایع! یک اشکال هنگام ایجاد حساب شما پیش آمد که کاری از دست ما بر نمیامد.'
         signedin_successfully: 'به‌وسیله‌ی %{provider} با موفقیت وارد شدید.'
         authenticating_error: 'هنگام تایید‌هویت توسط %{provider} خطایی پیش‌آمد. سرویس‌دهنده اطلاعات معتبری ارسال نکرد.'
@@ -89,31 +91,20 @@ fa:
   users:
     new:
       register: "ثبت‌نام"
+      caution: 'اگر از قبل در NerdNews حساب دارید، و فقط می‌خواهید یک حساب OpenID جدید برای ورود به سایت به حساب خود متصل کنید، اینجا جای شما نیست! شما باید ابتدا وارد حساب خود شوید و از طریق پروفایل خود اقدام کنید.'
+      notice_openid: 'حساب OpenID شما ثبت شده است. لطفا برای ایجاد حساب، اطلاعات خود را تکمیل کنید.'
+      have_account: 'حساب دارید؟ '
+      login: 'وارد شوید،'
+      use_openid: 'یا از %{url} استفاده کنید.'
     form:
       submit: "تایید"
     index:
       search: 'جستجو'
-    profile:
-      edit: 'ویرایش پروفایل'
-      registered_from: 'عضو شده از '
-      website: 'وب‌سایت: %{website}'
-      not_mentioned: 'عنوان نشده'
-      karma: 'کارما'
-      posts: 'ارسال‌ها'
-      add_favorite_tags: 'از طریق ویرایش پروفایل، تگ‌های مورد علاقه خود را وارد کنید'
-      no_favorite_tags: '%{user} تگ‌های موردعلاقه‌ی خود را اضافه نکرده است'
-      comments: 'کامنت‌ها'
-      favorite_tags: 'تگ‌های مورد علاقه'
-      favorites: 'موردعلاقه‌ها'
-      no_article: 'پست تایید شده‌ای ارسال نشده است.'
-      no_article: 'هیچ نظری ارسال نشده.'
-      no_favorite: 'هیچ موردی ثبت نشده است.'
-
 
   sessions:
     new:
       login: "ورود"
-      openid_login: 'چنانچه در یکی از سایت‌های زیر عضو هستید، می‌توانید مستقیما بدون ثبت‌نام وارد شوید:'
+      openid_login: 'چنانچه در یکی از سایت‌های زیر عضو هستید، می‌توانید مستقیما وارد شوید:'
       forgotten_password: "گذرواژهٔ خود را فراموش کرده‌اید؟"
 
   identities:
@@ -125,7 +116,6 @@ fa:
       new_account: 'حساب جدید'
       new_account_description: 'این حساب برای NerdNews جدید است'
       confirm_button: 'تایید و ایجاد حساب جدید'
-      caution: 'اگر از قبل در NerdNews حساب دارید، و فقط می‌خواهید یک حساب OpenID جدید برای ورود به سایت به حساب خود متصل کنید، اینجا جای شما نیست! شما باید ابتدا وارد حساب خود شوید و از طریق پروفایل خود اقدام کنید.'
 
   messages:
     index:
@@ -162,6 +152,7 @@ fa:
       new: "خبری جدید بنویسید"
     story:
       anonymous_user: "شخص ناشناس"
+      story_details: 'توسط %{user} در %{date}'
     show:
       comments: "دیدگاه‌ها"
       no_comments: "هیچ دیدگاهی وجود ندارد."
@@ -176,8 +167,8 @@ fa:
     index:
       search: جستجو
 
-  layouts:
-    application:
+  shared:
+    header:
       brand_name: "اخبار فناوری"
       home: "صفحه اصلی"
       register: "ثبت‌نام"
@@ -193,7 +184,25 @@ fa:
       unpublished_stories: "خبرهای منتشرنشده"
       users: 'کاربرها'
       ratings: 'ایجاد گزینه امتیاز'
+      identities: 'حساب‌های OpenID'
       messages: 'پیام‌ها'
+
+  layouts:
+    user_profile:
+      edit: 'ویرایش پروفایل'
+      registered_from: 'عضو شده از '
+      website: 'وب‌سایت: %{website}'
+      not_mentioned: 'عنوان نشده'
+      karma: 'کارما'
+      posts: 'ارسال‌ها'
+      add_favorite_tags: 'از طریق ویرایش پروفایل، تگ‌های مورد علاقه خود را وارد کنید'
+      no_favorite_tags: '%{user} تگ‌های موردعلاقه‌ی خود را اضافه نکرده است'
+      comments: 'کامنت‌ها'
+      favorite_tags: 'تگ‌های مورد علاقه'
+      favorites: 'موردعلاقه‌ها'
+      no_article: 'پست تایید شده‌ای ارسال نشده است.'
+      no_article: 'هیچ نظری ارسال نشده.'
+      no_favorite: 'هیچ موردی ثبت نشده است.'
 
   activerecord:
     models:

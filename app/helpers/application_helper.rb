@@ -39,14 +39,15 @@ module ApplicationHelper
     end
   end
 
-  def link_to_li(name, path)
-    if current_page? path
+  def link_to_li(name, *args)
+    options = args.last if args.last.kind_of? Hash else nil
+    if args.include? request.path
       content_tag :li, class: "active" do
-        link_to name, path
+        link_to name, args[0], options
       end
     else
       content_tag :li do
-        link_to name, path
+        link_to name, args[0], options
       end
     end
   end

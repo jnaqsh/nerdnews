@@ -123,7 +123,7 @@ describe '/Users' do
   context '/Rating' do
 
     before(:each) do
-      @story = FactoryGirl.create(:story, user: @user)
+      @story = FactoryGirl.create(:approved_story, user: @user)
     end
 
     context 'Users' do
@@ -154,6 +154,7 @@ describe '/Users' do
       end
 
       it 'should add a point after a story approved' do
+        @story = FactoryGirl.create(:story, user: @user)
         logout
         approved_user = FactoryGirl.create(:approved_user)
         login approved_user
