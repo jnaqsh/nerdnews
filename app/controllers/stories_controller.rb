@@ -32,7 +32,7 @@ class StoriesController < ApplicationController
     @comment = @story.comments.build
     @comments = @story.comments.arrange(order: :created_at)
 
-    flash[:error] = t('controllers.stories.show.flash.not_approved')
+    flash[:error] = t('controllers.stories.show.flash.not_approved') if !@story.approved?
     
     @story.increment!(:view_counter)
 
