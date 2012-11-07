@@ -13,7 +13,7 @@ describe VotesController do
     end
 
     it 'should all users create a vote' do
-      post :create, story_id: @story.id, rating_id: @rating
+      post :create, story_id: @story, rating_id: @rating
       flash[:notice].should eq(I18n.t('controllers.votes.create.flash.success'))
     end
 

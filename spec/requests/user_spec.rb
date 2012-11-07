@@ -169,6 +169,7 @@ describe '/Users' do
     context 'Stories', js: true do
 
       before(:each) do
+        login @user
         @pos = FactoryGirl.create(:rating)
         @neg = FactoryGirl.create(:negative_rating)
         visit story_path @story
@@ -189,7 +190,6 @@ describe '/Users' do
       end
 
       it 'gains a point after rating to a story' do
-        login @user
         visit story_path @story
         click_button 'btn-thumbs-up'
         expect {
@@ -205,7 +205,6 @@ describe '/Users' do
       end
 
       it 'wont let known user to vote after voting for first time' do
-        login @user
         visit story_path @story
         click_button 'btn-thumbs-up'
         click_link @pos.name

@@ -20,8 +20,8 @@ class VotesController < ApplicationController
     respond_to do |format|
       if @vote.save
         increment_story_votes_count(@story, type)
-        rate_user(1,
-          "#{current_user.full_name} voted a story with id #{@vote.story.id} and rate id of #{@vote.rating.id}")
+        rate_user 1,
+          "#{current_user.full_name} voted a story with id #{@vote.story.id} and rate id of #{@vote.rating.id}"
         format.html { redirect_to story_path(@story), notice: t('controllers.votes.create.flash.success') }
       else
         format.html { redirect_to story_path(@story), flash:{error: t('controllers.votes.create.flash.error')} }

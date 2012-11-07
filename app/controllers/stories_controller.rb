@@ -72,7 +72,7 @@ class StoriesController < ApplicationController
         format.html { render action: "new" }
       else
         if @story.save
-          rate_user(current_user, 1, "#{current_user.full_name} posted a story with id #{@story.id}") if current_user.present?
+          rate_user(1, "#{current_user.full_name} posted a story with id #{@story.id}") if current_user.present?
           format.html { redirect_to @story, only_path: true, notice: t("#{successful_notice}") }
           format.json { render json: @story, status: :created, location: @story }
         else
