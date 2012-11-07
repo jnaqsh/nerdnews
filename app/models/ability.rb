@@ -43,7 +43,6 @@ class Ability
          can :index, :mypage unless user.id.nil?
          can :index, Tag
          can :show, Page
-         can :create, Vote
        end
     #
     # The first argument to `can` is the action you are giving the user permission to do.
