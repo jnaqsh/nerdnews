@@ -1,1 +1,3 @@
+$("li.active").removeAttr('class')
+$("#comments_li").parent().addClass('active')
 $("#user-activities").html('<%= j render partial: 'comments', object: @comments %>')

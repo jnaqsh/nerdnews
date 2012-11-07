@@ -1,6 +1,6 @@
 # encoding: UTF-8
 class StoriesController < ApplicationController
-  load_and_authorize_resource
+  authorize_resource
   # GET /stories
   # GET /stories.json
   def index
@@ -32,6 +32,8 @@ class StoriesController < ApplicationController
     @comment = @story.comments.build
     @comments = @story.comments.arrange(order: :created_at)
 
+    flash[:error] = t('controllers.stories.show.flash.not_approved') if !@story.approved?
+    
     @story.increment!(:view_counter)
 
     if request.path != story_path(@story)

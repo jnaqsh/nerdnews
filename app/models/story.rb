@@ -68,6 +68,10 @@ class Story < ActiveRecord::Base
     !self.votes.where("user_id = ?", user).blank?
   end
 
+  def approved?
+    self.publish_date.present?
+  end
+
   private
 
     def calculate_count(tag)

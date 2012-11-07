@@ -9,7 +9,7 @@ class Ability
          can :manage, :all
        elsif user.role? :approved
          can :manage, Comment
-         can [:create,:newaccount, :failure], Identity
+         can [:create, :failure], Identity
          can [:index, :destroy], Identity, user: { :id => user.id }
          can :manage, Message, user: { :id => user.id }
          can :show, Message, reciver_id: user.id
@@ -21,7 +21,7 @@ class Ability
          can :create, Vote
        elsif user.role? :new_user
          can :create, Comment
-         can [:create,:newaccount, :failure], Identity
+         can [:create, :failure], Identity
          can [:index, :destroy], Identity, user: { :id => user.id }
          can :manage, Message, user: { :id => user.id }
          can :show, Message, reciver_id: user.id
@@ -36,7 +36,7 @@ class Ability
          can [:read, :create], Story
          can [:create, :show, :posts, :comments, :favorites], User
          can [:edit, :update], User, :id => user.id
-         can [:create,:newaccount, :failure], Identity
+         can [:create, :failure], Identity
          can [:index, :destroy], Identity, user: { :id => user.id }
          can :manage, Message, user: { :id => user.id }
          can :show, Message, reciver_id: user.id
