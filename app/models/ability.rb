@@ -19,6 +19,9 @@ class Ability
          can [:create, :show, :posts, :comments, :favorites], User
          can [:edit, :update], User, :id => user.id
          can :create, Vote
+         can :index, :mypage
+         can :destroy, :session
+         can :manage, :password_reset
        elsif user.role? :new_user
          can :create, Comment
          can [:create, :failure], Identity
@@ -31,6 +34,9 @@ class Ability
          can [:create, :show, :posts, :comments, :favorites], User
          can [:edit, :update], User, :id => user.id
          can :create, Vote
+         can :index, :mypage
+         can :destroy, :session
+         can :manage, :password_reset
        else # guest user
          can :create, Comment
          can [:read, :create], Story
@@ -40,9 +46,9 @@ class Ability
          can [:index, :destroy], Identity, user: { :id => user.id }
          can :manage, Message, user: { :id => user.id }
          can :show, Message, reciver_id: user.id
-         can :index, :mypage unless user.id.nil?
          can :index, Tag
          can :show, Page
+         can :manage, :password_reset
        end
     #
     # The first argument to `can` is the action you are giving the user permission to do.

@@ -1,4 +1,5 @@
 class RatingsController < ApplicationController
+  load_and_authorize_resource
   def index
     @ratings = Rating.order('weight DESC').page params[:page]
     respond_to do |format|
