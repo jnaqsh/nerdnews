@@ -4,6 +4,8 @@ require 'spec_helper'
 describe "Ratings" do
   describe "GET /ratings" do
     it 'should add/edit a new rating' do
+      user = FactoryGirl.create(:founder_user)
+      login user
       visit ratings_path
       click_link 'جدید'
       current_path.should eq new_rating_path

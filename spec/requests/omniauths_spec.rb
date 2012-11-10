@@ -5,8 +5,8 @@ describe "Omniauths" do
   context 'OpenId' do
     context 'known user' do
       before do
-        @approved_user = FactoryGirl.create(:approved_user)
-        login @approved_user
+        @user = FactoryGirl.create(:user)
+        login @user
         visit identities_path
         click_on 'MyOpenID'
       end
