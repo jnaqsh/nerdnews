@@ -1,5 +1,6 @@
 class TagsController < ApplicationController
-  authorize_resource
+  load_and_authorize_resource
+
   def index
     @search = Tag.search do
       fulltext params[:tag_search]
@@ -33,7 +34,6 @@ class TagsController < ApplicationController
   end
 
   def destroy
-    @tag = Tag.find(params[:id])
     @tag.destroy
 
     respond_to do |format|
@@ -42,11 +42,9 @@ class TagsController < ApplicationController
   end
 
   def edit
-    @tag = Tag.find(params[:id])
   end
 
   def update
-    @tag = Tag.find(params[:id])
 
     respond_to do |format|
       if @tag.update_attributes(params[:tag])
