@@ -68,7 +68,7 @@ fa:
         signedin_successfully: 'به‌وسیله‌ی %{provider} با موفقیت وارد شدید.'
         authenticating_error: 'هنگام تایید‌هویت توسط %{provider} خطایی پیش‌آمد. سرویس‌دهنده اطلاعات معتبری ارسال نکرد.'
         signin_error: 'شما در حال حاضر با همین حساب وارد شده‌اید.'
-        successfully_removed: 'حساب انتخاب شدخ با موفقیت حذف شد.'
+        successfully_removed: 'حساب انتخاب شده با موفقیت حذف شد.'
         notloggedin: 'خطایی در سرویس‌دهنده رخ داد. شما وارد سیستم نشده‌اید.'
     mypage:
       flash:
