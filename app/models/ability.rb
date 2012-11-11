@@ -17,8 +17,7 @@ class Ability
          can :destroy, :session
          can :manage, Story
          can :manage, Tag
-         can [:create, :show, :posts, :comments, :favorites], User
-         can [:index, :update, :destroy], User
+         can :manage, User
          can :create, Vote
        elsif user.role? :approved
          can :manage, Comment
@@ -32,7 +31,7 @@ class Ability
          can :manage, Story
          can [:read, :create, :update], Tag
          can [:show, :posts, :comments, :favorites], User
-         can :update, User, :id => user.id
+         can [:update, :destroy], User, :id => user.id
          can :create, Vote
        elsif user.role? :new_user
          can :create, Comment
@@ -46,7 +45,7 @@ class Ability
          can [:read, :create], Story
          can :index, Tag
          can [:show, :posts, :comments, :favorites], User
-         can :update, User, :id => user.id
+         can [:update, :destroy], User, :id => user.id
          can :create, Vote
        else # guest user
          can :create, Comment

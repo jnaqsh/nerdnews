@@ -1,6 +1,114 @@
 require 'spec_helper'
+require "cancan/matchers"
 
 describe User do
+  describe "abilities" do
+    subject { ability }
+    let(:ability){ Ability.new(user) }
+
+    context "when is a guest user" do
+      let(:user){ User.new }
+
+      it { user.should have_ability(:create, for: Comment.new)}
+      it { user.should_not have_ability([:read, :update, :destroy], for: Comment.new)}
+      it { user.should have_ability([:create, :failure], for: Identity.new)}
+      it { user.should_not have_ability([:index, :destroy], for: Identity.new)}
+      it { user.should_not have_ability([:create, :read, :sent], for: Message.new)}
+      it { user.should_not have_ability(:index, for: :mypage)}
+      it { user.should have_ability(:show, for: Page.new)}
+      it { user.should_not have_ability([:index, :create, :update, :destroy], for: Page.new)}
+      it { user.should have_ability(:manage, for: :password_reset)}
+      it { user.should_not have_ability([:read, :create, :update], for: Rating.new)}
+      it { user.should have_ability([:new, :create], for: :session)}
+      it { user.should_not have_ability(:destroy, for: :session)}
+      it { user.should have_ability([:read, :create], for: Story.new)}
+      it { user.should_not have_ability([:publish, :unpublished, :update, :destroy], for: Story.new)}
+      it { user.should have_ability(:index, for: Tag.new)}
+      it { user.should_not have_ability([:create, :show, :update, :destroy], for: Tag.new)}
+      it { user.should have_ability([:create, :show, :posts, :comments, :favorites], for: User.new)}
+      it { user.should_not have_ability([:index, :destroy, :update], for: User.new)}
+      it { user.should_not have_ability(:create, Vote.new)}
+    end
+
+    context "when is a new user" do
+      let(:user){ FactoryGirl.create(:user) }
+      let(:user2){ FactoryGirl.create(:user)}
+
+      it { user.should have_ability(:create, for: Comment.new)}
+      it { user.should_not have_ability([:read, :update, :destroy], for: Comment.new)}
+      it { user.should have_ability([:create, :failure], for: Identity.new)}
+      it { user.should have_ability([:index, :destroy], for: user.identities.new) }
+      it { user.should have_ability(:manage, for: user.messages.new)}
+      it { user.should have_ability(:show, for: Message.new(reciver_id: user.id))}
+      it { user.should_not have_ability(:manage, for: user2.messages.new)}
+      it { user.should have_ability(:index, for: :mypage)}
+      it { user.should have_ability(:show, for: Page.new)}
+      it { user.should_not have_ability([:index, :create, :update, :destroy], for: Page.new)}
+      it { user.should_not have_ability(:manage, for: :password_reset)}
+      it { user.should_not have_ability([:read, :create, :update], for: Rating.new)}
+      it { user.should_not have_ability([:new, :create], for: :session)}
+      it { user.should have_ability(:destroy, for: :session)}
+      it { user.should have_ability([:read, :create], for: Story.new)}
+      it { user.should_not have_ability([:publish, :unpublished, :update, :destroy], for: Story.new)}
+      it { user.should have_ability(:index, for: Tag.new)}
+      it { user.should_not have_ability([:create, :show, :update, :destroy], for: Tag.new)}
+      it { user.should have_ability([:show, :posts, :comments, :favorites], for: User.new)}
+      it { user.should have_ability([:update, :destroy], for: user)}
+      it { user.should_not have_ability([:create, :index, :destroy, :update], for: User.new)}
+      it { user.should have_ability(:create, for: Vote.new)}
+    end
+
+    context "when is a approved user" do
+      let(:user){ FactoryGirl.create(:approved_user) }
+      let(:user2){ FactoryGirl.create(:user)}
+
+      it { user.should have_ability(:manage, for: Comment.new)}
+      it { user.should have_ability([:create, :failure], for: Identity.new)}
+      it { user.should have_ability([:index, :destroy], for: user.identities.new)}
+      it { user.should have_ability(:manage, for: user.messages.new)}
+      it { user.should have_ability(:show, for: Message.new(reciver_id: user.id))}
+      it { user.should_not have_ability(:manage, for: user2.messages.new)}
+      it { user.should_not have_ability(:show, for: Message.new(reciver_id: user2.id))}
+      it { user.should have_ability(:index, for: :mypage)}
+      it { user.should have_ability(:show, for: Page.new)}
+      it { user.should_not have_ability([:index, :create, :update, :destroy], for: Page.new)}
+      it { user.should_not have_ability(:manage, for: :password_reset)}
+      it { user.should_not have_ability([:read, :create, :update], for: Rating.new)}
+      it { user.should_not have_ability([:new, :create], for: :session)}
+      it { user.should have_ability(:destroy, for: :session)}
+      it { user.should have_ability([:manage], for: Story.new)}
+      it { user.should have_ability([:read, :create, :update], for: Tag.new)}
+      it { user.should_not have_ability(:destroy, for: Tag.new)}
+      it { user.should have_ability([:show, :posts, :comments, :favorites], for: User.new)}
+      it { user.should have_ability([:update, :destroy], for: user)}
+      it { user.should_not have_ability([:create, :index, :destroy, :update], for: User.new)}
+      it { user.should have_ability(:create, for: Vote.new)}
+    end
+
+    context "when is a founder user" do
+      let(:user){ FactoryGirl.create(:founder_user) }
+      let(:user2){ FactoryGirl.create(:user)}
+
+      it { user.should have_ability(:manage, for: Comment.new)}
+      it { user.should have_ability([:create, :failure], for: Identity.new)}
+      it { user.should have_ability([:index, :destroy], for: user.identities.new)}
+      it { user.should have_ability(:manage, for: user.messages.new)}
+      it { user.should have_ability(:show, for: Message.new(reciver_id: user.id))}
+      it { user.should_not have_ability(:manage, for: user2.messages.new)}
+      it { user.should_not have_ability(:show, for: Message.new(reciver_id: user2.id))}
+      it { user.should have_ability(:index, for: :mypage)}
+      it { user.should have_ability([:read, :create, :update, :destroy], for: Page.new)}
+      it { user.should_not have_ability(:manage, for: :password_reset)}
+      it { user.should have_ability([:read, :create, :update], for: Rating.new)}
+      it { user.should_not have_ability([:new, :create], for: :session)}
+      it { user.should have_ability(:destroy, for: :session)}
+      it { user.should have_ability(:manage, for: Story.new)}
+      it { user.should have_ability(:manage, for: Tag.new)}
+      it { user.should have_ability(:manage, for: User.new)}
+      it { user.should have_ability(:create, for: Vote.new)}
+    end
+  end
+
   describe "#send_password_reset" do
     let(:user) { FactoryGirl.create(:user) }
 
