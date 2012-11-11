@@ -21,22 +21,23 @@ describe '/Users' do
     end
 
     it 'can get users posts' do
-      story = FactoryGirl.create(:approved_story, user_id: @user)
+      story = FactoryGirl.create(:approved_story, user: @user)
+      story.user.should eq(@user)
       visit posts_user_path(@user)
       page.should have_content story.title
     end
 
     it 'can get users comments' do
-      story = FactoryGirl.create(:approved_story, user_id: @user)
-      comment = FactoryGirl.create(:comment, user_id: @user, story_id: story)
+      story = FactoryGirl.create(:approved_story, user: @user)
+      comment = FactoryGirl.create(:comment, user: @user, story: story)
       visit comments_user_path(@user)
       page.should have_content comment.content[0..26] #because of truncate
     end
 
     it 'can get users favorites' do
-      story = FactoryGirl.create(:approved_story, user_id: @user)
+      story = FactoryGirl.create(:approved_story, user: @user)
       rating = FactoryGirl.create(:rating)
-      vote = FactoryGirl.create(:vote, story_id: story, user_id: @user, rating_id: rating)
+      vote = FactoryGirl.create(:vote, story: story, user: @user, rating: rating)
       visit favorites_user_path(@user)
       page.should have_content vote.rating.name
     end
