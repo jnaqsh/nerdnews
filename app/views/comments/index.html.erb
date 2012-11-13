@@ -1,6 +1,6 @@
 <%- model_class = Comment.new.class -%>
 <% content_for :page_header do %>
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
 <% end %>
 <table class="table table-striped">
   <thead>

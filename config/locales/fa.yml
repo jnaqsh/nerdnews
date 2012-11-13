@@ -99,6 +99,7 @@ fa:
     form:
       submit: "تایید"
     index:
+      title: 'کاربرها'
       search: 'جستجو'
 
   sessions:
@@ -119,6 +120,7 @@ fa:
 
   messages:
     index:
+      title: 'پیام‌ها'
       compose: 'ارسال پیام'
       outbox: 'پیام‌های ارسالی'
     sent:
@@ -145,11 +147,12 @@ fa:
       preview: "پیش‌نمایش"
     actions: "عملیات"
     titles:
-      new: "جدید"
+      new: "%{model} جدید"
+      edit: 'ویرایش %{model}'
 
   stories:
     index:
-      title: "اخبار"
+      title: "تازه‌ترین خبرها"
       new: "خبری جدید بنویسید"
     story:
       anonymous_user: "شخص ناشناس"
@@ -166,12 +169,19 @@ fa:
 
   tags:
     index:
+      title: 'تگ‌ها'
       search: 'جستجو'
 
   comments:
+    index:
+      title: 'دیدگاه‌ها'
     form:
       write_your_comment: 'دیدگاه خود را بنویسید...'
       You!: 'شما!'
+
+  ratings:
+    index:
+      title: 'امتیازها'
 
   shared:
     header:
@@ -219,7 +229,8 @@ fa:
       tag: "تگ"
       page: "صفحه"
       identities: "حساب‌های OpenID"
-      message: 'پیام‌ها'
+      message: 'پیام'
+      rating: 'امتیاز'
 
     attributes:
       story:

@@ -1,9 +1,9 @@
 <%- model_class = User.new.class -%>
 <% content_for :page_header do %>
-  <%= link_to t('.new', :default => t("helpers.links.new")),
-            new_user_path,
-            :class => 'pull-left btn btn-primary' %>
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+  <h1>
+    <%= link_to t('.new', :default => t("helpers.links.new")), new_user_path, class: 'btn btn-large btn-success pull-left' %>
+    <%=t '.title', :default => model_class.model_name.human %>
+  </h1>
 <% end %>
 
 <div class = 'row'>
