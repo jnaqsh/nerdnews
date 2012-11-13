@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
   validates_length_of :full_name, maximum: 30, minimum: 7
   accepts_nested_attributes_for :roles
 
+  before_save :set_new_user_role
+
   searchable do
     text :full_name, as: :full_name_textp
     text :id
@@ -57,5 +59,11 @@ class User < ActiveRecord::Base
     begin
       self[column] = SecureRandom.urlsafe_base64
     end while User.exists?(column => self[column])
+  end
+
+  def set_new_user_role
+    if self.roles.empty?
+      self.roles << (Role.find_by_name("new_user") or Role.create(name: "new_user"))
+    end
   end
 end

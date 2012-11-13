@@ -6,49 +6,56 @@ class Ability
     #
        user ||= User.new # guest user (not logged in)
        if user.role? :founder
-         can :manage, :all
+         can :manage, Comment
+         can [:create, :failure], Identity
+         can [:index, :destroy], Identity, user: { :id => user.id }
+         can :manage, Message, user: { :id => user.id }
+         can :show, Message, reciver_id: user.id
+         can :index, :mypage
+         can :manage, Page
+         can :manage, Rating
+         can :destroy, :session
+         can :manage, Story
+         can :manage, Tag
+         can :manage, User
+         can :create, Vote
        elsif user.role? :approved
          can :manage, Comment
          can [:create, :failure], Identity
          can [:index, :destroy], Identity, user: { :id => user.id }
          can :manage, Message, user: { :id => user.id }
          can :show, Message, reciver_id: user.id
-         can [:index, :show], Page
-         can :manage, Story
-         can :manage, Tag
-         can [:create, :show, :posts, :comments, :favorites], User
-         can [:edit, :update], User, :id => user.id
-         can :create, Vote
          can :index, :mypage
+         can [:index, :show], Page
          can :destroy, :session
-         can :manage, :password_reset
+         can :manage, Story
+         can [:read, :create, :update], Tag
+         can [:show, :posts, :comments, :favorites], User
+         can [:update, :destroy], User, :id => user.id
+         can :create, Vote
        elsif user.role? :new_user
          can :create, Comment
          can [:create, :failure], Identity
          can [:index, :destroy], Identity, user: { :id => user.id }
          can :manage, Message, user: { :id => user.id }
          can :show, Message, reciver_id: user.id
+         can :index, :mypage
          can :show, Page
+         can :destroy, :session
          can [:read, :create], Story
          can :index, Tag
-         can [:create, :show, :posts, :comments, :favorites], User
-         can [:edit, :update], User, :id => user.id
+         can [:show, :posts, :comments, :favorites], User
+         can [:update, :destroy], User, :id => user.id
          can :create, Vote
-         can :index, :mypage
-         can :destroy, :session
-         can :manage, :password_reset
        else # guest user
          can :create, Comment
-         can [:read, :create], Story
-         can [:create, :show, :posts, :comments, :favorites], User
-         can [:edit, :update], User, :id => user.id
          can [:create, :failure], Identity
-         can [:index, :destroy], Identity, user: { :id => user.id }
-         can :manage, Message, user: { :id => user.id }
-         can :show, Message, reciver_id: user.id
-         can :index, Tag
          can :show, Page
          can :manage, :password_reset
+         can [:new, :create], :session
+         can [:read, :create], Story
+         can :index, Tag
+         can [:create, :show, :posts, :comments, :favorites], User
        end
     #
     # The first argument to `can` is the action you are giving the user permission to do.

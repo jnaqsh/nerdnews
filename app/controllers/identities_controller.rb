@@ -1,6 +1,6 @@
 class IdentitiesController < ApplicationController
-  load_and_authorize_resource only: [:index, :destroy]
-
+  load_and_authorize_resource
+  
   def index
     @identities = current_user.identities.order('provider asc')
   end

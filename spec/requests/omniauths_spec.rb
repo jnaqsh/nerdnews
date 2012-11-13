@@ -39,18 +39,23 @@ describe "Omniauths" do
         page.should have_content '1234'
         page.should have_content 'Arash Joon'
         page.should have_content 'ArashJJ@jmail.com'
-        fill_in 'گذرواژه', with: 'secret'
-        fill_in 'تایید گذرواژه', with: 'secret'
+        fill_in 'user_password', with: 'secret'
+        fill_in 'user_password_confirmation', with: 'secret'
         click_button 'تایید'
         page.should have_content 'موفقیت'
       end
 
       it 'signes in user if identity exist' do
-        fill_in 'گذرواژه', with: 'secret'
-        fill_in 'تایید گذرواژه', with: 'secret'
+        current_path.should eq(new_user_path)
+        fill_in 'user_password', with: 'secret'
+        fill_in 'user_password_confirmation', with: 'secret'
         click_button 'تایید'
+        current_path.should eq(user_path(Identity.last.user))
         click_link 'خروج' # signe out before testing again
+        current_path.should eq(root_path)
+        page.should have_content(I18n.t("controllers.sessions.destroy.flash.success"))
         visit new_session_path
+        current_path.should eq(new_session_path)
         click_link 'MyOpenID'
         page.should have_content('با موفقیت وارد شدید')
       end
@@ -62,7 +67,8 @@ describe "Omniauths" do
 
       it 'doesnt let visit identities page' do
         visit identities_path
-        page.should have_content('not authorized')
+        current_path.should eq(root_path)
+        page.should have_content(I18n.t("unauthorized.manage.all"))
       end
     end
 

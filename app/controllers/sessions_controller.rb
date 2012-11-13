@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  authorize_resource :class => false, only: :destroy
+  authorize_resource :class => false
   def new
   end
 
