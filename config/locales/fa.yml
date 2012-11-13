@@ -177,6 +177,7 @@ fa:
     header:
       brand_name: "نردنیوز"
       home: "صفحه اصلی"
+      mypage: 'صفحه من'
       register: "ثبت‌نام"
       login: "ورود"
       logout: "خروج"
