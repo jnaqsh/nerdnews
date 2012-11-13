@@ -1,10 +1,10 @@
 <%- model_class = User.new.class -%>
-<div class="page-header">
-  <%= link_to t('.new', :default => t("helpers.links.new")),
-            new_user_path,
-            :class => 'pull-left btn btn-primary' %>
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
-</div>
+<% content_for :page_header do %>
+  <h1>
+    <%= link_to t('.new', :default => t("helpers.links.new")), new_user_path, class: 'btn btn-large btn-success pull-left' %>
+    <%=t '.title', :default => model_class.model_name.human %>
+  </h1>
+<% end %>
 
 <div class = 'row'>
   <%= form_tag users_path, remote: true, method: :get, class: 'form-search' do %>

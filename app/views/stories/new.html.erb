@@ -1,8 +1,8 @@
 <%- model_class = @story.class -%>
-<div class="page-header">
+<% content_for :page_header do %>
   <h1><%=t '.title', :default => t('helpers.titles.new', :model => model_class.model_name.human,
                                  :default => "New #{model_class.model_name.human}") %></h1>
-</div>
+<% end %>
 
 <% if params[:preview_button] %>
   <div class='preview'>

@@ -1,26 +1,76 @@
-<%= simple_form_for [@story, @comment], :html => { :class => 'form-horizontal' } do |f| %>
-  <% if current_user.nil? %>
-    <%= f.input :name, input_html: {class: "span5"} %>
-    <%= f.input :email, input_html: {class: "span5"} %>
-    <%= f.input :website, input_html: {class: "span5"} %>
-  <% elsif ["edit", "update"].include?(params[:action]) %>
-    <%= f.input :name, readonly: true, input_html: {class: "span5"} %>
-    <%= f.input :email, readonly: true, input_html: {class: "span5"} %>
-    <%= f.input :website, readonly: true, input_html: {class: "span5"} %>
-  <% else %>
-    <%= f.input :name, readonly: true,
-      input_html: {value: current_user.full_name, class: "span5"} %>
-    <%= f.input :email, readonly: true,
-      input_html: {value: current_user.email, class: "span5"} %>
-    <%= f.input :website, readonly: true,
-      input_html: {value: current_user.website, class: "span5"} %>
-    <%= f.input :user_id, as: :hidden,
-      input_html: {value: current_user.id} %>
-  <% end %>
-  <%= f.input :parent_id, as: :hidden %>
-  <%= f.input :content, input_html: {rows: 10, class: "span6"} %>
+<%= simple_form_for [@story, @comment], :html => { :class => '' } do |f| %>
+<div class='comment-form'>
+  
+  <div class='row'>
+    <div class='span6'>
+      
+      <%= f.input :parent_id, as: :hidden %>
+      <%= f.input :content, label: false, placeholder: "#{t('.write_your_comment')}", input_html: {rows: 3, class: "span6"} %>
 
-  <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
+    </div>
+  </div>
+
+  <div class='row'>
+    <% if current_user.nil? %>
+
+      <div class='span4'>
+        
+      <%= f.input :name, label: false, input_html: {class: 'span4'}, placeholder: "*#{t('activerecord.attributes.comment.name')}" %>
+
+      <%= f.input :email, label: false, input_html: {class: 'span4'}, placeholder: "*#{t('activerecord.attributes.comment.email')}" %>
+      
+      <%= f.input :website, label: false, input_html: {class: 'span4'}, placeholder: "#{t('activerecord.attributes.comment.website')}" %>
+      
+      </div>
+
+      <div class='span2' style='text-align: center'>
+        <%= image_tag 'nobody.png', class: 'img-polaroid' %>
+        <p><b><%=t '.You!' %></b></p>
+        <p>
+          <%= link_to t('shared.header.login'), login_path %>
+          /
+          <%= link_to t('shared.header.register'), register_path %>
+        </p>
+        <%= f.submit nil, :class => 'btn btn-primary' %>
+      </div>
+
+    <% elsif ["edit", "update"].include?(params[:action]) %>
+      <div class='span4'>
+
+        <%= f.input :name, readonly: true, label: false, input_html: {class: 'span4'}, placeholder: "*#{t('activerecord.attributes.comment.name')}" %>
+
+        <%= f.input :email, readonly: true, label: false, input_html: {class: 'span4'}, placeholder: "*#{t('activerecord.attributes.comment.email')}" %>
+        
+        <%= f.input :website, readonly: true, label: false, input_html: {class: 'span4'}, placeholder: "#{t('activerecord.attributes.comment.website')}" %>
+
+      </div>
+
+        <div class='span2' style='text-align: center'>
+          <%= image_tag avatar_url(current_user, 64), class: 'img-polaroid' %>
+          <p><b><%= link_to current_user.full_name, user_path(current_user) %></b></p>
+          <%= f.submit nil, :class => 'btn btn-primary' %>
+        </div>
+
+    <% else %>
+      <div id='commenter-info', class='span6'>
+        <%= image_tag avatar_url(current_user, 16), class: 'pull-right img-polaroid clearfix' %>
+        <%= link_to current_user.full_name, user_path(current_user) %>
+        
+        <span class='pull-left'>
+          <%= f.submit nil, :class => 'btn btn-primary' %>
+        </span>
+      </div>
+
+      <%= f.input :name, readonly: true, as: :hidden,
+        input_html: {value: current_user.full_name, class: "span5"} %>
+      <%= f.input :email, readonly: true, as: :hidden,
+        input_html: {value: current_user.email, class: "span5"} %>
+      <%= f.input :website, readonly: true, as: :hidden,
+        input_html: {value: current_user.website, class: "span5"} %>
+      <%= f.input :user_id, as: :hidden,
+        input_html: {value: current_user.id} %>
+    <% end %>
+
   </div>
 <% end %>
+</div>

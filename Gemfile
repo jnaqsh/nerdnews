@@ -22,7 +22,7 @@ gem "cancan"
 gem 'kaminari'
 gem 'sunspot_rails'
 gem 'RedCloth'
-gem 'rack-mini-profiler'
+# gem 'rack-mini-profiler'
 gem 'jalalidate'
 gem 'farsifu'
 gem 'ancestry'

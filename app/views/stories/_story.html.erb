@@ -16,23 +16,35 @@
     </div>
 
     <div class='span11'>
-      <% if story.id %>
-        <%= link_to story_path(story), :class => "btn btn-large pull-left" do %>
-          <i class='icon-comment'></i>
-          <span class='comment-counter'> <%= story.comments_count.to_farsi %></span>
-        <% end %>
-      <% end %>
 
-        <h3><%= link_to story.title, story %></h3>
-
-      <h6 class="muted">
+      <h3><%= link_to story.title, story %></h3>
+      <h5 class="muted">
         <small>
-          <% date = to_jalali(story.publish_date) if story.approved? %>
-          <%= t('stories.story.story_details', user: user_name(story), date: date).html_safe %>
-        </small>
-      </h6>
+          
+          <span>
+            <i class='icon-user'></i>
+            <%= user_name(story) %>
+          </span>
+          
+          <span>
+            <i class='icon-calendar'></i>
+            <%= to_jalali(story.publish_date) if story.approved? %>
+          </span>
 
+          <% if story.id %>
+            <span>
+              <i class='icon-comment'></i>
+              <%= link_to story_path(story) do %>
+                <%=t 'stories.show.comments' %>
+                <%= story.comments_count.to_farsi %>
+              <% end %>
+            </span>
+          <% end %>
+        </small>
+      </h5>
+      
       <p><%= user_name(story) %> می‌نویسد:</p>
+
       <blockquote>
         <%= sanitize(RedCloth.new(story.content, [:filter_html, :filter_styles]).to_html) %><br />
         <%= source_of_story(story) %>

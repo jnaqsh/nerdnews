@@ -1,0 +1,2 @@
+$('.nested_comments .comment-form').remove()
+$('#comment_<%= params[:parent_id] %>').next('.nested_comments').prepend('<%= j render 'form' %>')

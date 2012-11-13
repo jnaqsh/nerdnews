@@ -1,7 +1,7 @@
 <%- model_class = @user.class -%>
-<div class="page-header">
+<% content_for :page_header do %>
   <h1><%= t '.register' %></h1>
-</div>
+<% end %>
 <p>
   <%=t '.have_account' %> 
   <%= link_to t('.login'), new_session_path %>

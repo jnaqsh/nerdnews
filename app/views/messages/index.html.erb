@@ -1,14 +1,13 @@
 <%- model_class = Message.new.class -%>
-<div class="page-header">
+<% content_for :page_header do %>
   <h1>
     <%=t '.title', :default => model_class.model_name.human %>
     <span><small>(<%= link_to t('.outbox'), sent_user_messages_path(current_user) %>)
     </small></span>
     <% if can? :create, Message %>
-      <%= link_to t('.new', :default => t(".compose")), new_user_message_path,
-                :class => 'btn btn-success pull-left' %>
+      <%= link_to t('.new', :default => t(".compose")), new_user_message_path, class: 'btn btn-large btn-success pull-left' %>
     <% end %>
   </h1>
-</div>
+<% end %>
 
 <%= render partial: 'messages' %>

@@ -1,7 +1,10 @@
 <%- model_class = Rating.new.class -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
-</div>
+<% content_for :page_header do %>
+  <h1>
+    <%= link_to t('.new', :default => t("helpers.links.new")), new_rating_path, class: 'btn btn-large btn-success pull-left' %>
+    <%=t '.title', :default => model_class.model_name.human %>
+  </h1>
+<% end %>
 
 <table class="table table-striped">
   <thead>
@@ -29,9 +32,5 @@
     <% end %>
   </tbody>
 </table>
-
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_rating_path,
-            :class => 'btn btn-primary' %>
 
 <%= paginate @ratings %>

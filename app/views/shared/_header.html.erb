@@ -10,16 +10,21 @@
       <span class="icon-bar"></span>
     </a>
 
-    <%= link_to t('.brand_name'), root_path, class: "brand" %>
-    
+    <%= link_to root_path do %>
+      <%= image_tag 'NerdLogo-58px.png', class: 'logo pull-right' %>
+      <span class='brand hidden-phone'><%=t '.brand_name' %></span>
+    <% end %>
+
     <!-- User Buttton -->
     <% unless current_user %>
+    
     <div class="pull-left">
       <ul class="nav">
           <li><%= link_to t('.register'), register_path %></li>
           <li><%= link_to t('.login'), login_path %></li>
       </ul>
     </div>
+
     <% else %>
       <div class="btn-group pull-left">
         <a class="btn dropdown-toggle" data-toggle="dropdown" id="user-menu" href="<%= user_path(current_user) %>">
@@ -41,7 +46,7 @@
           <% end %>
           
           <% if can? :create, Tag %>
-            <li><%= link_to t('.tags'), new_tag_path %></li>
+            <li><%= link_to t('.tags'), tags_path %></li>
           <% end %>
           
           <% if can? :index, User %>
@@ -80,6 +85,9 @@
     <div class="nav-collapse">
       <ul class="nav">
         <%= link_to_li t('.home'), root_path %>
+        <% if can? :index, :mypage %>
+          <%= link_to_li t('.mypage'), mypage_index_path, style: 'font-weight: bold' %>
+        <% end %>
         <%= link_to_li t('.new_story'), new_story_path %><!--
         <li><%#= link_to t('.about'), page_by_permalink_path("about-us") %></li>
         <li><%#= link_to t('.contact us'), root_path %></li>-->

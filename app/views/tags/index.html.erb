@@ -1,13 +1,13 @@
 <%- model_class = Tag.new.class -%>
-<div class="row page-header">
-  <% if can? :create, Tag %>
-    <%= link_to t('.new', :default => t("helpers.links.new")), new_tag_path,
-      class: 'btn btn-primary pull-left' %>
-  <% end %>
-  <h1>
-    <%=t '.title', :default => model_class.model_name.human.pluralize %>
-  </h1>
-</div>
+<% content_for :page_header do %>
+    <h1>
+      <%=t '.title', default: model_class.model_name.human %>
+      <% if can? :create, Tag %>
+        <%= link_to t('.new', :default => t("helpers.links.new")), new_tag_path,
+          class: 'btn btn-large btn-success pull-left' %>
+      <% end %>
+    </h1>
+<% end %>
 
 <div class = 'row'>
   <div class='span2'>
