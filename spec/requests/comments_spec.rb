@@ -34,7 +34,7 @@ describe "Comments" do
     click_link "پاسخ"
     fill_in "comment_name", with: user.full_name
     fill_in "comment_email", with: user.email
-    fill_in "comment_website", with: Faker::Lorem.paragraph
+    fill_in "comment_content", with: Faker::Lorem.paragraph
     click_button 'ایجاد'
     last_email.to.should include(comment.email)
   end
