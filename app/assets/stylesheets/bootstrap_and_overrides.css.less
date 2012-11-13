@@ -1,6 +1,7 @@
 @import "twitter/bootstrap/bootstrap";
 body {
-	padding-top: 60px;
+	padding-top: 80px;
+  padding-bottom: 80px;
 }
 @import "twitter/bootstrap/responsive";
 
@@ -29,6 +30,70 @@ body {
 //
 // Example:
 // @linkColor: #ff0000;
+
+@font-face {
+  font-family: "Iranian Sans";
+  src: url('IranianSans.eot?#') format('eot'), /* IE6–8 */
+       url('IranianSans.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+       url('IranianSans.ttf') format('truetype'); /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
+}
+
+@linkColorHover: rgb(51, 154, 51);
+@sansFontFamily: "Iranian Sans", Tahoma,"Helvetica Neue", Helvetica, Arial, sans-serif;
+@navbarHeight: 60px;
+@navbarLinkColorHover: green;
+@navbarLinkColorActive: green;
+@dropdownLinkBackgroundHover:   desaturate(lighten(green, 50%), 50%);
+@navbarLinkBackgroundHover:     #fff;
+@navbarLinkBackgroundActive:    desaturate(lighten(green, 50%), 50%);
+@formActionsBackground:         desaturate(lighten(green, 70%), 50%);
+@inputBorder:                   desaturate(lighten(green, 60%), 50%);
+
+a:hover{
+  text-decoration: none;
+}
+
+.navbar-inner {
+  #gradient > .vertical(#fff, #fff);
+  background-image: none;
+  border: 0;
+  border-bottom: 1px solid desaturate(lighten(green, 30%), 50%);
+  .box-shadow(0);
+}
+
+.navbar .nav > .active > a,
+.navbar .nav > .active > a:hover,
+.navbar .nav > .active > a:focus {
+  @top-border-size: 4px;
+  padding-top: ((@navbarHeight - @baseLineHeight) / 2) - @top-border-size;
+  border-top: @top-border-size solid green;
+  background-color: #fff;
+  .box-shadow(0 0 0);
+}
+
+// Everything else
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+.uneditable-input {
+  // Focus state
+  &:focus {
+    border-color: rgba(83, 198, 83,.8);
+    .box-shadow(inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(83, 198, 83,.6));
+  }
+}
 
 // Overwrite Select2 properties
 .select2-offscreen {
@@ -66,4 +131,22 @@ body {
       margin: 3px 5px 3px 0px;
     }
   }
+}
+
+// General Styles
+
+.page-header {
+  margin-top: 0;
+  padding: 5px;
+  border-top: 3px solid rgb(245, 245, 245);
+  border-bottom: 3px solid rgb(245, 245, 245);
+  background: url('bg-k20.png')
+}
+
+article h5 span {
+  margin-left: 10px;
+}
+
+.logo {
+  margin-left: 10px;
 }

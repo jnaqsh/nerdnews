@@ -17,5 +17,6 @@
 //= require messages.js.coffee
 //= require users.js.coffee
 //= require stories.js.coffee
+//= require comments.js.coffee
 //= require twitter/bootstrap
 //= require bootstrap.js.coffee

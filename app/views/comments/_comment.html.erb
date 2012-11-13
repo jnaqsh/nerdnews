@@ -1,38 +1,69 @@
 <div class="comment" id="comment_<%= comment.id %>">
-  <div class="avatar">
-    <%= image_tag avatar_url(comment, 64) %>
+  <div>
+    <%= image_tag avatar_url(comment, 32), class: 'pull-right img-polaroid clearfix' %>
+  </div>
 
-    <div class='actions <%= find_peoper_class(comment) %>'>
-      <%= link_to t('.reply', :default => t("helpers.links.reply")),
-        new_story_comment_path(comment.story, parent_id: comment), :class => 'btn btn-mini'%>
+  <div class="main">
+    
+    <span class='owner'>
+      
+      <% if comment.user_id.nil? %>
+        <%= comment.name %>
+      <% else %>
+        <%= link_to comment.name, user_path(comment.user_id) %>
+      <% end %>
+
+      <% if comment.parent.present? %>
+        <small class='muted'>
+        <i class='icon-arrow-left'></i>
+        در جواب
+        <%= comment.parent.name %>
+      </small>
+      <% end %>
+
+    </span>
+
+    <h5 class="muted">
+      <small>
+        <span>
+          <i class='icon-calendar'></i>
+            <%= link_to story_path(comment.story, :anchor => "comment_#{comment.id}") do %>
+            <%= time_ago_in_words(comment.created_at) + ' قبل' %>
+            <% end %>
+        </span>
+        <% if comment.website.present? %>
+          <i class='icon-link'></i>
+          <%= link_to 'website', comment.website %>
+        <% end %>
+      </small>
+    </h5>
+
+    <div>
+      <p>
+        <%= comment.content %>
+      </p>
+    </div>
+
+    <div>
+      <h5 class="muted">
+      <small>
+        <%= link_to t('.reply', :default => t("helpers.links.reply")),
+        new_story_comment_path(comment.story, parent_id: comment), remote: true %>
 
       <% if can? :update, comment %>
         <%= link_to t('.edit', :default => t("helpers.links.edit")),
-          edit_story_comment_path(comment.story, comment), :class => 'btn btn-mini' %>
+          edit_story_comment_path(comment.story, comment) %>
       <% end %>
 
       <% if can? :destroy, comment %>
         <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
           [comment.story, comment], :method => :delete,
           :confirm => t('.confirm', :default => t("helpers.links.confirm",
-            :default => 'Are you sure?')), :class => 'btn btn-mini btn-danger' %>
+            :default => 'Are you sure?')) %>
       <% end %>
+      </small>
+    </h5>
     </div>
-  </div>
-
-  <div class="main">
-    <div>
-      <span class='owner'>
-      <%= comment.name %>
-      </span>
-      <span class='date'>
-      <%= link_to story_path(comment.story, :anchor => "comment_#{comment.id}") do %>
-        <%= '«در ' + time_ago_in_words(comment.created_at) + ' قبل»'%>
-        <% end %>
-      </span>
-    </div>
-
-    <div><%= comment.content %></div>
 
   </div>
 </div>

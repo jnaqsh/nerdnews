@@ -1,4 +1,7 @@
-<h1>بازنشانی گذرواژه</h1>
+<% content_for :page_header do %>
+  <h1>بازنشانی گذرواژه</h1>
+<% end %>
+
 <%= simple_form_for @user, url: password_reset_path(params[:id]),
                     :html => { :class => 'form-horizontal' } do |f| %>
     <%= f.input :password, :wrapper => :prepend do %>

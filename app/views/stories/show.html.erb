@@ -1,15 +1,18 @@
 <%- model_class = @story.class -%>
-<div class="page-header">
+<% content_for :page_header do %>
   <h1><%=t '.title', :default => model_class.model_name.human %></h1>
-</div>
+<% end %>
 
 <%= render @story %>
 
-<div class="comments">
-  <h2><%= t('.comments') %></h2>
-  <%= nested_comments @comments || t('.no_comments') %>
-
+<div class="comments span8 offset2">
+  
   <% if can? :create, Comment %>
-    <%= render "comments/form" %>
+      <%= render "comments/form" %>
   <% end %>
+  
+  <div id='comments-container'>
+    <h2><%= t('.comments') %></h2>
+    <%= nested_comments @comments || t('.no_comments') %>
+  </div>
 </div>

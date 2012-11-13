@@ -12,18 +12,18 @@ describe "Comments" do
 
   it "sends and reply to a comment" do
     visit new_story_comment_path story.id
-    fill_in "نام", with: user.full_name
-    fill_in "ایمیل", with: user.email
-    fill_in "وب‌سایت", with: user.website
-    fill_in "دیدگاه", with: Faker::Lorem.paragraph
+    fill_in "comment_name", with: user.full_name
+    fill_in "comment_email", with: user.email
+    fill_in "comment_website", with: user.website
+    fill_in "comment_content", with: Faker::Lorem.paragraph
     click_button "ایجاد"
     page.should have_content "موفقیت"
     current_path.should eq(story_path story)
     click_link "پاسخ"
-    fill_in "نام", with: user.full_name
-    fill_in "ایمیل", with: user.email
-    fill_in "وب‌سایت", with: user.website
-    fill_in "دیدگاه", with: Faker::Lorem.paragraph
+    fill_in "comment_name", with: user.full_name
+    fill_in "comment_email", with: user.email
+    fill_in "comment_website", with: user.website
+    fill_in "comment_content", with: Faker::Lorem.paragraph
     click_button "ایجاد"
     page.should have_content("موفقیت")
   end
@@ -32,9 +32,9 @@ describe "Comments" do
     comment = FactoryGirl.create :comment, story_id: story.id, user_id: user.id
     visit story_path story
     click_link "پاسخ"
-    fill_in "نام", with: user.full_name
-    fill_in "ایمیل", with: user.email
-    fill_in "دیدگاه", with: Faker::Lorem.paragraph
+    fill_in "comment_name", with: user.full_name
+    fill_in "comment_email", with: user.email
+    fill_in "comment_website", with: Faker::Lorem.paragraph
     click_button 'ایجاد'
     last_email.to.should include(comment.email)
   end

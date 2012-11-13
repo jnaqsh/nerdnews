@@ -1,7 +1,7 @@
 <%- model_class = Comment.new.class -%>
-<div class="page-header">
+<% content_for :page_header do %>
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
-</div>
+<% end %>
 <table class="table table-striped">
   <thead>
     <tr>

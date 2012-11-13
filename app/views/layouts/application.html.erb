@@ -5,14 +5,23 @@
 
   <body>
     
-    <div class="navbar navbar-fixed-top navbar-inverse">
-    <%= render partial: 'shared/header' %>
+    <div class="navbar navbar-fixed-top">
+      <%= render partial: 'shared/header' %>
+    </div>
+    
+    <div class='container'>
+      <%= render partial: 'shared/flash', locals: { flash: flash } %>
     </div>
 
+    <% if content_for? :page_header %>
+      <div class="page-header">
+        <div class="container">
+          <%= yield :page_header %>
+        </div>
+      </div>
+    <% end %>
+
     <div class="container">
-    
-      <%= render partial: 'shared/flash', locals: { flash: flash } %>
-    
       <div class="row">
         <div class="span12">
           <%= yield %>

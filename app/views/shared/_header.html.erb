@@ -10,16 +10,21 @@
       <span class="icon-bar"></span>
     </a>
 
-    <%= link_to t('.brand_name'), root_path, class: "brand" %>
-    
+    <%= link_to root_path do %>
+      <%= image_tag 'NerdLogo-58px.png', class: 'logo pull-right' %>
+      <span class='brand hidden-phone'><%=t '.brand_name' %></span>
+    <% end %>
+
     <!-- User Buttton -->
     <% unless current_user %>
+    
     <div class="pull-left">
       <ul class="nav">
           <li><%= link_to t('.register'), register_path %></li>
           <li><%= link_to t('.login'), login_path %></li>
       </ul>
     </div>
+
     <% else %>
       <div class="btn-group pull-left">
         <a class="btn dropdown-toggle" data-toggle="dropdown" id="user-menu" href="<%= user_path(current_user) %>">

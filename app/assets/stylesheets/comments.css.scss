@@ -4,15 +4,15 @@
 
 .comment {
 
-  .avatar {
-    float: right;
-    border: solid 1px #CCC;
-    color: #FFF;
-    padding: 4px;
-  }
-    img {
-      display: block;
-    }
+  // .avatar {
+  //   float: right;
+  //   border: solid 1px #CCC;
+  //   color: #FFF;
+  //   padding: 4px;
+  // }
+    // img {
+    //   margin-left: 10px;
+    // }
 
     .actions {
       margin-top: 3px;
@@ -23,27 +23,10 @@
     }
  
   .main {
-    min-height: 120px;
-    margin-right: 83px;
-    padding: 10px;
-    margin-bottom: 15px;
-    background-color: #DDD;
-    border: solid 1px #BBB;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    -webkit-border-top-left-radius: 5px;
-    -webkit-border-bottom-left-radius: 5px;
-    -webkit-border-top-right-radius: 5px;
-    -webkit-border-bottom-right-radius: 5px;
-    -moz-border-radius-topleft: 5px;
-    -moz-border-radius-bottomleft: 5px;
-    -moz-border-radius-topright: 5px;
-    -moz-border-radius-bottomright: 5px;
-    background: -webkit-gradient(linear, left top, left bottom, from(#EEE), to(#CCC));
-    background: -moz-linear-gradient(top,  #EEE, #CCC);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#EEE', endColorstr='#CCC');
+    margin-right: 52px;
+    margin-bottom: 10px;
+    border-bottom: 1px dotted #BBB;
+    line-height: 1;
     .owner {
       font-size: 16px;
       font-weight: bold;
@@ -57,11 +40,23 @@
 }
 
 .nested_comments {
-  margin-right: 83px;
+  margin-right: 32px;
   .nested_comments 
     .nested_comments 
       .nested_comments 
         .nested_comments {
           margin-right: 0;
+  }
+}
+
+#comments-container .comment-form {
+  margin: 0;
+}
+
+#commenter-info {
+  margin-top: 1px;
+  line-height: 2;
+  img {
+    margin-left: 10px;
   }
 }

@@ -1,6 +1,6 @@
-<div class="page-header">
+<% content_for :page_header do %>
   <h1>بازنشانی گذرواژه</h1>
-</div>
+<% end %>
 
 <%= form_tag password_resets_path, method: :post do %>
   <div class="control-group email optional">

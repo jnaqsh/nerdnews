@@ -134,12 +134,12 @@ describe '/Users' do
 
       it 'should add a point after commenting/replaying' do
         expect {
-          fill_in 'دیدگاه', with: 'comment'
+          fill_in 'comment_content', with: 'comment'
           click_button 'ایجاد'
         }.to change { @user.reload.user_rate }.by(1)
         expect {
           click_on 'پاسخ'
-          fill_in 'دیدگاه', with: 'comment'
+          fill_in 'comment_content', with: 'comment'
           click_button 'ایجاد'
         }.to change { @user.reload.user_rate }.by(1)
       end
