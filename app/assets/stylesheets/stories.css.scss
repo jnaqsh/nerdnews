@@ -35,6 +35,7 @@ span.comment-counter {
 
 .thumbs-up-list, .thumbs-down-list {
   display: none;
+  padding-top: 7px;
 }
 
 .thumbs-up-list, .thumbs-down-list {
@@ -51,4 +52,9 @@ li.token-input-input-token-facebook, li.token-input-token-facebook {
 
 ul.token-input-list-facebook {
   clear:right;
+}
+
+.submit-notice {
+  color: green;
+  margin-right: 25px;
 }
