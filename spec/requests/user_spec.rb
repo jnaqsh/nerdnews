@@ -196,6 +196,7 @@ describe '/Users' do
         click_button 'btn-thumbs-up'
         expect {
           click_link @pos.name
+          sleep 1 # Seems that we have to wait a moment for data from Ajax
         }.to change { @user.reload.user_rate }.by(1)
       end
 
