@@ -36,6 +36,8 @@ class Story < ActiveRecord::Base
   scope :not_approved, where(:publish_date => nil)
   scope :approved, where("publish_date", present?)
 
+  before_validation :smart_add_url_protocol
+
   validates_length_of :title, maximum: 100, minimum: 10
   validates_length_of :content, minimum: 20, maximum: 1500
   validates  :title, :content, presence: true
@@ -80,5 +82,13 @@ class Story < ActiveRecord::Base
 
     def increment_votes_count
       self.increment! :positive_votes_count
+    end
+
+    def smart_add_url_protocol
+      if self.source.present?
+        unless self.source[/^https?:\/\//]
+          self.source = 'http://' + self.source
+        end
+      end
     end
 end
