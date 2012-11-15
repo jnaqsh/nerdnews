@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   load_and_authorize_resource
   layout 'user_profile', only: [:show, :posts, :comments, :favorites]
-  
+
   # GET /users
   # GET /users.json
   def index
@@ -27,6 +27,11 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @stories = @user.stories.approved.order('created_at desc').page params[:page], per_page: 30
+
+    if request.path != user_path(@user)
+      redirect_to @user, status: :moved_permanently
+      return
+    end
 
     respond_to do |format|
       format.html # show.html.erb
