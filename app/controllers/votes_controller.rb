@@ -23,6 +23,7 @@ class VotesController < ApplicationController
         rate_user 1,
           "#{current_user.full_name} voted a story with id #{@vote.story.id} and rate id of #{@vote.rating.id}"
         format.html { redirect_to story_path(@story), notice: t('controllers.votes.create.flash.success') }
+        format.js
       else
         format.html { redirect_to story_path(@story), flash:{error: t('controllers.votes.create.flash.error')} }
       end

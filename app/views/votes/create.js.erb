@@ -1,0 +1,2 @@
+$('#voting-buttons-<%= @story.id %>').html("<%= j render 'stories/voting_buttons', story: @story %>")
+$(".thumbs-down-list#<%= @story.id %>, .thumbs-up-list#<%= @story.id %>").html("<span class='submit-notice'>امتیاز شما با موفقیت ثبت شد!</span>")
