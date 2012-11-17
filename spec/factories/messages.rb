@@ -3,8 +3,8 @@ require 'faker'
 
 FactoryGirl.define do
   factory :message do
-    subject Faker::Lorem.words
-    message Faker::Lorem.paragraph
+    subject Faker::Lorem.characters(20)
+    message Faker::Lorem.characters(100)
     unread true
     sender_id 1
     receiver_id 2
