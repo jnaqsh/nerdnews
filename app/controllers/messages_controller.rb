@@ -1,53 +1,59 @@
 class MessagesController < ApplicationController
   load_and_authorize_resource :user
-  load_and_authorize_resource through: :user
-  def index
-    @messages = Message.where(reciver_id: params[:user_id]).order('created_at desc').page params[:page]
-    respond_to do |format|
-    format.html { flash[:notice] = t('controllers.messages.flash.no_recived_message') if @messages.blank? }
-    end
-  end
 
-  def show
+  layout 'user_profile'
+
+  def index
+    @message = @user.received_messages.build
+    authorize! :index, @message
+
+    @messages = Message.messages(@user).order('created_at desc').page(params[:page]).per(10)
+
+    @messages.each {|m| m.mark_as_read if m.receiver == current_user}
+
     respond_to do |format|
-      @message.mark_as_read if current_user.id == @message.reciver_id
       format.html
+      format.js
     end
   end
 
   def new
-    @message = Message.new
-    @user = User.find(params[:user_id])
+    @message = @user.received_messages.build
+    @message.sender = current_user
+
+    authorize! :new, @message
 
     respond_to do |format|
       format.html # new.html.erb
+      format.js
     end
   end
 
   def create
-    @user = User.find(params[:user_id])
-    @message = @user.messages.build(params[:message])
+    @message = @user.received_messages.build(params[:message])
+    @message.sender = current_user
+
+    authorize! :create, @message
 
     respond_to do |format|
       if @message.save
-        format.html { redirect_to user_messages_path, notice: t('controllers.messages.flash.message_sent') }
+        format.html { redirect_to user_messages_path(current_user),
+          notice: t('controllers.messages.create.flash.success', name: @user.full_name) }
       else
         format.html { render action: "new" }
       end
     end
   end
 
-  # def destroy
-    # Pending option: How? if reciver removes one of the messages, it'll be removed for sender too
-    # Edit routes if you wanted to add it
-  # end
+  def destroy
+    @message = @user.received_messages.find(params[:id])
+    authorize! :destroy, @message
 
-  def sent
-    @messages = Message.where(user_id: params[:user_id]).order('created_at desc').page params[:page]
+    @message.destroy
 
     respond_to do |format|
-      format.html { flash[:notice] = t('controllers.messages.flash.no_sent_message') if @messages.blank? }
-
+      format.html { redirect_to user_messages_path(current_user) }
+      format.json { head :no_content }
     end
   end
 end

@@ -9,8 +9,9 @@ class Ability
          can :manage, Comment
          can [:create, :failure], Identity
          can [:index, :destroy], Identity, user: { :id => user.id }
-         can :manage, Message, user: { :id => user.id }
-         can :show, Message, reciver_id: user.id
+         can [:index, :destroy], Message, receiver: { :id => user.id }
+         can [:index, :create], Message, sender: { :id => user.id }
+         cannot :create, Message, receiver: { :id => user.id }
          can :index, :mypage
          can :manage, Page
          can :manage, Rating
@@ -23,8 +24,9 @@ class Ability
          can :manage, Comment
          can [:create, :failure], Identity
          can [:index, :destroy], Identity, user: { :id => user.id }
-         can :manage, Message, user: { :id => user.id }
-         can :show, Message, reciver_id: user.id
+         can [:index, :destroy], Message, receiver: { :id => user.id }
+         can [:index, :create], Message, sender: { :id => user.id }
+         cannot :create, Message, receiver: { :id => user.id }
          can :index, :mypage
          can [:index, :show], Page
          can :destroy, :session
@@ -37,8 +39,9 @@ class Ability
          can :create, Comment
          can [:create, :failure], Identity
          can [:index, :destroy], Identity, user: { :id => user.id }
-         can :manage, Message, user: { :id => user.id }
-         can :show, Message, reciver_id: user.id
+         can [:index, :destroy], Message, receiver: { :id => user.id }
+         can [:index, :create], Message, sender: { :id => user.id }
+         cannot :create, Message, receiver: { :id => user.id }
          can :index, :mypage
          can :show, Page
          can :destroy, :session

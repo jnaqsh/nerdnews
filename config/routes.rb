@@ -29,9 +29,7 @@ Nerdnews::Application.routes.draw do
     get 'posts', on: :member
     get 'comments', on: :member
     get 'favorites', on: :member
-    resources :messages, except: [:edit, :update, :destroy] do
-      get 'sent', on: :collection
-    end
+    resources :messages, except: [:edit, :update, :show]
   end
   match "/register", :to => "users#new"
 

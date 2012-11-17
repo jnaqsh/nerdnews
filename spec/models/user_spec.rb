@@ -13,7 +13,6 @@ describe User do
       it { user.should_not have_ability([:read, :update, :destroy], for: Comment.new)}
       it { user.should have_ability([:create, :failure], for: Identity.new)}
       it { user.should_not have_ability([:index, :destroy], for: Identity.new)}
-      it { user.should_not have_ability([:create, :read, :sent], for: Message.new)}
       it { user.should_not have_ability(:index, for: :mypage)}
       it { user.should have_ability(:show, for: Page.new)}
       it { user.should_not have_ability([:index, :create, :update, :destroy], for: Page.new)}
@@ -38,9 +37,12 @@ describe User do
       it { user.should_not have_ability([:read, :update, :destroy], for: Comment.new)}
       it { user.should have_ability([:create, :failure], for: Identity.new)}
       it { user.should have_ability([:index, :destroy], for: user.identities.new) }
-      it { user.should have_ability(:manage, for: user.messages.new)}
-      it { user.should have_ability(:show, for: Message.new(reciver_id: user.id))}
-      it { user.should_not have_ability(:manage, for: user2.messages.new)}
+      it { user.should have_ability([:index, :destroy], for: user.received_messages.new)}
+      it { user.should have_ability([:index, :create], for: user.sent_messages.new)}
+      it { user.should_not have_ability(:create, for: user.received_messages.new)}
+      it { user.should_not have_ability([:index, :destroy], for: user2.received_messages.new)}
+      it { user.should_not have_ability([:index, :create], for: user2.sent_messages.new)}
+      it { user.should_not have_ability(:create, for: user2.received_messages.new)}
       it { user.should have_ability(:index, for: :mypage)}
       it { user.should have_ability(:show, for: Page.new)}
       it { user.should_not have_ability([:index, :create, :update, :destroy], for: Page.new)}
@@ -65,10 +67,12 @@ describe User do
       it { user.should have_ability(:manage, for: Comment.new)}
       it { user.should have_ability([:create, :failure], for: Identity.new)}
       it { user.should have_ability([:index, :destroy], for: user.identities.new)}
-      it { user.should have_ability(:manage, for: user.messages.new)}
-      it { user.should have_ability(:show, for: Message.new(reciver_id: user.id))}
-      it { user.should_not have_ability(:manage, for: user2.messages.new)}
-      it { user.should_not have_ability(:show, for: Message.new(reciver_id: user2.id))}
+      it { user.should have_ability([:index, :destroy], for: user.received_messages.new)}
+      it { user.should have_ability([:index, :create], for: user.sent_messages.new)}
+      it { user.should_not have_ability(:create, for: user.received_messages.new)}
+      it { user.should_not have_ability([:index, :destroy], for: user2.received_messages.new)}
+      it { user.should_not have_ability([:index, :create], for: user2.sent_messages.new)}
+      it { user.should_not have_ability(:create, for: user2.received_messages.new)}
       it { user.should have_ability(:index, for: :mypage)}
       it { user.should have_ability(:show, for: Page.new)}
       it { user.should_not have_ability([:index, :create, :update, :destroy], for: Page.new)}
@@ -92,10 +96,12 @@ describe User do
       it { user.should have_ability(:manage, for: Comment.new)}
       it { user.should have_ability([:create, :failure], for: Identity.new)}
       it { user.should have_ability([:index, :destroy], for: user.identities.new)}
-      it { user.should have_ability(:manage, for: user.messages.new)}
-      it { user.should have_ability(:show, for: Message.new(reciver_id: user.id))}
-      it { user.should_not have_ability(:manage, for: user2.messages.new)}
-      it { user.should_not have_ability(:show, for: Message.new(reciver_id: user2.id))}
+      it { user.should have_ability([:index, :destroy], for: user.received_messages.new)}
+      it { user.should have_ability([:index, :create], for: user.sent_messages.new)}
+      it { user.should_not have_ability(:create, for: user.received_messages.new)}
+      it { user.should_not have_ability([:index, :destroy], for: user2.received_messages.new)}
+      it { user.should_not have_ability([:index, :create], for: user2.sent_messages.new)}
+      it { user.should_not have_ability(:create, for: user2.received_messages.new)}
       it { user.should have_ability(:index, for: :mypage)}
       it { user.should have_ability([:read, :create, :update, :destroy], for: Page.new)}
       it { user.should_not have_ability(:manage, for: :password_reset)}
@@ -137,7 +143,8 @@ describe User do
     it { should have_many :rating_logs }
     it { should have_many :votes }
     it { should have_many :identities }
-    it { should have_many :messages }
+    it { should have_many :sent_messages }
+    it { should have_many :received_messages }
   end
 
   context 'Validations' do
@@ -145,28 +152,14 @@ describe User do
       FactoryGirl.create(:user).should be_valid
     end
 
-    it "validates length and presence of full name attribute" do
-      user = FactoryGirl.build(:user, full_name: nil)
-      user.should have(2).errors_on(:full_name)
-    end
-
-    it "validates uniqueness of email attribue" do
-      user = FactoryGirl.create(:user, email: 'repeat@email.com')
-      user2 = FactoryGirl.build(:user, email: 'repeat@email.com')
-      user2.should have(1).errors_on(:email)
-    end
-
-    it "validates match of password and confirmation attributes" do
-      user = FactoryGirl.build(:user, password_confirmation: 'wrong')
-      user.should have(2).errors_on(:password)
-    end
-
-    it "validates presence of password attribute" do
-      pending "Need more investigation"
-      user = FactoryGirl.build(:user, password_confirmation: nil)
-      user.save
-      user.should have(1).error_on(:password_confirmation)
-    end
+    it { should validate_presence_of(:full_name) }
+    it { should ensure_length_of(:full_name).is_at_least(7).is_at_most(30) }
+    it { should validate_presence_of(:email) }
+    it { should allow_value("asd@asdas.com").for(:email) }
+    it { should_not allow_value("Asdasd@asd").for(:email) }
+    it { should validate_uniqueness_of(:email).case_insensitive }
+    it { should validate_presence_of(:password) }
+    it { should validate_confirmation_of(:password) }
   end
 
   context 'Authentication' do

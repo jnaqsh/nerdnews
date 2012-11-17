@@ -1,7 +1,1 @@
-<%- model_class = @message.class -%>
-<% content_for :page_header do %>
-  <h1><%=t '.title', :default => t('helpers.titles.new', :model => model_class.model_name.human,
-        :default => "New #{model_class.model_name.human}") %></h1>
-<% end %>
-
 <%= render partial: 'form' %>

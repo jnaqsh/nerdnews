@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 <html>
-  
+
   <%= render 'shared/head' %>
 
   <body>
-    
+
     <div class="navbar navbar-fixed-top">
     <%= render partial: 'shared/header' %>
     </div>
 
     <div class="container">
-    
+
       <%= render partial: 'shared/flash', locals: { flash: flash } %>
-      
+
       <%- model_class = @user.class -%>
 
       <div class='row'>
         <div class='span3'>
           <%= image_tag avatar_url(@user, 256), class: 'img-polaroid' %>
           <div class='user info'>
-            
+
             <div class='user user-name'>
               <p><strong><%= @user.full_name %></strong></p>
             </div>
-            
+
             <div class='user user-assets'>
               <i class="icon-user"></i>
               <%= t('.registered_from') + time_ago_in_words(@user.created_at) + ' قبل'%></p>
@@ -84,11 +84,19 @@
             <%= link_to_li t('.comments'), comments_user_path(@user), remote: true, id: 'comments', id: 'comments_li' %>
 
             <%= link_to_li t('.favorites'), favorites_user_path(@user), remote: true, id: 'favorites_li' %>
-            </li>
+
+            <% if (can? :create, Message) && (@user != current_user) %>
+              <%= link_to_li t('.send_message'), new_user_message_path(@user), user_messages_path(@user),
+                remote: true, id: "send_message" %>
+            <% end %>
+
+            <% if can? :index, @user.received_messages.build %>
+              <%= link_to_li t('.messages'), user_messages_path(@user), remote: true, id: "messages" %>
+            <% end %>
           </ul>
             <%= yield %>
         </div>
-      </div>  
+      </div>
     </div>
   </body>
 </html>

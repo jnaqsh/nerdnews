@@ -1,0 +1,12 @@
+<h3>
+  <%= message.subject %>
+  <% if can? :destroy, message %>
+    <%= link_to t('helpers.links.destroy'), user_message_path(@user, message),
+      class: "btn btn-danger btn-mini pull-left", method: :delete, confirm: t('helpers.links.confirm') %>
+  <% end %>
+</h3>
+<p>
+  <%= sanitize(RedCloth.new(message.message, [:filter_html, :filter_styles]).to_html) %>
+  <%= sign_message(message) %>
+</p>
+<hr />

@@ -1,11 +1,12 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
+require 'faker'
 
 FactoryGirl.define do
   factory :message do
-    user_id 1
-    reciver_id 1
-    subject "MyString"
-    message "MyText"
+    subject Faker::Lorem.words
+    message Faker::Lorem.paragraph
     unread true
+    sender_id 1
+    receiver_id 2
   end
 end

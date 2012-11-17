@@ -51,4 +51,12 @@ module ApplicationHelper
       end
     end
   end
+
+  def sign_message(message)
+    signed = " "
+    signed += link_to message.sender.full_name, user_path(message.sender)
+    signed += " " + to_jalali(message.created_at)
+    signed += " به " + link_to(message.receiver.full_name, user_path(message.receiver))
+    signed.html_safe
+  end
 end

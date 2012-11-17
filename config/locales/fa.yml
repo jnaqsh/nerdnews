@@ -75,10 +75,9 @@ fa:
         add_tags: 'لطفا تعدادی از تگ‌های موردعلاقه خود را به پروفایل خود اضافه کنید'
         nothing_found: 'موردی جهت نمایش پیدا نشد'
     messages:
-      flash:
-        message_sent: 'پیام با موفقیت ارسال شد.'
-        no_sent_message: 'تاکنون پیامی برای کاربران ارسال نکرده‌اید'
-        no_recived_message: 'تاکنون پیامی دریافت نکرده‌اید'
+      create:
+        flash:
+          success: "پیام با موفقیت برای %{name} ارسال گردید."
     password_resets:
       create:
         flash:
@@ -118,17 +117,6 @@ fa:
       new_account_description: 'این حساب برای NerdNews جدید است'
       confirm_button: 'تایید و ایجاد حساب جدید'
 
-  messages:
-    index:
-      title: 'پیام‌ها'
-      compose: 'ارسال پیام'
-      outbox: 'پیام‌های ارسالی'
-    sent:
-      sent_box: 'ارسال‌ها'
-      sender: 'ارسال کننده'
-      send_date: 'تاریخ ارسال'
-
-
   errors:
     messages:
       email_format: "ایمیل نامعتبر است"
@@ -167,6 +155,9 @@ fa:
       source_placeholder: 'چنانچه منبع خبر مشخص است آن را وارد کنید. در غیر این صورت در متن به منابع لینک دهید.'
       content_placeholder: "بدنه اصلی خبر خود را اینجا بنویسید. لطفا سعی کنید از کلمات خود استفاده کنید. اگر از منابع دیگر نقل‌وقول می‌کنید، آدرس‌های مرتبط را در متن وارد کنید. اگر از منبع اصلی خبر مطمئن هستید آنها را در متن بگنجانید. خبری که منبع مشخصی نداشته باشد، حذف می‌گردد. متن خبر می‌تواند حداکثر ۱۵۰۰ کاراکتر باشد."
 
+  messages:
+    index:
+      no_messages: "هیچ پیامی برای شما وجود ندارد."
   tags:
     index:
       title: 'تگ‌ها'
@@ -206,6 +197,8 @@ fa:
 
   layouts:
     user_profile:
+      messages: "پیام‌ها"
+      send_message: "ارسال پیام"
       edit: 'ویرایش پروفایل'
       registered_from: 'عضو شده از '
       website: 'وب‌سایت: %{website}'
