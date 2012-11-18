@@ -12,10 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
+//= require bootstrap.js.coffee
 //= require select2
 //= require tags.js.coffee
 //= require users.js.coffee
 //= require stories.js.coffee
 //= require comments.js.coffee
-//= require twitter/bootstrap
-//= require bootstrap.js.coffee

@@ -9,7 +9,6 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
-  gem 'twitter-bootstrap-rails', git: "https://github.com/jnaqsh/twitter-bootstrap-rails.git"
   gem 'select2-rails'
 end
 
@@ -30,6 +29,10 @@ gem 'paperclip'
 gem 'omniauth-github'
 gem 'omniauth-openid'
 gem 'friendly_id'
+
+gem 'therubyracer'
+gem 'less-rails'
+gem 'twitter-bootstrap-rails', git: "https://github.com/jnaqsh/twitter-bootstrap-rails.git"
 
 group :production do
   gem 'execjs'
