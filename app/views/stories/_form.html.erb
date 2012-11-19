@@ -13,6 +13,11 @@
 
   <%= f.input :tag_names, input_html: {data: {tags: @story.tags}, class: "span6", value: ' '} %>
 
+  <%= textcaptcha_fields(f) do %>
+    <%= f.input :spam_answer, placeholder: @story.spam_question,
+              input_html: {class: "span6"} %>
+  <% end %>
+
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
     <%= f.submit t('.preview', :default => t("helpers.links.preview")), :class => 'btn btn-primary', name: "preview_button" %>

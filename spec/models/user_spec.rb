@@ -27,6 +27,7 @@ describe User do
       it { user.should have_ability([:create, :show, :posts, :comments, :favorites], for: User.new)}
       it { user.should_not have_ability([:index, :destroy, :update], for: User.new)}
       it { user.should_not have_ability(:create, Vote.new)}
+      it { user.should_not have_ability(:bypass_captcha, for: user)}
     end
 
     context "when is a new user" do
@@ -58,6 +59,7 @@ describe User do
       it { user.should have_ability([:update, :destroy], for: user)}
       it { user.should_not have_ability([:create, :index, :destroy, :update], for: User.new)}
       it { user.should have_ability(:create, for: Vote.new)}
+      it { user.should_not have_ability(:bypass_captcha, for: user)}
     end
 
     context "when is a approved user" do
@@ -87,6 +89,7 @@ describe User do
       it { user.should have_ability([:update, :destroy], for: user)}
       it { user.should_not have_ability([:create, :index, :destroy, :update], for: User.new)}
       it { user.should have_ability(:create, for: Vote.new)}
+      it { user.should have_ability(:bypass_captcha, for: user)}
     end
 
     context "when is a founder user" do
@@ -112,6 +115,7 @@ describe User do
       it { user.should have_ability(:manage, for: Tag.new)}
       it { user.should have_ability(:manage, for: User.new)}
       it { user.should have_ability(:create, for: Vote.new)}
+      it { user.should have_ability(:bypass_captcha, for: user)}
     end
   end
 

@@ -215,6 +215,12 @@ fa:
       no_favorite: 'هیچ موردی ثبت نشده است.'
 
   activerecord:
+    errors:
+      models:
+        story:
+          attributes:
+            spam_answer:
+              incorrect_answer: "اشتباه پاسخ دادید، دوباره تلاش کنید!"
     models:
       story:  "خبر"
       comment: "دیدگاه"
@@ -234,6 +240,7 @@ fa:
         excerpt:  "خلاصه"
         tag_names: "تگ‌ها"
         source: 'منبع'
+        spam_answer: "پاسخ دهید"
 
       comment:
         name: "نام"

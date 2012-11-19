@@ -96,8 +96,9 @@ describe '/Users' do
       it 'should add a point after posting a stroy' do
         visit new_story_path
         expect {
-          fill_in 'عنوان', with: @story.title
-          fill_in 'محتوا', with: @story.content
+          fill_in 'story_title', with: @story.title
+          fill_in 'story_content', with: @story.content
+          fill_in 'story_spam_answer', with: "four"
           click_button 'ایجاد'
         }.to change { @user.reload.user_rate }.by(1)
       end

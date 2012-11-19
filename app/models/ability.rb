@@ -20,6 +20,7 @@ class Ability
          can :manage, Tag
          can :manage, User
          can :create, Vote
+         can :bypass_captcha, user
        elsif user.role? :approved
          can :manage, Comment
          can [:create, :failure], Identity
@@ -35,6 +36,7 @@ class Ability
          can [:show, :posts, :comments, :favorites], User
          can [:update, :destroy], User, :id => user.id
          can :create, Vote
+         can :bypass_captcha, user
        elsif user.role? :new_user
          can :create, Comment
          can [:create, :failure], Identity
@@ -50,6 +52,7 @@ class Ability
          can [:show, :posts, :comments, :favorites], User
          can [:update, :destroy], User, :id => user.id
          can :create, Vote
+         cannot :bypass_captcha, user
        else # guest user
          can :create, Comment
          can [:create, :failure], Identity
@@ -59,6 +62,7 @@ class Ability
          can [:read, :create], Story
          can :index, Tag
          can [:create, :show, :posts, :comments, :favorites], User
+         cannot :bypass_captcha, User
        end
     #
     # The first argument to `can` is the action you are giving the user permission to do.

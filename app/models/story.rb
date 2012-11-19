@@ -25,6 +25,8 @@ class Story < ActiveRecord::Base
     parameterized_string.downcase
   end
 
+  acts_as_textcaptcha
+
   has_many :comments, dependent: :destroy
   has_many :taggings, dependent: :destroy
   has_many :tags, :through => :taggings,
@@ -55,6 +57,10 @@ class Story < ActiveRecord::Base
     text :user do
       user.full_name if user.present?
     end
+  end
+
+  def perform_textcaptcha?
+    !skip_textcaptcha
   end
 
   def tag_names=(tokens)

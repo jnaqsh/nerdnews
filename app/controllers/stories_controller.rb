@@ -45,6 +45,9 @@ class StoriesController < ApplicationController
   # GET /stories/new.json
   def new
     @story = Story.new
+    @story.textcaptcha
+
+    bypass_captcha_or_not @story
 
     respond_to do |format|
       format.html # new.html.erb
@@ -66,6 +69,8 @@ class StoriesController < ApplicationController
     else
       @story = Story.new(params[:story])
     end
+
+    bypass_captcha_or_not @story
 
     @story.mark_as_published if can? :publish, Story
 
@@ -136,6 +141,7 @@ class StoriesController < ApplicationController
   end
 
   private
+
   def successful_notice
     if !current_user #successful message for guest and new users
       "controllers.stories.create.flash.success_for_guest_and_new_users"
