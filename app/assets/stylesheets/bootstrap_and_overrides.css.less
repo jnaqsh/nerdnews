@@ -94,7 +94,7 @@ input[type="color"],
   // Focus state
   &:focus {
     border-color: rgba(83, 198, 83,.8);
-//    .box-shadow(inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(83, 198, 83,.6));
+    .box-shadow(~"inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(83,198,83,.6)");
   }
 }
 
@@ -112,23 +112,38 @@ input[type="color"],
   margin: 0;
 }
 
+.select2-drop {
+  border-color: rgba(83,198,83,.8);
+  outline: 0;
+  outline: thin dotted \9; /* IE6-9 */
+  .box-shadow(~"inset 0 1px -1px rgba(0,0,0,.075), 0 0 8px rgba(83,198,83,.6)");
+  margin-top: -2px;
+
+  &.select2-drop-above {
+    .box-shadow(~"inset 0 -1px 1px rgba(0,0,0,.075), 0 0 8px rgba(83,198,83,.6)");
+    border-top: none;
+  }
+}
+
 .select2-container-multi {
   margin: 0;
 
+  &.select2-container-active .select2-choices {
+    border-color: rgba(83,198,83,.8);
+    outline: 0;
+    outline: thin dotted \9; /* IE6-9 */
+    .box-shadow(~"inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(83,198,83,.6)");
+  }
   .select2-choices {
-    border-radius: 3px 3px 3px 3px;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-    -webkit-transition: border linear .2s, box-shadow linear .2s;
-    -moz-transition: border linear .2s, box-shadow linear .2s;
-    -o-transition: border linear .2s, box-shadow linear .2s;
-    transition: border linear .2s, box-shadow linear .2s;
+    border-radius: @borderRadiusSmall;
+    border: 1px solid @inputBorder;
+    display: block;
+    margin-bottom: 0;
+    vertical-align: middle;
 
     li {
       float: right;
     }
-
     .select2-search-choice {
       padding: 3px 18px 3px 5px;
       margin: 3px 5px 3px 0px;
