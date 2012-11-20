@@ -139,6 +139,13 @@ describe '/Users' do
         page.should have_content 'موفقیت'
       end
 
+      it 'rates a story successfully with ajax', focus: true do
+        click_button 'btn-thumbs-up'
+        click_link @pos.name
+        page.should have_content 'موفقیت'
+        page.should have_selector('span.btn.btn-success.disabled')
+      end
+
       it 'gains a point after rating to a story' do
         visit story_path @story
         click_button 'btn-thumbs-up'
