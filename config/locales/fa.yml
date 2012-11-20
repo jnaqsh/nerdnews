@@ -287,8 +287,8 @@ fa:
     pagination:
       first: "ابتدا &raquo;"
       last: "&laquo; انتها"
-      previous: "قبلی &rsaquo;"
-      next: "&lsaquo; بعدی"
+      previous: "&laquo;"
+      next: "&raquo;"
       truncate: "..."
 
   unauthorized:
