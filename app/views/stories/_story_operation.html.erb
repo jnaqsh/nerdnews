@@ -9,7 +9,7 @@
     </div>
     <div class='span5 thumbs-up-list' id='<%= story.id %>'>
       <ul>
-        <% Rating.positive.each do |rating| %>
+        <% Rating.positive('stories').each do |rating| %>
           <li class='icon-hand-left'>
             <%= link_to rating.name, story_votes_path(story, rating_id: rating, positive: true),
               method: :post, remote: true %>
@@ -19,7 +19,7 @@
     </div>
     <div class='span5 thumbs-down-list' id='<%= story.id %>'>
       <ul>
-        <% Rating.negative.each do |rating| %>
+        <% Rating.negative('stories').each do |rating| %>
           <li class='icon-hand-left'>
             <%= link_to rating.name, story_votes_path(story, rating_id: rating), method: :post, remote: true %>
           </li>
