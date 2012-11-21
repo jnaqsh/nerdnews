@@ -1,2 +1,3 @@
-$('#voting-buttons-<%= @story.id %>').html("<%= j render 'stories/voting_buttons', story: @story %>")
-$(".thumbs-down-list#<%= @story.id %>, .thumbs-up-list#<%= @story.id %>").html("<span class='submit-notice'>امتیاز شما با موفقیت ثبت شد!</span>")
+<% voteable = @voteable.class.model_name.pluralize.downcase %>
+$('#voting-buttons-<%= @voteable.id %>').html('<%= j render "#{voteable}/voting_buttons", story: @voteable, comment: @voteable %>')
+$("#thumbs-down-list-<%= @voteable.id %>, #thumbs-up-list-<%= @voteable.id %>").html("<span class='submit-notice'>امتیاز شما با موفقیت ثبت شد!</span>")

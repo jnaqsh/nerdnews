@@ -42,6 +42,7 @@ end
 
 group :development do
   gem 'sunspot_solr' # optional pre-packaged Solr distribution for use in development
+  gem 'pry-rails'
 end
 
 group :development, :test do

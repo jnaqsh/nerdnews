@@ -12,16 +12,17 @@ describe VotesController do
       cookies.signed[:user_id] = @user.id
     end
 
-    it 'should all users create a vote' do
-      post :create, story_id: @story, rating_id: @rating
+    it 'lets all users to create vote' do
+      post :create, story_id: @story, rating_id: @rating, voteable: "stories"
+      assigns[:voteable].should eq(@story)
       flash[:notice].should eq(I18n.t('controllers.votes.create.flash.success'))
     end
 
     it 'should not users create a vote with wrong story id or rating id' do
-      post :create, story_id: "wrong_id", rating_id: @rating
+      post :create, story_id: "wrong_id", rating_id: @rating, voteable: "stories"
       flash[:notice].should be_nil
       flash[:error].should eq(I18n.t('controllers.votes.create.flash.error'))
-      post :create, story_id: @story.id, rating_id: "wrong_id"
+      post :create, story_id: @story.id, rating_id: "wrong_id", voteable: "stories"
       flash[:notice].should be_nil
       flash[:error].should eq(I18n.t('controllers.votes.create.flash.error'))
     end
@@ -29,13 +30,13 @@ describe VotesController do
     context '/count' do
       it 'increases Storys positive count' do
         expect {
-          post :create, story_id: @story.id, rating_id: @rating, positive: true
+          post :create, story_id: @story.id, rating_id: @rating, positive: true, voteable: "stories"
         }.to change { @story.reload.positive_votes_count }.by(1)
       end
 
       it 'increases Storys negative count' do
         expect {
-          post :create, story_id: @story.id, rating_id: @negative_rating
+          post :create, story_id: @story.id, rating_id: @negative_rating, voteable: "stories"
         }.to change { @story.reload.negative_votes_count }.by(1)
       end
     end

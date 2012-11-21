@@ -37,7 +37,7 @@ describe '/Users' do
     it 'can get users favorites' do
       story = FactoryGirl.create(:approved_story, user: @user)
       rating = FactoryGirl.create(:rating)
-      vote = FactoryGirl.create(:vote, story: story, user: @user, rating: rating)
+      vote = FactoryGirl.create(:vote, voteable: story, user: @user, rating: rating)
       visit favorites_user_path(@user)
       page.should have_content vote.rating.name
     end
@@ -116,7 +116,7 @@ describe '/Users' do
       it 'should add a point after ranking a comment'
     end
 
-    context 'Stories', js: true do
+    context '/Stories', js: true do
 
       before(:each) do
         login @user
@@ -126,29 +126,23 @@ describe '/Users' do
       end
 
       it 'shows the rating items for story' do
-        click_button 'btn-thumbs-up'
+        find('button.btn-thumbs-up').click
         page.should have_content @pos.name
-        click_button 'btn-thumbs-down'
+        find('button.btn-thumbs-down').click
         page.should have_content @neg.name
       end
 
       it 'rates a story successfully' do
-        click_button 'btn-thumbs-up'
+        find('button.btn-thumbs-up').click
         click_link @pos.name
         current_path.should eq story_path(@story)
-        page.should have_content 'موفقیت'
-      end
-
-      it 'rates a story successfully with ajax', focus: true do
-        click_button 'btn-thumbs-up'
-        click_link @pos.name
         page.should have_content 'موفقیت'
         page.should have_selector('span.btn.btn-success.disabled')
       end
 
       it 'gains a point after rating to a story' do
         visit story_path @story
-        click_button 'btn-thumbs-up'
+        find('button.btn-thumbs-up').click
         expect {
           click_link @pos.name
           sleep 1 # Seems that we have to wait a moment for data from Ajax
@@ -156,7 +150,8 @@ describe '/Users' do
       end
 
       it 'wont let unknown user to vote after voting for first time' do
-        click_button 'btn-thumbs-up'
+        pending 'Unknown users can\'t vote at all, delete?'
+        find('button.btn-thumbs-up').click
         click_link @pos.name
         visit story_path @story
         page.should have_no_button 'btn-thumbs-up'
@@ -164,10 +159,55 @@ describe '/Users' do
 
       it 'wont let known user to vote after voting for first time' do
         visit story_path @story
-        click_button 'btn-thumbs-up'
+        page.should have_selector 'button.btn-thumbs-up'
+        find('button.btn-thumbs-up').click
         click_link @pos.name
         visit story_path @story
-        page.should have_no_button 'btn-thumbs-up'
+        page.should_not have_selector 'button.btn-thumbs-up'
+      end
+    end
+
+    context '/Comments', js: true do
+      before do
+        login @user
+        @comment = FactoryGirl.create(:comment, story_id: @story)
+        @pos = FactoryGirl.create(:rating_comments)
+        @neg = FactoryGirl.create(:negative_comments)
+        visit story_path @story
+      end
+
+      it 'shows the rating items for comment' do
+        find('button.btn-comments-thumbs-up').click
+        page.should have_content @pos.name
+        find('button.btn-comments-thumbs-up').click
+        page.should have_content @neg.name
+      end
+
+      it 'rates a comment successfully' do
+        find('button.btn-comments-thumbs-up').click
+        sleep 1
+        page.driver.render('file.png')
+        click_link @pos.name
+        current_path.should eq story_path(@story)
+        page.should have_content 'موفقیت'
+        page.should have_selector('span.btn.btn-success.disabled')
+      end
+
+      it 'gains a point after rating to a comment' do
+        visit story_path @story
+        find('button.btn-comments-thumbs-up').click
+        expect {
+          click_link @pos.name
+          sleep 1 # Seems that we have to wait a moment for data from Ajax
+        }.to change { @user.reload.user_rate }.by(1)
+      end
+
+      it 'wont let known user to vote after voting for first time' do
+        visit story_path @story
+        find('button.btn-comments-thumbs-up').click
+        click_link @pos.name
+        visit story_path @story
+        page.should_not have_selector 'button.btn-comments-thumbs-up'
       end
     end
   end

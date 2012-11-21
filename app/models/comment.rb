@@ -1,4 +1,5 @@
 class Comment < ActiveRecord::Base
+  has_many :votes, as: :voteable
   belongs_to :story, counter_cache: true
   belongs_to :user, counter_cache: true
 
@@ -11,6 +12,14 @@ class Comment < ActiveRecord::Base
 
   has_ancestry
 
+  def user_voted?(user)
+    !self.votes.where("user_id = ?", user).blank?
+  end
+
+  # check if the parent story is approved
+  def approved?
+    self.story.approved?
+  end
 
   private
   

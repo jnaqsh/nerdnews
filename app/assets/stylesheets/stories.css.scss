@@ -36,12 +36,10 @@ span.comment-counter {
 .thumbs-up-list, .thumbs-down-list {
   display: none;
   padding-top: 7px;
-}
-
-.thumbs-up-list, .thumbs-down-list {
+  
   li {
-  display: inline;
-  list-style: none;
+    display: inline;
+    list-style: none;
   }
 }
 

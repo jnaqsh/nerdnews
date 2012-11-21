@@ -1,13 +1,11 @@
 <% if story.id %>
   <div class='row'>
-    <div class='span1'>
-      <div id='voting-buttons-<%= story.id %>' class='rate btn-group pull-right' >
-        
-        <%= render 'stories/voting_buttons', story: story %>
+    <div id='voting-buttons-<%= story.id %>' class='span1 btn-group pull-right' >
 
-      </div>
+      <%= render 'stories/voting_buttons', story: story %>
+
     </div>
-    <div class='span5 thumbs-up-list' id='<%= story.id %>'>
+    <div class='span5 thumbs-up-list' id='thumbs-up-list-<%= story.id %>'>
       <ul>
         <% Rating.positive('stories').each do |rating| %>
           <li class='icon-hand-left'>
@@ -17,7 +15,7 @@
         <% end %>
       </ul>
     </div>
-    <div class='span5 thumbs-down-list' id='<%= story.id %>'>
+    <div class='span5 thumbs-down-list' id='thumbs-down-list-<%= story.id %>'>
       <ul>
         <% Rating.negative('stories').each do |rating| %>
           <li class='icon-hand-left'>

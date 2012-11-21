@@ -3,12 +3,12 @@ class VotesController < ApplicationController
 
   def create
     begin
-      @story = Story.find(params[:story_id])
+      @voteable = get_voteable
       @rating = Rating.find(params[:rating_id])
       @user = current_user
       @vote = Vote.new()
+      @vote.voteable = @voteable
       @vote.rating = @rating
-      @vote.story = @story
       @vote.user = @user
     rescue ActiveRecord::RecordNotFound
       redirect_to stories_path, flash:{error: t('controllers.votes.create.flash.error')}
@@ -19,23 +19,31 @@ class VotesController < ApplicationController
 
     respond_to do |format|
       if @vote.save
-        increment_story_votes_count(@story, type)
+        increment_votes_count(@voteable, type)
         rate_user 1,
-          "#{current_user.full_name} voted a story with id #{@vote.story.id} and rate id of #{@vote.rating.id}"
-        format.html { redirect_to story_path(@story), notice: t('controllers.votes.create.flash.success') }
+          "#{current_user.full_name} voted a story with id #{@vote.voteable.id} and rate id of #{@vote.rating.id}"
+        format.html { redirect_to story_path(@voteable), notice: t('controllers.votes.create.flash.success') }
         format.js
       else
-        format.html { redirect_to story_path(@story), flash:{error: t('controllers.votes.create.flash.error')} }
+        format.html { redirect_to story_path(@voteable), flash:{error: t('controllers.votes.create.flash.error')} }
       end
     end
   end
 
-  private
-  def increment_story_votes_count(story, type = nil)
+private
+  def increment_votes_count(voteable, type = nil)
     if type
-      story.increment! :positive_votes_count
+      voteable.increment! :positive_votes_count
     else
-      story.increment! :negative_votes_count
+      voteable.increment! :negative_votes_count
     end
+  end
+
+  def get_voteable
+    @voteable = params[:voteable].classify.constantize.find(voteable_id)
+  end
+
+  def voteable_id
+    params[(params[:voteable].singularize + "_id").to_sym]
   end
 end

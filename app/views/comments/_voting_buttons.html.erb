@@ -1,0 +1,7 @@
+<% if turnoff_voting_button?(comment) %>
+  <span class='btn btn-mini btn-success disabled'><%= comment.positive_votes_count.to_farsi %></span>
+  <span class='btn btn-mini btn-danger disabled'><%= comment.negative_votes_count.to_farsi %></span>
+<% else %>
+  <button class="btn btn-mini btn-success btn-thumbs-up btn-comments-thumbs-up" data-id='<%= comment.id %>'><%= comment.positive_votes_count.to_farsi %></button>
+  <button class="btn btn-mini btn-danger btn-thumbs-down btn-comments-thumbs-down" data-id='<%= comment.id %>'><%= comment.negative_votes_count.to_farsi %></button>
+<% end %>
