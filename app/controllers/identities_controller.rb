@@ -1,6 +1,6 @@
 class IdentitiesController < ApplicationController
   load_and_authorize_resource
-  
+
   def index
     @identities = current_user.identities.order('provider asc')
   end
@@ -8,6 +8,7 @@ class IdentitiesController < ApplicationController
   # callback: success
   # This handles signing in and adding an authentication provider to existing accounts itself
   def create
+    session[:authhash] = nil #ensure no one sets it
     params[:provider] ? provider = params[:provider] : provider = 'No provider recognized (invalid callback)'
     omniauth = request.env['omniauth.auth']
     # raise omniauth.to_yaml

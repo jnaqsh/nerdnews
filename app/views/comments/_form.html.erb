@@ -1,9 +1,9 @@
 <%= simple_form_for [@story, @comment], :html => { :class => '' } do |f| %>
 <div class='comment-form'>
-  
+
   <div class='row'>
     <div class='span6'>
-      
+
       <%= f.input :parent_id, as: :hidden %>
       <%= f.input :content, label: false, placeholder: "#{t('.write_your_comment')}", input_html: {rows: 3, class: "span6"} %>
 
@@ -14,22 +14,22 @@
     <% if current_user.nil? %>
 
       <div class='span4'>
-        
+
       <%= f.input :name, label: false, input_html: {class: 'span4'}, placeholder: "*#{t('activerecord.attributes.comment.name')}" %>
 
       <%= f.input :email, label: false, input_html: {class: 'span4'}, placeholder: "*#{t('activerecord.attributes.comment.email')}" %>
-      
+
       <%= f.input :website, label: false, input_html: {class: 'span4'}, placeholder: "#{t('activerecord.attributes.comment.website')}" %>
-      
+
       </div>
 
       <div class='span2' style='text-align: center'>
         <%= image_tag 'nobody.png', class: 'img-polaroid' %>
         <p><b><%=t '.You!' %></b></p>
         <p>
-          <%= link_to t('shared.header.login'), login_path %>
+          <%= link_to t('shared.header.login'), new_session_path %>
           /
-          <%= link_to t('shared.header.register'), register_path %>
+          <%= link_to t('shared.header.register'), new_user_path %>
         </p>
         <%= f.submit nil, :class => 'btn btn-primary' %>
       </div>
@@ -40,7 +40,7 @@
         <%= f.input :name, readonly: true, label: false, input_html: {class: 'span4'}, placeholder: "*#{t('activerecord.attributes.comment.name')}" %>
 
         <%= f.input :email, readonly: true, label: false, input_html: {class: 'span4'}, placeholder: "*#{t('activerecord.attributes.comment.email')}" %>
-        
+
         <%= f.input :website, readonly: true, label: false, input_html: {class: 'span4'}, placeholder: "#{t('activerecord.attributes.comment.website')}" %>
 
       </div>
@@ -55,7 +55,7 @@
       <div id='commenter-info', class='span6'>
         <%= image_tag avatar_url(current_user, 16), class: 'pull-right img-polaroid clearfix' %>
         <%= link_to current_user.full_name, user_path(current_user) %>
-        
+
         <span class='pull-left'>
           <%= f.submit nil, :class => 'btn btn-primary' %>
         </span>

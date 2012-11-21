@@ -17,7 +17,7 @@ describe Story do
     it { should validate_presence_of(:title) }
     it { should ensure_length_of(:title).is_at_least(10).is_at_most(100) }
     it { should validate_presence_of(:content) }
-    it { should ensure_length_of(:content).is_at_least(20).is_at_most(1500) }
+    it { should ensure_length_of(:content).is_at_least(250).is_at_most(1500) }
     it { should allow_value("").for(:source) }
     it { should allow_value("www.google.com").for(:source) }
     it { should allow_value("http://stackoverflow.com/").for(:source) }

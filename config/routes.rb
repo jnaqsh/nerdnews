@@ -20,18 +20,17 @@ Nerdnews::Application.routes.draw do
   resources :mypage, only: :index
 
   # Sessions
-  resources :sessions, only: [:new, :create, :destroy]
-  match "/login", :to => "sessions#new"
-  match "/logout", :to => "sessions#destroy", via: :post
+  get "/login" => "sessions#new", as: "new_session"
+  post "/login" => "sessions#create", as: "sessions"
+  delete "/logout" => "sessions#destroy", as: "session"
 
   # Users
-  resources :users do
+  resources :users, path_names: { new: 'sign_up' } do
     get 'posts', on: :member
     get 'comments', on: :member
     get 'favorites', on: :member
     resources :messages, except: [:edit, :update, :show]
   end
-  match "/register", :to => "users#new"
 
   # Stories
   resources :stories do

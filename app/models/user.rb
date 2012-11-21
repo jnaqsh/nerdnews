@@ -3,26 +3,8 @@ class User < ActiveRecord::Base
   extend FriendlyId
   friendly_id :full_name_foo, use: [:slugged, :history]
 
-  def full_name_foo
-    "#{full_name}"
-  end
-
-  def normalize_friendly_id(string)
-    sep = "-"
-    parameterized_string = string
-    parameterized_string.gsub!(/[^\w\-اآبپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیءئؤيإأةك۱۲۳۴۵۶۷۸۹۰ٔ‌]+/i, sep)
-    unless sep.nil? || sep.empty?
-      re_sep = Regexp.escape(sep)
-      # No more than one of the separator in a row.
-      parameterized_string.gsub!(/#{re_sep}{2,}/, sep)
-      # Remove leading/trailing separator.
-      parameterized_string.gsub!(/^#{re_sep}|#{re_sep}$/i, '')
-    end
-    parameterized_string.downcase
-  end
-
-  attr_accessible :email, :full_name, :website, :password, :password_confirmation,
-    :role_ids, :created_at, :favorite_tags
+  attr_accessible :email, :full_name, :website, :password,
+                  :password_confirmation, :favorite_tags
 
   has_secure_password
 
@@ -36,14 +18,16 @@ class User < ActiveRecord::Base
   has_many :received_messages, class_name: Message, foreign_key: :receiver_id
 
   validates_presence_of :full_name, :email
-  validates :password, confirmation: true, presence: true, on: :create
   validates :email, email_format: true
+  validates :password, confirmation: true
   validates_uniqueness_of :email, case_sensitive: false
-  validates_length_of :full_name, maximum: 30, minimum: 7
+  validates_length_of :full_name, maximum: 30, minimum: 5
+  validates :website, allow_blank: true, uri: true
 
   accepts_nested_attributes_for :roles
 
   before_save :set_new_user_role
+  before_validation :smart_add_url_protocol
 
   searchable do
     text :full_name, as: :full_name_textp
@@ -57,6 +41,13 @@ class User < ActiveRecord::Base
     self.password_reset_sent_at = Time.zone.now
     save!
     UserMailer.password_reset(self).deliver
+  end
+
+  def signup_confirmation
+    generate_token(:password_reset_token)
+    self.password_reset_sent_at = Time.zone.now
+    save!
+    UserMailer.signup_confirmation(self).deliver
   end
 
   def role?(role)
@@ -90,6 +81,32 @@ class User < ActiveRecord::Base
   def set_new_user_role
     if self.roles.empty?
       self.roles << (Role.find_by_name("new_user") or Role.create(name: "new_user"))
+    end
+  end
+
+  def full_name_foo
+    "#{full_name}"
+  end
+
+  def normalize_friendly_id(string)
+    sep = "-"
+    parameterized_string = string
+    parameterized_string.gsub!(/[^\w\-اآبپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیءئؤيإأةك۱۲۳۴۵۶۷۸۹۰ٔ‌]+/i, sep)
+    unless sep.nil? || sep.empty?
+      re_sep = Regexp.escape(sep)
+      # No more than one of the separator in a row.
+      parameterized_string.gsub!(/#{re_sep}{2,}/, sep)
+      # Remove leading/trailing separator.
+      parameterized_string.gsub!(/^#{re_sep}|#{re_sep}$/i, '')
+    end
+    parameterized_string.downcase
+  end
+
+  def smart_add_url_protocol
+    if self.website.present?
+      unless self.website[/^https?:\/\//]
+        self.website = 'http://' + self.website
+      end
     end
   end
 end

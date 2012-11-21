@@ -39,16 +39,12 @@ describe "Omniauths" do
         page.should have_content '1234'
         page.should have_content 'Arash Joon'
         page.should have_content 'ArashJJ@jmail.com'
-        fill_in 'user_password', with: 'secret'
-        fill_in 'user_password_confirmation', with: 'secret'
         click_button 'تایید'
         page.should have_content 'موفقیت'
       end
 
       it 'signes in user if identity exist' do
         current_path.should eq(new_user_path)
-        fill_in 'user_password', with: 'secret'
-        fill_in 'user_password_confirmation', with: 'secret'
         click_button 'تایید'
         current_path.should eq(user_path(Identity.last.user))
         click_link 'خروج' # signe out before testing again

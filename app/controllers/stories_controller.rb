@@ -28,11 +28,9 @@ class StoriesController < ApplicationController
   # GET /stories/1
   # GET /stories/1.json
   def show
-    @story = Story.find(params[:id])
+    @story = Story.approved.find(params[:id])
     @comment = @story.comments.build
     @comments = @story.comments.arrange(order: :created_at)
-
-    flash[:error] = t('controllers.stories.show.flash.not_approved') if !@story.approved?
 
     @story.increment!(:view_counter)
 
@@ -72,7 +70,7 @@ class StoriesController < ApplicationController
 
     bypass_captcha_or_not @story
 
-    @story.mark_as_published if can? :publish, Story
+    @story.mark_as_published if can? :publish, @story
 
     respond_to do |format|
       if params[:preview_button]
@@ -80,7 +78,7 @@ class StoriesController < ApplicationController
       else
         if @story.save
           rate_user(1, "#{current_user.full_name} posted a story with id #{@story.id}") if current_user.present?
-          format.html { redirect_to @story, only_path: true, notice: t("#{successful_notice}") }
+          format.html { redirect_to root_path, only_path: true, notice: t("#{successful_notice(@story)}") }
           format.json { render json: @story, status: :created, location: @story }
         else
           format.html { render action: "new" }
@@ -142,10 +140,10 @@ class StoriesController < ApplicationController
 
   private
 
-  def successful_notice
-    if !current_user #successful message for guest and new users
+  def successful_notice(story)
+    unless story.published? #successful message for guest and new users
       "controllers.stories.create.flash.success_for_guest_and_new_users"
-    else #successful message for approved, admin and founder users
+    else #successful message for approved and founder users
       "controllers.stories.create.flash.success"
     end
   end

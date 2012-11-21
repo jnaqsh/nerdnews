@@ -41,7 +41,7 @@ class Story < ActiveRecord::Base
   before_validation :smart_add_url_protocol
 
   validates_length_of :title, maximum: 100, minimum: 10
-  validates_length_of :content, minimum: 20, maximum: 1500
+  validates_length_of :content, minimum: 250, maximum: 1500
   validates  :title, :content, presence: true
   validates :source, allow_blank: true, uri: true
 
@@ -57,6 +57,10 @@ class Story < ActiveRecord::Base
     text :user do
       user.full_name if user.present?
     end
+  end
+
+  def published?
+    self.publish_date.present? ? true : false
   end
 
   def perform_textcaptcha?

@@ -157,13 +157,17 @@ describe User do
     end
 
     it { should validate_presence_of(:full_name) }
-    it { should ensure_length_of(:full_name).is_at_least(7).is_at_most(30) }
+    it { should ensure_length_of(:full_name).is_at_least(5).is_at_most(30) }
     it { should validate_presence_of(:email) }
     it { should allow_value("asd@asdas.com").for(:email) }
     it { should_not allow_value("Asdasd@asd").for(:email) }
     it { should validate_uniqueness_of(:email).case_insensitive }
-    it { should validate_presence_of(:password) }
     it { should validate_confirmation_of(:password) }
+    it { should allow_value("www.example.com").for(:website) }
+    it { should_not allow_value("www.").for(:website) }
+    it { should allow_value('').for(:website) }
+    it { should allow_value("http://www.example.com/").for(:website) }
+    it { should_not allow_value("http://www.example").for(:website) }
   end
 
   context 'Authentication' do

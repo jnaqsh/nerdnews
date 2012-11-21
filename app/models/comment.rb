@@ -8,12 +8,13 @@ class Comment < ActiveRecord::Base
 
   validates :name, :content, presence: true
   validates :email, email_format: true, presence: true
+  validates :website, allow_blank: true, uri: true
 
   has_ancestry
 
 
   private
-  
+
     def smart_add_url_protocol
       if self.website.present?
         unless self.website[/^https?:\/\//]

@@ -3,7 +3,7 @@ require 'spec_helper'
 
 describe "Comments" do
   let(:user)  { FactoryGirl.create :user }
-  let(:story) { FactoryGirl.create :story }
+  let(:story) { FactoryGirl.create :approved_story }
   # let(:comment) { FactoryGirl.create :comment, story_id: story.id, user_id: user.id }
 
   # before do

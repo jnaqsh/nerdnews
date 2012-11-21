@@ -19,8 +19,8 @@
 
     <div class="pull-left">
       <ul class="nav">
-          <li><%= link_to t('.register'), register_path %></li>
-          <li><%= link_to t('.login'), login_path %></li>
+          <li><%= link_to t('.register'), new_user_path %></li>
+          <li><%= link_to t('.login'), new_session_path %></li>
       </ul>
     </div>
 
@@ -74,7 +74,7 @@
             <% end %>
 
             <li class="divider"></li>
-          <li><%= link_to t('.logout'), logout_path, method: :post,
+          <li><%= link_to t('.logout'), session_path, method: :delete,
             data: {confirm: t("helpers.links.confirm")} %></li>
         </ul>
       </div>

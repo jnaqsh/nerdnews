@@ -68,14 +68,25 @@ class UsersController < ApplicationController
       redirect_to root_url, flash: { error: t('controllers.users.create.flash.canceled') }
     else
       @user = User.new(params[:user])
+
       if session[:authhash].present?
         @user.identities.build(provider: session[:authhash][:provider], uid: session[:authhash][:uid])
       end
 
+      @user.password, @user.password_confirmation = SecureRandom.urlsafe_base64
+
       respond_to do |format|
         if @user.save
-          # login with new user
-          cookies.permanent.signed[:user_id] = @user.id
+          # login with new user if confirm with openid
+          cookies.permanent.signed[:user_id] = @user.id if session[:authhash].present?
+
+          # delete authhash after login
+          session.delete :authhash
+          session.delete :service_id
+
+          # send a welcome message and instruction for setting password
+          @user.signup_confirmation
+
           format.html { redirect_to @user, notice: t('controllers.users.create.flash.success') }
           format.json { render json: @user, status: :created, location: @user }
         else
@@ -91,13 +102,17 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
 
-    respond_to do |format|
-      if @user.update_attributes(params[:user])
-        format.html { redirect_to @user, notice: t('controllers.users.update.flash.success') }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+    if params[:cancel]
+      redirect_to @user, flash: { error: t('controllers.users.update.flash.canceled') }
+    else
+      respond_to do |format|
+        if @user.update_attributes(params[:user])
+          format.html { redirect_to @user, notice: t('controllers.users.update.flash.success') }
+          format.json { head :no_content }
+        else
+          format.html { render action: "edit" }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
