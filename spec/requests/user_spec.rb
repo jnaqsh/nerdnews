@@ -131,8 +131,6 @@ describe '/Users' do
           click_link 'انتشار'
         }.to change { @user.reload.user_rate }.by(3)
       end
-
-      it 'should add a point after ranking a comment'
     end
 
     context '/Stories', js: true do
@@ -204,8 +202,6 @@ describe '/Users' do
 
       it 'rates a comment successfully' do
         find('button.btn-comments-thumbs-up').click
-        sleep 1
-        page.driver.render('file.png')
         click_link @pos.name
         current_path.should eq story_path(@story)
         page.should have_content 'موفقیت'
