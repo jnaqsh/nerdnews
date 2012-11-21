@@ -20,9 +20,8 @@ class SessionsController < ApplicationController
 
   def destroy
     cookies.delete(:user_id)
-    if session[:service_id]
-      session[:service_id] = nil
-    end
+    session[:authhash] = nil
+    session[:service_id] = nil
     redirect_to root_path, :notice => t('controllers.sessions.destroy.flash.success')
   end
 end

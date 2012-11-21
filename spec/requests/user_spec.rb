@@ -3,6 +3,24 @@ require 'spec_helper'
 
 describe '/Users' do
   before { @user = FactoryGirl.create(:user) }
+  context "sign up" do
+    it 'should a user signs up successfully and send an sign up confirmation email' do
+      visit new_user_path
+      fill_in 'user_full_name', with: "a validate full_name"
+      fill_in 'user_email', with: 'user@example.com'
+      click_button I18n.t('users.signup_form.submit')
+      page.should have_content(I18n.t('controllers.users.create.flash.success'))
+#      last_email.should
+    end
+
+    it 'should logouts successfully' do
+      login @user
+      click_link 'خروج'
+      current_path.should eq(root_path)
+      page.should have_content(I18n.t('controllers.sessions.destroy.flash.success'))
+    end
+  end
+
   context '/Profile' do
     it 'can edit his profile page' do
       login @user
@@ -96,8 +114,9 @@ describe '/Users' do
       it 'should add a point after posting a stroy' do
         visit new_story_path
         expect {
-          fill_in 'عنوان', with: @story.title
-          fill_in 'محتوا', with: @story.content
+          fill_in 'story_title', with: @story.title
+          fill_in 'story_content', with: @story.content
+          fill_in 'story_spam_answer', with: "four"
           click_button 'ایجاد'
         }.to change { @user.reload.user_rate }.by(1)
       end

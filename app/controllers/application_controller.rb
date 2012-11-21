@@ -13,6 +13,10 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def bypass_captcha_or_not(object)
+    object.skip_textcaptcha = (can? :bypass_captcha, current_user) ? true : false
+  end
+
     # def load_tags
     #   tags = Tag.order('name asc').select("name, stories_count")
     #   maximum_font_size = 70

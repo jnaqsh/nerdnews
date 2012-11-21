@@ -1,29 +1,31 @@
 <% if story.id %>
   <div class='row'>
-    <div id='voting-buttons-<%= story.id %>' class='span1 btn-group pull-right' >
+    <% if can? :create, Vote %>
+      <div id='voting-buttons-<%= story.id %>' class='span1 btn-group pull-right' >
 
-      <%= render 'stories/voting_buttons', story: story %>
+        <%= render 'stories/voting_buttons', story: story %>
 
-    </div>
-    <div class='span5 thumbs-up-list' id='thumbs-up-list-<%= story.id %>'>
-      <ul>
-        <% Rating.positive('stories').each do |rating| %>
-          <li class='icon-hand-left'>
-            <%= link_to rating.name, story_votes_path(story, rating_id: rating, positive: true),
-              method: :post, remote: true %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-    <div class='span5 thumbs-down-list' id='thumbs-down-list-<%= story.id %>'>
-      <ul>
-        <% Rating.negative('stories').each do |rating| %>
-          <li class='icon-hand-left'>
-            <%= link_to rating.name, story_votes_path(story, rating_id: rating), method: :post, remote: true %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
+      </div>
+      <div class='span5 thumbs-up-list' id='thumbs-up-list-<%= story.id %>'>
+        <ul>
+          <% Rating.positive('stories').each do |rating| %>
+            <li class='icon-hand-left'>
+              <%= link_to rating.name, story_votes_path(story, rating_id: rating, positive: true),
+                method: :post, remote: true %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <div class='span5 thumbs-down-list' id='thumbs-down-list-<%= story.id %>'>
+        <ul>
+          <% Rating.negative('stories').each do |rating| %>
+            <li class='icon-hand-left'>
+              <%= link_to rating.name, story_votes_path(story, rating_id: rating), method: :post, remote: true %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
     <div class='pull-left'>
       <% if can? :update, story %>
         <%= link_to t('.edit', :default => t("helpers.links.edit")), edit_story_path(story), :class => 'btn btn-mini' %>

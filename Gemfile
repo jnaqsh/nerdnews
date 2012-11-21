@@ -34,6 +34,8 @@ gem 'therubyracer'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails', git: "https://github.com/jnaqsh/twitter-bootstrap-rails.git"
 
+gem 'acts_as_textcaptcha'
+
 group :production do
   gem 'execjs'
   gem 'therubyracer'

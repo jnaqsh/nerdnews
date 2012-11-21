@@ -27,6 +27,7 @@ describe User do
       it { user.should have_ability([:create, :show, :posts, :comments, :favorites], for: User.new)}
       it { user.should_not have_ability([:index, :destroy, :update], for: User.new)}
       it { user.should_not have_ability(:create, Vote.new)}
+      it { user.should_not have_ability(:bypass_captcha, for: user)}
     end
 
     context "when is a new user" do
@@ -58,6 +59,7 @@ describe User do
       it { user.should have_ability([:update, :destroy], for: user)}
       it { user.should_not have_ability([:create, :index, :destroy, :update], for: User.new)}
       it { user.should have_ability(:create, for: Vote.new)}
+      it { user.should_not have_ability(:bypass_captcha, for: user)}
     end
 
     context "when is a approved user" do
@@ -87,6 +89,7 @@ describe User do
       it { user.should have_ability([:update, :destroy], for: user)}
       it { user.should_not have_ability([:create, :index, :destroy, :update], for: User.new)}
       it { user.should have_ability(:create, for: Vote.new)}
+      it { user.should have_ability(:bypass_captcha, for: user)}
     end
 
     context "when is a founder user" do
@@ -112,6 +115,7 @@ describe User do
       it { user.should have_ability(:manage, for: Tag.new)}
       it { user.should have_ability(:manage, for: User.new)}
       it { user.should have_ability(:create, for: Vote.new)}
+      it { user.should have_ability(:bypass_captcha, for: user)}
     end
   end
 
@@ -153,13 +157,17 @@ describe User do
     end
 
     it { should validate_presence_of(:full_name) }
-    it { should ensure_length_of(:full_name).is_at_least(7).is_at_most(30) }
+    it { should ensure_length_of(:full_name).is_at_least(5).is_at_most(30) }
     it { should validate_presence_of(:email) }
     it { should allow_value("asd@asdas.com").for(:email) }
     it { should_not allow_value("Asdasd@asd").for(:email) }
     it { should validate_uniqueness_of(:email).case_insensitive }
-    it { should validate_presence_of(:password) }
     it { should validate_confirmation_of(:password) }
+    it { should allow_value("www.example.com").for(:website) }
+    it { should_not allow_value("www.").for(:website) }
+    it { should allow_value('').for(:website) }
+    it { should allow_value("http://www.example.com/").for(:website) }
+    it { should_not allow_value("http://www.example").for(:website) }
   end
 
   context 'Authentication' do

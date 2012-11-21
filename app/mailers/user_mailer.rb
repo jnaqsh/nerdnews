@@ -1,7 +1,7 @@
 #encoding: utf-8
 
 class UserMailer < ActionMailer::Base
-  default from: "from@example.com"
+  default from: "noreply@nerdnews.ir"
 
   def comment_reply(comment)
     @comment = comment
@@ -11,5 +11,10 @@ class UserMailer < ActionMailer::Base
   def password_reset(user)
     @user = user
     mail to: user.email, subject: "بازنشانی گذرواژه"
+  end
+
+  def signup_confirmation(user)
+    @user = user
+    mail to: @user.email, subject: "به نردنیوز خوش‌آمدید"
   end
 end

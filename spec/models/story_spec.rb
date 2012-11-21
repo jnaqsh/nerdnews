@@ -3,58 +3,39 @@ require 'spec_helper'
 describe Story do
   context '/relations' do
     it { should have_many :comments }
-    it { should have_many :taggings }
-    it { should have_many :tags }
+    it { should have_many(:taggings) }
+    it { should have_many(:tags).through(:taggings) }
     it { should have_many :votes }
     it { should belong_to :user }
   end
 
-  it 'has a valid factory' do
-    FactoryGirl.build(:story).should be_valid
+  context 'validations' do
+    it 'has a valid factory' do
+      FactoryGirl.create(:story).should be_valid
+    end
+
+    it { should validate_presence_of(:title) }
+    it { should ensure_length_of(:title).is_at_least(10).is_at_most(100) }
+    it { should validate_presence_of(:content) }
+    it { should ensure_length_of(:content).is_at_least(250).is_at_most(1500) }
+    it { should allow_value("").for(:source) }
+    it { should allow_value("www.google.com").for(:source) }
+    it { should allow_value("http://stackoverflow.com/").for(:source) }
+    it { should allow_value("http://railscasts.com/episodes/243-beanstalkd-and-stalker?view=comments")
+        .for(:source) }
+    it { should_not allow_value("wrong_uri").for(:source) }
+    it { should_not allow_value("http://sdfsdfdsfsiwuery").for(:source) }
+    it { should_not allow_value("http:sdfsdfdsfsiwuery.com").for(:source) }
   end
 
-  it 'is not published' do
-    story = FactoryGirl.build(:story)
-    story.publish_date.should be_nil
-  end
+    it 'is not published' do
+      story = FactoryGirl.build(:story)
+      story.publish_date.should be_nil
+    end
 
   it 'makes the story published' do
     story = FactoryGirl.build(:story)
     story.mark_as_published
     story.reload.publish_date.should_not be_nil
-  end
-
-  context "Title" do
-    it 'has a title' do
-      FactoryGirl.build(:story, title: nil).should_not be_valid
-    end
-
-    it 'doesnt have a small title' do
-      FactoryGirl.build(:story, title: 'small').should_not be_valid
-    end
-  end
-
-  context "Content" do
-    it 'has a content' do
-      FactoryGirl.build(:story, content: nil).should_not be_valid
-    end
-
-    it 'doesnt have a small contetnt' do
-      FactoryGirl.build(:story, content: 'small').should_not be_valid
-    end
-  end
-
-  context do
-    it 'checks source url' do
-      # Should be valid
-      FactoryGirl.build(:story, source: 'http://ruby.bastardsbook.com').should be_valid
-      FactoryGirl.build(:story, source: 'http://stackoverflow.com/').should be_valid
-      FactoryGirl.build(:story, source: 'http://railscasts.com/episodes/243-beanstalkd-and-stalker?view=comments').should be_valid
-
-      #should not be valid
-      FactoryGirl.build(:story, source: 'http://sdfsdfdsfsiwuery').should_not be_valid
-      FactoryGirl.build(:story, source: 'http://sdf.sdfd.sfsiwuery.').should_not be_valid
-      FactoryGirl.build(:story, source: 'http:sdfsdfdsfsiwuery.com').should_not be_valid
-    end
   end
 end

@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
-  
+
   <%= render 'shared/head' %>
 
   <body>
-    
+
     <div class="navbar navbar-fixed-top">
       <%= render partial: 'shared/header' %>
     </div>
-    
+
     <div class='container'>
       <%= render partial: 'shared/flash', locals: { flash: flash } %>
     </div>
@@ -22,12 +22,8 @@
     <% end %>
 
     <div class="container">
-      <div class="row">
-        <div class="span12">
-          <%= yield %>
-        </div>
-      </div>
-    
+      <%= yield %>
     </div>
+
   </body>
 </html>

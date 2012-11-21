@@ -1,0 +1,39 @@
+development: &common_settings
+  bcrypt_salt: $2a$10$qBf8znbwyDzaA8GnvNScCu   # must be a valid bcrypt salt, we've generated this one for you randomly
+                                               # generate another with; require 'bcrypt'; BCrypt::Engine.generate_salt
+  bcrypt_cost: 10 # optional (default is 10) must be > 4 (a larger number means slower, but better encryption)
+                  # see http://bcrypt-ruby.rubyforge.org for more information on bcrypt
+  questions:
+      - question: 'یخ سرد است یا داغ؟'
+        answers: 'سرد'
+      - question: 'اسم رهبر جنبش نرم‌افزار آزاد؟'
+        answers: 'استالمن'
+        answers: 'ریچارد'
+        answers: 'ريچارد'
+        answers: 'ریچارد استالمن'
+        answers: 'ريچارد استالمن'
+      - question: 'دو + دو'
+        answers: '۴'
+        answers: '4'
+        answers: 'چهار'
+        answers: 'four'
+      - question: 'نام سیستم‌عامل مایکروسافت؟'
+        answers: 'ویندوز'
+        answers: 'ويندوز'
+        answers: 'مایکروسافت ویندوز'
+        answers: 'مايکروسافت ويندوز'
+        answers: 'windows'
+      - question: 'لینوکس درست است یا گنو/لینوکس؟'
+        answers: 'لینوکس'
+        answers: 'گنو/لینوکس'
+
+test:
+  bcrypt_salt: $2a$10$qBf8znbwyDzaA8GnvNScCu
+  bcrypt_cost: 1
+
+  questions:
+      - question: 'two + two'
+        answers: 'four'
+
+production:
+  <<: *common_settings
