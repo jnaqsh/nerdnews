@@ -31,3 +31,11 @@ jQuery ->
   # $('#story_content').popover()
   
   votingOptions.init()
+
+  $('#loading-indicator')
+    .ajaxStart( ->
+      $(this).show()
+    )
+    .ajaxStop( ->
+      $(this).hide()
+    )
