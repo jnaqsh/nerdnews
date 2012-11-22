@@ -11,6 +11,7 @@
     <tr>
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:weight) %></th>
+      <th><%= model_class.human_attribute_name(:rating_target) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -19,6 +20,7 @@
       <tr>
         <td><%= link_to rating.name, edit_rating_path(rating) %></td>
         <td><%= rating.weight %></td>
+        <td><%= rating.rating_target %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_rating_path(rating), :class => 'btn btn-mini' %>
