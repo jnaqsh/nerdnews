@@ -35,7 +35,7 @@ class StoriesController < ApplicationController
     @story.increment!(:view_counter)
 
     if request.path != story_path(@story)
-      redirect_to @story, status: :moved_permanently
+      redirect_to @story, status: :moved_permanently, only_path: true
     end
   end
 
