@@ -14,6 +14,8 @@ class RatingsController < ApplicationController
     respond_to do |format|
       if @rating.save
         format.html { redirect_to ratings_path, notice: t('controllers.ratings.create.flash.success') }
+      else
+        format.html { render action: "new" }
       end
     end
   end
