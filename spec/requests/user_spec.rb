@@ -144,9 +144,12 @@ describe '/Users' do
 
       it 'shows the rating items for story' do
         find('button.btn-thumbs-up').click
-        page.should have_content @pos.name
+        find("div.thumbs-up-list").should be_visible
+        find("div.thumbs-down-list").should_not be_visible
+        
         find('button.btn-thumbs-down').click
-        page.should have_content @neg.name
+        find("div.thumbs-up-list").should_not be_visible
+        find("div.thumbs-down-list").should be_visible
       end
 
       it 'rates a story successfully' do
@@ -195,9 +198,12 @@ describe '/Users' do
 
       it 'shows the rating items for comment' do
         find('button.btn-comments-thumbs-up').click
-        page.should have_content @pos.name
-        find('button.btn-comments-thumbs-up').click
-        page.should have_content @neg.name
+        find("div.thumbs-up-list").should be_visible
+        find("div.thumbs-down-list").should_not be_visible
+
+        find('button.btn-comments-thumbs-down').click
+        find("div.thumbs-up-list").should_not be_visible
+        find("div.thumbs-down-list").should be_visible
       end
 
       it 'rates a comment successfully' do
