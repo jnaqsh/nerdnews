@@ -16,14 +16,17 @@ describe Rating do
     end
 
     it { should validate_numericality_of :weight }
-    
+    it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:weight) }
+    it { should validate_presence_of(:rating_target) }
+
     it 'wont accept weights not in the correct range' do
       wrong_weights = [-7, -6, 6, 7]
       wrong_weights.each do |weight|
         FactoryGirl.build(:rating, weight: weight).should_not be_valid
       end
     end
-    
+
     it 'accepts weights in the correct range' do
       correct_weight = -5..5
       correct_weight.each do |weight|
