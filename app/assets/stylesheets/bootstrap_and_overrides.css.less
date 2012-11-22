@@ -41,11 +41,11 @@ body {
        url('IranianSans.ttf') format('truetype'); /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
 }
 
-@linkColorHover: rgb(51, 154, 51);
-@sansFontFamily: "Iranian Sans", Tahoma,"Helvetica Neue", Helvetica, Arial, sans-serif;
-@navbarHeight: 60px;
-@navbarLinkColorHover: green;
-@navbarLinkColorActive: green;
+@linkColorHover:                rgb(51, 154, 51);
+@sansFontFamily:                "Iranian Sans", Tahoma,"Helvetica Neue", Helvetica, Arial, sans-serif;
+@navbarHeight:                  60px;
+@navbarLinkColorHover:          green;
+@navbarLinkColorActive:         green;
 @dropdownLinkBackgroundHover:   desaturate(lighten(green, 50%), 50%);
 @navbarLinkBackgroundHover:     #fff;
 @navbarLinkBackgroundActive:    desaturate(lighten(green, 50%), 50%);
@@ -167,4 +167,18 @@ article h5 span {
 
 .logo {
   margin-left: 10px;
+}
+
+#loading-indicator {
+  text-align: center;
+  z-index: 1029;
+  width: 40px;
+  display: none;
+  margin: auto;
+  top:59px;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid green;
+  border-radius: @borderRadiusSmall;
+  .box-shadow(~"inset 0 1px -1px rgba(0,0,0,.075), 0 0 8px rgba(83,198,83,.6)");
 }
