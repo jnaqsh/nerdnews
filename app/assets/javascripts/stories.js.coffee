@@ -10,14 +10,24 @@ jQuery ->
         $.getScript(url)
     $(window).scroll()
 
-  $('.btn-thumbs-up').live('click', ->
-    id = $(this).data('id')
-    $('.thumbs-down-list#' + id).hide()
-    $('.thumbs-up-list#' + id).fadeToggle())
+  # Show optins when clicking voting button
+  votingOptions =
+    init: ->
+      $('.btn-thumbs-up').live('click', @show)
+      $('.btn-thumbs-down').live('click', @show)
 
-  $('.btn-thumbs-down').live('click', ->
-    id = $(this).data('id')
-    $('.thumbs-up-list#' + id).hide()
-    $('.thumbs-down-list#' + id).fadeToggle())
+    show: ->
+      button = $(@)
+      thumbs_up_list = button.parent().nextAll('div.thumbs-up-list')
+      thumbs_down_list = thumbs_up_list.siblings('div.thumbs-down-list')
+      
+      if button.is('.btn-thumbs-up')
+        thumbs_down_list.hide() if thumbs_down_list.is(':visible')
+        thumbs_up_list.fadeToggle()
+      else
+        thumbs_up_list.hide() if thumbs_up_list.is(':visible')
+        thumbs_down_list.fadeToggle()
 
-  $('#story_content').popover()
+  # $('#story_content').popover()
+  
+  votingOptions.init()

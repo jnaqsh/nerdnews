@@ -16,6 +16,7 @@ describe Comment do
   describe "relations" do
     it {should belong_to :story}
     it {should belong_to :user}
+    it {should have_many :votes}
   end
 
   describe "validations" do

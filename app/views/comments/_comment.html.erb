@@ -44,25 +44,50 @@
       </p>
     </div>
 
-    <div>
-      <h5 class="muted">
-      <small>
-        <%= link_to t('.reply', :default => t("helpers.links.reply")),
-        new_story_comment_path(comment.story, parent_id: comment), remote: true %>
+    <div class='row'>
+      <div id='voting-buttons-<%= comment.id %>' class='span1 pull-right'>
+        <%= render 'comments/voting_buttons', comment: comment %>
+      </div>
+      <!-- <h5 class="muted"> -->
+        <div class='span3 thumbs-up-list' id='thumbs-up-list-<%= comment.id %>'>
+          <ul>
+            <% Rating.positive('comments').each do |rating| %>
+              <li class='icon-hand-left'>
+                <%= link_to rating.name, story_comment_votes_path(comment.story, comment, rating_id: rating, positive: true),
+                  method: :post, remote: true %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
 
-      <% if can? :update, comment %>
-        <%= link_to t('.edit', :default => t("helpers.links.edit")),
-          edit_story_comment_path(comment.story, comment) %>
-      <% end %>
+        <div class='span3 thumbs-down-list' id='thumbs-down-list-<%= comment.id %>'>
+          <ul>
+            <% Rating.negative('comments').each do |rating| %>
+              <li class='icon-hand-left'>
+                <%= link_to rating.name, story_comment_votes_path(comment.story, comment, rating_id: rating), method: :post, remote: true %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
 
-      <% if can? :destroy, comment %>
-        <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-          [comment.story, comment], :method => :delete,
-          :confirm => t('.confirm', :default => t("helpers.links.confirm",
-            :default => 'Are you sure?')) %>
-      <% end %>
-      </small>
-    </h5>
+        <div class='pull-left'>
+          <small>
+            <%= link_to t('.reply', :default => t("helpers.links.reply")),
+            new_story_comment_path(comment.story, parent_id: comment), remote: true %>
+
+            <% if can? :update, comment %>
+              <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                edit_story_comment_path(comment.story, comment) %>
+            <% end %>
+
+            <% if can? :destroy, comment %>
+              <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                [comment.story, comment], :method => :delete,
+                :confirm => t('.confirm', :default => t("helpers.links.confirm",
+                  :default => 'Are you sure?')) %>
+            <% end %>
+          </small>
+        </div>
     </div>
 
   </div>

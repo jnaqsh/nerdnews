@@ -34,8 +34,10 @@ Nerdnews::Application.routes.draw do
 
   # Stories
   resources :stories do
-    resources :votes
-    resources :comments
+    resources :votes, :defaults => { :voteable => 'stories' }
+    resources :comments do
+      resources :votes, :defaults => { :voteable => 'comments' }
+    end
     get 'unpublished', :on => :collection
     put 'publish', :on => :member
   end

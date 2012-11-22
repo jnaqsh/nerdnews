@@ -4,8 +4,8 @@
       <tr>
         <td>
           به 
-          <%= link_to story_path(vote.story) do %>
-            <%= truncate(vote.story.title) %>
+          <%= link_to story_path(vote.voteable) do %>
+            <%= truncate(vote.voteable.title) %>
           <% end %>
           امتیاز <b> <%= vote.rating.name %> </b> را داد
         </td>

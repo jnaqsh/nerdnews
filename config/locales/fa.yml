@@ -55,6 +55,9 @@ fa:
       update:
         flash:
           success: "گزینه امتیاز با موفقیت ویرایش شد"
+      destroy:
+        flash:
+          success: "با موفقیت حذف شد."
     votes:
       create:
         flash:
@@ -277,6 +280,7 @@ fa:
       rating:
         name: "نام"
         weight: "وزن"
+        rating_target: "مربوط به"
 
       identities:
         provider: 'سرویس‌دهنده'

@@ -1,16 +1,14 @@
 <% if story.id %>
   <div class='row'>
     <% if can? :create, Vote %>
-      <div class='span1'>
-        <div id='voting-buttons-<%= story.id %>' class='rate btn-group pull-right' >
+      <div id='voting-buttons-<%= story.id %>' class='span1 btn-group pull-right' >
 
-          <%= render 'stories/voting_buttons', story: story %>
+        <%= render 'stories/voting_buttons', story: story %>
 
-        </div>
       </div>
-      <div class='span5 thumbs-up-list' id='<%= story.id %>'>
+      <div class='span5 thumbs-up-list' id='thumbs-up-list-<%= story.id %>'>
         <ul>
-          <% Rating.positive.each do |rating| %>
+          <% Rating.positive('stories').each do |rating| %>
             <li class='icon-hand-left'>
               <%= link_to rating.name, story_votes_path(story, rating_id: rating, positive: true),
                 method: :post, remote: true %>
@@ -18,9 +16,9 @@
           <% end %>
         </ul>
       </div>
-      <div class='span5 thumbs-down-list' id='<%= story.id %>'>
+      <div class='span5 thumbs-down-list' id='thumbs-down-list-<%= story.id %>'>
         <ul>
-          <% Rating.negative.each do |rating| %>
+          <% Rating.negative('stories').each do |rating| %>
             <li class='icon-hand-left'>
               <%= link_to rating.name, story_votes_path(story, rating_id: rating), method: :post, remote: true %>
             </li>
