@@ -29,12 +29,11 @@ gem 'paperclip'
 gem 'omniauth-github'
 gem 'omniauth-openid'
 gem 'friendly_id'
-
 gem 'therubyracer'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails', git: "https://github.com/jnaqsh/twitter-bootstrap-rails.git"
-
 gem 'acts_as_textcaptcha'
+gem 'meta-tags', require: 'meta_tags'
 
 group :production do
   gem 'execjs'

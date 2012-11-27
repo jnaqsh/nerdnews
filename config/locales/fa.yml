@@ -108,15 +108,23 @@ fa:
       search: 'جستجو'
     edit:
       title: "ویرایش پروفایل"
+    show:
+      title: 'پروفایل %{name}'
+
+  mypage:
+    index:
+      title: 'صفحه‌ی شخصی %{name}'
 
   sessions:
     new:
+      title: 'ورود'
       login: "ورود"
       openid_login: 'چنانچه در یکی از سایت‌های زیر عضو هستید، می‌توانید مستقیما وارد شوید:'
       forgotten_password: "گذرواژهٔ خود را فراموش کرده‌اید؟"
 
   identities:
     index:
+      title: 'حساب‌های OpenID'
       remove_identity: 'حذف این حساب'
       more_accounts: 'می‌توانید حساب‌های بیشتری اضافه کنید'
       signed_in: 'با این حساب وارد شده‌اید'
@@ -150,6 +158,10 @@ fa:
     index:
       title: "تازه‌ترین خبرها"
       new: "خبری جدید بنویسید"
+    new:
+      title: 'خبر جدید'
+    edit:
+      title: 'ویرایش خبر'
     story:
       anonymous_user: "شخص ناشناس"
       story_details: 'توسط %{user} در %{date}'
@@ -165,11 +177,19 @@ fa:
 
   messages:
     index:
+      title: 'پیام‌ها'
       no_messages: "هیچ پیامی برای شما وجود ندارد."
+    new:
+      title: 'ارسال پیام'
+
   tags:
     index:
       title: 'تگ‌ها'
       search: 'جستجو'
+    edit:
+      title: 'ویرایش تگ'
+    new:
+      title: 'ایجاد تگ'
 
   comments:
     index:
@@ -177,10 +197,26 @@ fa:
     form:
       write_your_comment: 'دیدگاه خود را بنویسید...'
       You!: 'شما!'
+    show:
+      title: 'نمایش دیدگاه'
+    edit:
+      title: 'نمایش دیدگاه'
+    new:
+      title: 'دیدگاه جدید'
 
   ratings:
     index:
       title: 'امتیازها'
+    edit:
+      title: 'ویرایش گزینه امتیاز'
+    new:
+      index: 'ایجاد گزینه امتیاز'
+
+  password_resets:
+    edit: 
+      title: 'بازنشانی گذرواژه'
+    new:
+      title: 'بازنشانی گذرواژه'
 
   shared:
     header:
@@ -202,6 +238,8 @@ fa:
       ratings: 'ایجاد گزینه امتیاز'
       identities: 'حساب‌های OpenID'
       messages: 'پیام‌ها'
+    head:
+      title: 'نردنیوز'
 
   layouts:
     user_profile:

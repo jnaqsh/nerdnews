@@ -1,2 +1,4 @@
+<% set_meta_tags  title: t('.title', name: current_user.full_name),
+                  noindex: true %>
 <%= render partial: 'stories/story', collection: @stories %>
 <%= paginate @stories if @stories %>
