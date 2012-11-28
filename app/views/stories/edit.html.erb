@@ -1,4 +1,4 @@
-<% set_meta_tags  title: t('.title'),
+<% set_meta_tags  title: [t('stories.title'), t('.title')],
                   noindex: true %>
 <%- model_class = @story.class -%>
 <% content_for :page_header do %>

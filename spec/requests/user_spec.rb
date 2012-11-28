@@ -10,7 +10,6 @@ describe '/Users' do
       fill_in 'user_email', with: 'user@example.com'
       click_button I18n.t('users.signup_form.submit')
       page.should have_content(I18n.t('controllers.users.create.flash.success'))
-#      last_email.should
     end
 
     it 'should logouts successfully' do

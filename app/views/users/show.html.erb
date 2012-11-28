@@ -1,4 +1,4 @@
-<% set_meta_tags  title: t('.title', name: @user.full_name),
+<% set_meta_tags  title: [t('users.title'),t('.title', name: @user.full_name)],
                   description: 'پروفایل',
                   keywords: "#{@user.full_name}, profile, پروفایل" %>
 <div id='user-activities'>

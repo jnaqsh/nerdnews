@@ -92,6 +92,7 @@ fa:
           success: "گذرواژه جدید با موفقیت بازنشانی شد."
 
   users:
+    title: 'کاربران'
     new:
       register: "ثبت‌نام"
       caution: 'اگر از قبل در NerdNews حساب دارید، و فقط می‌خواهید یک حساب OpenID جدید برای ورود به سایت به حساب خود متصل کنید، اینجا جای شما نیست! شما باید ابتدا وارد حساب خود شوید و از طریق پروفایل خود اقدام کنید.'
@@ -110,10 +111,17 @@ fa:
       title: "ویرایش پروفایل"
     show:
       title: 'پروفایل %{name}'
+    posts:
+      title: 'ارسال‌های %{name}'
+    favorites:
+      title: 'موارد موردعلاقه %{name}'
+    comments:
+      title: 'نظرات %{name}'
 
   mypage:
+    title: 'صفحه شخصی'
     index:
-      title: 'صفحه‌ی شخصی %{name}'
+      title: '%{name}'
 
   sessions:
     new:
@@ -123,8 +131,9 @@ fa:
       forgotten_password: "گذرواژهٔ خود را فراموش کرده‌اید؟"
 
   identities:
+    title: 'حساب‌های OpenID'
     index:
-      title: 'حساب‌های OpenID'
+      title: 'فهرست'
       remove_identity: 'حذف این حساب'
       more_accounts: 'می‌توانید حساب‌های بیشتری اضافه کنید'
       signed_in: 'با این حساب وارد شده‌اید'
@@ -155,8 +164,9 @@ fa:
       edit: 'ویرایش %{model}'
 
   stories:
+    title: 'خبرها'
     index:
-      title: "تازه‌ترین خبرها"
+      title: "تازه‌ترین‌ها"
       new: "خبری جدید بنویسید"
     new:
       title: 'خبر جدید'
@@ -176,15 +186,17 @@ fa:
       content_placeholder: "بدنه اصلی خبر خود را اینجا بنویسید. لطفا سعی کنید از کلمات خود استفاده کنید. اگر از منابع دیگر نقل‌وقول می‌کنید، آدرس‌های مرتبط را در متن وارد کنید. اگر از منبع اصلی خبر مطمئن هستید آنها را در متن بگنجانید. خبری که منبع مشخصی نداشته باشد، حذف می‌گردد. متن خبر می‌تواند حداکثر ۱۵۰۰ کاراکتر باشد."
 
   messages:
+    title: 'پیام‌ها'
     index:
-      title: 'پیام‌ها'
+      title: 'فهرست'
       no_messages: "هیچ پیامی برای شما وجود ندارد."
     new:
       title: 'ارسال پیام'
 
   tags:
+    title: 'تگ‌ها'
     index:
-      title: 'تگ‌ها'
+      title: 'فهرست'
       search: 'جستجو'
     edit:
       title: 'ویرایش تگ'
@@ -192,8 +204,9 @@ fa:
       title: 'ایجاد تگ'
 
   comments:
+    title: 'دیدگاه‌ها'
     index:
-      title: 'دیدگاه‌ها'
+      title: 'فهرست'
     form:
       write_your_comment: 'دیدگاه خود را بنویسید...'
       You!: 'شما!'
@@ -205,15 +218,16 @@ fa:
       title: 'دیدگاه جدید'
 
   ratings:
+    title: 'امتیازها'
     index:
-      title: 'امتیازها'
+      title: 'فهرست'
     edit:
       title: 'ویرایش گزینه امتیاز'
     new:
       index: 'ایجاد گزینه امتیاز'
 
   password_resets:
-    edit: 
+    edit:
       title: 'بازنشانی گذرواژه'
     new:
       title: 'بازنشانی گذرواژه'

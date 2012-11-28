@@ -1,4 +1,4 @@
-<% set_meta_tags  title: t('.title'),
+<% set_meta_tags  title: [t('users.title'), t('.title')],
                   noindex: true %>
 <%- model_class = User.new.class -%>
 <% content_for :page_header do %>

@@ -1,5 +1,5 @@
-<% set_meta_tags title: @story.title,
-                 description: 'متن خبر',
+<% set_meta_tags title: [t('stories.title'), @story.title],
+                 description: "#{@story.content.truncate(160)}",
                  keywords: @story.tags.map { |tag| tag.name } %>
 <%- model_class = @story.class -%>
 <% content_for :page_header do %>

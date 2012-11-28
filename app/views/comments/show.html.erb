@@ -1,4 +1,4 @@
-<% set_meta_tags  title: t('.title'),
+<% set_meta_tags  title: [t('comments.title'), t('.title')],
                   description: "نمایش دیدگاه #{@comment.name}" %>
 <%- model_class = @comment.class -%>
 <% content_for :page_header do %>
