@@ -28,14 +28,25 @@ describe Story do
     it { should_not allow_value("http:sdfsdfdsfsiwuery.com").for(:source) }
   end
 
-    it 'is not published' do
-      story = FactoryGirl.build(:story)
-      story.publish_date.should be_nil
+  it 'is not published' do
+    story = FactoryGirl.build(:story)
+    story.publish_date.should be_nil
+  end
+
+  context '/Publishing' do
+    before do
+      @story = FactoryGirl.build(:story)
+      @user = FactoryGirl.create(:approved_user)
+      @story.mark_as_published(@user)
     end
 
-  it 'makes the story published' do
-    story = FactoryGirl.build(:story)
-    story.mark_as_published
-    story.reload.publish_date.should_not be_nil
+    it 'makes the story published' do
+      @story.reload.publish_date.should_not be_nil
+    end
+
+    it 'updates publisher id in story after getting published', focus: true do
+      pp @story
+      @story.reload.publisher_id.should_not be_nil
+    end
   end
 end

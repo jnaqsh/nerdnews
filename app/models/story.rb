@@ -2,7 +2,7 @@
 
 class Story < ActiveRecord::Base
   attr_accessible :content, :publish_date, :title, :source, :tag_names, :view_counter,
-    :positive_votes_count, :negative_votes_count
+    :positive_votes_count, :negative_votes_count, :publisher_id
 
   extend FriendlyId
   friendly_id :title_foo, use: [:slugged, :history]
@@ -72,8 +72,9 @@ class Story < ActiveRecord::Base
     self.tag_ids = tokens.split(",")
   end
 
-  def mark_as_published
+  def mark_as_published(publisher)
     self.update_attributes publish_date: Time.now
+    self.update_attributes publisher_id: publisher.id
   end
 
   def user_voted?(user)

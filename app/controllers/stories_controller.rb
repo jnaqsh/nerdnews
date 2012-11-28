@@ -70,7 +70,7 @@ class StoriesController < ApplicationController
 
     bypass_captcha_or_not @story
 
-    @story.mark_as_published if can? :publish, @story
+    @story.mark_as_published(current_user) if can? :publish, @story
 
     respond_to do |format|
       if params[:preview_button]
@@ -121,7 +121,7 @@ class StoriesController < ApplicationController
     @story = Story.find(params[:id])
 
     respond_to do |format|
-      if @story.mark_as_published
+      if @story.mark_as_published(current_user)
         rate_user(@story.user, 3, "a story from #{@story.user.full_name} with id #{@story.id} got approved")
         format.html { redirect_to unpublished_stories_path,
           notice: t('controllers.stories.publish.flash.success') }
