@@ -189,7 +189,7 @@ describe '/Users' do
     context '/Comments', js: true do
       before do
         login @user
-        @comment = FactoryGirl.create(:comment, story_id: @story)
+        @comment = FactoryGirl.create(:comment, story_id: @story.id)
         @pos = FactoryGirl.create(:rating_comments)
         @neg = FactoryGirl.create(:negative_comments)
         visit story_path @story
