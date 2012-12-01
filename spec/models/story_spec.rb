@@ -44,7 +44,7 @@ describe Story do
       @story.reload.publish_date.should_not be_nil
     end
 
-    it 'updates publisher id in story after getting published', focus: true do
+    it 'updates publisher id in story after getting published' do
       pp @story
       @story.reload.publisher_id.should_not be_nil
     end
