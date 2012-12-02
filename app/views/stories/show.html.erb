@@ -1,6 +1,12 @@
 <% set_meta_tags title: [t('stories.title'), @story.title],
                  description: "#{@story.content.truncate(160)}",
-                 keywords: @story.tags.map { |tag| tag.name } %>
+                 keywords: @story.tags.map { |tag| tag.name },
+                 open_graph: {
+                    title: "#{@story.title}",
+                    type: 'news',
+                    url: "#{story_url(@story)}",
+                    image: thumbnail_url(@story) } %>
+
 <%- model_class = @story.class -%>
 <% content_for :page_header do %>
   <h1><%=t '.title', :default => model_class.model_name.human %></h1>
