@@ -10,7 +10,6 @@ describe '/Users' do
       fill_in 'user_email', with: 'user@example.com'
       click_button I18n.t('users.signup_form.submit')
       page.should have_content(I18n.t('controllers.users.create.flash.success'))
-#      last_email.should
     end
 
     it 'should logouts successfully' do
@@ -100,6 +99,8 @@ describe '/Users' do
       end
 
       it 'should add a point after commenting/replaying' do
+        # Set user ip, user agent and referer for Capybara
+        page.driver.options[:headers] = {'REMOTE_ADDR' => '1.2.3.4', 'HTTP_USER_AGENT' => 'Mozilla', 'HTTP_REFERER' => 'http://localhost'}
         expect {
           fill_in 'comment_content', with: 'comment'
           click_button 'ایجاد'
@@ -184,51 +185,6 @@ describe '/Users' do
         click_link @pos.name
         visit story_path @story
         page.should_not have_selector 'button.btn-thumbs-up'
-      end
-    end
-
-    context '/Comments', js: true do
-      before do
-        login @user
-        @comment = FactoryGirl.create(:comment, story_id: @story)
-        @pos = FactoryGirl.create(:rating_comments)
-        @neg = FactoryGirl.create(:negative_comments)
-        visit story_path @story
-      end
-
-      it 'shows the rating items for comment' do
-        find('button.btn-comments-thumbs-up').click
-        find("div.thumbs-up-list").should be_visible
-        find("div.thumbs-down-list").should_not be_visible
-
-        find('button.btn-comments-thumbs-down').click
-        find("div.thumbs-up-list").should_not be_visible
-        find("div.thumbs-down-list").should be_visible
-      end
-
-      it 'rates a comment successfully' do
-        find('button.btn-comments-thumbs-up').click
-        click_link @pos.name
-        current_path.should eq story_path(@story)
-        page.should have_content 'موفقیت'
-        page.should have_selector('span.btn.btn-success.disabled')
-      end
-
-      it 'gains a point after rating to a comment' do
-        visit story_path @story
-        find('button.btn-comments-thumbs-up').click
-        expect {
-          click_link @pos.name
-          sleep 1 # Seems that we have to wait a moment for data from Ajax
-        }.to change { @user.reload.user_rate }.by(1)
-      end
-
-      it 'wont let known user to vote after voting for first time' do
-        visit story_path @story
-        find('button.btn-comments-thumbs-up').click
-        click_link @pos.name
-        visit story_path @story
-        page.should_not have_selector 'button.btn-comments-thumbs-up'
       end
     end
   end

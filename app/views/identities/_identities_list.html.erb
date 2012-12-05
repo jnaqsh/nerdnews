@@ -1,6 +1,10 @@
 <ul id="services_list">
-  <li><%= link_to "/auth/myopenid" do %><%= image_tag "myopenid_64.png", :size => "64x64", :alt => "MyOpenID" %>MyOpenID<% end %>
-  </li>
-  <li><%= link_to "/auth/google" do %><%= image_tag "google_64.png", :size => "64x64", :alt => "MyOpenID" %>Google<% end %>
-  </li>
+  <% @providers.each do |provider| %>
+    <li>
+      <%= link_to "/auth/#{provider}" do %>
+        <%= image_tag "#{provider}_64.png", size: "64x64", alt: "#{provider}" %>
+          <%= provider.upcase %>
+        <% end %>
+    </li>
+  <% end %>
 </ul>

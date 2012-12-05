@@ -43,6 +43,7 @@ class UsersController < ApplicationController
   # GET /users/new.json
   def new
     @user = User.new
+    @providers = Identity.providers
     if session[:authhash].present?
       @user.full_name = session[:authhash][:name] if session[:authhash][:name]
       @user.email = session[:authhash][:email] if session[:authhash][:email]

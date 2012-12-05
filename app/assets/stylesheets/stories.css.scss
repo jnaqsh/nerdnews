@@ -56,3 +56,23 @@ ul.token-input-list-facebook {
   color: green;
   margin-right: 25px;
 }
+
+.social-icons {
+  list-style: none;
+  display: inline;
+  margin: 10px 0;
+  li {
+    display: inline;
+    font-size: 24px;
+    // -webkit-transition-property: font-size;
+    // -moz-transition-property: font-size;
+    // -o-transition-property: font-size;
+    // transition-property: font-size;
+    // &:hover{
+    //   font-size: 30px;
+    // }
+    i {
+      width: inherit !important;
+    }
+  }
+}

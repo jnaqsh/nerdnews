@@ -7,4 +7,10 @@ module StoriesHelper
       story.user_voted?(current_user) or !story.approved?
     end
   end
+
+  def thumbnail_url(story)
+    unless story.tags.first.nil?
+      "#{root_url.gsub(/\/$/, '') + story.tags.first.thumbnail.url}"
+    end
+  end
 end

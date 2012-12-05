@@ -8,7 +8,7 @@ describe "Omniauths" do
         @user = FactoryGirl.create(:user)
         login @user
         visit identities_path
-        click_on 'MyOpenID'
+        click_on 'MYOPENID'
       end
 
       it 'Adds/Removes a MyOpenID identity' do
@@ -20,7 +20,7 @@ describe "Omniauths" do
       end
 
       it 'raises error if account already exist' do
-        click_on 'MyOpenID'
+        click_on 'MYOPENID'
         page.should have_content('قبلا در سایت ثبت شده است')
       end
     end
@@ -29,7 +29,7 @@ describe "Omniauths" do
       before do
         OmniAuth.config.add_mock :myopenid, uid: "12345", info: { name: "Arash Joon", email: 'ArashJJ@jmail.com' }
         visit new_session_path
-        click_link 'MyOpenID'
+        click_link 'MYOPENID'
       end
 
       it 'creates account with openid' do
@@ -52,7 +52,7 @@ describe "Omniauths" do
         page.should have_content(I18n.t("controllers.sessions.destroy.flash.success"))
         visit new_session_path
         current_path.should eq(new_session_path)
-        click_link 'MyOpenID'
+        click_link 'MYOPENID'
         page.should have_content('با موفقیت وارد شدید')
       end
 
@@ -75,7 +75,7 @@ describe "Omniauths" do
 
       it 'raises error if there is an error with provider' do
         visit new_session_path
-        click_link 'MyOpenID'
+        click_link 'MYOPENID'
         page.should have_content('خطایی در سرویس‌دهنده رخ داد')
       end
     end

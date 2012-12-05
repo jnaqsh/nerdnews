@@ -47,6 +47,7 @@ class CommentsController < ApplicationController
   def create
     @story = Story.find(params[:story_id])
     @comment = @story.comments.build(params[:comment])
+    @comment.add_user_requests_data = request
     @comments = @story.comments.arrange(order: :created_at)
 
     respond_to do |format|
