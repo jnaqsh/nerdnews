@@ -1,3 +1,6 @@
+<% set_meta_tags title: [t('stories.title'), t('.title')],
+                 description: 'صفحه اصلی',
+                 keywords: 'اخبار, صفحه اصلی' %>
 <%- model_class = Story.new.class -%>
 <% content_for :head, auto_discovery_link_tag(:atom, stories_url(:format => "atom")) %>
 <% content_for :page_header do %>

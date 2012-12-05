@@ -1,3 +1,6 @@
+<% set_meta_tags  title: [t('users.title'),t('.title', name: @user.full_name)],
+                  description: "پست‌های ارسال شده توسط #{@user.full_name}" ,
+                  keywords: "#{@user.full_name}, profile, پروفایل" %>
 <div class='user-activities'>
   <%= render partial: 'user_stories', object: @stories %>
 </div>

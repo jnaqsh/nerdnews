@@ -3,7 +3,7 @@ require 'faker'
 FactoryGirl.define do
   factory :story do
     title   { Faker::Lorem.characters(11)}
-    content { Faker::Lorem.characters(260) }
+    content { Faker::Lorem.paragraph(15) }
     publish_date nil
 
     after(:build) do |story|

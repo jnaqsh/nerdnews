@@ -3,6 +3,7 @@ class IdentitiesController < ApplicationController
 
   def index
     @identities = current_user.identities.order('provider asc')
+    @providers = Identity.providers
   end
 
   # callback: success
@@ -15,11 +16,15 @@ class IdentitiesController < ApplicationController
     @authhash = Hash.new
 
     if omniauth and params[:provider]
-      if ['myopenid', 'google'].include? provider
+      if ['myopenid', 'google', 'twitter', 'github', 'yahoo'].include? provider
         omniauth['info']['email'] ? @authhash[:email] =  omniauth['info']['email'] : @authhash[:email] = ''
         omniauth['info']['name'] ? @authhash[:name] =  omniauth['info']['name'] : @authhash[:name] = ''
         omniauth['uid'] ? @authhash[:uid] = omniauth['uid'].to_s : @authhash[:uid] = ''
         omniauth['provider'] ? @authhash[:provider] = omniauth['provider'] : @authhash[:provider] = ''
+      else
+        # debug to output the hash that has been returned when adding new services
+        render text: omniauth.to_yaml
+        return
       end
 
       if @authhash[:uid].present? and @authhash[:provider].present?

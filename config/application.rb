@@ -9,6 +9,10 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
+CONFIG = YAML.load(File.read(File.expand_path('../application_configs.yml', __FILE__)))
+CONFIG.merge! CONFIG.fetch(Rails.env, {})
+CONFIG.symbolize_keys!
+
 module Nerdnews
   class Application < Rails::Application
     # Add fonts path to rails asset pipeline

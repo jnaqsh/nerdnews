@@ -1,5 +1,7 @@
+<% set_meta_tags  title: t('.title'),
+                  noindex: true %>
 <% content_for :page_header do %>
-  <h1>بازنشانی گذرواژه</h1>
+  <h1><%=t '.title' %></h1>
 <% end %>
 
 <%= form_tag password_resets_path, method: :post do %>
@@ -12,5 +14,5 @@
           </div>
       </div>
     </div>
-  <div class="actions"><%= submit_tag "بازنشانی گذرواژه", class: "btn btn-primary" %>
+  <div class="actions"><%= submit_tag t('.title'), class: "btn btn-primary" %>
 <% end %>
