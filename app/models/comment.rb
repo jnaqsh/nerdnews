@@ -44,6 +44,10 @@ class Comment < ActiveRecord::Base
     self.update_attribute approved: true
   end
 
+  def votes_sum
+    positive_votes_count - negative_votes_count
+  end
+
   private
 
     def smart_add_url_protocol

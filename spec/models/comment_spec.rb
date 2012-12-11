@@ -38,4 +38,9 @@ describe Comment do
       Comment.approved.should_not include false_comment
     end
   end
+
+  it 'shows votes sum' do
+    story = FactoryGirl.create(:comment, positive_votes_count: 1, negative_votes_count: 3)
+    story.votes_sum.should equal(-2)
+  end
 end
