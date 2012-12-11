@@ -4,13 +4,11 @@ require 'spec_helper'
 describe "Comments" do
   let(:user)  { FactoryGirl.create :user }
   let(:story) { FactoryGirl.create :approved_story }
-  
-  before do
-    # Set user ip, user agent and referer for Capybara
-    page.driver.options[:headers] = {'REMOTE_ADDR' => '1.2.3.4', 'HTTP_USER_AGENT' => 'Mozilla', 'HTTP_REFERER' => 'http://localhost'}
-  end
 
   it "sends and reply to a comment" do
+    # Stub request to akismet
+    stub_akismet_connection
+
     visit new_story_comment_path story.id
     fill_in "comment_name", with: user.full_name
     fill_in "comment_email", with: user.email
@@ -29,6 +27,9 @@ describe "Comments" do
   end
 
   it "Sends email to original author when replies" do
+    # Stub request to akismet
+    stub_akismet_connection
+
     comment = FactoryGirl.create :comment, story_id: story.id, user_id: user.id
     visit story_path story
     click_link "پاسخ"

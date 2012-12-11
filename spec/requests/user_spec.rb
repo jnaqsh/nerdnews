@@ -101,6 +101,9 @@ describe '/Users' do
       it 'should add a point after commenting/replaying' do
         # Set user ip, user agent and referer for Capybara
         page.driver.options[:headers] = {'REMOTE_ADDR' => '1.2.3.4', 'HTTP_USER_AGENT' => 'Mozilla', 'HTTP_REFERER' => 'http://localhost'}
+        # Stub request to akismet
+        stub_akismet_connection
+
         expect {
           fill_in 'comment_content', with: 'comment'
           click_button 'ایجاد'
