@@ -1,8 +1,8 @@
 #encoding: utf-8
 
 class Story < ActiveRecord::Base
-  attr_accessible :content, :publish_date, :title, :source, :tag_names, :view_counter,
-    :positive_votes_count, :negative_votes_count, :publisher_id
+  attr_accessible :content, :publish_date, :title, :source,
+    :tag_names, :view_counter, :publisher_id
 
   extend FriendlyId
   friendly_id :title_foo, use: [:slugged, :history]
