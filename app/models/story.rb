@@ -85,6 +85,10 @@ class Story < ActiveRecord::Base
     self.publish_date.present?
   end
 
+  def votes_sum
+    positive_votes_count - negative_votes_count
+  end
+
   private
 
     def calculate_count(tag)

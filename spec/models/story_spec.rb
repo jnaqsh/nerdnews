@@ -45,8 +45,12 @@ describe Story do
     end
 
     it 'updates publisher id in story after getting published' do
-      pp @story
       @story.reload.publisher_id.should_not be_nil
     end
+  end
+
+  it 'shows votes sum' do
+    story = FactoryGirl.create(:story, positive_votes_count: 1, negative_votes_count: 3)
+    story.votes_sum.should equal(-2)
   end
 end

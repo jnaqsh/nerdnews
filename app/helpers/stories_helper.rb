@@ -13,4 +13,8 @@ module StoriesHelper
       "#{root_url.gsub(/\/$/, '') + story.tags.first.thumbnail.url}"
     end
   end
+
+  def hide?(story)
+    story.votes_sum < -5 ? true : false
+  end
 end

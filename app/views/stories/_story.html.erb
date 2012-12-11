@@ -1,4 +1,7 @@
-<article>
+<!-- cache status of Story -->
+<% status = hide?(story) %>
+
+<article <%= "class=grey-out" if status %> >
   <div class='row'>
     <div class='span1'>
       <div class='story-image'>
@@ -58,13 +61,14 @@
           <% end %>
         </small>
       </h5>
-      
-      <p><%= user_name(story) %> می‌نویسد:</p>
 
-      <blockquote>
-        <%= sanitize(RedCloth.new(story.content, [:filter_html, :filter_styles]).to_html) %><br />
-        <%= source_of_story(story) %>
-      </blockquote>
+      <% if !status or !current_page?(controller: 'stories', action: 'index') %>
+        <p><%= user_name(story) %> می‌نویسد:</p>
+        <blockquote>
+          <%= sanitize(RedCloth.new(story.content, [:filter_html, :filter_styles]).to_html) %><br />
+          <%= source_of_story(story) %>
+        </blockquote>
+      <% end %>
 
       <%= render partial: "stories/story_operation", locals: {story: story} %>
     </div>
