@@ -31,6 +31,7 @@ class VotesController < ApplicationController
   end
 
 private
+  # TODO: Move this method to somewhere else
   def increment_votes_count(voteable, type = nil)
     if type
       voteable.increment! :positive_votes_count

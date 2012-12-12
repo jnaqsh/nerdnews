@@ -32,7 +32,7 @@ class Story < ActiveRecord::Base
   has_many :tags, :through => :taggings,
                   :after_add => :calculate_count,
                   :after_remove => :calculate_count
-  has_many :votes, as: :voteable, after_add: :increment_votes_count
+  has_many :votes, as: :voteable
   belongs_to :user, counter_cache: true
 
   scope :not_approved, where(:publish_date => nil)
@@ -93,10 +93,6 @@ class Story < ActiveRecord::Base
 
     def calculate_count(tag)
       tag.update_attribute :stories_count, tag.stories.count
-    end
-
-    def increment_votes_count
-      self.increment! :positive_votes_count
     end
 
     def smart_add_url_protocol
