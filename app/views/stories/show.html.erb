@@ -15,13 +15,13 @@
 <%= render @story %>
 
 <div class="comments span8 offset2">
-  
+
   <% if can? :create, Comment %>
     <%= render "comments/form" %>
   <% end %>
-  
+
   <div id='comments-container'>
     <h2><%= t('.comments') %></h2>
-    <%= nested_comments @comments || t('.no_comments') %>
+    <%= (nested_comments @comments) || t('.no_comments') %>
   </div>
 </div>

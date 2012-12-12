@@ -1,21 +1,12 @@
+{<img src="https://codeclimate.com/badge.png" />}[https://codeclimate.com/github/jnaqsh/nerdnews]
+
 == nerdnews
 This is a project for creating a free and open source news site by Ruby on Rails framework.
 This project is under GPL 3 license.
 
-== TO DO
-* Add pointing system for comments based on views of the news comments, points for the news and points for user who wrote the news.
-* Add pointing system for news based on views of the news and rating the news
-* Define roles of app. The roles are:
-  ** Unregistered users: anonymous users
-  ** New users
-  ** Confirmed users
-  ** Administrators
-  ** Founders
-* Add confirmation after a user create a story by a moderator
-
 == DEMO
 If you wanna see a demo of this project you can see it:
-http://opennews.jnaqsh.com/
+http://nerdnews.ir/
 
 == LICENSE
 This project just another free and open source news site that everyone can create news and create comments and so on.

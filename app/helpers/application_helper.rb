@@ -20,9 +20,13 @@ module ApplicationHelper
   end
 
   def nested_comments(messages)
-    messages.map do |message, sub_messsages|
-      render(message) + content_tag(:div, nested_comments(sub_messsages), class: "nested_comments")
-    end.join.html_safe
+    if messages && messages.count > 0
+      messages.map do |message, sub_messsages|
+        render(message) + content_tag(:div, nested_comments(sub_messsages), class: "nested_comments")
+      end.join.html_safe
+    else
+      return false
+    end
   end
 
   def user_name(story)
