@@ -1,7 +1,7 @@
 <!-- cache status of Story -->
 <% status = hide?(story) %>
 
-<article <%= "class=grey-out" if status %> >
+<article <%= "class=grey-out" if status and current_page?(action: 'index') %> >
   <div class='row'>
     <div class='span1'>
       <div class='story-image'>
