@@ -28,17 +28,26 @@ describe VotesController do
     end
 
     context '/count' do
-      it 'increases Storys positive count' do
+      it 'increases Stories positive count' do
         expect {
           post :create, story_id: @story.id, rating_id: @rating, positive: true, voteable: "stories"
         }.to change { @story.reload.positive_votes_count }.by(1)
       end
 
-      it 'increases Storys negative count' do
+      it 'increases Stories negative count' do
         expect {
           post :create, story_id: @story.id, rating_id: @negative_rating, voteable: "stories"
         }.to change { @story.reload.negative_votes_count }.by(1)
       end
+
+      it 'increases Stories total point' do
+        rating2 = FactoryGirl.create(:rating, weight: -3)
+        expect {
+          post :create, story_id: @story.id, rating_id: @rating, positive: true, voteable: "stories"
+          post :create, story_id: @story.id, rating_id: rating2, positive: true, voteable: "stories"
+        }.to change { @story.reload.total_point }.by(-2)
+      end
+
     end
   end
 end

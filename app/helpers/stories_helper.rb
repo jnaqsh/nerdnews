@@ -14,7 +14,7 @@ module StoriesHelper
     end
   end
 
-  def hide?(story)
-    story.votes_sum < -5 ? true : false
+  def hide?(voteable)
+    voteable.total_point <= -30 ? true : false
   end
 end
