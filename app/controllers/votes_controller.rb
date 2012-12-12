@@ -20,6 +20,7 @@ class VotesController < ApplicationController
     respond_to do |format|
       if @vote.save
         increment_votes_count(@voteable, type)
+        calculate_total_point(@voteable, @vote)
         rate_user 1,
           "#{current_user.full_name} voted a story with id #{@vote.voteable.id} and rate id of #{@vote.rating.id}"
         format.html { redirect_to story_path(@voteable), notice: t('controllers.votes.create.flash.success') }
@@ -31,6 +32,14 @@ class VotesController < ApplicationController
   end
 
 private
+  def get_voteable
+    @voteable = params[:voteable].classify.constantize.find(voteable_id)
+  end
+
+  def voteable_id
+    params[(params[:voteable].singularize + "_id").to_sym]
+  end
+  
   # TODO: Move this method to somewhere else
   def increment_votes_count(voteable, type = nil)
     if type
@@ -40,11 +49,8 @@ private
     end
   end
 
-  def get_voteable
-    @voteable = params[:voteable].classify.constantize.find(voteable_id)
-  end
-
-  def voteable_id
-    params[(params[:voteable].singularize + "_id").to_sym]
+  # TODO: Move this method to somewhere else
+  def calculate_total_point(voteable, vote)
+    voteable.increment! :total_point, vote.rating.weight
   end
 end
