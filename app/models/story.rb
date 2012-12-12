@@ -1,8 +1,8 @@
 #encoding: utf-8
 
 class Story < ActiveRecord::Base
-  attr_accessible :content, :publish_date, :title, :source, :tag_names, :view_counter,
-    :positive_votes_count, :negative_votes_count, :publisher_id
+  attr_accessible :content, :publish_date, :title, :source,
+    :tag_names, :view_counter, :publisher_id
 
   extend FriendlyId
   friendly_id :title_foo, use: [:slugged, :history]
@@ -32,7 +32,7 @@ class Story < ActiveRecord::Base
   has_many :tags, :through => :taggings,
                   :after_add => :calculate_count,
                   :after_remove => :calculate_count
-  has_many :votes, as: :voteable, after_add: :increment_votes_count
+  has_many :votes, as: :voteable
   belongs_to :user, counter_cache: true
 
   scope :not_approved, where(:publish_date => nil)
@@ -89,10 +89,6 @@ class Story < ActiveRecord::Base
 
     def calculate_count(tag)
       tag.update_attribute :stories_count, tag.stories.count
-    end
-
-    def increment_votes_count
-      self.increment! :positive_votes_count
     end
 
     def smart_add_url_protocol

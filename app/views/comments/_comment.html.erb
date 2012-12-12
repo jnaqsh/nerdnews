@@ -1,4 +1,6 @@
-<div class="comment" id="comment_<%= comment.id %>">
+<!-- cache status of Story -->
+<% status = hide?(comment) %>
+<div class="comment <%= "grey-out" if status %>" id="comment_<%= comment.id %>">
   <div>
     <%= image_tag avatar_url(comment, 32), class: 'pull-right img-polaroid clearfix' %>
   </div>

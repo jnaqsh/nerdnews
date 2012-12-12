@@ -45,7 +45,6 @@ describe Story do
     end
 
     it 'updates publisher id in story after getting published' do
-      pp @story
       @story.reload.publisher_id.should_not be_nil
     end
   end
