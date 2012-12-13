@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.9'
-gem 'sqlite3'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -47,6 +46,7 @@ end
 group :development do
   gem 'sunspot_solr' # optional pre-packaged Solr distribution for use in development
   gem 'pry-rails'
+  gem 'sqlite3'
 end
 
 group :development, :test do
