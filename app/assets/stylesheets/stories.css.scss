@@ -76,3 +76,12 @@ ul.token-input-list-facebook {
     }
   }
 }
+
+.grey-out {
+  opacity: .5;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+  &:hover {
+    opacity: 1;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  }
+}

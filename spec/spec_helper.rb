@@ -18,6 +18,9 @@ Spork.prefork do
   require "paperclip/matchers"
   require 'sunspot_test/rspec'
   Capybara.javascript_driver = :poltergeist
+  require 'webmock/rspec'
+  # Allow local connections!
+  WebMock.disable_net_connect!(:allow_localhost => true)
 
   # Requires supporting ruby files with custom matchers and macros, etc,
   # in spec/support/ and its subdirectories.
@@ -55,6 +58,7 @@ Spork.prefork do
 
     config.include AuthMacros
     config.include MailerMacros
+    config.include StubCommentsMacros
     config.include Paperclip::Shoulda::Matchers
     config.before(:each) { reset_email }
   end
