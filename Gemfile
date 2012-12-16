@@ -39,6 +39,7 @@ gem 'meta-tags', require: 'meta_tags'
 gem 'rakismet'
 gem 'resque'
 gem 'delayed_paperclip' # pass paperclip uploads to resque
+gem 'whenever', :require => false
 
 group :production do
   gem 'execjs'

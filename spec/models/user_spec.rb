@@ -202,4 +202,16 @@ describe User do
       }.to change { @user.reload.comments_count }.by(1)
     end
   end
+
+  it 'should mark stories as hide', focus: true do
+    story1 = FactoryGirl.create(:story, publish_date: Date.today - 2.day)
+    story2 = FactoryGirl.create(:story, publish_date: Date.today - 1.day)
+    story3 = FactoryGirl.create(:story, publish_date: Date.today - 1.day, total_point: -10)
+    story4 = FactoryGirl.create(:approved_story, publish_date: Date.today - 1.day, total_point: -50)
+    Story.hide_negative_stories
+    expect(story1.reload.hide?).to be_false
+    expect(story2.reload.hide?).to be_false
+    expect(story3.reload.hide?).to be_false
+    expect(story4.reload.hide?).to be_true
+  end
 end

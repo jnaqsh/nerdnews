@@ -85,17 +85,26 @@ class Story < ActiveRecord::Base
     self.publish_date.present?
   end
 
-  private
-
-    def calculate_count(tag)
-      tag.update_attribute :stories_count, tag.stories.count
+protected
+  # Searches through recent stories and mark them to hide if
+  # too much negative rating is submitted for them
+  def self.hide_negative_stories
+    recent_stories = where(publish_date: (Time.now.midnight - 1.day)..Time.now.midnight)
+    recent_stories.each do |rs|
+      rs.update_attribute :hide, true if rs.total_point <= -30
     end
+  end
 
-    def smart_add_url_protocol
-      if self.source.present?
-        unless self.source[/^https?:\/\//]
-          self.source = 'http://' + self.source
-        end
+private
+  def calculate_count(tag)
+    tag.update_attribute :stories_count, tag.stories.count
+  end
+
+  def smart_add_url_protocol
+    if self.source.present?
+      unless self.source[/^https?:\/\//]
+        self.source = 'http://' + self.source
       end
     end
+  end
 end
