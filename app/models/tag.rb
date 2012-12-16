@@ -4,6 +4,7 @@ class Tag < ActiveRecord::Base
   attr_accessible :name, :thumbnail
 
   has_attached_file :thumbnail, :styles => { thumb: "64x64#" }
+  process_in_background :thumbnail
 
   has_many :taggings, dependent: :destroy
   has_many :stories, :through => :taggings

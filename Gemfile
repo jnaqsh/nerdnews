@@ -37,6 +37,8 @@ gem 'twitter-bootstrap-rails', git: "https://github.com/jnaqsh/twitter-bootstrap
 gem 'acts_as_textcaptcha'
 gem 'meta-tags', require: 'meta_tags'
 gem 'rakismet'
+gem 'resque'
+gem 'delayed_paperclip' # pass paperclip uploads to resque
 
 group :production do
   gem 'execjs'
@@ -47,6 +49,8 @@ end
 group :development do
   gem 'sunspot_solr' # optional pre-packaged Solr distribution for use in development
   gem 'pry-rails'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :development, :test do
