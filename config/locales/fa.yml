@@ -281,6 +281,10 @@ fa:
           attributes:
             spam_answer:
               incorrect_answer: "اشتباه پاسخ دادید، دوباره تلاش کنید!"
+        tag:
+          attributes:
+            thumbnail_file_size:
+              in_between: 'اندازه تصویر می‌تواند حداکثر ۱۰۰ کیلوبایت باشد'
     models:
       story:  "خبر"
       comment: "دیدگاه"
