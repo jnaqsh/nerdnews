@@ -39,6 +39,10 @@
       <h5 class="muted">
 
         <small>
+          <span>
+            <i class='icon-plus'></i>
+            <%= t('stories.index.point') + story.total_point.to_farsi if story.approved? %>
+          </span>
           
           <span>
             <i class='icon-user'></i>
@@ -52,7 +56,7 @@
 
           <% if story.id %>
             <span>
-              <i class='icon-comment'></i>
+              <i class='icon-comments-alt'></i>
               <%= link_to story_path(story) do %>
                 <%=t 'stories.show.comments' %>
                 <%= story.comments_count.to_farsi %>
