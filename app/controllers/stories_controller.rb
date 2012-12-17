@@ -6,6 +6,7 @@ class StoriesController < ApplicationController
   def index
     @search = Story.search do
       without(:publish_date, nil)
+      without(:hide, true)
       fulltext params[:search]
       order_by :publish_date, :desc
       paginate :page => params[:page], :per_page => 5

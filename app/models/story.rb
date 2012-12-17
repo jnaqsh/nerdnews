@@ -54,6 +54,7 @@ class Story < ActiveRecord::Base
       comments.map(&:content)
     end
     time :publish_date
+    boolean :hide
     text :user do
       user.full_name if user.present?
     end
