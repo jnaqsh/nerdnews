@@ -13,6 +13,8 @@
 
   <%= f.input :tag_names, input_html: {data: {tags: @story.tags}, class: "span6", value: ' '} %>
 
+  <%#= f.association :tags, collection: [], input_html: {data: {tags: @story.tags}, class: "span6", multiple: ' '} %>
+
   <%= textcaptcha_fields(f) do %>
     <%= f.input :spam_answer, placeholder: @story.spam_question,
               input_html: {class: "span6"} %>

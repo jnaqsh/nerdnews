@@ -14,7 +14,7 @@ describe Tag do
     end
     it {should validate_presence_of(:name)}
     it {should validate_uniqueness_of(:name)}
-    it {should validate_attachment_presence(:thumbnail)}
+    # it {should validate_attachment_presence(:thumbnail)}
     it {should validate_attachment_content_type(:thumbnail).
           allowing('image/jpeg', 'image/jpg', 'image/png')}
     it {should validate_attachment_size(:thumbnail).

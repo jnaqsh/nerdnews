@@ -2,7 +2,7 @@
 
 class Story < ActiveRecord::Base
   attr_accessible :content, :publish_date, :title, :source,
-    :tag_names, :view_counter, :publisher_id
+    :tag_names, :view_counter, :publisher_id, :tag_ids
 
   extend FriendlyId
   friendly_id :title_foo, use: [:slugged, :history]
@@ -70,7 +70,15 @@ class Story < ActiveRecord::Base
 
   def tag_names=(tokens)
     # self.tag_ids = Tag.ids_from_tokens(tokens)
-    self.tag_ids = tokens.split(",")
+    tags_array = tokens.split(",")
+    tags_array.each do |tag|
+      found_tag = Tag.find_by_name(tag.strip)
+      if !found_tag.blank?
+        self.tags << found_tag if !self.tags.include?(found_tag)
+      else
+        self.tags << Tag.create!(name: tag.strip) if tag.strip.size != 0
+      end
+    end
   end
 
   def mark_as_published(publisher)

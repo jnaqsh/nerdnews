@@ -10,7 +10,9 @@ class Tag < ActiveRecord::Base
   has_many :stories, :through => :taggings
 
   validates :name, uniqueness: true, presence: true
-  validates_attachment :thumbnail, :presence => true,
+  # We can't validate presence of thumbnail, because regular users
+  # who posts stories can't assgine thumbnail for it
+  validates_attachment :thumbnail,
     :content_type => {:content_type => ['image/jpeg', 'image/jpg', 'image/png']},
     :size => { :in => 0..100.kilobytes }
 

@@ -10,9 +10,12 @@ jQuery ->
   #   noResultsText: "یافت نشد"
   #   searchingText: "در حال جستجو..."
 
+  # Used in stories/_form
   $("#story_tag_names").select2({
     multiple: true
     minimumInputLength: 1
+    tokenSeparators: [",", " ", "،"]
+    dropdownCssClass: "bigdrop"
     ajax:
       url: "/tags.json"
       dataType: 'json'
@@ -23,18 +26,22 @@ jQuery ->
       results: (tags, page)->
         results: tags
     
+    id: (tags)->
+      tags.name
+
     formatResult: (tags) ->
       tags.name
 
     formatSelection: (tags) ->
       tags.name
 
-    dropdownCssClass: "bigdrop"
-
     initSelection: (element, callback)->
       elementText = $(element).data('tags')
-      console.log $(element)
       callback(elementText)
+
+    # creates tags if not exist
+    createSearchChoice: (term, data) ->
+      {id: term, name: term}
 
     # Translations
     formatNoMatches: (term)->
