@@ -17,6 +17,7 @@ class Ability
          can :manage, Rating
          can :destroy, :session
          can :manage, Story
+         can :manage, Role
          can :manage, Tag
          can :manage, User
          can :create, Vote
