@@ -263,6 +263,7 @@ fa:
       edit: 'ویرایش پروفایل'
       registered_from: 'عضو شده از '
       website: 'وب‌سایت: %{website}'
+      role: 'نقش: %{role}'
       not_mentioned: 'عنوان نشده'
       karma: 'کارما'
       posts: 'ارسال‌ها'

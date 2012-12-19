@@ -9,15 +9,15 @@ FactoryGirl.define do
     password_confirmation 'secret'
 
     factory :user do
-      after(:create) {|u| u.roles << (Role.find_by_name("new_user") or create(:role)) }
+      after(:create) {|u| u.roles.replace [Role.find_by_name("new_user")] or [create(:role)] }
     end
 
     factory :approved_user do
-      after(:create) {|u| u.roles << (Role.find_by_name("approved") or create(:approved_role)) }
+      after(:create) {|u| u.roles.replace [Role.find_by_name("approved")] or [create(:approved_role)] }
     end
 
     factory :founder_user do
-      after(:create) {|u| u.roles << (Role.find_by_name("founder") or create(:founder_role)) }
+      after(:create) {|u| u.roles.replace [Role.find_by_name("founder")] or [create(:founder_role)] }
     end
   end
 end
