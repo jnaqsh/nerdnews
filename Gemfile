@@ -37,7 +37,8 @@ gem 'twitter-bootstrap-rails', git: "https://github.com/jnaqsh/twitter-bootstrap
 gem 'acts_as_textcaptcha'
 gem 'meta-tags', require: 'meta_tags'
 gem 'rakismet'
-gem 'resque'
+gem 'delayed_job_active_record'
+gem 'delayed_job_web'
 gem 'delayed_paperclip' # pass paperclip uploads to resque
 gem 'whenever', :require => false
 
@@ -70,5 +71,4 @@ group :test do
   gem 'shoulda-matchers'
   gem 'poltergeist'
   gem 'webmock'
-  gem 'resque_spec'
 end
