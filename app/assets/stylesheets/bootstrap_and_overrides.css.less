@@ -16,6 +16,7 @@ body {
 @fontAwesomeWoffPath: asset-path("fontawesome-webfont.woff");
 @fontAwesomeTtfPath: asset-path("fontawesome-webfont.ttf");
 @fontAwesomeSvgPath: asset-path("fontawesome-webfont.svg");
+@fontAwesomeEotPath_iefix: asset-path("fontawesome-webfont.eot#iefix");
 
 // Font Awesome
 @import "fontawesome";
@@ -183,39 +184,40 @@ article h5 span {
   border-radius: @borderRadiusSmall;
   .box-shadow(~"inset 0 1px -1px rgba(0,0,0,.075), 0 0 8px rgba(83,198,83,.6)");
 }
+.navbar-inner {
+  ul.social-icons {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    *zoom: 1;
+  }
 
-ul.social-icons {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  *zoom: 1;
-}
+  ul.social-icons:before, ul.social-icons:after {
+    display: table;
+    content: "";
+    line-height: 0;
+  }
 
-ul.social-ic  ons:before, ul.social-icons:after {
-  display: table;
-  content: "";
-  line-height: 0;
-}
+  ul.social-icons:after {
+    clear: both;
+  }
 
-ul.social-icons:after {
-  clear: both;
-}
+  ul.social-icons li {
+    list-style-image: none;
+    list-style-type: none;
+    margin-left: 0;
+    display: -moz-inline-stack;
+    display: inline-block;
+    vertical-align: middle;
+    *vertical-align: auto;
+    zoom: 1;
+    *display: inline;
+    white-space: nowrap;
+    padding: 14px 0;
+  }
 
-ul.social-icons li {
-  list-style-image: none;
-  list-style-type: none;
-  margin-left: 0;
-  display: -moz-inline-stack;
-  display: inline-block;
-  vertical-align: middle;
-  *vertical-align: auto;
-  zoom: 1;
-  *display: inline;
-  white-space: nowrap;
-  padding: 14px 0;
-}
-
-ul.social-icons img:hover {
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
-  opacity: 0.6;
+  ul.social-icons img:hover {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
+    opacity: 0.6;
+  }
 }
