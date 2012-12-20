@@ -9,3 +9,6 @@ facebook_secret: "Qh43UZY0UHbbCqM7RK3dmgOC3h3VDKB8rBD60HEZ8"
 
 aksimet_key: "df84b68a37d2"
 aksimet_url: "http://127.0.0.1:3000"
+
+delayed_job_username: "username"
+delayed_job_password: "password"

@@ -1,5 +1,8 @@
 Nerdnews::Application.routes.draw do
   root :to => "stories#index"
+  
+  # delayed job web inteface
+  match "/delayed_job" => DelayedJobWeb, :anchor => false
 
   # External Auth
   match '/auth/:provider/callback' => 'identities#create'

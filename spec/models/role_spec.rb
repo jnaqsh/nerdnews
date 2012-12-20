@@ -18,7 +18,7 @@ describe Role do
     user.should be_role("founder")
   end
 
-  it 'shows persian equivelant of role name', focus: true do
+  it 'shows persian equivelant of role name' do
     role = FactoryGirl.create(:founder_role)
     role.to_persian.should eq('موسس')
   end

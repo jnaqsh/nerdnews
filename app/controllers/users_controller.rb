@@ -86,7 +86,7 @@ class UsersController < ApplicationController
           session.delete :service_id
 
           # send a welcome message and instruction for setting password
-          @user.signup_confirmation
+          @user.delay.signup_confirmation
 
           format.html { redirect_to @user, notice: t('controllers.users.create.flash.success') }
           format.json { render json: @user, status: :created, location: @user }

@@ -40,14 +40,14 @@ class User < ActiveRecord::Base
     generate_token(:password_reset_token)
     self.password_reset_sent_at = Time.zone.now
     save!
-    UserMailer.password_reset(self).deliver
+    UserMailer.password_reset(self.id).deliver
   end
 
   def signup_confirmation
     generate_token(:password_reset_token)
     self.password_reset_sent_at = Time.zone.now
     save!
-    UserMailer.signup_confirmation(self).deliver
+    UserMailer.signup_confirmation(self.id).deliver
   end
 
   def role?(role)
