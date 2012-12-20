@@ -70,4 +70,5 @@ group :test do
   gem 'shoulda-matchers'
   gem 'poltergeist'
   gem 'webmock'
+  gem 'resque_spec'
 end
