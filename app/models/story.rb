@@ -71,6 +71,7 @@ class Story < ActiveRecord::Base
   def tag_names=(tokens)
     # self.tag_ids = Tag.ids_from_tokens(tokens)
     tags_array = tokens.split(",")
+    self.tags.clear
     tags_array.each do |tag|
       found_tag = Tag.find_by_name(tag.strip)
       if !found_tag.blank?
