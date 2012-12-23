@@ -68,7 +68,7 @@ group :test do
   gem 'sunspot_test'
   gem 'guard-spork'
   gem 'launchy'
-  gem 'rb-inotify', '~> 0.8.8'
+  gem 'rb-inotify', '~> 0.8.8', :require => false
   gem 'shoulda-matchers'
   gem 'poltergeist'
   gem 'webmock'

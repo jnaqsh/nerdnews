@@ -9,13 +9,23 @@
         <%= link_to image_tag(story.tags.first.thumbnail.url(:thumb), class: 'img-polaroid'), stories_url(tag: story.tags.first.name) %>
       <% end %>
       </div>
-      <div class='tags-holder'>
+      <ul class='tags'>
         <% story.tags.each do |tag| %>
-          <a href="<%= stories_url(tag: tag.name) %>">
-            <span class="label"><%= tag.name %></span>
-          </a>
+        <% favored = true if current_user and current_user.included_tag_as_favorite?(tag.name) %>
+          <li>
+            <p>
+            <a href="<%= stories_url(tag: tag.name) %>"><%= tag.name %></a>
+            <span <%= 'class=yellow' if favored %>>
+              <% if current_user %>
+                <%= link_to add_to_favorites_user_path(id: current_user, tag: tag.name), class: "#{'yellow' if favored}", method: :post do %>
+                  <i class='icon-star'>1</i>
+                <% end %>
+              <% end %>
+            </span>
+            </p>
+          </li>
         <% end %>
-      </div>
+      </ul>
     </div>
 
     <div class='span11'>

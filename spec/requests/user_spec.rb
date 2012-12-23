@@ -86,6 +86,18 @@ describe '/Users' do
     end
   end
 
+  context "/favoriteTag" do
+    it "adds a tag to user favorites" do
+      login @user
+      story = FactoryGirl.create(:approved_story, user: @user)
+      tag = FactoryGirl.create(:tag)
+      story.tags << tag
+      visit story_path(story)
+      click_link "1"
+      @user.reload.favorite_tags_array.should be_include(tag.name)
+    end
+  end
+
   context '/Rating' do
 
     before(:each) do

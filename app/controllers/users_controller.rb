@@ -168,4 +168,16 @@ class UsersController < ApplicationController
       format.js
     end
   end
+
+  def add_to_favorites
+    @user = User.find(params[:id])
+    respond_to do |format|
+      if @user.add_to_favorites(params[:tag])
+        format.html { redirect_to root_path, notice: 'Added' }
+        # format.js
+      else
+        format.html { redirect_to :back, notice: 'Oops' }
+      end
+    end
+  end
 end

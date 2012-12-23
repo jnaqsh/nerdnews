@@ -202,4 +202,17 @@ describe User do
       }.to change { @user.reload.comments_count }.by(1)
     end
   end
+
+  it 'returns true if tag is favorited' do
+    user = FactoryGirl.create(:user, favorite_tags: 'nerd')
+    user.included_tag_as_favorite?('nerd').should be_true
+    user.included_tag_as_favorite?('news').should be_false
+  end
+
+  it 'updates the favorite tags' do
+    user = FactoryGirl.create(:user, favorite_tags: 'nerd')
+    user.add_to_favorites('news')
+    pp user.favorite_tags_array
+    user.reload.favorite_tags_array.should be_include('news')
+  end
 end

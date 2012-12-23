@@ -32,6 +32,7 @@ Nerdnews::Application.routes.draw do
     get 'posts', on: :member
     get 'comments', on: :member
     get 'favorites', on: :member
+    post 'add_to_favorites', on: :member
     resources :messages, except: [:edit, :update, :show]
   end
 
