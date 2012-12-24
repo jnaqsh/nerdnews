@@ -36,4 +36,6 @@ Nerdnews::Application.configure do
   config.active_support.deprecation = :stderr
 
   config.action_mailer.default_url_options = {host: "localhost:3000"}
+  # Prevent Webmock to disable connection to localhost(solr specially)
+  WebMock.disable_net_connect!(:allow_localhost => true)
 end

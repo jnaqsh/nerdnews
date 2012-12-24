@@ -27,12 +27,14 @@
             </div>
 
             <div class='user user-assets'>
-              <i class="icon-user"></i>
+              <p><i class="icon-user"></i>
               <%= t('.registered_from') + time_ago_in_words(@user.created_at) + ' قبل'%></p>
-              <i class="icon-th"></i>
+              <p><i class="icon-th"></i>
               <%=t '.website', website: @user.website || t('.not_mentioned') %></p>
-              <i class="icon-envelope"></i>
-              <%= mail_to @user.email, nil, :replace_at => ' at ', replace_dot: ' dot ', encode: 'hex' %>
+              <p><i class="icon-envelope"></i>
+              <%= mail_to @user.email, nil, :replace_at => ' at ', replace_dot: ' dot ', encode: 'hex' %></p>
+              <p><i class='icon-user-md'></i>
+              <%= t('.role', role: @user.roles[0].to_persian) %></p>
             </div>
             <% if can? :edit, @user %>
               <div class='user user-edit-button'>

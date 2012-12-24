@@ -16,7 +16,6 @@ Spork.prefork do
   require 'capybara/rspec'
   require 'capybara/poltergeist'
   require "paperclip/matchers"
-  require 'sunspot_test/rspec'
   Capybara.javascript_driver = :poltergeist
   require 'webmock/rspec'
   # Allow local connections!

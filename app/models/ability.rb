@@ -17,10 +17,12 @@ class Ability
          can :manage, Rating
          can :destroy, :session
          can :manage, Story
+         can :manage, Role
          can :manage, Tag
          can :manage, User
          can :create, Vote
          can :bypass_captcha, user
+         can :add_to_favorites, User
        elsif user.role? :approved
          can :manage, Comment
          can [:create, :failure], Identity
@@ -37,6 +39,7 @@ class Ability
          can [:update, :destroy], User, :id => user.id
          can :create, Vote
          can :bypass_captcha, user
+         can :add_to_favorites, User
        elsif user.role? :new_user
          can :create, Comment
          can [:create, :failure], Identity
@@ -53,6 +56,7 @@ class Ability
          can [:update, :destroy], User, :id => user.id
          can :create, Vote
          cannot :bypass_captcha, user
+         can :add_to_favorites, User
        else # guest user
          can :create, Comment
          can [:create, :failure], Identity

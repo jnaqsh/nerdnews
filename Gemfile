@@ -36,6 +36,11 @@ gem 'twitter-bootstrap-rails', git: "https://github.com/jnaqsh/twitter-bootstrap
 gem 'acts_as_textcaptcha'
 gem 'meta-tags', require: 'meta_tags'
 gem 'rakismet'
+gem 'delayed_job_active_record'
+gem 'daemons'
+gem 'delayed_job_web'
+gem 'delayed_paperclip' # pass paperclip uploads to resque
+gem 'whenever', :require => false
 
 group :production do
   gem 'execjs'
@@ -47,6 +52,8 @@ group :development do
   gem 'sunspot_solr' # optional pre-packaged Solr distribution for use in development
   gem 'pry-rails'
   gem 'sqlite3'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :development, :test do
@@ -61,7 +68,7 @@ group :test do
   gem 'sunspot_test'
   gem 'guard-spork'
   gem 'launchy'
-  gem 'rb-inotify', '~> 0.8.8'
+  gem 'rb-inotify', '~> 0.8.8', :require => false
   gem 'shoulda-matchers'
   gem 'poltergeist'
   gem 'webmock'

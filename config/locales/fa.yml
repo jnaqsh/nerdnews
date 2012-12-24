@@ -168,6 +168,7 @@ fa:
     index:
       title: "تازه‌ترین‌ها"
       new: "خبری جدید بنویسید"
+      point: "امتیاز: "
     new:
       title: 'خبر جدید'
     edit:
@@ -262,6 +263,7 @@ fa:
       edit: 'ویرایش پروفایل'
       registered_from: 'عضو شده از '
       website: 'وب‌سایت: %{website}'
+      role: 'نقش: %{role}'
       not_mentioned: 'عنوان نشده'
       karma: 'کارما'
       posts: 'ارسال‌ها'
@@ -281,6 +283,10 @@ fa:
           attributes:
             spam_answer:
               incorrect_answer: "اشتباه پاسخ دادید، دوباره تلاش کنید!"
+        tag:
+          attributes:
+            thumbnail_file_size:
+              in_between: 'اندازه تصویر می‌تواند حداکثر ۱۰۰ کیلوبایت باشد'
     models:
       story:  "خبر"
       comment: "دیدگاه"

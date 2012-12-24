@@ -9,3 +9,6 @@ facebook_secret: "key"
 
 aksimet_key: "key"
 aksimet_url: "http://nerdnews"
+
+delayed_job_username: "username"
+delayed_job_password: "password"

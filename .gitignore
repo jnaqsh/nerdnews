@@ -19,3 +19,5 @@ pickle-email-*.html
 .tags
 .tags_sorted_by_file
 /db/schema.rb
+/config/application_configs.yml
+/db/test.sqlite3-journal

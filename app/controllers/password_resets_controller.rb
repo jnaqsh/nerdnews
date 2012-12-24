@@ -5,7 +5,7 @@ class PasswordResetsController < ApplicationController
 
   def create
     user = User.find_by_email(params[:email])
-    user.send_password_reset if user
+    user.delay.send_password_reset if user
     redirect_to root_url, notice: t('controllers.password_resets.create.flash.success')
   end
 

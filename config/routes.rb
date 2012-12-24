@@ -1,5 +1,8 @@
 Nerdnews::Application.routes.draw do
   root :to => "stories#index"
+  
+  # delayed job web inteface
+  match "/delayed_job" => DelayedJobWeb, :anchor => false
 
   # External Auth
   match '/auth/:provider/callback' => 'identities#create'
@@ -29,6 +32,7 @@ Nerdnews::Application.routes.draw do
     get 'posts', on: :member
     get 'comments', on: :member
     get 'favorites', on: :member
+    post 'add_to_favorites', on: :member
     resources :messages, except: [:edit, :update, :show]
   end
 

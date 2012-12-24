@@ -86,7 +86,7 @@ class UsersController < ApplicationController
           session.delete :service_id
 
           # send a welcome message and instruction for setting password
-          @user.signup_confirmation
+          @user.delay.signup_confirmation
 
           format.html { redirect_to @user, notice: t('controllers.users.create.flash.success') }
           format.json { render json: @user, status: :created, location: @user }
@@ -166,6 +166,19 @@ class UsersController < ApplicationController
       format.html # favorites.html.erb
       format.json { render json: @favorites }
       format.js
+    end
+  end
+
+  def add_to_favorites
+    @user = User.find(params[:id])
+    @tag = Tag.find_by_name(params[:tag])
+    respond_to do |format|
+      if @user.add_to_favorites(params[:tag])
+        format.html { redirect_to root_path, notice: 'Added' }
+        format.js
+      else
+        format.html { redirect_to :back, notice: 'Oops' }
+      end
     end
   end
 end

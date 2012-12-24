@@ -2,7 +2,7 @@
 
 class Story < ActiveRecord::Base
   attr_accessible :content, :publish_date, :title, :source,
-    :tag_names, :view_counter, :publisher_id
+    :tag_names, :view_counter, :publisher_id, :tag_ids
 
   extend FriendlyId
   friendly_id :title_foo, use: [:slugged, :history]
@@ -54,6 +54,7 @@ class Story < ActiveRecord::Base
       comments.map(&:content)
     end
     time :publish_date
+    boolean :hide
     text :user do
       user.full_name if user.present?
     end
@@ -69,7 +70,16 @@ class Story < ActiveRecord::Base
 
   def tag_names=(tokens)
     # self.tag_ids = Tag.ids_from_tokens(tokens)
-    self.tag_ids = tokens.split(",")
+    tags_array = tokens.split(",")
+    self.tags.clear
+    tags_array.each do |tag|
+      found_tag = Tag.find_by_name(tag.strip)
+      if !found_tag.blank?
+        self.tags << found_tag if !self.tags.include?(found_tag)
+      else
+        self.tags << Tag.create!(name: tag.strip) if tag.strip.size != 0
+      end
+    end
   end
 
   def mark_as_published(publisher)
@@ -85,17 +95,26 @@ class Story < ActiveRecord::Base
     self.publish_date.present?
   end
 
-  private
-
-    def calculate_count(tag)
-      tag.update_attribute :stories_count, tag.stories.count
+protected
+  # Searches through recent stories and mark them to hide if
+  # too much negative rating is submitted for them
+  def self.hide_negative_stories
+    recent_stories = where(publish_date: (Time.now.midnight - 1.day)..Time.now.midnight)
+    recent_stories.each do |rs|
+      rs.update_attribute :hide, true if rs.total_point <= -30
     end
+  end
 
-    def smart_add_url_protocol
-      if self.source.present?
-        unless self.source[/^https?:\/\//]
-          self.source = 'http://' + self.source
-        end
+private
+  def calculate_count(tag)
+    tag.update_attribute :stories_count, tag.stories.count
+  end
+
+  def smart_add_url_protocol
+    if self.source.present?
+      unless self.source[/^https?:\/\//]
+        self.source = 'http://' + self.source
       end
     end
+  end
 end

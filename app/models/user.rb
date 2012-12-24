@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   extend FriendlyId
   friendly_id :full_name_foo, use: [:slugged, :history]
 
-  attr_accessible :email, :full_name, :website, :password,
+  attr_accessible :email, :full_name, :website, :password, :role_ids,
                   :password_confirmation, :favorite_tags
 
   has_secure_password
@@ -40,14 +40,14 @@ class User < ActiveRecord::Base
     generate_token(:password_reset_token)
     self.password_reset_sent_at = Time.zone.now
     save!
-    UserMailer.password_reset(self).deliver
+    UserMailer.password_reset(self.id).deliver
   end
 
   def signup_confirmation
     generate_token(:password_reset_token)
     self.password_reset_sent_at = Time.zone.now
     save!
-    UserMailer.signup_confirmation(self).deliver
+    UserMailer.signup_confirmation(self.id).deliver
   end
 
   def role?(role)
@@ -65,9 +65,16 @@ class User < ActiveRecord::Base
   end
 
   def favorite_tags_array
-    unless self.favorite_tags.blank?
-      self.favorite_tags.split(%r{[,|،]\s*})
-    end
+      self.favorite_tags.split(',') unless favorite_tags.blank?
+  end
+
+  def included_tag_as_favorite?(tag)
+    favorite_tags_array.to_a.include? tag unless favorite_tags_array.blank?
+  end
+
+  # appends tag to the favorite tags
+  def add_to_favorites(tag)
+    self.update_attributes(favorite_tags: favorite_tags.to_s + (self.favorite_tags.blank? ? tag : ",#{tag}"))
   end
 
   private
