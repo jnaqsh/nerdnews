@@ -14,7 +14,7 @@
         <% favored = true if current_user and current_user.included_tag_as_favorite?(tag.name) %>
           <li>
             <p>
-            <a href="<%= stories_url(tag: tag) %>"><%= tag.name %></a>
+            <a href="<%= stories_url(tag: tag.name) %>"><%= tag.name %></a>
             <span class="tag_id_<%= tag.id %> <%= 'yellow' if favored %>">
               <% if current_user %>
                 <%= link_to add_to_favorites_user_path(id: current_user, tag: tag.name), class: "#{'yellow' if favored}", method: :post, remote: true do %>
