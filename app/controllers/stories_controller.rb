@@ -4,7 +4,7 @@ class StoriesController < ApplicationController
   # GET /stories
   # GET /stories.json
   def index
-    @search = Story.search do
+    @search = Story.search(:include => [:tags]) do
       without(:publish_date, nil)
       without(:hide, true)
       fulltext params[:search]
