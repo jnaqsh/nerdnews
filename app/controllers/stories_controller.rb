@@ -30,10 +30,9 @@ class StoriesController < ApplicationController
   # GET /stories/1.json
   def show
     @story = Story.approved.find(params[:id])
+    @story.increment!(:view_counter)
     @comment = @story.comments.build
     @comments = @story.comments.arrange(order: :created_at)
-
-    @story.increment!(:view_counter)
 
     if request.path != story_path(@story)
       redirect_to @story, status: :moved_permanently, only_path: true
