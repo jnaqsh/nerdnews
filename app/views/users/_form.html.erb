@@ -22,7 +22,7 @@
 
   <div class="form-actions">
     <%= f.button :submit, t('.submit'), class: 'btn-primary' %>
-    <%= f.submit t("helpers.links.cancel"), name: 'cancel', class: 'btn' %>
+    <%= link_to t("helpers.links.cancel"), :back, name: 'cancel', class: 'btn', confirm: t('.confirm') %>
   </div>
 
 <% end %>

@@ -64,27 +64,17 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     if params[:cancel]
-      session.delete :authhash
-      session.delete :service_id
+      delete_sessions
       redirect_to root_url, flash: { error: t('controllers.users.create.flash.canceled') }
     else
       @user = User.new(params[:user])
-
-      if session[:authhash].present?
-        @user.identities.build(provider: session[:authhash][:provider], uid: session[:authhash][:uid])
-      end
-
+      build_identity_if_used_openid(@user)
       @user.password, @user.password_confirmation = SecureRandom.urlsafe_base64
 
       respond_to do |format|
         if @user.save
-          # login with new user if confirm with openid
-          cookies.permanent.signed[:user_id] = @user.id if session[:authhash].present?
-
-          # delete authhash after login
-          session.delete :authhash
-          session.delete :service_id
-
+          log_in(@user)
+          delete_sessions
           # send a welcome message and instruction for setting password
           @user.delay.signup_confirmation
 
@@ -98,22 +88,33 @@ class UsersController < ApplicationController
     end
   end
 
+  def delete_sessions
+    session.delete :authhash
+    session.delete :service_id
+  end
+
+  def log_in(user)
+    cookies.permanent.signed[:user_id] = user.id if session[:authhash].present?
+  end
+
+  def build_identity_if_used_openid(user)
+    if session[:authhash].present?
+      user.identities.build(provider: session[:authhash][:provider], uid: session[:authhash][:uid])
+    end
+  end
+
   # PUT /users/1
   # PUT /users/1.json
   def update
     @user = User.find(params[:id])
-
-    if params[:cancel]
-      redirect_to @user, flash: { error: t('controllers.users.update.flash.canceled') }
-    else
-      respond_to do |format|
-        if @user.update_attributes(params[:user])
-          format.html { redirect_to @user, notice: t('controllers.users.update.flash.success') }
-          format.json { head :no_content }
-        else
-          format.html { render action: "edit" }
-          format.json { render json: @user.errors, status: :unprocessable_entity }
-        end
+    
+    respond_to do |format|
+      if @user.update_attributes(params[:user])
+        format.html { redirect_to @user, notice: t('controllers.users.update.flash.success') }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
