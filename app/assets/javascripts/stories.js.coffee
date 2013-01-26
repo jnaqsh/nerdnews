@@ -6,7 +6,7 @@ jQuery ->
     $(window).scroll ->
       url = $('.pagination a[rel="next"]').attr('href')
       if url && $(window).scrollTop() > $(document).height() - $(window).height() - 50
-        $('.pagination').text("در حال دریافت خبرهای بیشتر...")
+        $('.pagination').text("")
         $.getScript(url)
     $(window).scroll()
 
@@ -20,7 +20,7 @@ jQuery ->
       button = $(@)
       thumbs_up_list = button.parent().nextAll('div.thumbs-up-list')
       thumbs_down_list = thumbs_up_list.siblings('div.thumbs-down-list')
-      
+
       if button.is('.btn-thumbs-up')
         thumbs_down_list.hide() if thumbs_down_list.is(':visible')
         thumbs_up_list.fadeToggle()
@@ -29,7 +29,7 @@ jQuery ->
         thumbs_down_list.fadeToggle()
 
   # $('#story_content').popover()
-  
+
   votingOptions.init()
 
   $('#loading-indicator')
