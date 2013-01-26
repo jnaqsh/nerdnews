@@ -14,7 +14,7 @@ jQuery ->
 
       results: (user, page)->
         results: user
-    
+
     formatResult: (user) ->
       user.full_name
 
@@ -22,7 +22,7 @@ jQuery ->
       user.full_name
 
     dropdownCssClass: "bigdrop"
-    
+
     # Translations
     formatNoMatches: (term)->
       'موردی پیدا نشد'
@@ -43,3 +43,14 @@ jQuery ->
     tokenSeparators: [",", " ", "،"]
     dropdownCssClass: "bigdrop"
     })
+
+  if history && history.pushState
+    # for push current state of ajax links
+    $("#posts_li,#messages,#favorites_li,#comments_li").live('ajax:success', (evt, data, status, xhr)->
+      history.pushState(null, document.title, this.href)
+    )
+
+    # Back button now working with popstate in ajax links
+    $(window).bind("popstate", ->
+      $.getScript(location.href)
+    )
