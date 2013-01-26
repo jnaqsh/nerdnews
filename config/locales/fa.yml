@@ -189,7 +189,7 @@ fa:
   messages:
     title: 'پیام‌ها'
     index:
-      title: 'فهرست'
+      title: 'پیام‌های %{name}'
       no_messages: "هیچ پیامی برای شما وجود ندارد."
     new:
       title: 'ارسال پیام'
