@@ -160,7 +160,7 @@ class UsersController < ApplicationController
   # GET /users/1/favorites.json
   def favorites
     @user = User.find(params[:id])
-    @favorites = @user.votes.order('created_at desc').page params[:page], per_page: 30
+    @favorites = @user.votes.where(voteable_type: "Story").order('created_at desc').page params[:page], per_page: 30
 
     respond_to do |format|
       format.html # favorites.html.erb
