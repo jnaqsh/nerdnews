@@ -12,9 +12,9 @@
       <ul class="tags">
         <% story.tags.each do |tag| %>
         <% favored = true if current_user and current_user.included_tag_as_favorite?(tag.name) %>
-          <li>
+          <%= content_tag :li, rel: "tooltip", title: tag.name do %>
             <p>
-              <%= link_to stories_url(tag: tag.name), rel: "tooltip", title: tag.name do %>
+              <%= link_to stories_url(tag: tag.name) do %>
                 <%= truncate(tag.name, length: 10) %>
               <% end %>
               <span class="tag_id_<%= tag.id %> <%= 'yellow' if favored %>">
@@ -25,7 +25,7 @@
                 <% end %>
               </span>
             </p>
-          </li>
+          <% end %>
         <% end %>
       </ul>
     </div>
