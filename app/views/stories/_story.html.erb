@@ -14,14 +14,16 @@
         <% favored = true if current_user and current_user.included_tag_as_favorite?(tag.name) %>
           <li>
             <p>
-            <a href="<%= stories_url(tag: tag.name) %>" <%= 'rel=tooltip' if tag.name.size > 10 %> title=<%= tag.name %> ><%= truncate(tag.name, length: 10) %></a>
-            <span class="tag_id_<%= tag.id %> <%= 'yellow' if favored %>">
-              <% if current_user %>
-                <%= link_to add_to_favorites_user_path(id: current_user, tag: tag.name), class: "#{'yellow' if favored}", method: :post, remote: true do %>
-                  <i class='icon-star'>1</i>
-                <% end %>
+              <%= link_to stories_url(tag: tag.name), rel: "tooltip", title: tag.name do %>
+                <%= truncate(tag.name, length: 10) %>
               <% end %>
-            </span>
+              <span class="tag_id_<%= tag.id %> <%= 'yellow' if favored %>">
+                <% if current_user %>
+                  <%= link_to add_to_favorites_user_path(id: current_user, tag: tag.name), class: "#{'yellow' if favored}", method: :post, remote: true do %>
+                    <i class='icon-star'>1</i>
+                  <% end %>
+                <% end %>
+              </span>
             </p>
           </li>
         <% end %>
@@ -53,12 +55,12 @@
             <i class='icon-plus'></i>
             <%= t('stories.index.point') + story.total_point.to_farsi if story.approved? %>
           </span>
-          
+
           <span>
             <i class='icon-user'></i>
             <%= user_name(story) %>
           </span>
-          
+
           <span>
             <i class='icon-calendar'></i>
             <%= to_jalali(story.publish_date) if story.approved? %>
