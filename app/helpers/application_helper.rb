@@ -25,7 +25,7 @@ module ApplicationHelper
         render(message) + content_tag(:div, nested_comments(sub_messsages), class: "nested_comments")
       end.join.html_safe
     else
-      return false
+      return nil
     end
   end
 
