@@ -46,7 +46,7 @@ jQuery ->
 
   if history && history.pushState
     # for push current state of ajax links
-    $("#posts_li,#messages,#favorites_li,#comments_li").live('ajax:success', (evt, data, status, xhr)->
+    $("#posts_li,#messages,#favorites_li,#comments_li").on('ajax:success', (evt, data, status, xhr)->
       history.pushState(null, document.title, this.href)
     )
 

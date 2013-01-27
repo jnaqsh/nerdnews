@@ -13,8 +13,8 @@ jQuery ->
   # Show optins when clicking voting button
   votingOptions =
     init: ->
-      $('.btn-thumbs-up').live('click', @show)
-      $('.btn-thumbs-down').live('click', @show)
+      $('.btn-thumbs-up').on('click', @show)
+      $('.btn-thumbs-down').on('click', @show)
 
     show: ->
       button = $(@)
@@ -32,10 +32,10 @@ jQuery ->
 
   votingOptions.init()
 
-  $('#loading-indicator')
+  $(document)
     .ajaxStart( ->
-      $(this).show()
+      $("#loading-indicator").show()
     )
     .ajaxStop( ->
-      $(this).hide()
+      $("#loading-indicator").hide()
     )
