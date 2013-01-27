@@ -6,9 +6,9 @@
   </div>
 
   <div class="main">
-    
+
     <span class='owner'>
-      
+
       <% if comment.user_id.nil? %>
         <%= comment.name %>
       <% else %>
@@ -47,9 +47,11 @@
     </div>
 
     <div class='row'>
-      <div id='voting-buttons-<%= comment.id %>' class='span1 pull-right'>
-        <%= render 'comments/voting_buttons', comment: comment %>
-      </div>
+      <% if can? :create, Vote %>
+        <div id='voting-buttons-<%= comment.id %>' class='span1 pull-right'>
+          <%= render 'comments/voting_buttons', comment: comment %>
+        </div>
+      <% end %>
       <!-- <h5 class="muted"> -->
         <div class='span3 thumbs-up-list' id='thumbs-up-list-<%= comment.id %>'>
           <ul>
