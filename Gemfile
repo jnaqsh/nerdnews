@@ -42,6 +42,8 @@ gem 'delayed_job_web'
 gem 'delayed_paperclip' # pass paperclip uploads to resque
 gem 'whenever', :require => false
 
+gem 'twitter'
+
 group :production do
   gem 'execjs'
   gem 'therubyracer'

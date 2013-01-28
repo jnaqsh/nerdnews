@@ -85,6 +85,7 @@ class Story < ActiveRecord::Base
   def mark_as_published(publisher)
     self.update_attributes publish_date: Time.now
     self.update_attributes publisher_id: publisher.id
+    Tweet.delay.tweet("خبر جدید: #{self.title}", story_url(self)) if Rails.env == "production"
   end
 
   def user_voted?(user)

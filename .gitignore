@@ -25,3 +25,4 @@ pickle-email-*.html
 /config/database.yml
 /config/sunspot.yml
 /config/textcaptcha.yml
+/config/twitter.yml
