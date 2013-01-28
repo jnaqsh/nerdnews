@@ -69,6 +69,7 @@ class UsersController < ApplicationController
       redirect_to root_url, flash: { error: t('controllers.users.create.flash.canceled') }
     else
       @user = User.new(params[:user])
+      @providers = Identity.providers
 
       if session[:authhash].present?
         @user.identities.build(provider: session[:authhash][:provider], uid: session[:authhash][:uid])

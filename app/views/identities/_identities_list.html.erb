@@ -1,10 +1,12 @@
-<ul id="services_list">
-  <% @providers.each do |provider| %>
-    <li>
-      <%= link_to "/auth/#{provider}" do %>
-        <%= image_tag "#{provider}_64.png", size: "64x64", alt: "#{provider}" %>
-          <%= provider.upcase %>
-        <% end %>
-    </li>
-  <% end %>
-</ul>
+<% if @providers && !@providers.empty? %>
+  <ul id="services_list">
+    <% @providers.each do |provider| %>
+      <li>
+        <%= link_to "/auth/#{provider}" do %>
+          <%= image_tag "#{provider}_64.png", size: "64x64", alt: "#{provider}" %>
+            <%= provider.upcase %>
+          <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
