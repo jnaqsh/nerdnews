@@ -236,7 +236,7 @@ fa:
   shared:
     header:
       brand_name: "نردنیوز"
-      home: "صفحه اصلی"
+      home: "تازه‌ترین خبرها"
       mypage: 'صفحه من'
       register: "ثبت‌نام"
       login: "ورود"
