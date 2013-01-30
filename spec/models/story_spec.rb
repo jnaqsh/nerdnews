@@ -37,7 +37,7 @@ describe Story do
     before do
       @story = FactoryGirl.build(:story)
       @user = FactoryGirl.create(:approved_user)
-      @story.mark_as_published(@user)
+      @story.mark_as_published(@user, "http://example.com/stories/story_name")
     end
 
     it 'makes the story published' do

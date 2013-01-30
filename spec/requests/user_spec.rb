@@ -162,7 +162,7 @@ describe '/Users' do
         find('button.btn-thumbs-up').click
         find("div.thumbs-up-list").should be_visible
         find("div.thumbs-down-list").should_not be_visible
-        
+
         find('button.btn-thumbs-down').click
         find("div.thumbs-up-list").should_not be_visible
         find("div.thumbs-down-list").should be_visible
