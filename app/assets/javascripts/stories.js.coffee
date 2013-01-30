@@ -13,8 +13,8 @@ jQuery ->
   # Show optins when clicking voting button
   votingOptions =
     init: ->
-      $('.btn-thumbs-up').on('click', @show)
-      $('.btn-thumbs-down').on('click', @show)
+      $(document).on('click', '.btn-thumbs-up', @show)
+      $(document).on('click', '.btn-thumbs-down', @show)
 
     show: ->
       button = $(@)
@@ -28,10 +28,9 @@ jQuery ->
         thumbs_up_list.hide() if thumbs_up_list.is(':visible')
         thumbs_down_list.fadeToggle()
 
-  # $('#story_content').popover()
-
   votingOptions.init()
 
+  # show/hide loading indicator
   $(document)
     .ajaxStart( ->
       $("#loading-indicator").show()
