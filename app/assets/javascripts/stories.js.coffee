@@ -6,7 +6,7 @@ jQuery ->
     $(window).scroll ->
       url = $('.pagination a[rel="next"]').attr('href')
       if url && $(window).scrollTop() > $(document).height() - $(window).height() - 50
-        $('.pagination').text("")
+        $('.pagination').text("در حال دریافت خبرهای بیشتر...")
         $.getScript(url)
     $(window).scroll()
 
