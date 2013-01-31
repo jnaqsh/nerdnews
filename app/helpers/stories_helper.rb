@@ -15,6 +15,6 @@ module StoriesHelper
   end
 
   def hide?(voteable)
-    voteable.total_point <= -30 ? true : false
+    voteable.total_point <= Story::HIDE_THRESHOLD ? true : false
   end
 end

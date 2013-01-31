@@ -1,6 +1,8 @@
 #encoding: utf-8
 
 class Story < ActiveRecord::Base
+  HIDE_THRESHOLD = -30
+
   attr_accessible :content, :publish_date, :title, :source,
     :tag_names, :view_counter, :publisher_id, :tag_ids
 
@@ -103,7 +105,8 @@ protected
   def self.hide_negative_stories
     recent_stories = where(publish_date: (Time.now.midnight - 1.day)..Time.now.midnight)
     recent_stories.each do |rs|
-      rs.update_attribute :hide, true if rs.total_point <= -30
+      rs.update_attribute :hide, true if rs.total_point <= Story::HIDE_THRESHOLD
+      rs.index!
     end
   end
 
