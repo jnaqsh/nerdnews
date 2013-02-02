@@ -1,5 +1,7 @@
 # encoding:utf-8
 class User < ActiveRecord::Base
+  KARMA_THRESHOLD = 100
+
   extend FriendlyId
   friendly_id :full_name_foo, use: [:slugged, :history]
 
@@ -114,6 +116,16 @@ class User < ActiveRecord::Base
       unless self.website[/^https?:\/\//]
         self.website = 'http://' + self.website
       end
+    end
+  end
+
+  protected
+  # Searches through users and mark them to be approved or not based on KARMA_THRESHOLD
+  def self.promote_users
+    users = joins(:roles).where('user_rate > ? and roles.name = "new_user"', User::KARMA_THRESHOLD)
+    users.each do |u|
+      u.roles = [Role.find_by_name("approved")]
+      UserMailer.delay.promotion_message(u.id)
     end
   end
 end

@@ -2,4 +2,5 @@
 
 every 1.day, :at => '2:00 am' do
   runner "Story.hide_negative_stories"
+  runner "User.promote_users"
 end

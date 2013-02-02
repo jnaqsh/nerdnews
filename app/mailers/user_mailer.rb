@@ -17,4 +17,9 @@ class UserMailer < ActionMailer::Base
     @user = User.find(user_id)
     mail to: @user.email, subject: "نردنیوز: به نردنیوز خوش‌آمدید"
   end
+
+  def promotion_message(user_id)
+    @user = User.find(user_id)
+    mail to: @user.email, subject: "نردنیوز: نقش شما تبدیل به کاربر تاییدشده گردید"
+  end
 end

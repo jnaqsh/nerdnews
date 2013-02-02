@@ -35,4 +35,15 @@ describe UserMailer do
       mail.body.encoded.should match(edit_password_reset_path(user.password_reset_token))
     end
   end
+
+  describe "promotion message" do
+    let(:user) {FactoryGirl.create(:approved_user)}
+    let(:mail) {UserMailer.promotion_message(user)}
+
+    it 'sends promotion message for user' do
+      mail.subject.should eq("نردنیوز: نقش شما تبدیل به کاربر تاییدشده گردید")
+      mail.to.should eq([user.email])
+      mail.from.should eq(["do_not_reply@nerdnews.ir"])
+    end
+  end
 end
