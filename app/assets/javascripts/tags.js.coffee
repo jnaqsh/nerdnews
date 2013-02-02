@@ -10,6 +10,14 @@ jQuery ->
   #   noResultsText: "یافت نشد"
   #   searchingText: "در حال جستجو..."
 
+  if $('#tags-list').next('.pagination').length
+    $(window).scroll ->
+      url = $('.pagination a[rel="next"]').attr('href')
+      if url && $(window).scrollTop() > $(document).height() - $(window).height() - 50
+        $('.pagination').text("در حال دریافت تگ‌های بیشتر...")
+        $.getScript(url)
+    $(window).scroll()
+
   # Used in stories/_form
   $("#story_tag_names").select2({
     multiple: true
@@ -25,7 +33,7 @@ jQuery ->
 
       results: (tags, page)->
         results: tags
-    
+
     id: (tags)->
       tags.name
 
@@ -51,7 +59,7 @@ jQuery ->
     formatInputTooShort: (term, minLength)->
       minLength + " حرف دیگر وارد کنید"
     })
-  
+
   $("#tag_search").select2({
     minimumInputLength: 1
     ajax:
@@ -63,7 +71,7 @@ jQuery ->
 
       results: (tags, page)->
         results: tags
-    
+
     formatResult: (tags) ->
       tags.name
 
@@ -71,7 +79,7 @@ jQuery ->
       tags.name
 
     dropdownCssClass: "bigdrop"
-    
+
     # Translations
     formatNoMatches: (term)->
       'موردی پیدا نشد'

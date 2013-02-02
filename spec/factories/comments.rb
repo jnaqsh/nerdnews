@@ -4,7 +4,7 @@ include WebMock::API
 
 FactoryGirl.define do
   factory :comment do |c|
-    
+
     before(:create) do |c|
       if c.name == 'viagra-test-123'
         stub_request(:post, /.*akismet.com\/.*/)
@@ -23,8 +23,9 @@ FactoryGirl.define do
     c.user_agent { 'Mozilla/5.0' }
     c.referrer { 'http://localhost' }
 
-    factory :comment_reply do |c|
-      c.ancestry 1
+    factory :comment_reply do
+      after(:build) {|c| c.ancestry = create(:comment).id}
+      after(:build) {|c| c.story = create(:approved_story) }
     end
   end
 end

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.9'
+gem 'rails', '3.2.11'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -41,6 +41,11 @@ gem 'daemons'
 gem 'delayed_job_web'
 gem 'delayed_paperclip' # pass paperclip uploads to resque
 gem 'whenever', :require => false
+
+#for testing email in development mode
+gem 'letter_opener', group: :development
+
+gem 'twitter'
 
 group :production do
   gem 'execjs'

@@ -1,7 +1,7 @@
 <!-- cache status of Story -->
-<% status = hide?(story) %>
+<% status = hide_story?(story) %>
 
-<article <%= "class=grey-out" if status and current_page?(action: 'index') %> >
+<article <%= "class=grey-out" if status %> >
   <div class='row'>
     <div class='span1'>
       <div class='story-image'>
@@ -9,41 +9,35 @@
         <%= link_to image_tag(story.tags.first.thumbnail.url(:thumb), class: 'img-polaroid'), stories_url(tag: story.tags.first.name) %>
       <% end %>
       </div>
-      <ul class="tags">
-        <% story.tags.each do |tag| %>
-        <% favored = true if current_user and current_user.included_tag_as_favorite?(tag.name) %>
-          <li>
-            <p>
-            <a href="<%= stories_url(tag: tag.name) %>" <%= 'rel=tooltip' if tag.name.size > 10 %> title=<%= tag.name %> ><%= truncate(tag.name, length: 10) %></a>
-            <span class="tag_id_<%= tag.id %> <%= 'yellow' if favored %>">
-              <% if current_user %>
-                <%= link_to add_to_favorites_user_path(id: current_user, tag: tag.name), class: "#{'yellow' if favored}", method: :post, remote: true do %>
-                  <i class='icon-star'>1</i>
+      <% unless status %>
+        <ul class="tags">
+          <% story.tags.each do |tag| %>
+          <% favored = true if current_user and current_user.included_tag_as_favorite?(tag.name) %>
+            <%= content_tag :li, rel: "tooltip", title: tag.name do %>
+              <p>
+                <%= link_to stories_url(tag: tag.name) do %>
+                  <%= truncate(tag.name, length: 10) %>
                 <% end %>
-              <% end %>
-            </span>
-            </p>
-          </li>
-        <% end %>
-      </ul>
+                <span class="tag_id_<%= tag.id %> <%= 'yellow' if favored %>">
+                  <% if current_user && !favored %>
+                    <%= link_to add_to_favorites_user_path(id: current_user, tag: tag.name), class: "#{'yellow' if favored}", method: :post, remote: true do %>
+                      <i class='icon-star'>1</i>
+                    <% end %>
+                  <% end %>
+                </span>
+              </p>
+            <% end %>
+          <% end %>
+        </ul>
+      <% end %>
     </div>
 
     <div class='span11'>
 
       <h3><%= link_to story.title, story %></h3>
 
-      <% unless params[:preview_button] %>
-        <ul class='social-icons'>
-          <li>
-            <a href="http://www.facebook.com/sharer.php?u=<%= story_url(story) %>&t=<%= story.title %>" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><i class="icon-facebook-sign"></i></a>
-          </li>
-          <li>
-            <a href="http://twitter.com/home?status=<%= story.title + " " + story_url(story) %>" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><i class="icon-twitter-sign"></i></a>
-          </li>
-          <li>
-            <a href="https://m.google.com/app/plus/x/?v=compose&content=<%= story.title %>&url=<%= story_url(story) %>" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><i class="icon-google-plus-sign"></i></a>
-          </li>
-        </ul>
+      <% unless status or params[:preview_button] %>
+        <%= render partial: 'stories/social_share', locals: {title: story.title, share_url: story_url(story)} %>
       <% end %>
 
       <h5 class="muted">
@@ -53,12 +47,12 @@
             <i class='icon-plus'></i>
             <%= t('stories.index.point') + story.total_point.to_farsi if story.approved? %>
           </span>
-          
+
           <span>
             <i class='icon-user'></i>
             <%= user_name(story) %>
           </span>
-          
+
           <span>
             <i class='icon-calendar'></i>
             <%= to_jalali(story.publish_date) if story.approved? %>
@@ -76,7 +70,7 @@
         </small>
       </h5>
 
-      <% if !status or !current_page?(controller: 'stories', action: 'index') %>
+      <% unless status %>
         <p><%= user_name(story) %> می‌نویسد:</p>
         <blockquote>
           <%= sanitize(RedCloth.new(story.content, [:filter_html, :filter_styles]).to_html) %><br />

@@ -1,3 +1,4 @@
 $("li.active").removeAttr('class')
 $("#posts_li").parent().addClass('active')
 $("#user-activities").html('<%= j render partial: 'user_stories', object: @stories %>')
+document.title = '<%= escape_javascript("#{t('shared.header.brand_name') + ' | ' + t('users.title') + ' | ' + t('.title', name: @user.full_name)}") %>'

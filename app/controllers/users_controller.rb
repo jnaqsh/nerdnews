@@ -68,7 +68,12 @@ class UsersController < ApplicationController
       redirect_to root_url, flash: { error: t('controllers.users.create.flash.canceled') }
     else
       @user = User.new(params[:user])
-      build_identity_if_used_openid(@user)
+      @providers = Identity.providers
+
+      if session[:authhash].present?
+        @user.identities.build(provider: session[:authhash][:provider], uid: session[:authhash][:uid])
+      end
+
       @user.password, @user.password_confirmation = SecureRandom.urlsafe_base64
 
       respond_to do |format|
@@ -161,7 +166,7 @@ class UsersController < ApplicationController
   # GET /users/1/favorites.json
   def favorites
     @user = User.find(params[:id])
-    @favorites = @user.votes.order('created_at desc').page params[:page], per_page: 30
+    @favorites = @user.votes.where(voteable_type: "Story").order('created_at desc').page params[:page], per_page: 30
 
     respond_to do |format|
       format.html # favorites.html.erb

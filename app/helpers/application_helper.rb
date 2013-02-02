@@ -25,7 +25,7 @@ module ApplicationHelper
         render(message) + content_tag(:div, nested_comments(sub_messsages), class: "nested_comments")
       end.join.html_safe
     else
-      return false
+      return nil
     end
   end
 
@@ -44,7 +44,7 @@ module ApplicationHelper
   end
 
   def link_to_li(name, *args)
-    options = args.last if args.last.kind_of? Hash else nil
+    options = (args.last.kind_of? Hash) ? args.last : nil
     if args.include? request.path
       content_tag :li, class: "active" do
         link_to name, args[0], options

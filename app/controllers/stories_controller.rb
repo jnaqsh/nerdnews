@@ -70,14 +70,13 @@ class StoriesController < ApplicationController
 
     bypass_captcha_or_not @story
 
-    @story.mark_as_published(current_user) if can? :publish, @story
-
     respond_to do |format|
       if params[:preview_button]
         format.html { render action: "new" }
       else
         if @story.save
           rate_user(1, "#{current_user.full_name} posted a story with id #{@story.id}") if current_user.present?
+          @story.mark_as_published(current_user, story_url(@story)) if can? :publish, @story
           format.html { redirect_to root_path, only_path: true, notice: t("#{successful_notice(@story)}") }
           format.json { render json: @story, status: :created, location: @story }
         else
@@ -121,7 +120,7 @@ class StoriesController < ApplicationController
     @story = Story.find(params[:id])
 
     respond_to do |format|
-      if @story.mark_as_published(current_user)
+      if @story.mark_as_published(current_user, story_url(@story))
         rate_user(@story.user, 3, "a story from #{@story.user.full_name} with id #{@story.id} got approved")
         format.html { redirect_to unpublished_stories_path,
           notice: t('controllers.stories.publish.flash.success') }

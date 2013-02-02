@@ -1,10 +1,13 @@
-Hi <%= raw @comment.parent.name %>!
+سلام <%= @comment.parent.name %>!
 
-Someone has responded to your comment on NerdNews. Here is the response.
+شخصی به دیدگاه شما پاسخ داده‌است. پاسخ آن این است:
 
 ---
-From: <%= raw @comment.name %>
-<%= raw @comment.content %>
----
+از: <%= @comment.name %>
+<%= @comment.content %>
 
-You can unsubscribe from reciving emails in your profile later.
+پیوند آن در نردنیوز:
+<%= story_url(@comment.story, anchor: "comment_#{@comment.id}") %>
+
+---
+نردنیوز - http://nerdnews.ir/

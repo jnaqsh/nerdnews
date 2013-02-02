@@ -1,2 +1,10 @@
-$('.pagination').hide()
-$('#tags-list').html('<%= j render(@tags) %>')
+$('#tags-list').append('<%= j render(@tags) %>');
+<% if @tags.next_page %>
+  $(".pagination").replaceWith('<%= j paginate(@tags) %>');
+<% else %>
+  $('.pagination').remove();
+<% end %>
+
+<% sleep 1 %>
+
+$("[rel=tooltip]").tooltip()

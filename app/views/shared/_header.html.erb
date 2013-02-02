@@ -19,8 +19,8 @@
 
     <div class="pull-left">
       <ul class="nav">
-          <li><%= link_to t('.register'), new_user_path %></li>
-          <li><%= link_to t('.login'), new_session_path %></li>
+          <li><%= link_to_li t('.register'), new_user_path, users_path %></li>
+          <li><%= link_to_li t('.login'), new_session_path %></li>
       </ul>
     </div>
 
@@ -98,27 +98,27 @@
       <!-- Social Icons -->
       <ul class='social-icons'>
         <li>
-          <%= link_to 'stories.atom' do %>
+          <%= link_to stories_path + ".atom", format: "atom" do %>
           <%= image_tag 'social-icons/fc-webicon-rss-m.png' %>
           <% end %>
         </li>
         <li>
-          <%= link_to '#' do %>
+          <%= link_to 'https://github.com/jnaqsh/nerdnews' do %>
           <%= image_tag 'social-icons/fc-webicon-github-m.png' %>
           <% end %>
         </li>
         <li>
-          <%= link_to '#' do %>
+          <%= link_to 'https://plus.google.com/b/111646924484501471492/111646924484501471492' do %>
           <%= image_tag 'social-icons/fc-webicon-googleplus-m.png' %>
           <% end %>
         </li>
         <li>
-          <%= link_to '#' do %>
+          <%= link_to 'https://twitter.com/farsi_nerdnews' do %>
           <%= image_tag 'social-icons/fc-webicon-twitter-m.png' %>
           <% end %>
         </li>
         <li>
-          <%= link_to '#' do %>
+          <%= link_to 'http://www.facebook.com/farsi.nerdnews' do %>
           <%= image_tag 'social-icons/fc-webicon-facebook-m.png' %>
           <% end %>
         </li>

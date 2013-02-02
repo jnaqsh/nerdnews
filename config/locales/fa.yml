@@ -190,7 +190,7 @@ fa:
   messages:
     title: 'پیام‌ها'
     index:
-      title: 'فهرست'
+      title: 'پیام‌های %{name}'
       no_messages: "هیچ پیامی برای شما وجود ندارد."
     new:
       title: 'ارسال پیام'
@@ -200,6 +200,7 @@ fa:
     index:
       title: 'فهرست'
       search: 'جستجو'
+      new: "تگ جدید"
     edit:
       title: 'ویرایش تگ'
     new:
@@ -237,7 +238,7 @@ fa:
   shared:
     header:
       brand_name: "نردنیوز"
-      home: "صفحه اصلی"
+      home: "تازه‌ترین خبرها"
       mypage: 'صفحه من'
       register: "ثبت‌نام"
       login: "ورود"

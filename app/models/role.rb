@@ -7,7 +7,7 @@ class Role < ActiveRecord::Base
   validates_uniqueness_of :name
   validates_presence_of :name
 
-  ROLES_PERSIAN={new_user: 'کاربرجدید', approved: 'تاییدشده', founder: 'موسس'}
+  ROLES_PERSIAN={new_user: 'کاربر جدید', approved: 'تاییدشده', founder: 'موسس'}
 
   def to_persian
     ROLES_PERSIAN[name.to_sym]
