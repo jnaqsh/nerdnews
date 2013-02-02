@@ -12,7 +12,7 @@
       <% if comment.user_id.nil? %>
         <%= comment.name %>
       <% else %>
-        <%= link_to comment.name, user_path(comment.user_id) %>
+        <%= link_to comment.name, user_path(comment.user) %>
       <% end %>
 
       <% if comment.parent.present? %>

@@ -159,6 +159,8 @@ GEM
     less-rails (2.2.6)
       actionpack (>= 3.1)
       less (~> 2.2.0)
+    letter_opener (1.0.0)
+      launchy (>= 2.0.4)
     libv8 (3.11.8.13)
     listen (0.7.2)
     lumberjack (1.0.2)
@@ -374,6 +376,7 @@ DEPENDENCIES
   kaminari
   launchy
   less-rails
+  letter_opener
   meta-tags
   mysql2
   omniauth-facebook

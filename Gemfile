@@ -42,6 +42,9 @@ gem 'delayed_job_web'
 gem 'delayed_paperclip' # pass paperclip uploads to resque
 gem 'whenever', :require => false
 
+#for testing email in development mode
+gem 'letter_opener', group: :development
+
 gem 'twitter'
 
 group :production do

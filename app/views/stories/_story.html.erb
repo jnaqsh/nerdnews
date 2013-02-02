@@ -35,7 +35,7 @@
       <h3><%= link_to story.title, story %></h3>
 
       <% unless params[:preview_button] %>
-        <%= render partial: 'social_share', locals: {title: story.title, share_url: story_url(story)} %>
+        <%= render partial: 'stories/social_share', locals: {title: story.title, share_url: story_url(story)} %>
       <% end %>
 
       <h5 class="muted">
