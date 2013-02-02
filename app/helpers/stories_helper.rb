@@ -14,7 +14,13 @@ module StoriesHelper
     end
   end
 
-  def hide?(voteable)
-    voteable.total_point <= Story::HIDE_THRESHOLD ? true : false
+  def hide_story?(story)
+    if story.total_point < Story::HIDE_THRESHOLD
+      if current_page?(controller: "stories", action: "index") or
+        current_page?(controller: "mypage", action: "index")
+          return true
+      end
+    end
+    return false
   end
 end
