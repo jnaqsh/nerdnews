@@ -9,7 +9,7 @@ describe "Tags" do
 
   it "should make a new tag" do
     visit tags_path
-    click_on "جدید"
+    click_on "تگ جدید"
     current_path.should eq(new_tag_path)
     fill_in 'نام', with: "tag"
     attach_file('tag_thumbnail', 'app/assets/images/rails.png')
