@@ -16,12 +16,6 @@
   padding: 4px 6px 4px 6px;
 }
 
-textarea {
--webkit-border-radius: 0 0 4px 4px;
- -moz-border-radius: 0 0 4px 4px;
-      border-radius: 0 0 4px 4px;
-}
-
 .tags-holder {
   margin: 5px auto;
   a {
@@ -36,7 +30,7 @@ span.comment-counter {
 .thumbs-up-list, .thumbs-down-list {
   display: none;
   padding-top: 7px;
-  
+
   li {
     display: inline;
     list-style: none;
