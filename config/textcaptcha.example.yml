@@ -1,39 +1,36 @@
 development: &common_settings
-  bcrypt_salt: $2a$10$qBf8znbwyDzaA8GnvNScCu   # must be a valid bcrypt salt, we've generated this one for you randomly
+  #api_key: PASTE_YOUR_TEXTCAPCHA_API_KEY_HERE  # grab one from http://textcaptcha.ir/api
+  bcrypt_salt: $2a$10$5qtI7uEOB7vOlG0RChy/CO   # must be a valid bcrypt salt, we've generated this one for you randomly
                                                # generate another with; require 'bcrypt'; BCrypt::Engine.generate_salt
   bcrypt_cost: 10 # optional (default is 10) must be > 4 (a larger number means slower, but better encryption)
                   # see http://bcrypt-ruby.rubyforge.org for more information on bcrypt
   questions:
       - question: 'یخ سرد است یا داغ؟'
         answers: 'سرد'
-      - question: 'اسم رهبر جنبش نرم‌افزار آزاد؟'
-        answers: 'استالمن'
-        answers: 'ریچارد'
-        answers: 'ريچارد'
-        answers: 'ریچارد استالمن'
-        answers: 'ريچارد استالمن'
-      - question: 'دو + دو'
-        answers: '۴'
-        answers: '4'
-        answers: 'چهار'
-        answers: 'four'
-      - question: 'نام سیستم‌عامل مایکروسافت؟'
-        answers: 'ویندوز'
-        answers: 'ويندوز'
-        answers: 'مایکروسافت ویندوز'
-        answers: 'مايکروسافت ويندوز'
-        answers: 'windows'
-      - question: 'لینوکس درست است یا گنو/لینوکس؟'
-        answers: 'لینوکس'
-        answers: 'گنو/لینوکس'
+      - question: 'سیب قرمز چه رنگی است؟'
+        answers: 'قرمز'
+      - question: 'دو به‌علاوهٔ ۳ چقدر می‌شود؟'
+        answers: '۵,5,پنج'
+      - question: 'دو ضربدر ۵ چقدر می‌شود؟'
+        answers: '۱۰,10,ده'
+      - question: 'چه تعداد رنگ در جملهٔ، سبز، قهوه‌ای، پا، آبی وجود دارد؟'
+        answers: '3,۳,سه'
+      - question: 'اگر امروز جمعه باشد، فردا چه روزی است؟'
+        answers: 'شنبه'
+      - question: '۱۱ - ۱؟'
+        answers: '10,۱۰,ده'
+      - question: 'آبی که در حال جوشیدن است، داغ است یا سرد؟'
+        answers: 'داغ'
+      - question: 'لباس آبی امروز من، چه رنگی است؟'
+        answers: 'آبی'
+      - question: '۱۶ + ۲؟'
+        answers: '۱۸,18,هجده'
 
 test:
-  bcrypt_salt: $2a$10$qBf8znbwyDzaA8GnvNScCu
+  <<: *common_settings
+  api_key: PASTE_YOUR_TEXTCAPCHA_API_KEY_HERE
+  bcrypt_salt: $2a$10$5qtI7uEOB7vOlG0RChy/CO
   bcrypt_cost: 1
-
-  questions:
-      - question: 'two + two'
-        answers: 'four'
 
 production:
   <<: *common_settings

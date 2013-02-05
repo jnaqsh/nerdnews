@@ -6,6 +6,13 @@ GIT
       i18n (~> 0.5)
 
 GIT
+  remote: https://github.com/jnaqsh/acts_as_textcaptcha.git
+  revision: 6a0c8691cc13af1ffc44944cf750fe43ebf7c401
+  specs:
+    acts_as_textcaptcha (3.0.5)
+      bcrypt-ruby
+
+GIT
   remote: https://github.com/jnaqsh/twitter-bootstrap-rails.git
   revision: 65751b00c375988808d484e859e94443c1d92ae9
   specs:
@@ -45,8 +52,6 @@ GEM
     activesupport (3.2.11)
       i18n (~> 0.6)
       multi_json (~> 1.0)
-    acts_as_textcaptcha (3.0.5)
-      bcrypt-ruby
     addressable (2.3.2)
     ancestry (1.3.0)
       activerecord (>= 2.3.14)
@@ -351,7 +356,7 @@ PLATFORMS
 
 DEPENDENCIES
   RedCloth
-  acts_as_textcaptcha
+  acts_as_textcaptcha!
   ancestry
   bcrypt-ruby (~> 3.0.0)
   better_errors

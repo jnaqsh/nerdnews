@@ -33,7 +33,7 @@ gem 'friendly_id'
 gem 'therubyracer'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails', git: "https://github.com/jnaqsh/twitter-bootstrap-rails.git"
-gem 'acts_as_textcaptcha'
+gem 'acts_as_textcaptcha', git: "https://github.com/jnaqsh/acts_as_textcaptcha.git"
 gem 'meta-tags', require: 'meta_tags'
 gem 'rakismet'
 gem 'delayed_job_active_record'
