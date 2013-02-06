@@ -1,5 +1,9 @@
 fa:
   controllers:
+    under_construction_email_storage:
+      create:
+        flash:
+          success: "در هنگام آغاز به کار نردنیوز شما را نیز مطلع می‌کنیم"
     stories:
       create:
         flash:
@@ -90,6 +94,10 @@ fa:
         flash:
           fail: "زمان بازنشانی گذرواژه تمام شده‌است، دوباره سعی کنید."
           success: "گذرواژه جدید با موفقیت بازنشانی شد."
+
+  email_storage:
+    form:
+      submit: "خبرم کن!"
 
   users:
     title: 'کاربران'
@@ -276,6 +284,20 @@ fa:
       no_article: 'پست تایید شده‌ای ارسال نشده است.'
       no_article: 'هیچ نظری ارسال نشده.'
       no_favorite: 'هیچ موردی ثبت نشده است.'
+
+  activemodel:
+    errors:
+      models:
+        under_construction_email_storage:
+          attributes:
+            email:
+              format: "نامناسب است"
+              uniqueness: "پیشتر ثبت‌نام شده‌اید"
+    models:
+      under_construction_email_storage: "ذخیره ایمیل در دست ساخت"
+    attributes:
+      under_construction_email_storage:
+        email: "ایمیل"
 
   activerecord:
     errors:

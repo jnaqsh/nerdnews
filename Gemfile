@@ -47,6 +47,8 @@ gem 'letter_opener', group: :development
 
 gem 'twitter'
 
+gem 'under_construction'
+
 group :production do
   gem 'execjs'
   gem 'therubyracer'

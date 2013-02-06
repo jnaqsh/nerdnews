@@ -1,0 +1,116 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta name="generator" content=
+  "HTML Tidy for Linux/x86 (vers 25 March 2009), see www.w3.org" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+  <meta http-equiv="refresh" content="60">
+
+  <title><%= @info['site_title'] %></title>
+  <%= javascript_include_tag "application" %>
+  <%= stylesheet_link_tag "under_construction/#{@theme}/style.css", :media => "all" %>
+  <%= javascript_include_tag "under_construction/#{@theme}/jquery.countdown.min.js" %>
+  <%= javascript_include_tag "under_construction/#{@theme}/jcarousellite1.0.1_min.js" %>
+  <!-- jquery countdown-->
+
+  <script type="text/javascript">
+  $(function () {
+  var austDay = new Date("<%= Chronic.parse(@launch_time).to_s(:rfc822) %>");
+    $('#defaultCountdown').countdown({until: austDay, layout: '{dn} {dl}, {hn} {hl}, {mn} {ml}, and {sn} {sl}'});
+    $('#year').text(austDay.getFullYear());
+    });
+  </script><!-- jquery slider -->
+
+  <script type="text/javascript">
+  $(function() {
+    $("#slidertext").jCarouselLite({
+        btnNext: ".next",
+        btnPrev: ".prev"
+    });
+  });
+  </script><!--script for IE6-image transparency recover-->
+  <!--[if IE 6]>
+<script type="text/javascript" src="js/DD_belatedPNG_0.0.7a-min.js"></script>
+<script>
+  /* EXAMPLE */
+  DD_belatedPNG.fix('#logo img,#main,.counter,.twitter,.flickr,.facebook,.youtube,.skype,.stumbleupon, #submit,.prev img,.next img,#email');
+</script>
+<![endif]-->
+</head>
+
+<body>
+  <div class="container">
+    <%= view_flash_messages unless view_flash_messages.blank?  %>
+    <div id="header">
+      <div id="logo">
+        <a href="/under_construction">
+          <img src="<%= @info['logo_url'] %>"></img>
+        </a>
+      </div><!--end logo-->
+
+      <div id="contact_details">
+        <p><%= link_to @info['email'], "#" %></p>
+
+        <p><%= link_to "#{@info['phone']}", "#" %></p>
+      </div><!--end contact details-->
+    </div><!--end header-->
+
+    <div style="clear:both"></div>
+
+    <div id="main">
+      <div id="content">
+        <div class="text">
+          <h2><%= @info['heading'] %></h2>
+        </div><!--end text-->
+
+        <div class="counter">
+          <h3><%= @info['counter_heading'] %></h3>
+
+          <div id="defaultCountdown"></div>
+        </div><!--end counter-->
+
+        <div class="details">
+          <!--slider prev button-->
+          <a class="prev" href="#">
+            <%= image_tag "under_construction/#{@theme}/prev.png" %></a>
+
+          <div id="sliderwrap">
+            <div id="slidertext">
+              <!-- The slider -->
+
+              <ul>
+                <li>
+                  <h3><%= @info['inform_by_email'] %></h3>
+                  <%= render partial: 'email_storage/form', object: @email %>
+                </li><!-- Slider item -->
+
+                <li>
+                  <h3><%= @socials_title %></h3>
+
+                  <div class="social">
+                    <% @socials.each do |name, url| %>
+                      <%= link_to name, url, class: name %>
+                    <% end %>
+                  </div>
+                </li><!-- Slider item -->
+
+                <li>
+                  <h3><%= @info['about_title'] %></h3>
+
+                  <p><%= @info['about_content'] %></p>
+                </li><!-- Slider item -->
+              </ul>
+            </div><!-- End of slidertext -->
+          </div><!-- End of sliderwrap -->
+          <!--slider next button-->
+          <a class="next" href=
+          "#"><%= image_tag "under_construction/#{@theme}/next.png" %></a>
+        </div><!--end details-->
+      </div><!--end content-->
+
+      <p class="copyright">
+      <%= raw @info['copyright'] + " " + @site_developer['name'] %></p>
+    </div><!--end main-->
+  </div><!--end class container-->
+</body>
+</html>
