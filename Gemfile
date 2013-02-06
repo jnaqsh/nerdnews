@@ -49,6 +49,9 @@ gem 'twitter'
 
 gem 'under_construction'
 
+# Deploy with Capistrano
+gem 'capistrano'
+
 group :production do
   gem 'execjs'
   gem 'therubyracer'
