@@ -3,7 +3,7 @@ launch_time: "13 Feb 2013 11:30am"
 progress: "95" # Percent
 progress_label: "Progress"
 website_address: "http://nerdnews.ir"
-host_name: "nerdnews.ir:80"
+host_name: "nerdnews.ir"
 info:
   site_title: "نردنیوز | در دست ساخت"
   logo_url: "/assets/NerdLogo-58px.png"
