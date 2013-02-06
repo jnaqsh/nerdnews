@@ -19,6 +19,7 @@ gem 'simple_form'
 gem "cancan"
 gem 'kaminari'
 gem 'sunspot_rails'
+gem 'sunspot_solr' # optional pre-packaged Solr distribution for use in development
 gem 'RedCloth'
 # gem 'rack-mini-profiler'
 gem 'jalalidate'
@@ -59,7 +60,6 @@ group :production do
 end
 
 group :development do
-  gem 'sunspot_solr' # optional pre-packaged Solr distribution for use in development
   gem 'pry-rails'
   gem 'sqlite3'
   gem 'better_errors'
