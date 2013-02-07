@@ -292,7 +292,7 @@ fa:
           attributes:
             email:
               format: "نامناسب است"
-              uniqueness: "پیشتر ثبت‌نام شده‌اید"
+              uniqueness: "پیشتر ثبت شده‌است"
     models:
       under_construction_email_storage: "ذخیره ایمیل در دست ساخت"
     attributes:
