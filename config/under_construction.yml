@@ -1,5 +1,5 @@
 theme: 'site-under-construction-fa'
-launch_time: "13 Feb 2013 04:00am"
+launch_time: "13 Feb 2013 05:00am"
 progress: "95" # Percent
 progress_label: "Progress"
 website_address: "http://nerdnews.ir"
@@ -9,7 +9,7 @@ info:
   logo_url: "/assets/NerdLogo-58px.png"
   email: "nerdnews@jnaqsh.com"
   phone: "تلفن: ۹۸۵۱۱۶۰۹۹۳۹۳+"
-  heading: "پروژه‌ای آزاد و متن‌باز برای افراد گیک و نرد"
+  heading: "پروژه‌ای آزاد برای گیک‌ها"
   counter_heading: "زمانی که به آغاز کار نردنیوز مانده‌است:"
   about_title: "نردنیوز چیست؟"
   about_content: |
