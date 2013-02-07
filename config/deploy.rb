@@ -26,10 +26,8 @@ ssh_options[:forward_agent] = true
 after "deploy", "deploy:cleanup" # keep only the last 5 releases
 after "deploy:stop",    "delayed_job:stop"
 after "deploy:start",   "delayed_job:start"
-after "deploy:restart", "delayed_job:restart"
 after "deploy:start", "solr:start"
 after "deploy:stop", "solr:stop"
-after "deploy:restart", "solr:reindex"
 
 namespace :deploy do
   desc "reload the database with seed data"
