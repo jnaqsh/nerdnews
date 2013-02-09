@@ -57,6 +57,7 @@ namespace :deploy do
     put File.read("config/application_configs.example.yml"), "#{shared_path}/config/application_configs.yml"
     put File.read("config/sunspot.example.yml"), "#{shared_path}/config/sunspot.yml"
     put File.read("config/textcaptcha.example.yml"), "#{shared_path}/config/textcaptcha.yml"
+    put File.read("config/dropbox.example.yml"), "#{shared_path}/config/dropbox.yml"
     put File.read("config/twitter.example.yml"), "#{shared_path}/config/twitter.yml"
     FileUtils.touch "#{shared_path}/db/under_construction_mails.txt"
     puts "Now edit the config files in #{shared_path}."
@@ -69,6 +70,7 @@ namespace :deploy do
     run "ln -nfs #{shared_path}/config/sunspot.yml #{release_path}/config/sunspot.yml"
     run "ln -nfs #{shared_path}/config/textcaptcha.yml #{release_path}/config/textcaptcha.yml"
     run "ln -nfs #{shared_path}/config/twitter.yml #{release_path}/config/twitter.yml"
+    run "ln -nfs #{shared_path}/config/dropbox.yml #{release_path}/config/dropbox.yml"
     run "ln -nfs #{shared_path}/db/under_construction_mails.txt #{release_path}/db/under_construction_mails.txt"
   end
   after "deploy:finalize_update", "deploy:symlink_config"

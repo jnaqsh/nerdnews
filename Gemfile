@@ -25,7 +25,10 @@ gem 'RedCloth'
 gem 'jalalidate'
 gem 'farsifu', "0.2.2"
 gem 'ancestry'
+
 gem 'paperclip'
+gem "paperclip-dropbox"
+
 gem 'omniauth-github'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'

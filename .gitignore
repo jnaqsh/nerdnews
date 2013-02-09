@@ -27,3 +27,4 @@ pickle-email-*.html
 /config/textcaptcha.yml
 /config/twitter.yml
 db/under_construction_mails.txt
+config/dropbox.yml
