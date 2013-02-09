@@ -52,11 +52,13 @@ namespace :deploy do
   task :setup_config, roles: :app do
     sudo "ln -nfs #{current_path}/config/nginx.conf /opt/nginx/sites-enabled/#{application}"
     run "mkdir -p #{shared_path}/config"
+    run "mkdir -p #{shared_path}/db"
     put File.read("config/database.example.yml"), "#{shared_path}/config/database.yml"
     put File.read("config/application_configs.example.yml"), "#{shared_path}/config/application_configs.yml"
     put File.read("config/sunspot.example.yml"), "#{shared_path}/config/sunspot.yml"
     put File.read("config/textcaptcha.example.yml"), "#{shared_path}/config/textcaptcha.yml"
     put File.read("config/twitter.example.yml"), "#{shared_path}/config/twitter.yml"
+    FileUtils.touch "#{shared_path}/db/under_construction_mails.txt"
     puts "Now edit the config files in #{shared_path}."
   end
   after "deploy:setup", "deploy:setup_config"
@@ -67,6 +69,7 @@ namespace :deploy do
     run "ln -nfs #{shared_path}/config/sunspot.yml #{release_path}/config/sunspot.yml"
     run "ln -nfs #{shared_path}/config/textcaptcha.yml #{release_path}/config/textcaptcha.yml"
     run "ln -nfs #{shared_path}/config/twitter.yml #{release_path}/config/twitter.yml"
+    run "ln -nfs #{shared_path}/db/under_construction_mails.txt #{release_path}/db/under_construction_mails.txt"
   end
   after "deploy:finalize_update", "deploy:symlink_config"
 
