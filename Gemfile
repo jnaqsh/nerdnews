@@ -11,6 +11,8 @@ group :assets do
   gem 'select2-rails'
 end
 
+gem 'acts_as_paranoid'
+
 gem 'jquery-rails'
 gem 'rails-i18n', git: 'https://github.com/iCEAGE/rails-i18n.git'
 gem 'bcrypt-ruby', '~> 3.0.0'

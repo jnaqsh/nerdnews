@@ -1,4 +1,6 @@
 class Comment < ActiveRecord::Base
+  acts_as_paranoid
+
   include Rakismet::Model
 
   HIDE_THRESHOLD = -30

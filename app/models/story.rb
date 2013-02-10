@@ -1,6 +1,9 @@
 #encoding: utf-8
 
 class Story < ActiveRecord::Base
+  acts_as_paranoid
+  acts_as_textcaptcha
+
   HIDE_THRESHOLD = -30
 
   attr_accessible :content, :publish_date, :title, :source,
@@ -26,8 +29,6 @@ class Story < ActiveRecord::Base
     end
     parameterized_string.downcase
   end
-
-  acts_as_textcaptcha
 
   has_many :comments, dependent: :destroy
   has_many :taggings, dependent: :destroy
