@@ -17,7 +17,8 @@ module StoriesHelper
   def hide_story?(story)
     if story.total_point < Story::HIDE_THRESHOLD
       if current_page?(controller: "stories", action: "index") or
-        current_page?(controller: "mypage", action: "index")
+        current_page?(controller: "mypage", action: "index") or
+        current_page?("/stories")
           return true
       end
     end
