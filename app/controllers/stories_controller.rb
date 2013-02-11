@@ -1,4 +1,5 @@
-# encoding: UTF-8
+# encoding: utf-8
+
 class StoriesController < ApplicationController
   load_and_authorize_resource
   # GET /stories
@@ -75,8 +76,15 @@ class StoriesController < ApplicationController
         format.html { render action: "new" }
       else
         if @story.save
-          rate_user(1, "#{current_user.full_name} posted a story with id #{@story.id}") if current_user.present?
-          @story.mark_as_published(current_user, story_url(@story)) if can? :publish, @story
+          if can? :publish, @story
+            @story.mark_as_published(current_user, story_url(@story))
+            record_activity "خبر شماره #{@story.id.to_farsi} را ایجاد و منتشر کردید",
+              story_path(@story) #This will call application controller  record_activity
+          else
+            record_activity "خبر شماره #{@story.id.to_farsi} را ایجاد کردید" #This will call application controller  record_activity
+          end
+
+          rate_user 1 if current_user.present?
           format.html { redirect_to root_path, only_path: true, notice: t("#{successful_notice(@story)}") }
           format.json { render json: @story, status: :created, location: @story }
         else
@@ -94,6 +102,9 @@ class StoriesController < ApplicationController
 
     respond_to do |format|
       if @story.update_attributes(params[:story])
+        record_activity "خبر شماره #{@story.id.to_farsi} را به‌روز کردید",
+          story_path(@story) #This will call application controller  record_activity
+
         format.html { redirect_to @story, notice: t('controllers.stories.update.flash.success') }
         format.json { head :no_content }
       else
@@ -109,6 +120,8 @@ class StoriesController < ApplicationController
     @story = Story.find(params[:id])
     @story.destroy
 
+    record_activity "خبر شماره #{@story.id.to_farsi} را حذف کردید"
+
     respond_to do |format|
       format.html { redirect_to stories_url }
       format.json { head :no_content }
@@ -121,7 +134,12 @@ class StoriesController < ApplicationController
 
     respond_to do |format|
       if @story.mark_as_published(current_user, story_url(@story))
-        rate_user(@story.user, 3, "a story from #{@story.user.full_name} with id #{@story.id} got approved")
+
+        rate_user(@story.user, 3) if @story.user #rate for user who wrote a story
+        rate_user(1) if current_user #rate for user who publish a story
+        record_activity "خبر شماره #{@story.id.to_farsi} را منتشر کردید",
+          story_path(@story) #This will call application controller  record_activity
+
         format.html { redirect_to unpublished_stories_path,
           notice: t('controllers.stories.publish.flash.success') }
       end

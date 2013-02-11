@@ -123,8 +123,10 @@ fa:
       title: 'ارسال‌های %{name}'
     favorites:
       title: 'موارد موردعلاقه %{name}'
+    activity_logs:
+      title: 'تاریخچه فعالیت %{name}'
     comments:
-      title: 'نظرات %{name}'
+      title: 'دیدگاه‌های %{name}'
 
   mypage:
     title: 'صفحه شخصی'
@@ -281,6 +283,7 @@ fa:
       comments: 'دیدگاه‌ها'
       favorite_tags: 'تگ‌های مورد علاقه'
       favorites: 'موردعلاقه‌ها'
+      activity_logs: "تاریخچه فعالیت"
       no_article: 'پست تایید شده‌ای ارسال نشده است.'
       no_article: 'هیچ نظری ارسال نشده.'
       no_favorite: 'هیچ موردی ثبت نشده است.'

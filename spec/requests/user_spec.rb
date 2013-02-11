@@ -58,6 +58,12 @@ describe '/Users' do
       visit favorites_user_path(@user)
       page.should have_content vote.rating.name
     end
+
+    it 'can get users activity logs' do
+      login @user
+      visit activity_logs_user_path(@user)
+      page.should have_content "وارد نردنیوز شدید"
+    end
   end
 
   context '/MyPage' do

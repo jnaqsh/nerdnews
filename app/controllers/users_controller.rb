@@ -1,6 +1,8 @@
+# encoding: utf-8
+
 class UsersController < ApplicationController
   load_and_authorize_resource
-  layout 'user_profile', only: [:show, :posts, :comments, :favorites]
+  layout 'user_profile', only: [:show, :posts, :comments, :favorites, :activity_logs]
 
   # GET /users
   # GET /users.json
@@ -109,6 +111,7 @@ class UsersController < ApplicationController
     else
       respond_to do |format|
         if @user.update_attributes(params[:user])
+          record_activity "پروفایل خود را به‌روز کردید"
           format.html { redirect_to @user, notice: t('controllers.users.update.flash.success') }
           format.json { head :no_content }
         else
@@ -166,6 +169,16 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html # favorites.html.erb
       format.json { render json: @favorites }
+      format.js
+    end
+  end
+
+  def activity_logs
+    @activity_logs = @user.activity_logs.order('created_at desc').page params[:page], per_page: 30
+
+    respond_to do |format|
+      format.html # favorites.html.erb
+      format.json { render json: @activity_logs }
       format.js
     end
   end

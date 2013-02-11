@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 class SessionsController < ApplicationController
   authorize_resource :class => false
   def new
@@ -12,6 +14,8 @@ class SessionsController < ApplicationController
       else
         cookies.signed[:user_id] = user.id
       end
+      record_activity "وارد نردنیوز شدید"
+
       redirect_to root_path, notice: t('controllers.sessions.create.flash.success')
     else
       redirect_to new_session_path
@@ -23,6 +27,7 @@ class SessionsController < ApplicationController
     cookies.delete(:user_id)
     session[:authhash] = nil
     session[:service_id] = nil
+    record_activity "از نردنیوز خارج شدید"
     redirect_to root_path, :notice => t('controllers.sessions.destroy.flash.success')
   end
 end

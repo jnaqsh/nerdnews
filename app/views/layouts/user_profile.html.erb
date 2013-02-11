@@ -10,7 +10,7 @@
     </div>
 
     <%= render partial: 'shared/loading_indicator' %>
-    
+
     <div class="container">
 
       <%= render partial: 'shared/flash', locals: { flash: flash } %>
@@ -96,6 +96,10 @@
 
             <% if can? :index, @user.received_messages.build %>
               <%= link_to_li t('.messages'), user_messages_path(@user), remote: true, id: "messages" %>
+            <% end %>
+
+            <% if can? :activity_logs, @user %>
+              <%= link_to_li t('.activity_logs'), activity_logs_user_path(@user), remote: true, id: "activity_logs_li" %>
             <% end %>
           </ul>
             <%= yield %>

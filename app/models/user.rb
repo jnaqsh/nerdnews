@@ -13,11 +13,11 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :roles
   has_many :stories
   has_many :comments
-  has_many :rating_logs, dependent: :destroy
   has_many :votes
   has_many :identities
   has_many :sent_messages, class_name: Message, foreign_key: :sender_id
   has_many :received_messages, class_name: Message, foreign_key: :receiver_id
+  has_many :activity_logs
 
   validates_presence_of :full_name, :email
   validates :email, email_format: true
