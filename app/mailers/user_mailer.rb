@@ -22,4 +22,10 @@ class UserMailer < ActionMailer::Base
     @user = User.find(user_id)
     mail to: @user.email, subject: "نردنیوز: نقش شما تبدیل به کاربر تاییدشده گردید"
   end
+
+  def message_notify(message_id)
+    @message = Message.find(message_id)
+    @user = @message.receiver
+    mail to: @user.email, subject: "نردنیوز: شخصی برای شما پیام خصوصی گذاشته است"
+  end
 end

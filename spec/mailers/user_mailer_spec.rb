@@ -46,4 +46,15 @@ describe UserMailer do
       mail.from.should eq(["do_not_reply@nerdnews.ir"])
     end
   end
+
+  describe "message notify" do
+    let(:message) {FactoryGirl.create(:message_with_user)}
+    let(:mail) {UserMailer.message_notify(message)}
+
+    it 'sends message notify to user' do
+      mail.subject.should eq("نردنیوز: شخصی برای شما پیام خصوصی گذاشته است")
+      mail.to.should eq([message.receiver.email])
+      mail.from.should eq(["do_not_reply@nerdnews.ir"])
+    end
+  end
 end
