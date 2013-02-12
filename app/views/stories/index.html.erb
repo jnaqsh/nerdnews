@@ -17,7 +17,7 @@
 <% end %>
 
 <div id="stories">
-  <%= render @stories %>
+  <%= (render @stories) || "خبر مورد نظر پیدا نشد" %>
 </div>
 
 <%= paginate @stories %>
