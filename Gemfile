@@ -22,10 +22,14 @@ gem "cancan"
 gem 'kaminari'
 gem 'sunspot_rails'
 gem 'sunspot_solr' # optional pre-packaged Solr distribution for use in development
+
 gem 'RedCloth'
+# plain formatter for redcloth
+gem "red_cloth_formatters_plain", "~> 0.2.0"
+
 # gem 'rack-mini-profiler'
 gem 'jalalidate'
-gem 'farsifu', "0.2.2"
+gem 'farsifu'
 gem 'ancestry'
 
 gem 'paperclip'

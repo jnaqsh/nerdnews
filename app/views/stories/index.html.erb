@@ -1,6 +1,8 @@
 <% set_meta_tags title: [t('stories.title'), t('.title')],
-                 description: 'صفحه اصلی',
-                 keywords: 'اخبار, صفحه اصلی' %>
+                 description: 'نردنیوز شبکه اجتماعی خبر برای افراد گیک فناوری است',
+                 keywords: 'اخبار, صفحه اصلی, فناوری,گیک,خوره,نرد,نردنیوز,شبکه اجتماعی خبر',
+                 canonical: root_url %>
+
 <%- model_class = Story.new.class -%>
 <% content_for :head, auto_discovery_link_tag(:atom, stories_url(:format => "atom")) %>
 <% content_for :page_header do %>

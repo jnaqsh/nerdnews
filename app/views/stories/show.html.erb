@@ -1,6 +1,7 @@
 <% set_meta_tags title: [t('stories.title'), @story.title],
                  description: "#{@story.content.truncate(160)}",
                  keywords: @story.tags.map { |tag| tag.name },
+                 canonical: story_url(@story),
                  open_graph: {
                     title: "#{@story.title}",
                     type: 'news',
