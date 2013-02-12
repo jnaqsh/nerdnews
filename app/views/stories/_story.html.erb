@@ -34,41 +34,43 @@
 
     <div class='span11'>
 
-      <h3><%= link_to story.title, story %></h3>
+      <h3><%= link_to_if story.published?, story.title, story %></h3>
 
-      <% unless status or params[:preview_button] %>
-        <%= render partial: 'stories/social_share', locals: {title: story.title, share_url: story_url(story)} %>
-      <% end %>
+      <% if story.published? %>
+        <% unless status or params[:preview_button] %>
+          <%= render partial: 'stories/social_share', locals: {title: story.title, share_url: story_url(story)} %>
+        <% end %>
 
-      <h5 class="muted">
+        <h5 class="muted">
 
-        <small>
-          <span>
-            <i class='icon-plus'></i>
-            <%= t('stories.index.point') + story.total_point.to_farsi if story.approved? %>
-          </span>
-
-          <span>
-            <i class='icon-user'></i>
-            <%= user_name(story) %>
-          </span>
-
-          <span>
-            <i class='icon-calendar'></i>
-            <%= to_jalali(story.publish_date) if story.approved? %>
-          </span>
-
-          <% if story.id %>
+          <small>
             <span>
-              <i class='icon-comments-alt'></i>
-              <%= link_to story_path(story) do %>
-                <%=t 'stories.show.comments' %>
-                <%= story.comments_count.to_farsi %>
-              <% end %>
+              <i class='icon-plus'></i>
+              <%= t('stories.index.point') + story.total_point.to_farsi if story.approved? %>
             </span>
-          <% end %>
-        </small>
-      </h5>
+
+            <span>
+              <i class='icon-user'></i>
+              <%= user_name(story) %>
+            </span>
+
+            <span>
+              <i class='icon-calendar'></i>
+              <%= to_jalali(story.publish_date) if story.approved? %>
+            </span>
+
+            <% if story.id %>
+              <span>
+                <i class='icon-comments-alt'></i>
+                <%= link_to story_path(story) do %>
+                  <%=t 'stories.show.comments' %>
+                  <%= story.comments_count.to_farsi %>
+                <% end %>
+              </span>
+            <% end %>
+          </small>
+        </h5>
+      <% end %>
 
       <% unless status %>
         <p><%= user_name(story) %> می‌نویسد:</p>

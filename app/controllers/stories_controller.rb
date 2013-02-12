@@ -30,13 +30,23 @@ class StoriesController < ApplicationController
   # GET /stories/1
   # GET /stories/1.json
   def show
-    @story = Story.approved.find(params[:id])
-    @story.increment!(:view_counter)
-    @comment = @story.comments.build
-    @comments = @story.comments.approved.arrange(order: :created_at)
+    @story = Story.find(params[:id])
 
-    if request.path != story_path(@story)
-      redirect_to @story, status: :moved_permanently, only_path: true
+    if @story and @story.published?
+      @story.increment!(:view_counter)
+      @comment = @story.comments.build
+      @comments = @story.comments.approved.arrange(order: :created_at)
+
+      if request.path != story_path(@story)
+        redirect_to @story, status: :moved_permanently, only_path: true
+        return
+      end
+    else
+      raise ActiveRecord::RecordNotFound, t("controllers.stories.show.story_not_found")
+    end
+
+    respond_to do |format|
+      format.html
     end
   end
 
@@ -78,13 +88,13 @@ class StoriesController < ApplicationController
         if @story.save
           if can? :publish, @story
             @story.mark_as_published(current_user, story_url(@story))
+            rate_user 3 if current_user.present?
             record_activity "خبر شماره #{@story.id.to_farsi} را ایجاد و منتشر کردید",
               story_path(@story) #This will call application controller  record_activity
           else
             record_activity "خبر شماره #{@story.id.to_farsi} را ایجاد کردید" #This will call application controller  record_activity
           end
 
-          rate_user 1 if current_user.present?
           format.html { redirect_to root_path, only_path: true, notice: t("#{successful_notice(@story)}") }
           format.json { render json: @story, status: :created, location: @story }
         else
