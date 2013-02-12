@@ -154,6 +154,7 @@ describe User do
     it { should have_many :sent_messages }
     it { should have_many :received_messages }
     it { should have_many :activity_logs }
+    it { should have_many :published_stories }
   end
 
   context 'Validations' do

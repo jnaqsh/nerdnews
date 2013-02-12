@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
   has_many :sent_messages, class_name: Message, foreign_key: :sender_id
   has_many :received_messages, class_name: Message, foreign_key: :receiver_id
   has_many :activity_logs
+  has_many :published_stories, class_name: "Story", foreign_key: "publisher_id"
 
   validates_presence_of :full_name, :email
   validates :email, email_format: true
