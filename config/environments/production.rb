@@ -81,4 +81,8 @@ Nerdnews::Application.configure do
       :unique_filename => true
     }
   }
+
+  config.middleware.use ExceptionNotifier,
+    sender_address: 'do_not_reply@nerdnews.ir',
+    exception_recipients: "h.ramezanian@jnaqsh.com"
 end

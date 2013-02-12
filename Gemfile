@@ -48,6 +48,9 @@ gem 'delayed_job_web'
 gem 'delayed_paperclip' # pass paperclip uploads to resque
 gem 'whenever', :require => false
 
+# mails execeptions to admin of site
+gem 'exception_notification'
+
 #for testing email in development mode
 gem 'letter_opener', group: :development
 

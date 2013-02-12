@@ -121,6 +121,9 @@ GEM
       json
     erubis (2.7.0)
     eventmachine (1.0.0)
+    exception_notification (3.0.0)
+      actionmailer (>= 3.0.4)
+      tinder (~> 1.8)
     execjs (1.4.0)
       multi_json (~> 1.0)
     factory_girl (4.2.0)
@@ -132,6 +135,8 @@ GEM
       i18n (~> 0.5)
     faraday (0.8.5)
       multipart-post (~> 1.1)
+    faraday_middleware (0.9.0)
+      faraday (>= 0.7.4, < 0.9)
     farsifu (0.2.2)
     faye-websocket (0.4.6)
       eventmachine (>= 0.12.0)
@@ -286,6 +291,7 @@ GEM
     rdoc (3.12.1)
       json (~> 1.4)
     ref (1.0.2)
+    roauth (0.0.8)
     rsolr (1.0.8)
       builder (>= 2.1.2)
     rspec (2.12.0)
@@ -353,6 +359,15 @@ GEM
       ref
     thor (0.17.0)
     tilt (1.3.3)
+    tinder (1.9.2)
+      eventmachine (~> 1.0)
+      faraday (~> 0.8)
+      faraday_middleware (~> 0.9)
+      hashie (~> 1.0)
+      json (~> 1.7.5)
+      mime-types (~> 1.19)
+      multi_json (~> 1.5)
+      twitter-stream (~> 0.1)
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
@@ -360,6 +375,9 @@ GEM
       faraday (~> 0.8, < 0.10)
       multi_json (~> 1.0)
       simple_oauth (~> 0.2)
+    twitter-stream (0.1.12)
+      eventmachine (>= 0.12.8)
+      roauth (>= 0.0.2)
     tzinfo (0.3.35)
     uglifier (1.3.0)
       execjs (>= 0.3.0)
@@ -398,6 +416,7 @@ DEPENDENCIES
   delayed_job_active_record
   delayed_job_web
   delayed_paperclip
+  exception_notification
   execjs
   factory_girl_rails
   faker
