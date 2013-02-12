@@ -45,29 +45,34 @@
 
           <small>
             <span>
-              <i class='icon-plus'></i>
+              <i class='icon-plus' title="امتیاز"></i>
               <%= t('stories.index.point') + story.total_point.to_farsi if story.approved? %>
             </span>
 
             <span>
-              <i class='icon-user'></i>
+              <i class='icon-user' title="نویسنده"></i>
               <%= user_name(story) %>
             </span>
 
             <span>
-              <i class='icon-calendar'></i>
+              <i class='icon-calendar' title="تاریخ انتشار"></i>
               <%= to_jalali(story.publish_date) if story.approved? %>
             </span>
 
             <% if story.id %>
               <span>
-                <i class='icon-comments-alt'></i>
+                <i class='icon-comments-alt' title="تعداد دیدگاه‌ها"></i>
                 <%= link_to story_path(story) do %>
                   <%=t 'stories.show.comments' %>
                   <%= story.comments_count.to_farsi %>
                 <% end %>
               </span>
             <% end %>
+
+            <span>
+              <i class='icon-ok' title="تاییدکننده"></i>
+              <%= link_to story.publisher.full_name, user_path(story.publisher) %>
+            </span>
           </small>
         </h5>
       <% end %>
