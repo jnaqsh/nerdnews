@@ -30,6 +30,7 @@ class Story < ActiveRecord::Base
     parameterized_string.downcase
   end
 
+  belongs_to :remover, class_name: "User"
   belongs_to :publisher, class_name: "User"
   has_many :comments, dependent: :destroy
   has_many :taggings, dependent: :destroy

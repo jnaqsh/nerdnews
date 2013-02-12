@@ -155,6 +155,7 @@ describe User do
     it { should have_many :received_messages }
     it { should have_many :activity_logs }
     it { should have_many :published_stories }
+    it { should have_many :removed_stories }
   end
 
   context 'Validations' do

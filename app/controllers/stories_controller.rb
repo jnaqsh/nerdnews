@@ -130,6 +130,8 @@ class StoriesController < ApplicationController
     @story = Story.find(params[:id])
     @story.destroy
 
+    @story.update_attributes({remover: current_user}, without_protection: true)
+
     record_activity "خبر شماره #{@story.id.to_farsi} را حذف کردید"
 
     respond_to do |format|
