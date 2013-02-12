@@ -31,7 +31,7 @@ class Ability
          can [:index, :create], Message, sender: { :id => user.id }
          cannot :create, Message, receiver: { :id => user.id }
          can :index, :mypage
-         can [:index, :show], Page
+         can :show, Page
          can :destroy, :session
          can :manage, Story
          can [:read, :create, :update], Tag

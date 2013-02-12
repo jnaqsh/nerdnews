@@ -52,6 +52,10 @@
             <li><%= link_to t('.users'), users_path %></li>
           <% end %>
 
+          <% if can? :index, Page %>
+            <li><%= link_to t('.pages'), pages_path %></li>
+          <% end %>
+
           <% if can? :create, Rating %>
             <li><%= link_to t('.ratings'), ratings_path %></li>
           <% end %>

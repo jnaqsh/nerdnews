@@ -8,7 +8,9 @@
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:permalink) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <% if can? [:edit, :destroy], Page %>
+        <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <% end %>
     </tr>
   </thead>
   <tbody>
@@ -16,21 +18,27 @@
       <tr>
         <td><%= link_to page.id, page_path(page) %></td>
         <td><%= page.name %></td>
-        <td><%= page.permalink %></td>
+        <td><%= link_to page.permalink, page_by_permalink_path(page.permalink) %></td>
         <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_page_path(page), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      page_path(page),
-                      :method => :delete,
-                      :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
-                      :class => 'btn btn-mini btn-danger' %>
+          <% if can? :edit, Page %>
+            <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                        edit_page_path(page), :class => 'btn btn-mini' %>
+          <% end %>
+          <% if can? :destroy, Page %>
+            <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                        page_path(page),
+                        :method => :delete,
+                        :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
+                        :class => 'btn btn-mini btn-danger' %>
+          <% end %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_page_path,
-            :class => 'btn btn-primary' %>
+<% if can? :create, Page %>
+  <%= link_to t('.new', :default => t("helpers.links.new")),
+              new_page_path,
+              :class => 'btn btn-primary' %>
+<% end %>

@@ -3,7 +3,7 @@
   <h1><%= @page.name %></h1>
 <% end %>
 
-<p><%= @page.content %></p>
+<p><%= sanitize(RedCloth.new(@page.content, [:filter_styles]).to_html) %></p>
 
 
 <% if (can? :edit, @page) or (can? :destroy, @page) or (can? :index, @page)%>

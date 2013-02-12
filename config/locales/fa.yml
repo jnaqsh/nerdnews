@@ -46,6 +46,12 @@ fa:
     pages:
       show:
         page_not_found: "صفحه مورد نظر پیدا نشد."
+      create:
+        flash:
+          success: "صفحه با موفقیت ایجاد گردید."
+      update:
+        flash:
+          success: "صفحه با موفقیت به‌روز گردید."
     tags:
       create:
         flash:
@@ -96,6 +102,9 @@ fa:
           fail: "زمان بازنشانی گذرواژه تمام شده‌است، دوباره سعی کنید."
           success: "گذرواژه جدید با موفقیت بازنشانی شد."
 
+  pages:
+    index:
+      title: "صفحات"
   email_storage:
     form:
       submit: "خبرم کن!"
@@ -265,6 +274,7 @@ fa:
       ratings: 'ایجاد گزینه امتیاز'
       identities: 'حساب‌های OpenID'
       messages: 'پیام‌ها'
+      pages: "صفحات"
     head:
       title: 'نردنیوز'
 
