@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
   before_validation :smart_add_url_protocol
 
   searchable do
-    text :full_name, as: :full_name_textp
+    text :full_name, as: "full_name_textp"
     text :id
     text :email
     time :created_at
