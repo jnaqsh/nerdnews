@@ -37,7 +37,7 @@ class StoriesController < ApplicationController
       @comment = @story.comments.build
       @comments = @story.comments.approved.arrange(order: :created_at)
 
-      if request.path != story_path(@story)
+      if request.path != story_path(@story).downcase #monkey patch due to error in production (downcase)
         redirect_to @story, status: :moved_permanently, only_path: true
         return
       end

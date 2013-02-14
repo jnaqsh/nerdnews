@@ -30,7 +30,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @stories = @user.stories.approved.order('created_at desc').page params[:page], per_page: 30
 
-    if request.path != user_path(@user)
+    if request.path != user_path(@user).downcase  #monkey patch due to error in production (downcase)
       redirect_to @user, status: :moved_permanently
       return
     end
