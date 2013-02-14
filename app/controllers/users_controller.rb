@@ -30,7 +30,9 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @stories = @user.stories.approved.order('created_at desc').page params[:page], per_page: 30
 
-    if request.path != user_path(@user).downcase  #monkey patch due to error in production (downcase)
+    user_path = Rails.env.production? ? user_path(@user).downcase : user_path(@user) #monkey patch due to error in production (downcase)
+
+    if request.path != user_path
       redirect_to @user, status: :moved_permanently
       return
     end
