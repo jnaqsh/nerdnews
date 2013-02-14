@@ -11,7 +11,7 @@
       <% if can? :create, Story %>
         <%= link_to t('.new', :default => t("helpers.links.new")),
                   new_story_path,
-                  :class => 'btn btn-large btn-success pull-left' %>
+                  :class => 'hidden-phone btn btn-large btn-success pull-left' %>
       <% end %>
     </h1>
 <% end %>
