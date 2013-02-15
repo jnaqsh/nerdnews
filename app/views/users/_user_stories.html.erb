@@ -5,7 +5,7 @@
         <td>
           <i class='icon-book'></i>
           <%= link_to story_path(user_story) do %>
-            <%= user_story.title %>
+            <%= truncate user_story.title %>
           <% end %>
         </td>
         <td title="تاریخ انتشار">
