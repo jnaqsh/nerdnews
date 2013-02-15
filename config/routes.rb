@@ -5,6 +5,8 @@ Nerdnews::Application.routes.draw do
 
   root :to => "stories#index"
 
+  get "/faq" => "static_pages#faq", as: "static_pages_faq"
+
   # delayed job web inteface
   match "/delayed_job" => DelayedJobWeb, :anchor => false
 
