@@ -121,6 +121,7 @@ fa:
       have_account: 'حساب دارید؟ '
       login: 'وارد شوید'
       openid_register: "چنانچه در یکی از سایت‌های زیر عضو هستید، می‌توانید مستقیما وارد شوید:"
+      title: "ثبت‌نام"
     form:
       submit: "تایید"
     signup_form:
