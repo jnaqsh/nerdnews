@@ -1,14 +1,14 @@
 require 'open-uri'
 
 class Tweet
-  def self.tweet(title, link)
+  def self.tweet(object, title, link)
     tweet_desc = title
     shrunk_url = Tweet.tiny_url(134 - tweet_desc.length, link)
     if tweet_desc.length > 134 - shrunk_url.length
       tweet_desc = tweet_desc[0...(134 - shrunk_url.length)] + '...'
     end
     tweet = "#{tweet_desc} #{shrunk_url}"
-    Twitter.update tweet
+    object.update tweet
   end
 
   def self.tiny_url(available_length, url)
