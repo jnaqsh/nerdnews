@@ -22,7 +22,7 @@ jQuery ->
   $("#story_tag_names").select2({
     multiple: true
     minimumInputLength: 1
-    tokenSeparators: [",", " ", "،"]
+    tokenSeparators: [",", "،"]
     dropdownCssClass: "bigdrop"
     ajax:
       url: "/tags.json"

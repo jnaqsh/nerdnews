@@ -40,7 +40,7 @@ jQuery ->
   # Used in users/_form
   $("#user_favorite_tags").select2({
     tags: ''
-    tokenSeparators: [",", " ", "،"]
+    tokenSeparators: [",", "،"]
     dropdownCssClass: "bigdrop"
     })
 
