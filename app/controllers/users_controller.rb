@@ -28,7 +28,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
-    @stories = @user.stories.approved.order('created_at desc').page params[:page], per_page: 30
+    @stories = @user.stories.approved.order('created_at desc').page(params[:page])
 
     user_path = Rails.env.production? ? user_path(@user).downcase : user_path(@user) #monkey patch due to error in production (downcase)
 
@@ -140,7 +140,7 @@ class UsersController < ApplicationController
   # GET /users/1/posts.json
   def posts
     @user = User.find(params[:id])
-    @stories = @user.stories.approved.order('created_at desc').page params[:page], per_page: 30
+    @stories = @user.stories.approved.order('created_at desc').page(params[:page])
 
     respond_to do |format|
       format.html # posts.html.erb
@@ -153,7 +153,7 @@ class UsersController < ApplicationController
   # GET /users/1/comments.json
   def comments
     @user = User.find(params[:id])
-    @comments = @user.comments.order('created_at desc').page params[:page], per_page: 30
+    @comments = @user.comments.order('created_at desc').page(params[:page])
 
     respond_to do |format|
       format.html # comments.html.erb
@@ -166,7 +166,7 @@ class UsersController < ApplicationController
   # GET /users/1/favorites.json
   def favorites
     @user = User.find(params[:id])
-    @favorites = @user.votes.where(voteable_type: "Story").order('created_at desc').page params[:page], per_page: 30
+    @favorites = @user.votes.where(voteable_type: "Story").order('created_at desc').page(params[:page])
 
     respond_to do |format|
       format.html # favorites.html.erb
@@ -176,7 +176,7 @@ class UsersController < ApplicationController
   end
 
   def activity_logs
-    @activity_logs = @user.activity_logs.order('created_at desc').page params[:page], per_page: 30
+    @activity_logs = @user.activity_logs.order('created_at desc').page(params[:page])
 
     respond_to do |format|
       format.html # favorites.html.erb

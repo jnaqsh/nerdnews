@@ -8,22 +8,22 @@
             <%= user_story.title %>
           <% end %>
         </td>
-        <td>
+        <td title="تاریخ انتشار">
           <%= to_jalali(user_story.publish_date) %>
         </td>
-        <td>
+        <td title="تعداد دیدگاه‌ها">
           <i class='icon-comment'></i>
           <%= user_story.comments_count.to_farsi %>
         </td>
-        <td>
+        <td title="تعداد نمایش">
           <i class='icon-eye-open'></i>
           <%= user_story.view_counter.to_farsi %>
         </td>
-        <td>
+        <td title="تعداد نظر مثبت">
           <i class='icon-thumbs-up'></i>
           <%= user_story.positive_votes_count.to_farsi %>
         </td>
-        <td>
+        <td title="تعداد نظر منفی">
           <i class='icon-thumbs-down'></i>
           <%= user_story.negative_votes_count.to_farsi %>
         </td>
@@ -31,4 +31,5 @@
     <% end %>
   </tbody>
 </table>
-<%= paginate @stories %>
+
+<%= paginate user_stories %>

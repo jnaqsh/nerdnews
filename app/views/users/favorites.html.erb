@@ -1,7 +1,6 @@
 <% set_meta_tags  title: [t('users.title'),t('.title', name: @user.full_name)],
                   description: "پست‌های ارسال شده توسط #{@user.full_name}" ,
                   keywords: "#{@user.full_name}, profile, پروفایل" %>
-<div class='user-activities'>
-  <%= render 'favorites' %>
-  <%= paginate @favorites %>
+<div id='user-activities'>
+  <%= render partial: 'favorites', object: @favorites %>
 </div>

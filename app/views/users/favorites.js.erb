@@ -1,4 +1,4 @@
 $("li.active").removeAttr('class')
 $("#favorites_li").parent().addClass('active')
-$("#user-activities").html('<%= j render partial: 'favorites' %>')
+$("#user-activities").html('<%= j render partial: 'favorites', object: @favorites %>')
 document.title = '<%= escape_javascript("#{t('shared.header.brand_name') + ' | ' + t('users.title') + ' | ' + t('.title', name: @user.full_name)}") %>'
