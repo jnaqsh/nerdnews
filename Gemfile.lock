@@ -38,6 +38,7 @@ GEM
       rack-cache (~> 1.2)
       rack-test (~> 0.6.1)
       sprockets (~> 2.2.1)
+    active_link_to (1.0.0)
     activemodel (3.2.12)
       activesupport (= 3.2.12)
       builder (~> 3.0.0)
@@ -387,6 +388,7 @@ PLATFORMS
 
 DEPENDENCIES
   RedCloth
+  active_link_to
   acts_as_paranoid
   acts_as_textcaptcha!
   ancestry

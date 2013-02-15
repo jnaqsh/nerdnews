@@ -216,7 +216,7 @@ fa:
       title: 'پیام‌های %{name}'
       no_messages: "هیچ پیامی برای شما وجود ندارد."
     new:
-      title: 'ارسال پیام'
+      title: 'ارسال پیام برای %{name}'
 
   tags:
     title: 'تگ‌ها'

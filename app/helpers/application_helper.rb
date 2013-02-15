@@ -43,19 +43,6 @@ module ApplicationHelper
     end
   end
 
-  def link_to_li(name, *args)
-    options = (args.last.kind_of? Hash) ? args.last : nil
-    if args.include? request.path
-      content_tag :li, class: "active" do
-        link_to name, args[0], options
-      end
-    else
-      content_tag :li do
-        link_to name, args[0], options
-      end
-    end
-  end
-
   def sign_message(message)
     signed = " "
     signed += link_to message.sender.full_name, user_path(message.sender)

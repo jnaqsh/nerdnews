@@ -1,3 +1,4 @@
 $("li.active").removeAttr('class')
 $("#send_message").parent().addClass('active')
 $("#user-activities").html('<%= j render(partial: 'form') %>')
+document.title = '<%= escape_javascript("#{t('shared.header.brand_name') + ' | ' + t('messages.title') + ' | ' + t('.title', name: @user.full_name)}") %>'

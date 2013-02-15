@@ -40,7 +40,7 @@ Nerdnews::Application.routes.draw do
     get 'favorites', on: :member
     get 'activity_logs', on: :member
     post 'add_to_favorites', on: :member
-    resources :messages, except: [:edit, :update, :show]
+    resources :messages, except: [:edit, :update, :show], path_names: { new: 'new' }
   end
 
   # Stories
