@@ -6,10 +6,17 @@ GIT
       i18n (~> 0.5)
 
 GIT
-  remote: https://github.com/jnaqsh/twitter-bootstrap-rails.git
-  revision: 42996ce6a3744d32d64821bbecd3497c4ec533cc
+  remote: https://github.com/jnaqsh/acts_as_textcaptcha.git
+  revision: 6a0c8691cc13af1ffc44944cf750fe43ebf7c401
   specs:
-    twitter-bootstrap-rails (2.1.9)
+    acts_as_textcaptcha (3.0.5)
+      bcrypt-ruby
+
+GIT
+  remote: https://github.com/jnaqsh/twitter-bootstrap-rails.git
+  revision: d2bbf036dfa9e654bb4c1048463430f6084f8dbd
+  specs:
+    twitter-bootstrap-rails (2.2.3)
       actionpack (>= 3.1)
       execjs
       railties (>= 3.1)
@@ -18,48 +25,55 @@ GEM
   remote: https://rubygems.org/
   specs:
     RedCloth (4.2.9)
-    actionmailer (3.2.11)
-      actionpack (= 3.2.11)
+    actionmailer (3.2.12)
+      actionpack (= 3.2.12)
       mail (~> 2.4.4)
-    actionpack (3.2.11)
-      activemodel (= 3.2.11)
-      activesupport (= 3.2.11)
+    actionpack (3.2.12)
+      activemodel (= 3.2.12)
+      activesupport (= 3.2.12)
       builder (~> 3.0.0)
       erubis (~> 2.7.0)
       journey (~> 1.0.4)
-      rack (~> 1.4.0)
+      rack (~> 1.4.5)
       rack-cache (~> 1.2)
       rack-test (~> 0.6.1)
       sprockets (~> 2.2.1)
-    activemodel (3.2.11)
-      activesupport (= 3.2.11)
+    active_link_to (1.0.0)
+    activemodel (3.2.12)
+      activesupport (= 3.2.12)
       builder (~> 3.0.0)
-    activerecord (3.2.11)
-      activemodel (= 3.2.11)
-      activesupport (= 3.2.11)
+    activerecord (3.2.12)
+      activemodel (= 3.2.12)
+      activesupport (= 3.2.12)
       arel (~> 3.0.2)
       tzinfo (~> 0.3.29)
-    activeresource (3.2.11)
-      activemodel (= 3.2.11)
-      activesupport (= 3.2.11)
-    activesupport (3.2.11)
+    activeresource (3.2.12)
+      activemodel (= 3.2.12)
+      activesupport (= 3.2.12)
+    activesupport (3.2.12)
       i18n (~> 0.6)
       multi_json (~> 1.0)
-    acts_as_textcaptcha (3.0.5)
-      bcrypt-ruby
+    acts_as_paranoid (0.4.1)
+      activerecord (~> 3.2)
     addressable (2.3.2)
     ancestry (1.3.0)
       activerecord (>= 2.3.14)
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
-    better_errors (0.3.2)
+    better_errors (0.5.0)
       coderay (>= 1.0.0)
-      erubis (>= 2.7.0)
+      erubis (>= 2.6.6)
     binding_of_caller (0.6.8)
     bourne (1.1.2)
       mocha (= 0.10.5)
     builder (3.0.4)
-    cancan (1.6.8)
+    cancan (1.6.9)
+    capistrano (2.14.2)
+      highline
+      net-scp (>= 1.0.0)
+      net-sftp (>= 2.0.0)
+      net-ssh (>= 2.0.14)
+      net-ssh-gateway (>= 1.1.0)
     capybara (1.1.4)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -67,8 +81,8 @@ GEM
       rack-test (>= 0.5.4)
       selenium-webdriver (~> 2.0)
       xpath (~> 0.1.4)
-    childprocess (0.3.7)
-      ffi (~> 1.0, >= 1.0.6)
+    childprocess (0.3.8)
+      ffi (~> 1.0, >= 1.0.11)
     chronic (0.9.0)
     cocaine (0.4.2)
     coderay (1.0.8)
@@ -83,16 +97,16 @@ GEM
     commonjs (0.2.6)
     crack (0.3.2)
     daemons (1.1.9)
-    debugger (1.3.0)
+    debugger (1.3.1)
       columnize (>= 0.3.1)
       debugger-linecache (~> 1.1.1)
-      debugger-ruby_core_source (~> 1.1.7)
+      debugger-ruby_core_source (~> 1.1.8)
     debugger-linecache (1.1.2)
       debugger-ruby_core_source (>= 1.1.1)
-    debugger-ruby_core_source (1.1.7)
-    delayed_job (3.0.4)
+    debugger-ruby_core_source (1.1.8)
+    delayed_job (3.0.5)
       activesupport (~> 3.0)
-    delayed_job_active_record (0.3.3)
+    delayed_job_active_record (0.4.1)
       activerecord (>= 2.1.0, < 4)
       delayed_job (~> 3.0)
     delayed_job_web (1.1.2)
@@ -104,20 +118,24 @@ GEM
     delayed_paperclip (2.5.0.1)
       paperclip (>= 3.3.0)
     diff-lcs (1.1.3)
+    dropbox-sdk (1.5.1)
+      json
     erubis (2.7.0)
     eventmachine (1.0.0)
+    exception_notification (3.0.1)
+      actionmailer (>= 3.0.4)
     execjs (1.4.0)
       multi_json (~> 1.0)
     factory_girl (4.2.0)
       activesupport (>= 3.0.0)
-    factory_girl_rails (4.2.0)
+    factory_girl_rails (4.2.1)
       factory_girl (~> 4.2.0)
       railties (>= 3.0.0)
     faker (1.1.2)
       i18n (~> 0.5)
-    faraday (0.8.4)
+    faraday (0.8.5)
       multipart-post (~> 1.1)
-    farsifu (0.2.2)
+    farsifu (0.4.1)
     faye-websocket (0.4.6)
       eventmachine (>= 0.12.0)
     ffi (1.3.1)
@@ -131,36 +149,37 @@ GEM
     guard-rspec (2.4.0)
       guard (>= 1.1)
       rspec (~> 2.11)
-    guard-spork (1.4.1)
+    guard-spork (1.4.2)
       childprocess (>= 0.2.3)
       guard (>= 1.1)
       spork (>= 0.8.4)
     haml (3.1.7)
     hashie (1.2.0)
+    highline (1.6.15)
     hike (1.2.1)
     http_parser.rb (0.5.3)
     httpauth (0.2.0)
     i18n (0.6.1)
     jalalidate (0.3.1)
     journey (1.0.4)
-    jquery-rails (2.2.0)
+    jquery-rails (2.2.1)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
-    json (1.7.6)
+    json (1.7.7)
     jwt (0.1.5)
       multi_json (>= 1.0)
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
-    launchy (2.1.2)
+    launchy (2.2.0)
       addressable (~> 2.3)
     less (2.2.2)
       commonjs (~> 0.2.6)
     less-rails (2.2.6)
       actionpack (>= 3.1)
       less (~> 2.2.0)
-    letter_opener (1.0.0)
-      launchy (>= 2.0.4)
+    letter_opener (1.1.0)
+      launchy (~> 2.2.0)
     libv8 (3.11.8.13)
     listen (0.7.2)
     lumberjack (1.0.2)
@@ -172,12 +191,19 @@ GEM
       actionpack
     metaclass (0.0.1)
     method_source (0.8.1)
-    mime-types (1.19)
+    mime-types (1.21)
     mocha (0.10.5)
       metaclass (~> 0.0.1)
-    multi_json (1.5.0)
+    multi_json (1.5.1)
     multipart-post (1.1.5)
     mysql2 (0.3.11)
+    net-scp (1.1.0)
+      net-ssh (>= 2.6.5)
+    net-sftp (2.1.1)
+      net-ssh (>= 2.6.5)
+    net-ssh (2.6.5)
+    net-ssh-gateway (1.2.0)
+      net-ssh (>= 2.6.5)
     nokogiri (1.5.6)
     oauth (0.4.7)
     oauth2 (0.8.0)
@@ -186,7 +212,7 @@ GEM
       jwt (~> 0.1.4)
       multi_json (~> 1.0)
       rack (~> 1.2)
-    omniauth (1.1.1)
+    omniauth (1.1.2)
       hashie (~> 1.2)
       rack
     omniauth-facebook (1.4.1)
@@ -212,6 +238,9 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.4.0)
       mime-types
+    paperclip-dropbox (1.1.2)
+      dropbox-sdk (~> 1.3)
+      paperclip (~> 3.1)
     poltergeist (1.0.2)
       capybara (~> 1.1)
       childprocess (~> 0.3)
@@ -220,13 +249,13 @@ GEM
       multi_json (~> 1.0)
     polyglot (0.3.3)
     pr_geohash (1.0.0)
-    pry (0.9.11.4)
+    pry (0.9.12)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
       slop (~> 3.4)
     pry-rails (0.2.2)
       pry (>= 0.9.10)
-    rack (1.4.4)
+    rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
     rack-openid (1.3.1)
@@ -234,21 +263,21 @@ GEM
       ruby-openid (>= 2.1.8)
     rack-protection (1.3.2)
       rack
-    rack-ssl (1.3.2)
+    rack-ssl (1.3.3)
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
-    rails (3.2.11)
-      actionmailer (= 3.2.11)
-      actionpack (= 3.2.11)
-      activerecord (= 3.2.11)
-      activeresource (= 3.2.11)
-      activesupport (= 3.2.11)
+    rails (3.2.12)
+      actionmailer (= 3.2.12)
+      actionpack (= 3.2.12)
+      activerecord (= 3.2.12)
+      activeresource (= 3.2.12)
+      activesupport (= 3.2.12)
       bundler (~> 1.0)
-      railties (= 3.2.11)
-    railties (3.2.11)
-      actionpack (= 3.2.11)
-      activesupport (= 3.2.11)
+      railties (= 3.2.12)
+    railties (3.2.12)
+      actionpack (= 3.2.12)
+      activesupport (= 3.2.12)
       rack-ssl (~> 1.3.2)
       rake (>= 0.8.7)
       rdoc (~> 3.4)
@@ -257,8 +286,10 @@ GEM
     rakismet (1.3.0)
     rb-inotify (0.8.8)
       ffi (>= 0.5.0)
-    rdoc (3.12)
+    rdoc (3.12.1)
       json (~> 1.4)
+    red_cloth_formatters_plain (0.2.0)
+      RedCloth (>= 4.2.3)
     ref (1.0.2)
     rsolr (1.0.8)
       builder (>= 2.1.2)
@@ -279,6 +310,8 @@ GEM
       rspec-mocks (~> 2.12.0)
     ruby-openid (2.2.2)
     rubyzip (0.9.9)
+    rufus-scheduler (2.0.17)
+      tzinfo (>= 0.3.23)
     sass (3.2.5)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -336,6 +369,10 @@ GEM
     uglifier (1.3.0)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
+    under_construction (0.1.3)
+      chronic (~> 0.9)
+      rails (~> 3.2)
+      rufus-scheduler (~> 2.0)
     webmock (1.9.0)
       addressable (>= 2.2.7)
       crack (>= 0.1.7)
@@ -351,12 +388,15 @@ PLATFORMS
 
 DEPENDENCIES
   RedCloth
-  acts_as_textcaptcha
+  active_link_to
+  acts_as_paranoid
+  acts_as_textcaptcha!
   ancestry
   bcrypt-ruby (~> 3.0.0)
   better_errors
   binding_of_caller
   cancan
+  capistrano
   capybara
   coffee-rails (~> 3.2.1)
   daemons
@@ -364,6 +404,7 @@ DEPENDENCIES
   delayed_job_active_record
   delayed_job_web
   delayed_paperclip
+  exception_notification
   execjs
   factory_girl_rails
   faker
@@ -384,12 +425,14 @@ DEPENDENCIES
   omniauth-openid
   omniauth-twitter
   paperclip
+  paperclip-dropbox
   poltergeist
   pry-rails
-  rails (= 3.2.11)
+  rails (= 3.2.12)
   rails-i18n!
   rakismet
   rb-inotify (~> 0.8.8)
+  red_cloth_formatters_plain (~> 0.2.0)
   rspec-rails
   sass-rails (~> 3.2.3)
   select2-rails
@@ -403,5 +446,6 @@ DEPENDENCIES
   twitter
   twitter-bootstrap-rails!
   uglifier (>= 1.0.3)
+  under_construction
   webmock
   whenever

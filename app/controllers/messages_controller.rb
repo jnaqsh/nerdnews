@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 class MessagesController < ApplicationController
   load_and_authorize_resource :user
 
@@ -37,6 +39,8 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       if @message.save
+        UserMailer.delay.message_notify(@message)
+        record_activity "برای #{@message.receiver.full_name} پیام فرستادید"
         format.html { redirect_to user_messages_path(current_user),
           notice: t('controllers.messages.create.flash.success', name: @user.full_name) }
       else
@@ -50,6 +54,8 @@ class MessagesController < ApplicationController
     authorize! :destroy, @message
 
     @message.destroy
+
+    record_activity "پیام شماره #{@message.id.to_farsi} را حذف کردید"
 
     respond_to do |format|
       format.html { redirect_to user_messages_path(current_user) }

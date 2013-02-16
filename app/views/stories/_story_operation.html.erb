@@ -1,6 +1,6 @@
 <% if story.id %>
   <div class='row'>
-    <% if can? :create, Vote %>
+    <% if can? :create, Vote and story.published? %>
       <div id='voting-buttons-<%= story.id %>' class='span1 btn-group pull-right' >
 
         <%= render 'stories/voting_buttons', story: story %>

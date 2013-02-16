@@ -58,6 +58,12 @@ describe '/Users' do
       visit favorites_user_path(@user)
       page.should have_content vote.rating.name
     end
+
+    it 'can get users activity logs' do
+      login @user
+      visit activity_logs_user_path(@user)
+      page.should have_content "وارد نردنیوز شدید"
+    end
   end
 
   context '/MyPage' do
@@ -127,14 +133,29 @@ describe '/Users' do
         }.to change { @user.reload.user_rate }.by(1)
       end
 
-      it 'should add a point after posting a stroy' do
+      it 'should not add a point after posting a stroy' do
         visit new_story_path
         expect {
           fill_in 'story_title', with: @story.title
           fill_in 'story_content', with: @story.content
           fill_in 'story_spam_answer', with: "four"
           click_button 'ایجاد'
-        }.to change { @user.reload.user_rate }.by(1)
+        }.to change { @user.reload.user_rate }.by(0)
+      end
+
+      it 'should add 3 points after posting a stroy and published' do
+        @approved_user = FactoryGirl.create(:approved_user)
+        visit new_story_path
+        expect {
+          fill_in 'story_title', with: @story.title
+          fill_in 'story_content', with: @story.content
+          fill_in 'story_spam_answer', with: "four"
+          click_button 'ایجاد'
+          logout
+          login @approved_user
+          visit unpublished_stories_path
+          click_link "انتشار"
+        }.to change { @user.reload.user_rate }.by(3)
       end
 
       it 'should add a point after a story approved' do

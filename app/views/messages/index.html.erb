@@ -1,3 +1,5 @@
 <% set_meta_tags  title: [t('users.title'), t('.title', name: @user.full_name)],
                   noindex: true %>
-<%= render partial: "index", locals: {messages: @messages} %>
+<div id='user-activities'>
+  <%= render partial: "index", locals: {messages: @messages} %>
+</div>

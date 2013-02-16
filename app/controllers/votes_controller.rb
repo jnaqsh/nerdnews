@@ -21,8 +21,7 @@ class VotesController < ApplicationController
       if @vote.save
         increment_votes_count(@voteable, type)
         calculate_total_point(@voteable, @vote)
-        rate_user 1,
-          "#{current_user.full_name} voted a story with id #{@vote.voteable.id} and rate id of #{@vote.rating.id}"
+        rate_user 1
         format.html { redirect_to story_path(@voteable), notice: t('controllers.votes.create.flash.success') }
         format.js
       else
@@ -39,7 +38,7 @@ private
   def voteable_id
     params[(params[:voteable].singularize + "_id").to_sym]
   end
-  
+
   # TODO: Move this method to somewhere else
   def increment_votes_count(voteable, type = nil)
     if type

@@ -1,11 +1,16 @@
 fa:
   controllers:
+    under_construction_email_storage:
+      create:
+        flash:
+          success: "در هنگام آغاز به کار نردنیوز شما را نیز مطلع می‌کنیم"
     stories:
       create:
         flash:
           success:  "خبر شما با موفقیت ایجاد گردید و منتشر شد."
           success_for_guest_and_new_users: "خبر شما با موفقیت ایجاد گردید، بعد از این‌که یکی از مدیرها آن را تایید کرد، منتشر می‌شود."
       show:
+        story_not_found: "خبر مورد نظر پیدا نشد."
         flash:
           not_approved: 'این خبر هنوز تایید نشده است'
       update:
@@ -41,6 +46,12 @@ fa:
     pages:
       show:
         page_not_found: "صفحه مورد نظر پیدا نشد."
+      create:
+        flash:
+          success: "صفحه با موفقیت ایجاد گردید."
+      update:
+        flash:
+          success: "صفحه با موفقیت به‌روز گردید."
     tags:
       create:
         flash:
@@ -91,6 +102,16 @@ fa:
           fail: "زمان بازنشانی گذرواژه تمام شده‌است، دوباره سعی کنید."
           success: "گذرواژه جدید با موفقیت بازنشانی شد."
 
+  static_pages:
+    faq:
+      title: "سوالات رایج"
+  pages:
+    index:
+      title: "صفحات"
+  email_storage:
+    form:
+      submit: "خبرم کن!"
+
   users:
     title: 'کاربران'
     new:
@@ -100,6 +121,7 @@ fa:
       have_account: 'حساب دارید؟ '
       login: 'وارد شوید'
       openid_register: "چنانچه در یکی از سایت‌های زیر عضو هستید، می‌توانید مستقیما وارد شوید:"
+      title: "ثبت‌نام"
     form:
       submit: "تایید"
       confirm: "مطمئنید؟ تغییرات شما اعمال نخواهد شد."
@@ -116,8 +138,10 @@ fa:
       title: 'ارسال‌های %{name}'
     favorites:
       title: 'موارد موردعلاقه %{name}'
+    activity_logs:
+      title: 'تاریخچه فعالیت %{name}'
     comments:
-      title: 'نظرات %{name}'
+      title: 'دیدگاه‌های %{name}'
 
   mypage:
     title: 'صفحه شخصی'
@@ -193,7 +217,7 @@ fa:
       title: 'پیام‌های %{name}'
       no_messages: "هیچ پیامی برای شما وجود ندارد."
     new:
-      title: 'ارسال پیام'
+      title: 'ارسال پیام برای %{name}'
 
   tags:
     title: 'تگ‌ها'
@@ -255,6 +279,7 @@ fa:
       ratings: 'ایجاد گزینه امتیاز'
       identities: 'حساب‌های OpenID'
       messages: 'پیام‌ها'
+      pages: "صفحات"
     head:
       title: 'نردنیوز'
 
@@ -274,9 +299,24 @@ fa:
       comments: 'دیدگاه‌ها'
       favorite_tags: 'تگ‌های مورد علاقه'
       favorites: 'موردعلاقه‌ها'
+      activity_logs: "تاریخچه فعالیت"
       no_article: 'پست تایید شده‌ای ارسال نشده است.'
       no_article: 'هیچ نظری ارسال نشده.'
       no_favorite: 'هیچ موردی ثبت نشده است.'
+
+  activemodel:
+    errors:
+      models:
+        under_construction_email_storage:
+          attributes:
+            email:
+              format: "نامناسب است"
+              uniqueness: "پیشتر ثبت شده‌است"
+    models:
+      under_construction_email_storage: "ذخیره ایمیل در دست ساخت"
+    attributes:
+      under_construction_email_storage:
+        email: "ایمیل"
 
   activerecord:
     errors:

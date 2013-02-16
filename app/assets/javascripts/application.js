@@ -12,7 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require twitter/bootstrap
+//= require twitter/bootstrap/bootstrap-transition
+//= require twitter/bootstrap/bootstrap-dropdown
+//= require twitter/bootstrap/bootstrap-tab
+//= require twitter/bootstrap/bootstrap-tooltip
+//= require twitter/bootstrap/bootstrap-popover
+//= require twitter/bootstrap/bootstrap-collapse
 //= require bootstrap.js.coffee
 //= require select2
 //= require tags.js.coffee

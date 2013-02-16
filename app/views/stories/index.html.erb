@@ -1,6 +1,8 @@
 <% set_meta_tags title: [t('stories.title'), t('.title')],
-                 description: 'صفحه اصلی',
-                 keywords: 'اخبار, صفحه اصلی' %>
+                 description: 'نردنیوز شبکه اجتماعی خبر برای افراد گیک فناوری است',
+                 keywords: 'اخبار, صفحه اصلی, فناوری,گیک,خوره,نرد,نردنیوز,شبکه اجتماعی خبر',
+                 canonical: root_url %>
+
 <%- model_class = Story.new.class -%>
 <% content_for :head, auto_discovery_link_tag(:atom, stories_url(:format => "atom")) %>
 <% content_for :page_header do %>
@@ -9,13 +11,13 @@
       <% if can? :create, Story %>
         <%= link_to t('.new', :default => t("helpers.links.new")),
                   new_story_path,
-                  :class => 'btn btn-large btn-success pull-left' %>
+                  :class => 'hidden-phone btn btn-large btn-success pull-left' %>
       <% end %>
     </h1>
 <% end %>
 
 <div id="stories">
-  <%= render @stories %>
+  <%= (render @stories) || "خبر مورد نظر پیدا نشد" %>
 </div>
 
 <%= paginate @stories %>

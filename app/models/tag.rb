@@ -17,7 +17,7 @@ class Tag < ActiveRecord::Base
     :size => { :in => 0..100.kilobytes }
 
   searchable do
-    text :name, as: :name_textp
+    text :name, as: "name_textp"
     text :id
     time :created_at
   end

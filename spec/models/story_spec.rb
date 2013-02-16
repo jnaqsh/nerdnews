@@ -7,6 +7,8 @@ describe Story do
     it { should have_many(:tags).through(:taggings) }
     it { should have_many :votes }
     it { should belong_to :user }
+    it { should belong_to :publisher }
+    it { should belong_to :remover }
   end
 
   context 'validations' do

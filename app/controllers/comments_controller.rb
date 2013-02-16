@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class CommentsController < ApplicationController
   load_and_authorize_resource
   # GET /comments
@@ -52,8 +54,10 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
+        record_activity "دیدگاه شماره #{@comment.id.to_farsi} را ایجاد کردید",
+          story_path(@comment.story, :anchor => "comment_#{@comment.id}") #This will call application controller  record_activity
         UserMailer.delay.comment_reply(@comment.id) unless @comment.parent.nil?
-        rate_user(current_user, 1, "#{current_user.full_name} commented on a story") if current_user.present?
+        rate_user(current_user, 1) if current_user.present?
         format.html { redirect_to @story, notice: t('controllers.comments.create.flash.success') }
         format.json { render json: @comment, status: :created, location: @comment }
       else
@@ -86,6 +90,9 @@ class CommentsController < ApplicationController
   def destroy
     @comment = Comment.find(params[:id])
     @comment.destroy
+
+    record_activity "دیدگاه شماره #{@comment.id.to_farsi} را حذف کردید",
+          story_path(@comment.story, :anchor => "comment_#{@comment.id}") #This will call application controller  record_activity
 
     respond_to do |format|
       format.html { redirect_to story_path(@comment.story) }

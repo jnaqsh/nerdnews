@@ -1,6 +1,7 @@
 <% set_meta_tags title: [t('stories.title'), t('.title')],
                  description: 'ارسال خبر جدید',
-                 keywords: 'ارسال خبر' %>
+                 keywords: 'ارسال خبر',
+                 canonical: new_story_url %>
 
 <%- model_class = @story.class -%>
 <% content_for :page_header do %>

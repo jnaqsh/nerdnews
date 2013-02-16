@@ -19,8 +19,8 @@
 
     <div class="pull-left">
       <ul class="nav">
-          <li><%= link_to_li t('.register'), new_user_path, users_path %></li>
-          <li><%= link_to_li t('.login'), new_session_path %></li>
+        <%= active_link_to t('.register'), new_user_path, active: [['users'], ['new', 'create']], :wrap_tag => :li %>
+        <%= active_link_to t('.login'), new_session_path, active: [['sessions'], ['new', 'create']], :wrap_tag => :li %>
       </ul>
     </div>
 
@@ -50,6 +50,10 @@
 
           <% if can? :index, User %>
             <li><%= link_to t('.users'), users_path %></li>
+          <% end %>
+
+          <% if can? :index, Page %>
+            <li><%= link_to t('.pages'), pages_path %></li>
           <% end %>
 
           <% if can? :create, Rating %>
@@ -83,13 +87,15 @@
     <!-- Links -->
     <div class="nav-collapse">
       <ul class="nav">
-        <%= link_to_li t('.home'), root_path %>
+        <%= active_link_to t('.home'), root_path, active: [['stories'], ['index']], :wrap_tag => :li %>
+
         <% if can? :index, :mypage %>
-          <%= link_to_li t('.mypage'), mypage_index_path, style: 'font-weight: bold' %>
+          <%= active_link_to t('.mypage'), mypage_index_path, active: [['mypage'], ['index']],
+            :wrap_tag => :li %>
         <% end %>
-        <%= link_to_li t('.new_story'), new_story_path %><!--
-        <li><%#= link_to t('.about'), page_by_permalink_path("about-us") %></li>
-        <li><%#= link_to t('.contact us'), root_path %></li>-->
+        <%= active_link_to t('.new_story'), new_story_path, active: [['stories'], ['new', 'create']],
+            :wrap_tag => :li %>
+
         <%= form_tag stories_path, method: :get, class: "navbar-search pull-left" do %>
           <%= text_field_tag :search, params[:search], class: "span2 search-query",
             placeholder: t(".search") %>
@@ -99,27 +105,32 @@
       <ul class='social-icons'>
         <li>
           <%= link_to stories_path + ".atom", format: "atom" do %>
-          <%= image_tag 'social-icons/fc-webicon-rss-m.png' %>
+            <%= image_tag 'social-icons/fc-webicon-rss-m.png' %>
           <% end %>
         </li>
         <li>
           <%= link_to 'https://github.com/jnaqsh/nerdnews' do %>
-          <%= image_tag 'social-icons/fc-webicon-github-m.png' %>
+            <%= image_tag 'social-icons/fc-webicon-github-m.png' %>
           <% end %>
         </li>
         <li>
           <%= link_to 'https://plus.google.com/b/111646924484501471492/111646924484501471492' do %>
-          <%= image_tag 'social-icons/fc-webicon-googleplus-m.png' %>
+            <%= image_tag 'social-icons/fc-webicon-googleplus-m.png' %>
           <% end %>
         </li>
         <li>
           <%= link_to 'https://twitter.com/farsi_nerdnews' do %>
-          <%= image_tag 'social-icons/fc-webicon-twitter-m.png' %>
+            <%= image_tag 'social-icons/fc-webicon-twitter-m.png' %>
           <% end %>
         </li>
         <li>
           <%= link_to 'http://www.facebook.com/farsi.nerdnews' do %>
-          <%= image_tag 'social-icons/fc-webicon-facebook-m.png' %>
+            <%= image_tag 'social-icons/fc-webicon-facebook-m.png' %>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to static_pages_faq_path do %>
+            <%= image_tag 'info_32.png' %>
           <% end %>
         </li>
       </ul>

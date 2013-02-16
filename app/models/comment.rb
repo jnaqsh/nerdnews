@@ -1,5 +1,9 @@
 class Comment < ActiveRecord::Base
+  acts_as_paranoid
+
   include Rakismet::Model
+
+  HIDE_THRESHOLD = -30
 
   scope :approved, where(approved: true)
 
@@ -8,8 +12,8 @@ class Comment < ActiveRecord::Base
   belongs_to :user, counter_cache: true
 
   attr_accessible :content, :name, :email, :website, :user_id, :parent_id
-  rakismet_attrs author: :name, author_email: :email, author_url: :website 
-  
+  rakismet_attrs author: :name, author_email: :email, author_url: :website
+
   before_validation :smart_add_url_protocol
   before_create :is_spam?
 
@@ -46,6 +50,17 @@ class Comment < ActiveRecord::Base
 
   def votes_sum
     positive_votes_count - negative_votes_count
+  end
+
+  protected
+  # Searches through recent comments and mark them to hide if
+  # too much negative rating is submitted for them
+  def self.hide_negative_comments
+    recent_comments = where(created_at: (Time.now.midnight - 1.day)..Time.now.midnight)
+    recent_comments.each do |comment|
+      comment.update_attribute :approved, false if comment.total_point < Comment::HIDE_THRESHOLD
+      comment.index!
+    end
   end
 
   private

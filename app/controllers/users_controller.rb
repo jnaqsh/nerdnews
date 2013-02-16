@@ -1,6 +1,8 @@
+# encoding: utf-8
+
 class UsersController < ApplicationController
   load_and_authorize_resource
-  layout 'user_profile', only: [:show, :posts, :comments, :favorites]
+  layout 'user_profile', only: [:show, :posts, :comments, :favorites, :activity_logs]
 
   # GET /users
   # GET /users.json
@@ -26,9 +28,11 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
-    @stories = @user.stories.approved.order('created_at desc').page params[:page], per_page: 30
+    @stories = @user.stories.approved.order('created_at desc').page(params[:page])
 
-    if request.path != user_path(@user)
+    user_path = Rails.env.production? ? user_path(@user).downcase : user_path(@user) #monkey patch due to error in production (downcase)
+
+    if request.path != user_path
       redirect_to @user, status: :moved_permanently
       return
     end
@@ -112,14 +116,19 @@ class UsersController < ApplicationController
   # PUT /users/1.json
   def update
     @user = User.find(params[:id])
-    
-    respond_to do |format|
-      if @user.update_attributes(params[:user])
-        format.html { redirect_to @user, notice: t('controllers.users.update.flash.success') }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+
+    if params[:cancel]
+      redirect_to @user, flash: { error: t('controllers.users.update.flash.canceled') }
+    else
+      respond_to do |format|
+        if @user.update_attributes(params[:user])
+          record_activity "پروفایل خود را به‌روز کردید"
+          format.html { redirect_to @user, notice: t('controllers.users.update.flash.success') }
+          format.json { head :no_content }
+        else
+          format.html { render action: "edit" }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -140,7 +149,7 @@ class UsersController < ApplicationController
   # GET /users/1/posts.json
   def posts
     @user = User.find(params[:id])
-    @stories = @user.stories.approved.order('created_at desc').page params[:page], per_page: 30
+    @stories = @user.stories.approved.order('created_at desc').page(params[:page])
 
     respond_to do |format|
       format.html # posts.html.erb
@@ -153,7 +162,7 @@ class UsersController < ApplicationController
   # GET /users/1/comments.json
   def comments
     @user = User.find(params[:id])
-    @comments = @user.comments.order('created_at desc').page params[:page], per_page: 30
+    @comments = @user.comments.order('created_at desc').page(params[:page])
 
     respond_to do |format|
       format.html # comments.html.erb
@@ -166,11 +175,21 @@ class UsersController < ApplicationController
   # GET /users/1/favorites.json
   def favorites
     @user = User.find(params[:id])
-    @favorites = @user.votes.where(voteable_type: "Story").order('created_at desc').page params[:page], per_page: 30
+    @favorites = @user.votes.where(voteable_type: "Story").order('created_at desc').page(params[:page])
 
     respond_to do |format|
       format.html # favorites.html.erb
       format.json { render json: @favorites }
+      format.js
+    end
+  end
+
+  def activity_logs
+    @activity_logs = @user.activity_logs.order('created_at desc').page(params[:page])
+
+    respond_to do |format|
+      format.html # favorites.html.erb
+      format.json { render json: @activity_logs }
       format.js
     end
   end

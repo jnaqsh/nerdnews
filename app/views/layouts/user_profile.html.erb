@@ -10,7 +10,7 @@
     </div>
 
     <%= render partial: 'shared/loading_indicator' %>
-    
+
     <div class="container">
 
       <%= render partial: 'shared/flash', locals: { flash: flash } %>
@@ -83,19 +83,28 @@
 
         <div class='span9'>
           <ul class="nav nav-tabs">
-            <%= link_to_li t('.posts'), posts_user_path(@user), user_path(@user), remote: true, id: 'posts_li' %>
+            <%= active_link_to t('.posts'), posts_user_path(@user), active: [['users'], ['show', 'posts']], :wrap_tag => :li, remote: true, id: 'posts_li' %>
 
-            <%= link_to_li t('.comments'), comments_user_path(@user), remote: true, id: 'comments', id: 'comments_li' %>
+            <%= active_link_to t('.comments'), comments_user_path(@user), active: [['users'], ['comments']], :wrap_tag => :li, remote: true, id: 'comments_li' %>
 
-            <%= link_to_li t('.favorites'), favorites_user_path(@user), remote: true, id: 'favorites_li' %>
+            <%= active_link_to t('.favorites'), favorites_user_path(@user), active: [['users'], ['favorites']], :wrap_tag => :li, remote: true, id: 'favorites_li' %>
 
             <% if (can? :create, Message) && (@user != current_user) %>
-              <%= link_to_li t('.send_message'), new_user_message_path(@user), user_messages_path(@user),
-                remote: true, id: "send_message" %>
+              <%= active_link_to t('.send_message'), new_user_message_path(@user),
+                active: [['messages'], ['new', 'create']], :wrap_tag => :li,
+                remote: true, id: 'send_message' %>
             <% end %>
 
             <% if can? :index, @user.received_messages.build %>
-              <%= link_to_li t('.messages'), user_messages_path(@user), remote: true, id: "messages" %>
+              <%= active_link_to t('.messages'), user_messages_path(@user),
+                active: [['messages'], ['index']], :wrap_tag => :li,
+                remote: true, id: 'messages' %>
+            <% end %>
+
+            <% if can? :activity_logs, @user %>
+              <%= active_link_to t('.activity_logs'), activity_logs_user_path(@user),
+                active: [['users'], ['activity_logs']], :wrap_tag => :li,
+                remote: true, id: 'activity_logs_li' %>
             <% end %>
           </ul>
             <%= yield %>

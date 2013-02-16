@@ -40,13 +40,13 @@ jQuery ->
   # Used in users/_form
   $("#user_favorite_tags").select2({
     tags: ''
-    tokenSeparators: [",", " ", "،"]
+    tokenSeparators: [",", "،"]
     dropdownCssClass: "bigdrop"
     })
 
   if history && history.pushState
     # for push current state of ajax links
-    $("#posts_li,#messages,#favorites_li,#comments_li").on('ajax:success', (evt, data, status, xhr)->
+    $("#posts_li,#messages,#favorites_li,#comments_li, #activity_logs_li, #send_message").on('ajax:success', (evt, data, status, xhr)->
       history.pushState(null, document.title, this.href)
     )
 

@@ -1,4 +1,9 @@
-$('#tags-list').append('<%= j render(@tags) %>');
+<% if params[:tag_search] %>
+  $('#tags-list').html('<%= j render(@tags) %>');
+<% else %>
+  $('#tags-list').append('<%= j render(@tags) %>');
+<% end %>
+
 <% if @tags.next_page %>
   $(".pagination").replaceWith('<%= j paginate(@tags) %>');
 <% else %>

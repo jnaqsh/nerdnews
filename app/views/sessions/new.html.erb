@@ -1,5 +1,7 @@
 <% set_meta_tags  title: t('.title'),
-                  noindex: true %>
+                  noindex: true,
+                  canonical: new_session_url %>
+
 <% content_for :page_header do %>
   <h1><%= t '.login' %></h1>
 <% end %>

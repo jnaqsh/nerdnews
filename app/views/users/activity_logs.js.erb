@@ -1,0 +1,4 @@
+$("li.active").removeAttr('class')
+$("#activity_logs_li").parent().addClass('active')
+$("#user-activities").html('<%= j render partial: 'activity_logs', object: @activity_logs %>')
+document.title = '<%= escape_javascript("#{t('shared.header.brand_name') + ' | ' + t('users.title') + ' | ' + t('.title', name: @user.full_name)}") %>'

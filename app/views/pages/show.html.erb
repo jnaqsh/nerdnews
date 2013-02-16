@@ -1,9 +1,13 @@
+<% set_meta_tags title: [t('stories.title'), t('.title')],
+                 description: truncate(RedCloth.new(@page.content).to_plain, length: 160),
+                 canonical: page_by_permalink_url(@page.permalink) %>
+
 <%- model_class = @page.class -%>
 <% content_for :page_header do %>
   <h1><%= @page.name %></h1>
 <% end %>
 
-<p><%= @page.content %></p>
+<p><%= sanitize(RedCloth.new(@page.content, [:filter_styles]).to_html) %></p>
 
 
 <% if (can? :edit, @page) or (can? :destroy, @page) or (can? :index, @page)%>

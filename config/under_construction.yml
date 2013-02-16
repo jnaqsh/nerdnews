@@ -1,0 +1,42 @@
+theme: 'site-under-construction-fa'
+launch_time: "16 Feb 2013 04:00am"
+progress: "95" # Percent
+progress_label: "Progress"
+website_address: "http://nerdnews.ir"
+host_name: "nerdnews.ir"
+info:
+  site_title: "نردنیوز | در دست ساخت"
+  logo_url: "/assets/NerdLogo-58px.png"
+  email: "nerdnews@jnaqsh.com"
+  phone: "تلفن: ۹۸۵۱۱۶۰۹۹۳۹۳+"
+  heading: "پروژه‌ای آزاد برای گیک‌ها"
+  counter_heading: "زمانی که به آغاز کار نردنیوز مانده‌است:"
+  about_title: "نردنیوز چیست؟"
+  about_content: |
+                  یک شبکه اجتماعی خبر برای افراد نرد و گیک که علاقه به اخبار فناوری دارند.
+                  اگر شما هم یک گیک فناوری هستید و به برنامه‌نویسی علاقه دارید می‌توانید آن را توسعه دهید!
+  inform_by_email: "ایمیل خود را وارد کنید، که در هنگام شروع به کار نردنیوز شما را مطلع کنیم:"
+  email_field_value: "ایمیل خود را وارد کنید"
+  copyright: "Copyright &copy;"
+site_developer:
+  name: "<a href='http://jnaqsh.com/'>Naqsh Inc</a>"
+socials_title: "آخرین تغییرات را می‌توانید دنبال کنید:"
+socials:
+  twitter: "http://twitter.com/farsi_nerdnews" #Full URL: http://twitter.com/great_developer
+  facebook: "http://facebook.com/farsi.nerdnews"
+#  yahoo: "#"
+  # stumbleupon: "#"
+#  flickr: "#"
+  google: "https://plus.google.com/b/111646924484501471492/111646924484501471492"
+#  youtube: "#"
+#  skype: "#"
+#  deviantart: "#"
+#  identica: "#"
+notify_mail:
+  sender_email_address: "do_not_reply@nerdnews.ir"
+  email_subject: "نردنیوز: نردنیوز شروع به‌کار کرد"
+  email_content: |
+                  سلام! در این لحظه سایت نرد نیوز آغاز به کار کرد. می‌توانید با مراجعه به پیوند http://nerdnews.ir/ آن را مشاهده کنید.
+
+                  ---
+                  نردنیوز - http://nerdnews.ir/

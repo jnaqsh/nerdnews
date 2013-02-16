@@ -31,11 +31,12 @@ class Ability
          can [:index, :create], Message, sender: { :id => user.id }
          cannot :create, Message, receiver: { :id => user.id }
          can :index, :mypage
-         can [:index, :show], Page
+         can :show, Page
          can :destroy, :session
          can :manage, Story
          can [:read, :create, :update], Tag
          can [:show, :posts, :comments, :favorites], User
+         can :activity_logs, User, id: user.id
          can [:update, :destroy], User, :id => user.id
          can :create, Vote
          can :bypass_captcha, user
@@ -53,6 +54,7 @@ class Ability
          can [:read, :create], Story
          can :index, Tag
          can [:show, :posts, :comments, :favorites], User
+         can :activity_logs, User, id: user.id
          can [:update, :destroy], User, :id => user.id
          can :create, Vote
          cannot :bypass_captcha, user

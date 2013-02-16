@@ -1,3 +1,5 @@
-<% set_meta_tags  title: [t('messages.title'), t('.title')],
+<% set_meta_tags  title: [t('messages.title'), t('.title', name: @user.full_name)],
                   noindex: true %>
-<%= render partial: 'form' %>
+<div id='user-activities'>
+  <%= render partial: 'form' %>
+</div>

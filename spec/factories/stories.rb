@@ -13,6 +13,7 @@ FactoryGirl.define do
 
     factory :approved_story do
       publish_date { Time.now }
+      after(:build){ |s| s.publisher = create(:approved_user)}
     end
   end
 end

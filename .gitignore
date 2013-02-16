@@ -26,3 +26,5 @@ pickle-email-*.html
 /config/sunspot.yml
 /config/textcaptcha.yml
 /config/twitter.yml
+db/under_construction_mails.txt
+config/dropbox.yml

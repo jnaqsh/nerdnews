@@ -25,6 +25,7 @@ describe User do
       it { user.should have_ability(:index, for: Tag.new)}
       it { user.should_not have_ability([:create, :show, :update, :destroy], for: Tag.new)}
       it { user.should have_ability([:create, :show, :posts, :comments, :favorites], for: User.new)}
+      it { user.should_not have_ability(:activity_logs), for: User.new}
       it { user.should_not have_ability([:index, :destroy, :update], for: User.new)}
       it { user.should_not have_ability(:create, Vote.new)}
       it { user.should_not have_ability(:bypass_captcha, for: user)}
@@ -53,6 +54,8 @@ describe User do
       it { user.should have_ability(:destroy, for: :session)}
       it { user.should have_ability([:read, :create], for: Story.new)}
       it { user.should_not have_ability([:publish, :unpublished, :update, :destroy], for: Story.new)}
+#      it { user.should have_ability(:activity_logs), for: user}
+#      it { user.should_not have_ability(:activity_logs), for: user2}
       it { user.should have_ability(:index, for: Tag.new)}
       it { user.should_not have_ability([:create, :show, :update, :destroy], for: Tag.new)}
       it { user.should have_ability([:show, :posts, :comments, :favorites], for: User.new)}
@@ -86,6 +89,8 @@ describe User do
       it { user.should have_ability([:read, :create, :update], for: Tag.new)}
       it { user.should_not have_ability(:destroy, for: Tag.new)}
       it { user.should have_ability([:show, :posts, :comments, :favorites], for: User.new)}
+#      it { user.should_not have_ability(:activity_logs), for: user2}
+#      it { user.should have_ability(:activity_logs), for: user}
       it { user.should have_ability([:update, :destroy], for: user)}
       it { user.should_not have_ability([:create, :index, :destroy, :update], for: User.new)}
       it { user.should have_ability(:create, for: Vote.new)}
@@ -144,11 +149,13 @@ describe User do
     it { should have_and_belong_to_many :roles }
     it { should have_many :stories}
     it { should have_many :comments }
-    it { should have_many :rating_logs }
     it { should have_many :votes }
     it { should have_many :identities }
     it { should have_many :sent_messages }
     it { should have_many :received_messages }
+    it { should have_many :activity_logs }
+    it { should have_many :published_stories }
+    it { should have_many :removed_stories }
   end
 
   context 'Validations' do

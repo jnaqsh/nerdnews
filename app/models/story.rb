@@ -1,6 +1,9 @@
 #encoding: utf-8
 
 class Story < ActiveRecord::Base
+  acts_as_paranoid
+  acts_as_textcaptcha
+
   HIDE_THRESHOLD = -30
 
   attr_accessible :content, :publish_date, :title, :source,
@@ -27,8 +30,8 @@ class Story < ActiveRecord::Base
     parameterized_string.downcase
   end
 
-  acts_as_textcaptcha
-
+  belongs_to :remover, class_name: "User"
+  belongs_to :publisher, class_name: "User"
   has_many :comments, dependent: :destroy
   has_many :taggings, dependent: :destroy
   has_many :tags, :through => :taggings,
@@ -84,11 +87,10 @@ class Story < ActiveRecord::Base
     end
   end
 
-  def mark_as_published(publisher, url)
-    self.update_attributes publish_date: Time.now
-    self.update_attributes publisher_id: publisher.id
+  def mark_as_published(user, url)
+    self.update_attributes({publish_date: Time.zone.now, publisher: user}, without_protection: true)
     # conditional due to error on request user spec
-    Rails.env == "production" ? Tweet.delay.tweet("خبر جدید: #{self.title}", url) : true
+    Rails.env.production? ? Tweet.tweet(Twitter::Client.new, "خبر جدید: #{self.title}", url) : true
   end
 
   def user_voted?(user)
@@ -103,7 +105,7 @@ protected
   # Searches through recent stories and mark them to hide if
   # too much negative rating is submitted for them
   def self.hide_negative_stories
-    recent_stories = where(publish_date: (Time.now.midnight - 1.day)..Time.now.midnight)
+    recent_stories = where(publish_date: (Time.zone.now.midnight - 1.day)..Time.zone.now.midnight)
     recent_stories.each do |rs|
       rs.update_attribute :hide, true if rs.total_point < Story::HIDE_THRESHOLD
       rs.index!

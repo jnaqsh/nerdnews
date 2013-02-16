@@ -1,4 +1,4 @@
 $("li.active").removeAttr('class')
 $("#messages").parent().addClass('active')
-$("#user-activities").html('<%= j render(partial: "index", locals: {messages: @messages}) %>')
+$("#user-activities").html('<%= j render(partial: "index", locals: {messages: @messages})%>')
 document.title = '<%= escape_javascript("#{t('shared.header.brand_name') + ' | ' + t('users.title') + ' | ' + t('.title', name: @user.full_name)}") %>'
