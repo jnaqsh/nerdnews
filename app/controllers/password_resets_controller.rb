@@ -18,6 +18,7 @@ class PasswordResetsController < ApplicationController
     if @user.password_reset_sent_at < 2.hours.ago
       redirect_to new_password_reset_path, alert: t('controllers.password_resets.update.flash.fail')
     elsif @user.update_attributes(params[:user])
+      cookies.permanent.signed[:user_id] = @user.id
       redirect_to root_url, notice: t('controllers.password_resets.update.flash.success')
     else
       render :edit
