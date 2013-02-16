@@ -51,7 +51,6 @@ gem 'rakismet'
 gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'delayed_job_web'
-gem 'delayed_paperclip' # pass paperclip uploads to resque
 gem 'whenever', :require => false
 
 # mails execeptions to admin of site

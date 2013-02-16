@@ -251,7 +251,7 @@ fa:
     edit:
       title: 'ویرایش گزینه امتیاز'
     new:
-      index: 'ایجاد گزینه امتیاز'
+      title: 'ایجاد گزینه امتیاز'
 
   password_resets:
     edit:
