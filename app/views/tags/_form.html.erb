@@ -2,7 +2,7 @@
   <%= f.input :name,
               input_html: {class: "span6"} %>
   <div class='control-group'>
-    <% unless @tag.new_record? %>
+    <% unless @tag.new_record? || @tag.errors.any? %>
       <%= image_tag @tag.thumbnail.url(:thumb), class: 'img-polaroid pull-left' %>
     <% end %>
     <%= f.label :thumbnail, label: t("activerecord.attributes.tag.thumbnail"), class: 'control-label' %>
