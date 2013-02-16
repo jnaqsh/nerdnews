@@ -39,7 +39,7 @@ module ApplicationHelper
 
   def source_of_story(story)
     if story && story.source
-      link_to "منبع اصلی خبر", story.source
+      link_to "منبع اصلی خبر", story.source, target: "_blank"
     end
   end
 
