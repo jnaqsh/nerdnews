@@ -16,7 +16,6 @@ describe User do
       it { user.should_not have_ability(:index, for: :mypage)}
       it { user.should have_ability(:show, for: Page.new)}
       it { user.should_not have_ability([:index, :create, :update, :destroy], for: Page.new)}
-      it { user.should have_ability(:manage, for: :password_reset)}
       it { user.should_not have_ability([:read, :create, :update], for: Rating.new)}
       it { user.should have_ability([:new, :create], for: :session)}
       it { user.should_not have_ability(:destroy, for: :session)}

@@ -63,7 +63,6 @@ class Ability
          can :create, Comment
          can [:create, :failure], Identity
          can :show, Page
-         can :manage, :password_reset
          can [:new, :create], :session
          can [:read, :create], Story
          can :index, Tag
