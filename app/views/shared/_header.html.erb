@@ -28,7 +28,7 @@
       <div class="btn-group pull-left">
         <a class="btn dropdown-toggle" data-toggle="dropdown" id="user-menu" href="<%= user_path(current_user) %>">
           <%= image_tag avatar_url(current_user) %>
-          <%= current_user.full_name %>
+          <%= truncate current_user.full_name, length: 16 %>
           <% if unread_messages > 0 %>
             <span class="label label-important"><%= unread_messages.to_farsi %></span>
           <% end %>
@@ -103,32 +103,32 @@
       </ul>
       <!-- Social Icons -->
       <ul class='social-icons'>
-        <li>
+        <li id="atom">
           <%= link_to stories_path + ".atom", format: "atom" do %>
             <%= image_tag 'social-icons/fc-webicon-rss-m.png' %>
           <% end %>
         </li>
-        <li>
+        <li id="github">
           <%= link_to 'https://github.com/jnaqsh/nerdnews' do %>
             <%= image_tag 'social-icons/fc-webicon-github-m.png' %>
           <% end %>
         </li>
-        <li>
+        <li id="googleplus">
           <%= link_to 'https://plus.google.com/b/111646924484501471492/111646924484501471492' do %>
             <%= image_tag 'social-icons/fc-webicon-googleplus-m.png' %>
           <% end %>
         </li>
-        <li>
+        <li id="twitter">
           <%= link_to 'https://twitter.com/farsi_nerdnews' do %>
             <%= image_tag 'social-icons/fc-webicon-twitter-m.png' %>
           <% end %>
         </li>
-        <li>
+        <li id="facebook">
           <%= link_to 'http://www.facebook.com/farsi.nerdnews' do %>
             <%= image_tag 'social-icons/fc-webicon-facebook-m.png' %>
           <% end %>
         </li>
-        <li>
+        <li id="faq">
           <%= link_to static_pages_faq_path do %>
             <%= image_tag 'info_32.png' %>
           <% end %>
