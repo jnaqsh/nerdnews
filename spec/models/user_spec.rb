@@ -163,7 +163,7 @@ describe User do
     end
 
     it { should validate_presence_of(:full_name) }
-    it { should ensure_length_of(:full_name).is_at_least(5).is_at_most(30) }
+    it { should ensure_length_of(:full_name).is_at_least(4).is_at_most(30) }
     it { should validate_presence_of(:email) }
     it { should allow_value("asd@asdas.com").for(:email) }
     it { should_not allow_value("Asdasd@asd").for(:email) }

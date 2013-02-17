@@ -113,15 +113,19 @@ class StoriesController < ApplicationController
     @story = Story.find(params[:id])
 
     respond_to do |format|
-      if @story.update_attributes(params[:story])
-        record_activity "خبر شماره #{@story.id.to_farsi} را به‌روز کردید",
-          story_path(@story) #This will call application controller  record_activity
-
-        format.html { redirect_to @story, notice: t('controllers.stories.update.flash.success') }
-        format.json { head :no_content }
-      else
+      if params[:preview_button]
         format.html { render action: "edit" }
-        format.json { render json: @story.errors, status: :unprocessable_entity }
+      else
+        if @story.update_attributes(params[:story])
+          record_activity "خبر شماره #{@story.id.to_farsi} را به‌روز کردید",
+            story_path(@story) #This will call application controller  record_activity
+
+          format.html { redirect_to @story, notice: t('controllers.stories.update.flash.success') }
+          format.json { head :no_content }
+        else
+          format.html { render action: "edit" }
+          format.json { render json: @story.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

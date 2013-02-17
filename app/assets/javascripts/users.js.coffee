@@ -51,6 +51,6 @@ jQuery ->
     )
 
     # Back button now working with popstate in ajax links
-    $(window).bind("popstate", ->
-      $.getScript(location.href)
-    )
+#    $(window).bind("popstate", ->
+#      $.getScript(location.href)
+#    )

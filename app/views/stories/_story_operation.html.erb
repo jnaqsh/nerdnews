@@ -1,4 +1,4 @@
-<% if story.id %>
+<% if story.id && !params[:preview_button] %>
   <div class='row'>
     <% if can? :create, Vote and story.published? %>
       <div id='voting-buttons-<%= story.id %>' class='span1 btn-group pull-right' >

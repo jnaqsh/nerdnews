@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
   validates :email, email_format: true
   validates :password, confirmation: true
   validates_uniqueness_of :email, case_sensitive: false
-  validates_length_of :full_name, maximum: 30, minimum: 5
+  validates_length_of :full_name, maximum: 30, minimum: 4
   validates :website, allow_blank: true, uri: true
 
   accepts_nested_attributes_for :roles

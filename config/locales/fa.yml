@@ -29,7 +29,8 @@ fa:
     users:
       create:
         flash:
-          success: "شما با موفقیت ثبت‌نام کردید."
+          success: "شما با موفقیت ثبت‌نام کردید، برای تعیین گذرواژه، ایمیلی برای شما فرستاده شده‌است."
+          success_with_openid: "شما با موفقیت ثبت‌نام کردید، هم‌اکنون می‌توانید در نردنیوز فعالیت کنید."
           canceled: 'ایجاد حساب لغو شد. شما وارد نشده‌اید.'
       update:
         flash:
@@ -173,6 +174,8 @@ fa:
       uri_format: "پیوند نامعتبر است"
 
   helpers:
+    application:
+      anonymous_user: "شخص ناشناس"
     links:
       new: "جدید"
       edit: "ویرایش"
@@ -199,7 +202,6 @@ fa:
     edit:
       title: 'ویرایش خبر'
     story:
-      anonymous_user: "شخص ناشناس"
       story_details: 'توسط %{user} در %{date}'
     show:
       comments: "دیدگاه‌ها"

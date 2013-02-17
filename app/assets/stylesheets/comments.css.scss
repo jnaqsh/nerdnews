@@ -6,12 +6,12 @@
     .actions {
       margin-top: 3px;
     }
- 
+
   .main {
     margin-right: 52px;
     margin-bottom: 10px;
     border-bottom: 1px dotted #BBB;
-    line-height: 1;
+    line-height: 1.8em;
     .owner {
       font-size: 16px;
       font-weight: bold;
@@ -26,9 +26,9 @@
 
 .nested_comments {
   margin-right: 32px;
-  .nested_comments 
-    .nested_comments 
-      .nested_comments 
+  .nested_comments
+    .nested_comments
+      .nested_comments
         .nested_comments {
           margin-right: 0;
   }

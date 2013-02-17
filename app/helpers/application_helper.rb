@@ -29,17 +29,21 @@ module ApplicationHelper
     end
   end
 
-  def user_name(story)
+  def user_name(story, plain=false)
     if story.user
-      link_to story.user.full_name, user_path(story.user)
+      unless plain
+        link_to story.user.full_name, user_path(story.user)
+      else
+        story.user.full_name
+      end
     else
-      t('.anonymous_user')
+      t('helpers.application.anonymous_user')
     end
   end
 
   def source_of_story(story)
     if story && story.source
-      link_to "منبع اصلی خبر", story.source
+      link_to "منبع اصلی خبر", story.source, target: "_blank"
     end
   end
 

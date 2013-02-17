@@ -82,16 +82,23 @@ class UsersController < ApplicationController
 
       respond_to do |format|
         if @user.save
-          log_in(@user)
-          delete_sessions
           # send a welcome message and instruction for setting password
           @user.delay.signup_confirmation
 
-          format.html { redirect_to @user, notice: t('controllers.users.create.flash.success') }
-          format.json { render json: @user, status: :created, location: @user }
+          # login with new user if confirm with openid
+          if session[:authhash].present?
+            cookies.permanent.signed[:user_id] = @user.id
+
+            # delete authhash after login
+            session.delete :authhash
+            session.delete :service_id
+
+            format.html { redirect_to @user, notice: t("controllers.users.create.flash.success_with_openid") }
+          else
+            format.html { redirect_to root_path, notice: t("controllers.users.create.flash.success") }
+          end
         else
           format.html { render action: "new" }
-          format.json { render json: @user.errors, status: :unprocessable_entity }
         end
       end
     end
