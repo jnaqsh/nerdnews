@@ -114,7 +114,7 @@ class StoriesController < ApplicationController
 
     respond_to do |format|
       if params[:preview_button]
-        format.html { render action: "new" }
+        format.html { render action: "edit" }
       else
         if @story.update_attributes(params[:story])
           record_activity "خبر شماره #{@story.id.to_farsi} را به‌روز کردید",
