@@ -111,6 +111,7 @@ class StoriesController < ApplicationController
   # PUT /stories/1.json
   def update
     @story = Story.find(params[:id])
+    @story.attributes = params[:story]
 
     respond_to do |format|
       if params[:preview_button]
