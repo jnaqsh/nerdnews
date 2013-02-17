@@ -8,7 +8,7 @@ atom_feed do |feed|
       entry.title(story.title)
       entry.content(sanitize(RedCloth.new(story.content, [:filter_html, :filter_styles]).to_html), type: 'html')
 
-      entry.author { |author| author.name(story.user.full_name)}
+      entry.author { |author| author.name(user_name(story, true))}
     end
   end
 end
