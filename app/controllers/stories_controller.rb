@@ -30,7 +30,7 @@ class StoriesController < ApplicationController
   # GET /stories/1
   # GET /stories/1.json
   def show
-    @story = Story.find(params[:id])
+    @story = Story.includes(:tags).find(params[:id])
 
     if @story and @story.published?
       @story.increment!(:view_counter)
@@ -68,7 +68,7 @@ class StoriesController < ApplicationController
 
   # GET /stories/1/edit
   def edit
-    @story = Story.find(params[:id])
+    @story = Story.includes(:tags).find(params[:id])
   end
 
   # POST /stories
@@ -110,7 +110,7 @@ class StoriesController < ApplicationController
   # PUT /stories/1
   # PUT /stories/1.json
   def update
-    @story = Story.find(params[:id])
+    @story = Story.includes(:tags).find(params[:id])
     @story.attributes = params[:story]
 
     respond_to do |format|
