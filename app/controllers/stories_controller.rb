@@ -119,9 +119,14 @@ class StoriesController < ApplicationController
       else
         if @story.update_attributes(params[:story])
           record_activity "خبر شماره #{@story.id.to_farsi} را به‌روز کردید",
-            story_path(@story) #This will call application controller  record_activity
+              story_path(@story) #This will call application controller  record_activity
 
-          format.html { redirect_to @story, notice: t('controllers.stories.update.flash.success') }
+          if @story.published?
+            format.html { redirect_to @story, notice: t('controllers.stories.update.flash.success') }
+          else
+            format.html { redirect_to unpublished_stories_path, notice: t('controllers.stories.update.flash.success') }
+          end
+
           format.json { head :no_content }
         else
           format.html { render action: "edit" }
