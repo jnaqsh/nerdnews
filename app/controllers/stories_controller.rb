@@ -10,7 +10,7 @@ class StoriesController < ApplicationController
       without(:hide, true)
       fulltext params[:search]
       order_by :publish_date, :desc
-      paginate :page => params[:page], :per_page => 5
+      paginate :page => params[:page], :per_page => 20
     end
 
     if params[:tag]

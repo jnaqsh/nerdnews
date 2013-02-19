@@ -5,7 +5,7 @@ jQuery ->
   if $('#stories').next('.pagination').length
     $(window).scroll ->
       url = $('.pagination a[rel="next"]').attr('href')
-      if url && $(window).scrollTop() > $(document).height() - $(window).height() - 50
+      if url && $(window).scrollTop() > $(document).height() - $(window).height() - 2500
         $('.pagination').text("در حال دریافت خبرهای بیشتر...")
         $.getScript(url)
     $(window).scroll()
