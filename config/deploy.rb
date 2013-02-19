@@ -28,6 +28,7 @@ after "deploy:stop",    "delayed_job:stop"
 after "deploy:start",   "delayed_job:start"
 after "deploy:start", "solr:start"
 after "deploy:stop", "solr:stop"
+after "deploy:restart", "delayed_job:restart"
 
 namespace :deploy do
   desc "reload the database with seed data"
