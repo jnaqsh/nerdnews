@@ -10,7 +10,8 @@ module StoriesHelper
 
   def thumbnail_url(story)
     unless story.tags.first.nil?
-      "#{root_url.gsub(/\/$/, '') + story.tags.first.thumbnail.url}"
+#      "#{root_url.gsub(/\/$/, '') + story.tags.first.thumbnail.url}"
+      story.tags.first.thumbnail.url #using dropbox in production
     end
   end
 
