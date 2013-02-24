@@ -40,6 +40,10 @@
 
           <li class="divider"></li>
 
+          <% if can? :index, ActivityLog %>
+            <li><%= link_to t('.activity_logs'), activity_logs_path %></li>
+          <% end %>
+
           <% if can? :publish, Story %>
             <li><%= link_to t('.unpublished_stories'), unpublished_stories_path %></li>
           <% end %>
@@ -95,10 +99,13 @@
         <% end %>
         <%= active_link_to t('.new_story'), new_story_path, active: [['stories'], ['new', 'create']],
             :wrap_tag => :li %>
-
-        <%= form_tag stories_path, method: :get, class: "navbar-search pull-left" do %>
-          <%= text_field_tag :search, params[:search], class: "span2 search-query",
-            placeholder: t(".search") %>
+        <% if content_for?(:search) %>
+          <%= yield :search %>
+        <% else %>
+          <%= form_tag stories_path, method: :get, class: "navbar-search pull-left" do %>
+            <%= text_field_tag :search, params[:search], class: "span2 search-query",
+              placeholder: t(".search") %>
+          <% end %>
         <% end %>
       </ul>
       <!-- Social Icons -->

@@ -103,6 +103,13 @@ fa:
           fail: "زمان بازنشانی گذرواژه تمام شده‌است، دوباره سعی کنید."
           success: "گذرواژه جدید با موفقیت بازنشانی شد."
 
+  activity_logs:
+    title: "آخرین تغییرات"
+    index:
+      search: "جستجو"
+      title: "فهرست"
+    search:
+      search: "جستجو"
   static_pages:
     faq:
       title: "سوالات رایج"
@@ -176,6 +183,7 @@ fa:
     application:
       anonymous_user: "شخص ناشناس"
     links:
+      show: "نمایش"
       new: "جدید"
       edit: "ویرایش"
       destroy: "حذف"
@@ -281,6 +289,7 @@ fa:
       identities: 'حساب‌های OpenID'
       messages: 'پیام‌ها'
       pages: "صفحات"
+      activity_logs: "آخرین تغییرات"
     head:
       title: 'نردنیوز'
 
@@ -339,6 +348,7 @@ fa:
       identities: "حساب‌های OpenID"
       message: 'پیام'
       rating: 'امتیاز'
+      activity_log: "تاریخچه فعالیت"
 
     attributes:
       story:
@@ -350,6 +360,15 @@ fa:
         tag_names: "تگ‌ها"
         source: 'منبع'
         spam_answer: "پاسخ دهید"
+      activity_log:
+        user: "کاربر"
+        browser: "مرورگر"
+        ip_address: "آدرس آی‌پی"
+        controller: "کنترل‌کننده"
+        action: "عمل"
+        note: "اطلاعات بیشتر"
+        note_link: "پیوند اطلاعات بیشتر"
+        params: "پارامترها"
 
       comment:
         name: "نام"

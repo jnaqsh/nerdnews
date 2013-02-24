@@ -21,6 +21,7 @@ Nerdnews::Application.routes.draw do
   end
 
   # Other Resources
+  resources :activity_logs
   resources :ratings
   resources :password_resets
   resources :pages

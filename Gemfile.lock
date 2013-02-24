@@ -134,6 +134,7 @@ GEM
     faraday (0.8.5)
       multipart-post (~> 1.1)
     farsifu (0.4.1)
+    fattr (2.2.1)
     faye-websocket (0.4.6)
       eventmachine (>= 0.12.0)
     ffi (1.3.1)
@@ -230,6 +231,8 @@ GEM
     omniauth-twitter (0.0.14)
       multi_json (~> 1.3)
       omniauth-oauth (~> 1.0)
+    options (2.3.0)
+      fattr
     paperclip (3.4.0)
       activemodel (>= 3.0.0)
       activerecord (>= 3.0.0)
@@ -247,6 +250,9 @@ GEM
       multi_json (~> 1.0)
     polyglot (0.3.3)
     pr_geohash (1.0.0)
+    progress_bar (0.4.0)
+      highline (~> 1.6.1)
+      options (~> 2.3.0)
     pry (0.9.12)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
@@ -424,6 +430,7 @@ DEPENDENCIES
   paperclip
   paperclip-dropbox
   poltergeist
+  progress_bar
   pry-rails
   rails (= 3.2.12)
   rails-i18n!

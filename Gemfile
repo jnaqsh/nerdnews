@@ -37,6 +37,9 @@ gem 'ancestry'
 gem 'paperclip'
 gem "paperclip-dropbox"
 
+# progress_bar for reindexing sunspot
+gem 'progress_bar'
+
 gem 'omniauth-github'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'

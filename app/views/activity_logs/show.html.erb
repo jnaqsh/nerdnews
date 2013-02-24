@@ -1,0 +1,32 @@
+<% set_meta_tags  title: [t('activity_logs.title'), t('.title')] %>
+
+<%= content_for :search do %>
+  <%= render "search" %>
+<% end %>
+
+<%- model_class = @activity_log.class -%>
+<% content_for :page_header do %>
+  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+<% end %>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:user) %>:</strong></dt>
+  <dd><%= link_to @activity_log.user.full_name, user_path(@activity_log.user) %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:note) %>:</strong></dt>
+  <dd><%= link_to_if @activity_log.note_link, @activity_log.note, @activity_log.note_link %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:browser) %>:</strong></dt>
+  <dd><%= @activity_log.browser %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:ip_address) %>:</strong></dt>
+  <dd><%= @activity_log.ip_address %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:controller) %>:</strong></dt>
+  <dd><%= @activity_log.controller %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:action) %>:</strong></dt>
+  <dd><%= @activity_log.action %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:params) %>:</strong></dt>
+  <dd class="ltr"><%= @activity_log.params %></dd>
+</dl>
+
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              activity_logs_path, :class => 'btn'  %>
+</div>

@@ -23,6 +23,7 @@ class Ability
          can :create, Vote
          can :bypass_captcha, user
          can :add_to_favorites, User
+         can [:show, :index], ActivityLog
        elsif user.role? :approved
          can :manage, Comment
          can [:create, :failure], Identity
@@ -41,6 +42,7 @@ class Ability
          can :create, Vote
          can :bypass_captcha, user
          can :add_to_favorites, User
+         can :index, ActivityLog
        elsif user.role? :new_user
          can :create, Comment
          can [:create, :failure], Identity
@@ -59,6 +61,7 @@ class Ability
          can :create, Vote
          cannot :bypass_captcha, user
          can :add_to_favorites, User
+         can :index, ActivityLog
        else # guest user
          can :create, Comment
          can [:create, :failure], Identity

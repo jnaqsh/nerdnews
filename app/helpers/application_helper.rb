@@ -14,9 +14,15 @@ module ApplicationHelper
     "http://gravatar.com/avatar/#{gravater_id}.png?s=#{size}&d=mm"
   end
 
-  def to_jalali(date)
+  def to_jalali(date, options = {})
     jalali_date = JalaliDate.new(date)
-    jalali_date.strftime("%A %e %b %Y - %H:%M").to_farsi
+    if options[:standard]
+      jalali_date.strftime("%e %b %Y").to_farsi
+    elsif options[:just_time]
+      "ساعت " + jalali_date.strftime("%H:%M").to_farsi
+    else
+      jalali_date.strftime("%A %e %b %Y - %H:%M").to_farsi
+    end
   end
 
   def nested_comments(messages)
@@ -29,12 +35,12 @@ module ApplicationHelper
     end
   end
 
-  def user_name(story, plain=false)
-    if story.user
+  def user_name(object, plain=false)
+    if object.user
       unless plain
-        link_to story.user.full_name, user_path(story.user)
+        link_to object.user.full_name, user_path(object.user)
       else
-        story.user.full_name
+        object.user.full_name
       end
     else
       t('helpers.application.anonymous_user')
