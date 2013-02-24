@@ -63,6 +63,9 @@ class Story < ActiveRecord::Base
     text :user do
       user.full_name if user.present?
     end
+    text :tags do
+      tags.map(&:name)
+    end
   end
 
   def published?
