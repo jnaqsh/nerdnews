@@ -50,6 +50,11 @@
             </span>
 
             <span>
+              <i class='icon-eye-open' title="تعداد نمایش"></i>
+              <%= t('stories.index.views_count') + story.view_counter.to_farsi %>
+            </span>
+
+            <span>
               <i class='icon-user' title="نویسنده"></i>
               <%= user_name(story) %>
             </span>

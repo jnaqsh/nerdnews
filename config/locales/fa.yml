@@ -204,6 +204,7 @@ fa:
       title: "تازه‌ترین‌ها"
       new: "خبری جدید بنویسید"
       point: "امتیاز: "
+      views_count: "نمایش: "
     new:
       title: 'خبر جدید'
     edit:
