@@ -35,8 +35,10 @@ describe User do
       let(:user){ FactoryGirl.create(:user) }
       let(:user2){ FactoryGirl.create(:user)}
 
+      it { user.should_not have_ability(:show, for: ActivityLog.new)}
+      it { user.should have_ability(:index, for: ActivityLog.new)}
       it { user.should have_ability(:create, for: Comment.new)}
-      it { user.should have_ability(:update, for: user.comments.build)}
+      it { user.should have_ability([:update, :destroy], for: user.comments.build)}
       it { user.should_not have_ability(:update, for: user2.comments.build)}
       it { user.should_not have_ability([:read, :update, :destroy], for: Comment.new)}
       it { user.should have_ability([:create, :failure], for: Identity.new)}
@@ -61,12 +63,10 @@ describe User do
       it { user.should have_ability(:index, for: Tag.new)}
       it { user.should_not have_ability([:create, :show, :update, :destroy], for: Tag.new)}
       it { user.should have_ability([:show, :posts, :comments, :favorites], for: User.new)}
-      it { user.should have_ability([:update, :destroy], for: user)}
+      it { user.should have_ability(:update, for: user)}
       it { user.should_not have_ability([:create, :index, :destroy, :update], for: User.new)}
       it { user.should have_ability(:create, for: Vote.new)}
       it { user.should_not have_ability(:bypass_captcha, for: user)}
-      it { user.should_not have_ability(:show, for: ActivityLog.new)}
-      it { user.should have_ability(:index, for: ActivityLog.new)}
     end
 
     context "when is a approved user" do

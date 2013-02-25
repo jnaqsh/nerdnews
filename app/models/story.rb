@@ -59,9 +59,11 @@ class Story < ActiveRecord::Base
       comments.map(&:content)
     end
     time :publish_date
+    time :created_at
     boolean :hide
     text :user do
       user.full_name if user.present?
+      user.email if user.present?
     end
     text :tags do
       tags.map(&:name)
@@ -69,7 +71,7 @@ class Story < ActiveRecord::Base
   end
 
   def published?
-    self.publish_date.present? ? true : false
+    publish_date.present? ? true : false
   end
 
   def perform_textcaptcha?

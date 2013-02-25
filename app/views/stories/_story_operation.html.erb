@@ -30,7 +30,7 @@
       <% if can? :update, story %>
         <%= link_to t('.edit', :default => t("helpers.links.edit")), edit_story_path(story), :class => 'btn btn-mini' %>
       <% end %>
-      <% if can? :destroy, story %>
+      <% if (can? :destroy, story) && !story.published? %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       story_path(story),
                       :method => :delete,
@@ -38,7 +38,7 @@
                       :class => 'btn btn-mini btn-danger'
                        %>
       <% end %>
-      <% if (can? :publish, story) && !story.publish_date %>
+      <% if (can? :publish, story) && !story.published? %>
         <%= link_to t('.publish', default: t('helpers.links.publish')), publish_story_path(story),
             class: "btn btn-mini btn-primary", method: :put %>
       <% end %>

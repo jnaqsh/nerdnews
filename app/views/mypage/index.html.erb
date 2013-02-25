@@ -1,4 +1,17 @@
 <% set_meta_tags  title: [t('mypage.title'), t('.title', name: current_user.full_name)],
                   noindex: true %>
-<%= render partial: 'stories/story', collection: @stories %>
-<%= paginate @stories if @stories %>
+
+<% if @stories && !@stories.empty? %>
+  <%- model_class = Story.new.class -%>
+  <% content_for :page_header do %>
+      <h1>
+        <%= t '.title', name: current_user.full_name, :default => model_class.model_name.human.pluralize %>
+      </h1>
+  <% end %>
+
+  <div id="stories">
+    <%= render partial: 'stories/story', collection: @stories %>
+  </div>
+
+  <%= paginate @stories %>
+<% end %>
