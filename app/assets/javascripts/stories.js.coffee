@@ -1,14 +1,20 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
-jQuery ->
-  if $('#stories').next('.pagination').length
+
+load_pages = (divID='#stories', messageReplace='در حال دریافت...') ->
+  if $("#{divID}").next('.pagination').length
     $(window).scroll ->
       url = $('.pagination a[rel="next"]').attr('href')
       if url && $(window).scrollTop() > $(document).height() - $(window).height() - 2500
-        $('.pagination').text("در حال دریافت خبرهای بیشتر...")
+        $('.pagination').text("#{messageReplace}")
         $.getScript(url)
     $(window).scroll()
+window.load_pages = load_pages
+
+jQuery ->
+  #loads more stories when scroll to the end of the page
+  load_pages("#stories", "در حال دریافت خبرهای بیشتر...")
 
   # Show optins when clicking voting button
   votingOptions =
