@@ -24,3 +24,4 @@
 //= require users.js.coffee
 //= require stories.js.coffee
 //= require comments.js.coffee
+//= require activity_logs

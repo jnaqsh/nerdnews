@@ -1,0 +1,24 @@
+<dl class="dl-horizontal" id="activity_logs">
+  <% begin_date = 1.day.from_now(activity_logs.first.created_at.to_date) rescue nil %>
+
+  <% activity_logs.each do |activity_log| %>
+    <% if begin_date > activity_log.created_at.to_date %>
+      <% begin_date = activity_log.created_at.to_date %>
+      <em><%= to_jalali(activity_log.created_at, standard: true) %></em><br />
+    <% end %>
+
+    <dt>
+      <%= user_name activity_log %>
+    </dt>
+    <dd>
+      <%= link_to_if activity_log.note_link, activity_log.note, activity_log.note_link %>
+      <%= " - " %>
+      <%= to_jalali(activity_log.created_at, just_time: true) %>
+
+      <% if can? :show, ActivityLog %>
+        <%= " - " %>
+        <%= link_to t('helpers.links.show'), activity_log_path(activity_log) %>
+      <% end %>
+    </dd>
+  <% end %>
+</dl>

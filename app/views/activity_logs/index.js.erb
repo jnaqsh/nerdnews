@@ -1,0 +1,8 @@
+$('#activity_logs').append('<%= j render(partial: 'activity_logs', object: @activity_logs) %>');
+<% if @activity_logs.next_page %>
+  $(".pagination").replaceWith('<%= j render(partial: 'activity_logs', object: @activity_logs) %>');
+<% else %>
+  $('.pagination').remove();
+<% end %>
+
+<% sleep 1 %>
