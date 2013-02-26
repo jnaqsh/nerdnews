@@ -55,6 +55,14 @@ jQuery ->
       minLength + " حرف دیگر وارد کنید"
     })
 
+  $("ul.select2-choices").sortable({
+    containment: 'parent',
+    start: ->
+      $("#story_tag_names").select2("onSortStart")
+    update: ->
+      $("#story_tag_names").select2("onSortEnd")
+  })
+
   $("#tag_search").select2({
     minimumInputLength: 1
     ajax:
