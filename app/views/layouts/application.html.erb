@@ -3,14 +3,14 @@
 
   <%= render 'shared/head' %>
 
-  <body>
+  <%= body do %>
 
     <div class="navbar navbar-fixed-top">
       <%= render partial: 'shared/header' %>
     </div>
 
     <%= render partial: 'shared/loading_indicator' %>
-    
+
     <div class='container'>
       <%= render partial: 'shared/flash', locals: { flash: flash } %>
     </div>
@@ -27,5 +27,5 @@
       <%= yield %>
     </div>
 
-  </body>
+  <% end %>
 </html>

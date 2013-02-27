@@ -60,4 +60,44 @@ module ApplicationHelper
     signed += " به " + link_to(message.receiver.full_name, user_path(message.receiver))
     signed.html_safe
   end
+
+  def body(&block)
+    content_tag :body, class: determine_browser_and_os do
+      capture(&block)
+    end
+  end
+
+  private
+  # The ruby version of the CSS Browser Selector with some additions
+  # This code is from: https://github.com/attinteractive/css_browser_selector
+  def determine_browser_and_os(ua = request.env["HTTP_USER_AGENT"])
+    ua = (ua||"").downcase
+    br = case ua
+      when /opera[\/,\s+](\d+)/
+        o = %W(opera opera#{$1})
+        o << "mobile" if ua.include?('mini')
+        o.join(" ")
+      when /webtv/ ;              "gecko"
+      when /msie (\d)/ ;          "ie ie#{$1}"
+      when %r{firefox/2} ;        "gecko ff2"
+      when %r{firefox/3.5} ;      "gecko ff3 ff3_5"
+      when %r{firefox/3} ;        "gecko ff3"
+      when /konqueror/ ;          "konqueror"
+      when /applewebkit\/([\d.]+).? \([^)]*\) ?(?:version\/(\d+))?.*$/
+        o = %W(webkit)
+        if ua.include?('iron')
+          o << 'iron'
+        elsif ua.include?('chrome')
+          o << 'chrome'
+        else
+          o << "safari safari"+ ($2 || (($1.to_i >= 400) ? '2' : '1'))
+        end
+        o.join(" ")
+      when /gecko/, /mozilla/ ;   "gecko"
+    end
+    os = ua.include?('mac') || ua.include?('darwin') ? ua.include?('iphone') ? 'iphone' : ua.include?('ipod') ? 'ipod' : 'mac' :
+         ua.include?('x11') || ua.include?('linux') ? 'linux' :
+         ua.include?('win') ? 'win' : nil
+    "#{br}#{" " unless br.nil? or os.nil?}#{os}"
+  end
 end
