@@ -16,7 +16,7 @@
             <%= content_tag :li, rel: "tooltip", title: tag.name do %>
               <p>
                 <%= link_to stories_url(tag: tag.name) do %>
-                  <%= truncate(tag.name, length: 10) %>
+                  <%= truncate(tag.name, length: 8) %>
                 <% end %>
                 <span class="tag_id_<%= tag.id %> <%= 'yellow' if favored %>">
                   <% if current_user && !favored %>
