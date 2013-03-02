@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-load_pages = (divID='#stories', messageReplace='در حال دریافت...') ->
+@load_pages = (divID='#stories', messageReplace='در حال دریافت...') ->
   if $("#{divID}").next('.pagination').length
     $(window).scroll ->
       url = $('.pagination a[rel="next"]').attr('href')
@@ -10,7 +10,6 @@ load_pages = (divID='#stories', messageReplace='در حال دریافت...') ->
         $('.pagination').text("#{messageReplace}")
         $.getScript(url)
     $(window).scroll()
-window.load_pages = load_pages
 
 jQuery ->
   #loads more stories when scroll to the end of the page
