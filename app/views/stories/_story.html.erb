@@ -1,7 +1,7 @@
 <!-- cache status of Story -->
 <% status = hide_story?(story) %>
 
-<article <%= "class=grey-out" if status %> >
+<%= content_tag :article, class: "story #{'grey-out' if status}", data: {id: story.id} do %>
   <div class='row'>
     <div class='span1 visible-desktop'>
       <div class='story-image'>
@@ -93,5 +93,5 @@
       <%= render partial: "stories/story_operation", locals: {story: story} %>
     </div>
   </div>
-</article>
+<% end %>
 <hr />

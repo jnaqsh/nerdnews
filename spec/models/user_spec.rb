@@ -19,7 +19,7 @@ describe User do
       it { user.should_not have_ability([:read, :create, :update], for: Rating.new)}
       it { user.should have_ability([:new, :create], for: :session)}
       it { user.should_not have_ability(:destroy, for: :session)}
-      it { user.should have_ability([:read, :create], for: Story.new)}
+      it { user.should have_ability([:read, :create, :recent], for: Story.new)}
       it { user.should_not have_ability([:publish, :unpublished, :update, :destroy], for: Story.new)}
       it { user.should have_ability(:index, for: Tag.new)}
       it { user.should_not have_ability([:create, :show, :update, :destroy], for: Tag.new)}
@@ -56,7 +56,7 @@ describe User do
       it { user.should_not have_ability([:read, :create, :update], for: Rating.new)}
       it { user.should_not have_ability([:new, :create], for: :session)}
       it { user.should have_ability(:destroy, for: :session)}
-      it { user.should have_ability([:read, :create], for: Story.new)}
+      it { user.should have_ability([:read, :create, :recent], for: Story.new)}
       it { user.should_not have_ability([:publish, :unpublished, :update, :destroy], for: Story.new)}
 #      it { user.should have_ability(:activity_logs), for: user}
 #      it { user.should_not have_ability(:activity_logs), for: user2}
@@ -90,7 +90,7 @@ describe User do
       it { user.should_not have_ability([:read, :create, :update], for: Rating.new)}
       it { user.should_not have_ability([:new, :create], for: :session)}
       it { user.should have_ability(:destroy, for: :session)}
-      it { user.should have_ability([:read, :create, :publish, :unpublished], for: Story.new)}
+      it { user.should have_ability([:read, :create, :publish, :unpublished, :recent], for: Story.new)}
       it { user.should have_ability(:update, for: user.stories.build)}
       it { user.should_not have_ability(:update, for: user2.stories.build)}
       it { user.should have_ability([:read, :create, :update], for: Tag.new)}

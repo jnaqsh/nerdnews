@@ -51,6 +51,7 @@ Nerdnews::Application.routes.draw do
     end
     get 'unpublished', :on => :collection
     put 'publish', :on => :member
+    get 'recent', on: :collection
   end
 
   get "/:permalink" => "pages#show", as: "page_by_permalink"

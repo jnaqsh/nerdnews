@@ -36,7 +36,7 @@ class Ability
          can :index, :mypage
          can :show, Page
          can :destroy, :session
-         can [:read, :create, :publish, :unpublished], Story
+         can [:read, :create, :publish, :unpublished, :recent], Story
          can [:update, :destroy], Story, user: {id: user.id}
          can [:read, :create, :update], Tag
          can [:show, :posts, :comments, :favorites], User
@@ -57,7 +57,7 @@ class Ability
          can :index, :mypage
          can :show, Page
          can :destroy, :session
-         can [:read, :create], Story
+         can [:read, :create, :recent], Story
          can [:update, :destroy], Story, user: {id: user.id}
          can :index, Tag
          can [:show, :posts, :comments, :favorites], User
@@ -71,7 +71,7 @@ class Ability
          can [:create, :failure], Identity
          can :show, Page
          can [:new, :create], :session
-         can [:read, :create], Story
+         can [:read, :create, :recent], Story
          can :index, Tag
          can [:create, :show, :posts, :comments, :favorites], User
          cannot :bypass_captcha, User

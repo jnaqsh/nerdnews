@@ -53,6 +53,7 @@ class Story < ActiveRecord::Base
   attr_reader :tag_names
 
   searchable do
+    integer :id
     text :title, boost: 5
     text :content
     text :comments do

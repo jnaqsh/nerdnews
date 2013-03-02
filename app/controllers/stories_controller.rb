@@ -4,6 +4,15 @@ class StoriesController < ApplicationController
   load_and_authorize_resource
   # GET /stories
   # GET /stories.json
+
+  def recent
+    @stories = Story.approved.includes(:tags).where('id > ? and hide = ?', params[:after].to_i, false).order("publish_date desc")
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def index
     @stories = Story.search(:include => [:tags]) do
       without(:publish_date, nil)

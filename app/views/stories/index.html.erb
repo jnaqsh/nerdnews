@@ -16,8 +16,12 @@
     </h1>
 <% end %>
 
-<div id="stories">
-  <%= (render @stories) || "خبر مورد نظر پیدا نشد" %>
+<div class="alert alert-info" id="show_stories" style="display: none">
+  خبرهای جدیدی منتشر گردیده‌است - <a href="#">کلیک کنید تا آن‌ها را ببینید</a>
 </div>
+
+<%= content_tag :div, id: "stories", data: {url: recent_stories_url(format: :js)} do %>
+  <%= (render @stories) || "خبر مورد نظر پیدا نشد" %>
+<% end %>
 
 <%= paginate @stories %>
