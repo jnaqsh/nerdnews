@@ -48,6 +48,12 @@
             <li><%= link_to t('.unpublished_stories'), unpublished_stories_path %></li>
           <% end %>
 
+          <% if can? :index, :mypage %>
+            <li><%= link_to t('.mypage'), mypage_index_path %></li>
+          <% end %>
+
+          <li class="divider"></li>
+
           <% if can? :create, Tag %>
             <li><%= link_to t('.tags'), tags_path %></li>
           <% end %>
