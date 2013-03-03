@@ -71,7 +71,9 @@ class Ability
          can [:create, :failure], Identity
          can :show, Page
          can [:new, :create], :session
-         can [:read, :create, :recent], Story
+         can [:index, :create, :recent], Story
+         can :show, Story
+         cannot :show, Story, publish_date: nil
          can :index, Tag
          can [:create, :show, :posts, :comments, :favorites], User
          cannot :bypass_captcha, User

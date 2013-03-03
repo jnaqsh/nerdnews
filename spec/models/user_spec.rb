@@ -8,6 +8,8 @@ describe User do
 
     context "when is a guest user" do
       let(:user){ User.new }
+      let(:story){ FactoryGirl.create(:story)}
+      let(:approved_story){ FactoryGirl.create(:approved_story)}
 
       it { user.should have_ability(:create, for: Comment.new)}
       it { user.should_not have_ability([:read, :update, :destroy], for: Comment.new)}
@@ -19,7 +21,9 @@ describe User do
       it { user.should_not have_ability([:read, :create, :update], for: Rating.new)}
       it { user.should have_ability([:new, :create], for: :session)}
       it { user.should_not have_ability(:destroy, for: :session)}
-      it { user.should have_ability([:read, :create, :recent], for: Story.new)}
+      it { user.should have_ability([:index, :create, :recent], for: Story.new)}
+      it { user.should have_ability(:show, for: approved_story)}
+      it { user.should_not have_ability(:show, for: story)}
       it { user.should_not have_ability([:publish, :unpublished, :update, :destroy], for: Story.new)}
       it { user.should have_ability(:index, for: Tag.new)}
       it { user.should_not have_ability([:create, :show, :update, :destroy], for: Tag.new)}
@@ -58,8 +62,8 @@ describe User do
       it { user.should have_ability(:destroy, for: :session)}
       it { user.should have_ability([:read, :create, :recent, :unpublished], for: Story.new)}
       it { user.should_not have_ability([:publish, :update, :destroy], for: Story.new)}
-#      it { user.should have_ability(:activity_logs), for: user}
-#      it { user.should_not have_ability(:activity_logs), for: user2}
+      it { user.should have_ability(:activity_logs, for: user)}
+      it { user.should_not have_ability(:activity_logs, for: user2)}
       it { user.should have_ability(:index, for: Tag.new)}
       it { user.should_not have_ability([:create, :show, :update, :destroy], for: Tag.new)}
       it { user.should have_ability([:show, :posts, :comments, :favorites], for: User.new)}
@@ -96,8 +100,8 @@ describe User do
       it { user.should have_ability([:read, :create, :update], for: Tag.new)}
       it { user.should_not have_ability(:destroy, for: Tag.new)}
       it { user.should have_ability([:show, :posts, :comments, :favorites], for: User.new)}
-#      it { user.should_not have_ability(:activity_logs), for: user2}
-#      it { user.should have_ability(:activity_logs), for: user}
+      it { user.should_not have_ability(:activity_logs, for: user2)}
+      it { user.should have_ability(:activity_logs, for: user)}
       it { user.should have_ability(:update, for: user)}
       it { user.should_not have_ability(:update, for: user2)}
       it { user.should_not have_ability([:create, :index, :destroy, :update], for: User.new)}

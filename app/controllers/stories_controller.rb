@@ -36,7 +36,7 @@ class StoriesController < ApplicationController
   def show
     @story = Story.includes(:tags).find(params[:id])
 
-    if @story and @story.published?
+    if @story
       @story.increment!(:view_counter)
       @comment = @story.comments.build
       @comments = @story.comments.approved.arrange(order: :created_at)
@@ -92,7 +92,7 @@ class StoriesController < ApplicationController
         format.html { render action: "new" }
       else
         if @story.save
-          record_activity "خبر شماره #{@story.id.to_farsi} را ایجاد کردید" #This will call application controller  record_activity
+          record_activity "خبر #{@story.title} را ایجاد کرد" #This will call application controller  record_activity
 
           format.html { redirect_to root_path, only_path: true,
             notice: t("controllers.stories.create.flash.success", link: unpublished_stories_path).html_safe }
@@ -116,7 +116,7 @@ class StoriesController < ApplicationController
         format.html { render action: "edit" }
       else
         if @story.update_attributes(params[:story])
-          record_activity "خبر شماره #{@story.id.to_farsi} را به‌روز کردید",
+          record_activity "خبر #{@story.title} را به‌روز کرد",
               story_path(@story) #This will call application controller  record_activity
 
           if @story.published?
@@ -142,7 +142,7 @@ class StoriesController < ApplicationController
 
     @story.update_attributes({remover: current_user}, without_protection: true)
 
-    record_activity "خبر شماره #{@story.id.to_farsi} را حذف کردید"
+    record_activity "خبر #{@story.title} را حذف کرد"
 
     respond_to do |format|
       format.html { redirect_to stories_url }
@@ -159,7 +159,7 @@ class StoriesController < ApplicationController
 
         rate_user(@story.user, 3) if @story.user #rate for user who wrote a story
         rate_user(1) if current_user #rate for user who publish a story
-        record_activity "خبر شماره #{@story.id.to_farsi} را منتشر کردید",
+        record_activity "خبر #{@story.title} را منتشر کرد",
           story_path(@story) #This will call application controller  record_activity
 
         format.html { redirect_to unpublished_stories_path,
