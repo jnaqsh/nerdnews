@@ -56,8 +56,8 @@ describe User do
       it { user.should_not have_ability([:read, :create, :update], for: Rating.new)}
       it { user.should_not have_ability([:new, :create], for: :session)}
       it { user.should have_ability(:destroy, for: :session)}
-      it { user.should have_ability([:read, :create, :recent], for: Story.new)}
-      it { user.should_not have_ability([:publish, :unpublished, :update, :destroy], for: Story.new)}
+      it { user.should have_ability([:read, :create, :recent, :unpublished], for: Story.new)}
+      it { user.should_not have_ability([:publish, :update, :destroy], for: Story.new)}
 #      it { user.should have_ability(:activity_logs), for: user}
 #      it { user.should_not have_ability(:activity_logs), for: user2}
       it { user.should have_ability(:index, for: Tag.new)}

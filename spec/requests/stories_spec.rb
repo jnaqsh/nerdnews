@@ -52,8 +52,8 @@ describe "Stories" do
         fill_in "story_title", with: Faker::Lorem.characters(10)
         fill_in "story_content", with: Faker::Lorem.characters(260)
         click_button 'ایجاد'
-        page.should have_content("موفقیت") and have_content('منتشر')
-        Story.last.publish_date.should_not be_nil
+        page.should have_content("موفقیت") and have_content('مدیرها') and have_content('منتشرنشده')
+        Story.last.publish_date.should be_nil
       end
 
       it 'gets preview' do

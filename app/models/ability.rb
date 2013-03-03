@@ -57,7 +57,7 @@ class Ability
          can :index, :mypage
          can :show, Page
          can :destroy, :session
-         can [:read, :create, :recent], Story
+         can [:read, :create, :recent, :unpublished], Story
          can [:update, :destroy], Story, user: {id: user.id}
          can :index, Tag
          can [:show, :posts, :comments, :favorites], User

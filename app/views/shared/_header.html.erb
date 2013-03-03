@@ -44,7 +44,7 @@
             <li><%= link_to t('.activity_logs'), activity_logs_path %></li>
           <% end %>
 
-          <% if can? :publish, Story %>
+          <% if can? :unpublished, Story %>
             <li><%= link_to t('.unpublished_stories'), unpublished_stories_path %></li>
           <% end %>
 

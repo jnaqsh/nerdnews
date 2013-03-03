@@ -92,16 +92,10 @@ class StoriesController < ApplicationController
         format.html { render action: "new" }
       else
         if @story.save
-          if can? :publish, @story
-            @story.mark_as_published(current_user, story_url(@story))
-            rate_user 3 if current_user.present?
-            record_activity "خبر شماره #{@story.id.to_farsi} را ایجاد و منتشر کردید",
-              story_path(@story) #This will call application controller  record_activity
-          else
-            record_activity "خبر شماره #{@story.id.to_farsi} را ایجاد کردید" #This will call application controller  record_activity
-          end
+          record_activity "خبر شماره #{@story.id.to_farsi} را ایجاد کردید" #This will call application controller  record_activity
 
-          format.html { redirect_to root_path, only_path: true, notice: t("#{successful_notice(@story)}") }
+          format.html { redirect_to root_path, only_path: true,
+            notice: t("controllers.stories.create.flash.success", link: unpublished_stories_path).html_safe }
           format.json { render json: @story, status: :created, location: @story }
         else
           format.html { render action: "new" }
@@ -180,16 +174,6 @@ class StoriesController < ApplicationController
 
     respond_to do |format|
       format.html
-    end
-  end
-
-  private
-
-  def successful_notice(story)
-    unless story.published? #successful message for guest and new users
-      "controllers.stories.create.flash.success_for_guest_and_new_users"
-    else #successful message for approved and founder users
-      "controllers.stories.create.flash.success"
     end
   end
 end
