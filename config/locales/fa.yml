@@ -210,6 +210,7 @@ fa:
       title: 'ویرایش خبر'
     story:
       story_details: 'توسط %{user} در %{date}'
+      voters: "رای‌دهندگان"
     show:
       comments: "دیدگاه‌ها"
       no_comments: "هیچ دیدگاهی وجود ندارد."

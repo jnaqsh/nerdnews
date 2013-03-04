@@ -25,4 +25,12 @@ module StoriesHelper
     end
     return false
   end
+
+  def positive_or_negative(vote)
+    if vote.rating.weight >= 0
+      "label-success"
+    else
+      "label-important"
+    end
+  end
 end

@@ -14,13 +14,13 @@ class StoriesController < ApplicationController
   end
 
   def index
-    @stories = Story.search(:include => [:tags]) do
+    @stories = Story.search(:include => [:tags, :votes, :user]) do
       without(:publish_date, nil)
       without(:hide, true)
       fulltext params[:search]
       fulltext params[:tag]
       order_by :publish_date, :desc
-      paginate :page => params[:page], :per_page => 20
+      paginate :page => params[:page], :per_page => 5
     end.results
 
     respond_to do |format|

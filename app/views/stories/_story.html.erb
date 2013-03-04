@@ -81,8 +81,17 @@
               <%= link_to story.publisher.full_name, user_path(story.publisher) %>
             </span>
           <% end %>
+
+          <% if story.votes.any? %>
+            <span>
+              <i class='icon-thumbs-up' title="رای‌دهندگان"></i>
+              <%= link_to t('.voters'), "#", class: "toggle-voters" %>
+            </span>
+          <% end %>
         </small>
       </h5>
+
+      <%= render partial: "stories/voters", locals: {story: story} %>
 
       <% unless status %>
         <p><%= user_name(story) %> می‌نویسد:</p>

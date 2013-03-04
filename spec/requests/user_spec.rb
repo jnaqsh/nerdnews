@@ -227,6 +227,18 @@ describe '/Users' do
         visit story_path @story
         page.should_not have_selector 'button.btn-thumbs-up'
       end
+
+      it 'should toggle list of voters' do
+        visit story_path @story
+        page.should have_selector 'button.btn-thumbs-up'
+        find('button.btn-thumbs-up').click
+        click_link @pos.name
+        visit story_path @story
+        click_link I18n.t('stories.story.voters')
+        within("div.voters") {page.should have_content @user.full_name}
+        click_link I18n.t('stories.story.voters')
+        page.should_not have_selector("div.voters", visible: true)
+      end
     end
   end
 end

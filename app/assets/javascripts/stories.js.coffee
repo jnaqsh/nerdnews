@@ -37,6 +37,13 @@ jQuery ->
   #loads more stories when scroll to the end of the page
   load_pages("#stories", "در حال دریافت خبرهای بیشتر...")
 
+
+  #toggle voters div to show/hide list of voters
+  $(document).on('click', 'a.toggle-voters', (e) ->
+    e.preventDefault()
+    $(this).parent().parent().parent().next("div.row").slideToggle()
+  )
+
   # Show optins when clicking voting button
   votingOptions =
     init: ->
