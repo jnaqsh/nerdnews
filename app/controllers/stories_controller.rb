@@ -6,7 +6,7 @@ class StoriesController < ApplicationController
   # GET /stories.json
 
   def recent
-    @stories = Story.approved.includes(:tags).where('id > ? and hide = ?', params[:after].to_i, false).order("publish_date desc")
+    @stories = Story.approved.where('id > ? and hide = ?', params[:after].to_i, false).order("publish_date desc")
 
     respond_to do |format|
       format.js
@@ -14,7 +14,7 @@ class StoriesController < ApplicationController
   end
 
   def index
-    @stories = Story.search(:include => [:tags, :votes, :user]) do
+    @stories = Story.search(:include => [:tags, :user, :publisher, {:votes => [:rating, :user]}]) do
       without(:publish_date, nil)
       without(:hide, true)
       fulltext params[:search]
@@ -34,12 +34,12 @@ class StoriesController < ApplicationController
   # GET /stories/1
   # GET /stories/1.json
   def show
-    @story = Story.includes(:tags).find(params[:id])
+    @story = Story.includes(:user, :votes => [:rating, :user]).find(params[:id])
 
     if @story
       @story.increment!(:view_counter)
       @comment = @story.comments.build
-      @comments = @story.comments.approved.arrange(order: :created_at)
+      @comments = @story.comments.approved.includes(:user, :story).arrange(order: :created_at)
 
       story_path = Rails.env.production? ? story_path(@story).downcase : story_path(@story) #monkey patch due to error in production (downcase)
 
@@ -72,7 +72,7 @@ class StoriesController < ApplicationController
 
   # GET /stories/1/edit
   def edit
-    @story = Story.includes(:tags).find(params[:id])
+    @story = Story.find(params[:id])
   end
 
   # POST /stories
@@ -92,7 +92,7 @@ class StoriesController < ApplicationController
         format.html { render action: "new" }
       else
         if @story.save
-          record_activity "خبر #{@story.title} را ایجاد کرد" #This will call application controller  record_activity
+          record_activity "خبر #{@story.title.truncate(55)} را ایجاد کرد", story_path(@story) #This will call application controller  record_activity
 
           format.html { redirect_to root_path, only_path: true,
             notice: t("controllers.stories.create.flash.success", link: unpublished_stories_path).html_safe }
@@ -108,7 +108,7 @@ class StoriesController < ApplicationController
   # PUT /stories/1
   # PUT /stories/1.json
   def update
-    @story = Story.includes(:tags).find(params[:id])
+    @story = Story.find(params[:id])
     @story.attributes = params[:story]
 
     respond_to do |format|
@@ -116,7 +116,7 @@ class StoriesController < ApplicationController
         format.html { render action: "edit" }
       else
         if @story.update_attributes(params[:story])
-          record_activity "خبر #{@story.title} را به‌روز کرد",
+          record_activity "خبر #{@story.title.truncate(55)} را به‌روز کرد",
               story_path(@story) #This will call application controller  record_activity
 
           if @story.published?
@@ -142,7 +142,7 @@ class StoriesController < ApplicationController
 
     @story.update_attributes({remover: current_user}, without_protection: true)
 
-    record_activity "خبر #{@story.title} را حذف کرد"
+    record_activity "خبر #{@story.title.truncate(55)} را حذف کرد"
 
     respond_to do |format|
       format.html { redirect_to stories_url }
@@ -159,10 +159,10 @@ class StoriesController < ApplicationController
 
         rate_user(@story.user, 3) if @story.user #rate for user who wrote a story
         rate_user(1) if current_user #rate for user who publish a story
-        record_activity "خبر #{@story.title} را منتشر کرد",
+        record_activity "خبر #{@story.title.truncate(55)} را منتشر کرد",
           story_path(@story) #This will call application controller  record_activity
 
-        format.html { redirect_to unpublished_stories_path,
+        format.html { redirect_to story_path(@story),
           notice: t('controllers.stories.publish.flash.success') }
       end
     end
@@ -170,7 +170,7 @@ class StoriesController < ApplicationController
 
   # GET /stories/list
   def unpublished
-    @stories = Story.not_approved.order("created_at DESC").page params[:page]
+    @stories = Story.not_approved.includes([:tags, :user, {:votes => [:rating, :user]}]).order("created_at DESC").page params[:page]
 
     respond_to do |format|
       format.html

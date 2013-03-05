@@ -9,7 +9,7 @@ class MessagesController < ApplicationController
     @message = @user.received_messages.build
     authorize! :index, @message
 
-    @messages = Message.messages(@user).order('created_at desc').page(params[:page]).per(10)
+    @messages = Message.messages(@user).includes(:receiver, :sender).order('created_at desc').page(params[:page]).per(10)
 
     @messages.each {|m| m.mark_as_read if m.receiver == current_user}
 

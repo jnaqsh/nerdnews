@@ -2,7 +2,7 @@ class MypageController < ApplicationController
   authorize_resource :class => false
 
   def index
-    @stories = Story.search(:include => [:tags]) do
+    @stories = Story.search(:include => [:tags, :user, :publisher, {:votes => [:rating, :user]} ]) do
       fulltext params[:search]
       without(:hide, true)
       keywords("#{favorite_tags.join(' ')} #{current_user.email}") {minimum_match 1}

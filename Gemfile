@@ -15,6 +15,8 @@ gem 'acts_as_paranoid'
 
 gem 'active_link_to'
 
+gem 'bullet', group: :development
+
 gem 'jquery-rails'
 gem 'rails-i18n', git: 'https://github.com/iCEAGE/rails-i18n.git'
 gem 'bcrypt-ruby', '~> 3.0.0'

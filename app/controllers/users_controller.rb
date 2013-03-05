@@ -155,7 +155,7 @@ class UsersController < ApplicationController
   # GET /users/1/comments.json
   def comments
     @user = User.find(params[:id])
-    @comments = @user.comments.order('created_at desc').page(params[:page])
+    @comments = @user.comments.includes(:story).order('created_at desc').page(params[:page])
 
     respond_to do |format|
       format.html # comments.html.erb
@@ -168,7 +168,7 @@ class UsersController < ApplicationController
   # GET /users/1/favorites.json
   def favorites
     @user = User.find(params[:id])
-    @favorites = @user.votes.where(voteable_type: "Story").order('created_at desc').page(params[:page])
+    @favorites = @user.votes.where(voteable_type: "Story").includes(:voteable, :rating).order('created_at desc').page(params[:page])
 
     respond_to do |format|
       format.html # favorites.html.erb

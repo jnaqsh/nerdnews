@@ -67,6 +67,8 @@ GEM
     bourne (1.1.2)
       mocha (= 0.10.5)
     builder (3.0.4)
+    bullet (4.3.1)
+      uniform_notifier
     cancan (1.6.9)
     capistrano (2.14.2)
       highline
@@ -377,6 +379,7 @@ GEM
       chronic (~> 0.9)
       rails (~> 3.2)
       rufus-scheduler (~> 2.0)
+    uniform_notifier (1.2.0)
     webmock (1.9.0)
       addressable (>= 2.2.7)
       crack (>= 0.1.7)
@@ -399,6 +402,7 @@ DEPENDENCIES
   bcrypt-ruby (~> 3.0.0)
   better_errors
   binding_of_caller
+  bullet
   cancan
   capistrano
   capybara
