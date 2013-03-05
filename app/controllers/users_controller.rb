@@ -83,6 +83,7 @@ class UsersController < ApplicationController
 
       respond_to do |format|
         if @user.save
+          record_activity %Q(کاربر #{view_context.link_to @user.full_name, user_path(@user)} در نردنیوز ثبت‌نام کرد)
           # send a welcome message and instruction for setting password
           @user.delay.signup_confirmation
 
@@ -115,7 +116,7 @@ class UsersController < ApplicationController
     else
       respond_to do |format|
         if @user.update_attributes(params[:user])
-          record_activity "پروفایل خود را به‌روز کردید"
+          record_activity %Q(پروفایل خود را ویرایش کرد)
           format.html { redirect_to @user, notice: t('controllers.users.update.flash.success') }
           format.json { head :no_content }
         else

@@ -3,7 +3,7 @@
     <% activity_logs.each do |log| %>
       <tr>
         <td>
-          <%= link_to_if log.note_link, log.note, log.note_link %>
+          <%= log.note.html_safe %>
         </td>
         <td title="تاریخ انجام فعالیت">
           <%= to_jalali(log.created_at) %>

@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
       else
         cookies.signed[:user_id] = user.id
       end
-      record_activity "وارد نردنیوز شدید"
+      record_activity "وارد نردنیوز شد"
 
       redirect_to root_path, notice: t('controllers.sessions.create.flash.success')
     else
@@ -24,10 +24,10 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    record_activity "از نردنیوز خارج شد"
     cookies.delete(:user_id)
     session[:authhash] = nil
     session[:service_id] = nil
-    record_activity "از نردنیوز خارج شدید"
     redirect_to root_path, :notice => t('controllers.sessions.destroy.flash.success')
   end
 end

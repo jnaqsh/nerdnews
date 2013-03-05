@@ -11,7 +11,7 @@ describe "activity logs", search: true do
     click_link "آخرین تغییرات"
     current_path.should eq(activity_logs_path)
     page.should have_content "ایجاد"
-    page.should_not have_content "وارد نردنیوز شدید"
+    page.should_not have_content "وارد نردنیوز شد"
     page.should_not have_content "نمایش"
   end
 

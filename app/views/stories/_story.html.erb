@@ -83,7 +83,7 @@
             </span>
           <% end %>
 
-          <% if can? :create, Vote && story.votes.any? %>
+          <% if (can? :create, Vote) && story.votes.any? %>
             <span>
               <i class='icon-thumbs-up' title="رای‌دهندگان"></i>
               <%= link_to t('.voters'), "#", class: "toggle-voters" %>

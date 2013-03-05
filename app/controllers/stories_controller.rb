@@ -92,7 +92,10 @@ class StoriesController < ApplicationController
         format.html { render action: "new" }
       else
         if @story.save
-          record_activity "خبر #{view_context.link_to @story.title.truncate(55), story_path(@story)} را ایجاد کرد", story_path(@story) #This will call application controller  record_activity
+
+          record_activity %Q(خبر
+            #{view_context.link_to @story.title.truncate(50),
+              story_path(@story)} را ایجاد کرد)
 
           format.html { redirect_to root_path, only_path: true,
             notice: t("controllers.stories.create.flash.success", link: unpublished_stories_path).html_safe }
@@ -116,8 +119,10 @@ class StoriesController < ApplicationController
         format.html { render action: "edit" }
       else
         if @story.update_attributes(params[:story])
-          record_activity "خبر #{@story.title.truncate(55)} را به‌روز کرد",
-              story_path(@story) #This will call application controller  record_activity
+
+          record_activity %Q(خبر
+            #{view_context.link_to @story.title.truncate(50),
+              story_path(@story)} را ویرایش کرد)
 
           if @story.published?
             format.html { redirect_to @story, notice: t('controllers.stories.update.flash.success') }
@@ -142,7 +147,9 @@ class StoriesController < ApplicationController
 
     @story.update_attributes({remover: current_user}, without_protection: true)
 
-    record_activity "خبر #{@story.title.truncate(55)} را حذف کرد"
+    record_activity %Q(خبر
+      #{view_context.link_to @story.title.truncate(50),
+        story_path(@story)} را حذف کرد)
 
     respond_to do |format|
       format.html { redirect_to stories_url }
@@ -159,8 +166,10 @@ class StoriesController < ApplicationController
 
         rate_user(@story.user, 3) if @story.user #rate for user who wrote a story
         rate_user(1) if current_user #rate for user who publish a story
-        record_activity "خبر #{@story.title.truncate(55)} را منتشر کرد",
-          story_path(@story) #This will call application controller  record_activity
+
+        record_activity %Q(خبر
+          #{view_context.link_to @story.title.truncate(50),
+            story_path(@story)} را منتشر کرد)
 
         format.html { redirect_to story_path(@story),
           notice: t('controllers.stories.publish.flash.success') }

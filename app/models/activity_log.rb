@@ -8,7 +8,6 @@ class ActivityLog < ActiveRecord::Base
     text :action
     text :params
     text :note, boost: 5
-    text :note_link
     time :created_at
     text :user do
       if user.present?

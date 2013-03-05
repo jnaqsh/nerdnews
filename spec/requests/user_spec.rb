@@ -62,7 +62,7 @@ describe '/Users' do
     it 'can get users activity logs' do
       login @user
       visit activity_logs_user_path(@user)
-      page.should have_content "وارد نردنیوز شدید"
+      page.should have_content "وارد نردنیوز شد"
     end
   end
 
@@ -220,7 +220,6 @@ describe '/Users' do
       end
 
       it 'wont let known user to vote after voting for first time' do
-        visit story_path @story
         page.should have_selector 'button.btn-thumbs-up'
         find('button.btn-thumbs-up').click
         click_link @pos.name
@@ -229,7 +228,6 @@ describe '/Users' do
       end
 
       it 'should toggle list of voters' do
-        visit story_path @story
         page.should have_selector 'button.btn-thumbs-up'
         find('button.btn-thumbs-up').click
         click_link @pos.name

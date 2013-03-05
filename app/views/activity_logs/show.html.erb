@@ -13,7 +13,7 @@
   <dt><strong><%= model_class.human_attribute_name(:user) %>:</strong></dt>
   <dd><%= link_to @activity_log.user.full_name, user_path(@activity_log.user) %></dd>
   <dt><strong><%= model_class.human_attribute_name(:note) %>:</strong></dt>
-  <dd><%= link_to_if @activity_log.note_link, @activity_log.note, @activity_log.note_link %></dd>
+  <dd><%= @activity_log.note.html_safe %></dd>
   <dt><strong><%= model_class.human_attribute_name(:browser) %>:</strong></dt>
   <dd><%= @activity_log.browser %></dd>
   <dt><strong><%= model_class.human_attribute_name(:ip_address) %>:</strong></dt>

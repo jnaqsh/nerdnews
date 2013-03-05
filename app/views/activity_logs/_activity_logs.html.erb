@@ -11,7 +11,7 @@
       <%= user_name activity_log %>
     </dt>
     <dd>
-      <%= link_to_if activity_log.note_link, activity_log.note, activity_log.note_link %>
+      <%= activity_log.note.html_safe %>
       <%= " - " %>
       <%= to_jalali(activity_log.created_at, just_time: true) %>
 
