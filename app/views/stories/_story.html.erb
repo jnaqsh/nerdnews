@@ -1,7 +1,8 @@
 <!-- cache status of Story -->
 <% status = hide_story?(story) %>
 
-<%= content_tag :article, class: "story #{'grey-out' if status}", data: {id: story.id} do %>
+<%= content_tag :article, class: "story #{'grey-out' if status}",
+      data: {timestamp: story.publish_date.to_f} do %>
   <div class='row'>
     <div class='span1 visible-desktop'>
       <div class='story-image'>

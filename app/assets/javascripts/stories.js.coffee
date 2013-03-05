@@ -15,7 +15,7 @@
     setTimeout @request, 60000
 
   request: ->
-    $.get($("#stories").data('url'), after: $('.story').first().data('id'))
+    $.get($("#stories").data('url'), after: $('.story').first().data('timestamp'))
 
   addStories: (stories) ->
     if stories.length > 0

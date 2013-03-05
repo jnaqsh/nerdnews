@@ -6,7 +6,7 @@ class StoriesController < ApplicationController
   # GET /stories.json
 
   def recent
-    @stories = Story.approved.where('id > ? and hide = ?', params[:after].to_i, false).order("publish_date desc")
+    @stories = Story.approved.where('publish_date > ? and hide = ?', Time.at(params[:after].to_f), false).order("publish_date desc")
 
     respond_to do |format|
       format.js
@@ -92,7 +92,7 @@ class StoriesController < ApplicationController
         format.html { render action: "new" }
       else
         if @story.save
-          record_activity "خبر #{@story.title.truncate(55)} را ایجاد کرد", story_path(@story) #This will call application controller  record_activity
+          record_activity "خبر #{view_context.link_to @story.title.truncate(55), story_path(@story)} را ایجاد کرد", story_path(@story) #This will call application controller  record_activity
 
           format.html { redirect_to root_path, only_path: true,
             notice: t("controllers.stories.create.flash.success", link: unpublished_stories_path).html_safe }
