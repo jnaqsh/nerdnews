@@ -4,7 +4,7 @@ class Story < ActiveRecord::Base
   acts_as_paranoid
   acts_as_textcaptcha
 
-  HIDE_THRESHOLD = -30
+  HIDE_THRESHOLD = -8
 
   attr_accessible :content, :publish_date, :title, :source,
     :tag_names, :view_counter, :publisher_id, :tag_ids
