@@ -63,7 +63,7 @@ private
     rating = vote.rating
 
     if vote.voteable_type == "Story"
-      record_activity %Q(به
+      record_activity %Q(به خبر
         #{view_context.link_to story.title.truncate(50), story_path(story)} امتیاز
         #{rating.name} را داد)
     elsif vote.voteable_type == "Comment"
