@@ -1,5 +1,6 @@
 require "bundler/capistrano"
 require "delayed/recipes"
+require 'capistrano/maintenance'
 
 server "server.jnaqsh.com", :web, :app, :db, primary: true
 
