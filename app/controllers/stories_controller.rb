@@ -94,7 +94,7 @@ class StoriesController < ApplicationController
         if @story.save
 
           record_activity %Q(خبر
-            #{view_context.link_to @story.title.truncate(50),
+            #{view_context.link_to @story.title.truncate(40),
               story_path(@story)} را ایجاد کرد)
 
           format.html { redirect_to root_path, only_path: true,
@@ -121,7 +121,7 @@ class StoriesController < ApplicationController
         if @story.update_attributes(params[:story])
 
           record_activity %Q(خبر
-            #{view_context.link_to @story.title.truncate(50),
+            #{view_context.link_to @story.title.truncate(40),
               story_path(@story)} را ویرایش کرد)
 
           if @story.published?
@@ -148,7 +148,7 @@ class StoriesController < ApplicationController
     @story.update_attributes({remover: current_user}, without_protection: true)
 
     record_activity %Q(خبر
-      #{view_context.link_to @story.title.truncate(50),
+      #{view_context.link_to @story.title.truncate(40),
         story_path(@story)} را حذف کرد)
 
     respond_to do |format|
@@ -168,7 +168,7 @@ class StoriesController < ApplicationController
         rate_user(1) if current_user #rate for user who publish a story
 
         record_activity %Q(خبر
-          #{view_context.link_to @story.title.truncate(50),
+          #{view_context.link_to @story.title.truncate(40),
             story_path(@story)} را منتشر کرد)
 
         format.html { redirect_to story_path(@story),

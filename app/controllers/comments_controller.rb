@@ -56,7 +56,7 @@ class CommentsController < ApplicationController
       if @comment.save
 
         record_activity %Q(دیدگاهی جدید برای خبر
-          #{view_context.link_to @story.title.truncate(50),
+          #{view_context.link_to @story.title.truncate(40),
           story_path(@story, :anchor => "comment_#{@comment.id}")} ایجاد کرد)
 
         UserMailer.delay.comment_reply(@comment.id) unless @comment.parent.nil?
@@ -79,7 +79,7 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.update_attributes(params[:comment])
         record_activity %Q(دیدگاه در خبر
-          #{view_context.link_to @story.title.truncate(50),
+          #{view_context.link_to @story.title.truncate(40),
           story_path(@story, :anchor => "comment_#{@comment.id}")} را ویرایش کرد)
 
         format.html { redirect_to story_path(@comment.story),
@@ -99,7 +99,7 @@ class CommentsController < ApplicationController
     @comment.destroy
 
     record_activity %Q(دیدگاه در خبر
-            #{view_context.link_to @story.title.truncate(50),
+            #{view_context.link_to @story.title.truncate(40),
             story_path(@story, :anchor => "comment_#{@comment.id}")} را حذف کرد)
 
     respond_to do |format|
