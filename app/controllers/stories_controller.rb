@@ -34,7 +34,7 @@ class StoriesController < ApplicationController
   # GET /stories/1
   # GET /stories/1.json
   def show
-    @story = Story.includes(:user, :votes => [:rating, :user]).find(params[:id])
+    @story = Story.includes([:tags, :user, :publisher, {:votes => [:rating, :user]}]).find(params[:id])
 
     if @story
       @story.increment!(:view_counter)
@@ -93,9 +93,7 @@ class StoriesController < ApplicationController
       else
         if @story.save
 
-          record_activity %Q(خبر
-            #{view_context.link_to @story.title.truncate(40),
-              story_path(@story)} را ایجاد کرد)
+          record_activity %Q(خبر #{view_context.link_to @story.title.truncate(40), story_path(@story)} را ایجاد کرد)
 
           format.html { redirect_to root_path, only_path: true,
             notice: t("controllers.stories.create.flash.success", link: unpublished_stories_path).html_safe }
@@ -120,9 +118,7 @@ class StoriesController < ApplicationController
       else
         if @story.update_attributes(params[:story])
 
-          record_activity %Q(خبر
-            #{view_context.link_to @story.title.truncate(40),
-              story_path(@story)} را ویرایش کرد)
+          record_activity %Q(خبر #{view_context.link_to @story.title.truncate(40), story_path(@story)} را ویرایش کرد)
 
           if @story.published?
             format.html { redirect_to @story, notice: t('controllers.stories.update.flash.success') }
@@ -147,9 +143,7 @@ class StoriesController < ApplicationController
 
     @story.update_attributes({remover: current_user}, without_protection: true)
 
-    record_activity %Q(خبر
-      #{view_context.link_to @story.title.truncate(40),
-        story_path(@story)} را حذف کرد)
+    record_activity %Q(خبر #{view_context.link_to @story.title.truncate(40), story_path(@story)} را حذف کرد)
 
     respond_to do |format|
       format.html { redirect_to stories_url }
@@ -167,9 +161,7 @@ class StoriesController < ApplicationController
         rate_user(@story.user, 3) if @story.user #rate for user who wrote a story
         rate_user(1) if current_user #rate for user who publish a story
 
-        record_activity %Q(خبر
-          #{view_context.link_to @story.title.truncate(40),
-            story_path(@story)} را منتشر کرد)
+        record_activity %Q(خبر #{view_context.link_to @story.title.truncate(40), story_path(@story)} را منتشر کرد)
 
         format.html { redirect_to story_path(@story),
           notice: t('controllers.stories.publish.flash.success') }

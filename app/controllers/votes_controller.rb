@@ -63,14 +63,9 @@ private
     rating = vote.rating
 
     if vote.voteable_type == "Story"
-      record_activity %Q(به خبر
-        #{view_context.link_to story.title.truncate(40), story_path(story)} امتیاز
-        #{rating.name} را داد)
+      record_activity %Q(به خبر #{view_context.link_to story.title.truncate(40), story_path(story)} امتیاز #{rating.name} را داد)
     elsif vote.voteable_type == "Comment"
-      record_activity %Q(به
-        دیدگاه #{view_context.link_to comment.content.truncate(40),
-          story_path(comment.story, :anchor => "comment_#{comment.id}")} امتیاز
-          #{rating.name} را داد)
+      record_activity %Q(به دیدگاه #{view_context.link_to comment.content.truncate(40), story_path(comment.story, :anchor => "comment_#{comment.id}")} امتیاز #{rating.name} را داد)
     end
   end
 end

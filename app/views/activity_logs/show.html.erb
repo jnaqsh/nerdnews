@@ -11,7 +11,7 @@
 
 <dl class="dl-horizontal">
   <dt><strong><%= model_class.human_attribute_name(:user) %>:</strong></dt>
-  <dd><%= user_name activity_log %></dd>
+  <dd><%= user_name @activity_log %></dd>
   <dt><strong><%= model_class.human_attribute_name(:note) %>:</strong></dt>
   <dd><%= @activity_log.note.html_safe %></dd>
   <dt><strong><%= model_class.human_attribute_name(:browser) %>:</strong></dt>
