@@ -6,6 +6,8 @@ class Ability
     #
        user ||= User.new # guest user (not logged in)
        if user.role? :founder
+         can [:show, :index], ActivityLog
+         can :manage, Announcement
          can :manage, Comment
          can [:create, :failure], Identity
          can [:index, :destroy], Identity, user: { :id => user.id }
@@ -23,9 +25,9 @@ class Ability
          can :create, Vote
          can :bypass_captcha, user
          can :add_to_favorites, User
-         can [:show, :index], ActivityLog
        elsif user.role? :approved
          can :index, ActivityLog
+         can :hide, Announcement
          can :create, Comment
          can [:update, :destroy], Comment, user: {id: user.id}
          can [:create, :failure], Identity
@@ -47,6 +49,7 @@ class Ability
          can :create, Vote
        elsif user.role? :new_user
          can :index, ActivityLog
+         can :hide, Announcement
          can :create, Comment
          can [:update, :destroy], Comment, user: {id: user.id}
          can [:create, :failure], Identity
@@ -68,6 +71,7 @@ class Ability
          can :create, Vote
        else # guest user
          can :create, Comment
+         can :hide, Announcement
          can [:create, :failure], Identity
          can :show, Page
          can [:new, :create], :session

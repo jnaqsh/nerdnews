@@ -62,6 +62,10 @@
             <li><%= link_to t('.users'), users_path %></li>
           <% end %>
 
+          <% if can? :manage, Announcement %>
+            <li><%= link_to t('.announcements'), announcements_path %></li>
+          <% end %>
+
           <% if can? :index, Page %>
             <li><%= link_to t('.pages'), pages_path %></li>
           <% end %>

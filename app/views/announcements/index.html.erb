@@ -1,0 +1,53 @@
+<% set_meta_tags title: [t('announcements.title'), t('.title')] %>
+
+<%- model_class = Announcement.new.class -%>
+
+<% content_for :page_header do %>
+  <h1>
+    <%=t '.title', :default => model_class.model_name.human.pluralize %>
+
+    <% if can? :create, Announcement %>
+      <%= link_to t('.new', :default => t("helpers.links.new")), new_announcement_path,
+        class: 'btn btn-large btn-success pull-left' %>
+    <% end %>
+  </h1>
+<% end %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:message) %></th>
+      <th><%= model_class.human_attribute_name(:starts_at) %></th>
+      <th><%= model_class.human_attribute_name(:ends_at) %></th>
+      <% if can? [:edit, :destroy], Announcement %>
+        <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @announcements.each do |announcement| %>
+      <tr>
+        <td><%= link_to announcement.id, announcement_path(announcement) %></td>
+        <td><%= announcement.message.truncate(50) %></td>
+        <td><%= to_jalali(announcement.starts_at) %></td>
+        <td><%= to_jalali(announcement.ends_at) %></td>
+        <td>
+          <% if can? :edit, Announcement %>
+            <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                        edit_announcement_path(announcement), :class => 'btn btn-mini' %>
+          <% end %>
+          <% if can? :destroy, Announcement %>
+            <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                        announcement_path(announcement),
+                        :method => :delete,
+                        :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
+                        :class => 'btn btn-mini btn-danger' %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @announcements %>

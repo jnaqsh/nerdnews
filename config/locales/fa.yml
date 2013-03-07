@@ -1,5 +1,12 @@
 fa:
   controllers:
+    announcements:
+      create:
+        flash:
+          success: "اطلاعیه جدید با موفقیت ایجاد گردید."
+      update:
+        flash:
+          success: "اطلاعیه با موفقیت ویرایش گردید."
     under_construction_email_storage:
       create:
         flash:
@@ -102,6 +109,16 @@ fa:
           fail: "زمان بازنشانی گذرواژه تمام شده‌است، دوباره سعی کنید."
           success: "گذرواژه جدید با موفقیت بازنشانی شد."
 
+  announcements:
+    title: "اطلاعیه‌ها"
+    index:
+      title: "فهرست اطلاعیه‌ها"
+    new:
+      title: "اطلاعیه جدید"
+    edit:
+      title: "ویرایش اطلاعیه"
+    show:
+      title: "نمایش اطلاعیه"
   activity_logs:
     title: "آخرین تغییرات"
     index:
@@ -291,10 +308,13 @@ fa:
       messages: 'پیام‌ها'
       pages: "صفحات"
       activity_logs: "آخرین تغییرات"
+      announcements: "اطلاعیه‌ها"
     head:
       title: 'نردنیوز'
 
   layouts:
+    application:
+      hide_announcement: "مخفی کردن"
     user_profile:
       messages: "پیام‌ها"
       send_message: "ارسال پیام"
@@ -350,8 +370,14 @@ fa:
       message: 'پیام'
       rating: 'امتیاز'
       activity_log: "تاریخچه فعالیت"
+      announcement: "اطلاعیه"
 
     attributes:
+      announcement:
+        id: "شماره"
+        message: "پیام"
+        starts_at: "تاریخ شروع"
+        ends_at: "تاریخ پایان"
       story:
         title:  "عنوان"
         content:  "محتوا"

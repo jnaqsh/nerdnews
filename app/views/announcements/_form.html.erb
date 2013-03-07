@@ -1,0 +1,10 @@
+<%= simple_form_for @announcement, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :starts_at, input_html: {class: "span1"} %>
+  <%= f.input :ends_at, input_html: {class: "span1"} %>
+  <%= f.input :message, input_html: {rows: 15, class: "span9", 'data-trigger' => "focus"} %>
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                announcements_path, :class => 'btn' %>
+  </div>
+<% end %>

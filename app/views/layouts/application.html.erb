@@ -6,6 +6,14 @@
   <%= body do %>
 
     <div class="navbar navbar-fixed-top">
+      <% Announcement.current(cookies.signed[:hidden_annoucement_ids]).each do |announcement| %>
+        <%= div_for announcement do %>
+          <%= link_to "&times;".html_safe, hide_announcement_path(announcement), remote: true,
+            class: "close", id: "hide_announcement" %>
+          <%= sanitize(RedCloth.new(announcement.message, [:filter_html, :filter_styles]).to_html) %>
+        <% end %>
+      <% end %>
+
       <%= render partial: 'shared/header' %>
     </div>
 

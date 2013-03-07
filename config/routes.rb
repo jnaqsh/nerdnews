@@ -27,6 +27,9 @@ Nerdnews::Application.routes.draw do
   resources :pages
   resources :tags
   resources :mypage, only: :index
+  resources :announcements do
+    get :hide, on: :member
+  end
 
   # Sessions
   get "/login" => "sessions#new", as: "new_session"
