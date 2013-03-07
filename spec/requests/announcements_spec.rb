@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'spec_helper'
 
 describe "Announcements" do
@@ -7,7 +9,7 @@ describe "Announcements" do
     visit root_path
     page.should have_content("Hello world!")
     page.should_not have_content("Upcoming")
-    click_link "hide_announcement"
+    click_link "×"
     page.should_not have_content("Hello world!")
   end
 
