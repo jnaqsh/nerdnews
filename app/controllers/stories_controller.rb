@@ -20,7 +20,7 @@ class StoriesController < ApplicationController
       fulltext params[:search]
       fulltext params[:tag]
       order_by :publish_date, :desc
-      paginate :page => params[:page], :per_page => 5
+      paginate :page => params[:page], :per_page => 20
     end.results
 
     respond_to do |format|
