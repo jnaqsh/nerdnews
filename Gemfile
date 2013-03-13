@@ -24,8 +24,8 @@ gem 'debugger'
 gem 'simple_form'
 gem "cancan"
 gem 'kaminari'
-gem 'sunspot_rails'
-gem 'sunspot_solr' # optional pre-packaged Solr distribution for use in development
+gem "sunspot_rails", "~> 1.3.3"
+gem "sunspot_solr", "~> 1.3.3"
 
 gem 'RedCloth'
 # plain formatter for redcloth
