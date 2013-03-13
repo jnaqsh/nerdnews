@@ -59,7 +59,13 @@ class AnnouncementsController < ApplicationController
     cookies.permanent.signed[:hidden_annoucement_ids] = ids
 
     respond_to do |format|
-      format.html { redirect_to :back }
+      format.html do
+        begin
+          redirect_to :back
+        rescue ActionController::RedirectBackError
+          redirect_to root_path
+        end
+      end
       format.js
     end
   end

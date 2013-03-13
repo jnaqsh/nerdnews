@@ -93,7 +93,7 @@ end
 
 group :test do
   gem 'factory_girl_rails'
-  gem 'capybara'
+  gem "capybara", "~> 1.1.4"
   gem 'guard-rspec'
   gem 'faker'
   gem 'sunspot_test'

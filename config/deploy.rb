@@ -60,7 +60,7 @@ namespace :deploy do
     put File.read("config/textcaptcha.example.yml"), "#{shared_path}/config/textcaptcha.yml"
     put File.read("config/dropbox.example.yml"), "#{shared_path}/config/dropbox.yml"
     put File.read("config/twitter.example.yml"), "#{shared_path}/config/twitter.yml"
-    FileUtils.touch "#{shared_path}/db/under_construction_mails.txt"
+    run "touch #{shared_path}/db/under_construction_mails.txt"
     puts "Now edit the config files in #{shared_path}."
   end
   after "deploy:setup", "deploy:setup_config"
