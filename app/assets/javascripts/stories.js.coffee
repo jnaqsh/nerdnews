@@ -1,14 +1,48 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
-jQuery ->
-  if $('#stories').next('.pagination').length
+@load_pages = (divID='#stories', messageReplace='در حال دریافت...') ->
+  if $("#{divID}").next('.pagination').length
     $(window).scroll ->
       url = $('.pagination a[rel="next"]').attr('href')
-      if url && $(window).scrollTop() > $(document).height() - $(window).height() - 50
-        $('.pagination').text("در حال دریافت خبرهای بیشتر...")
+      if url && $(window).scrollTop() > $(document).height() - $(window).height() - 2500
+        $('.pagination').text("#{messageReplace}")
         $.getScript(url)
     $(window).scroll()
+
+@StoryPoller =
+  poll: ->
+    setTimeout @request, 60000
+
+  request: ->
+    $.get($("#stories").data('url'), after: $('.story').first().data('timestamp'))
+
+  addStories: (stories) ->
+    if stories.length > 0
+      $("#stories").prepend($(stories).hide())
+      $("#show_stories").show()
+    @poll()
+
+  showStories: (e) ->
+    e.preventDefault()
+    $('.story').show()
+    $('#show_stories').hide()
+
+jQuery ->
+  #load recent stories just added recently
+  if $("#stories").length > 0
+    StoryPoller.poll()
+    $("#show_stories a").click StoryPoller.showStories
+
+  #loads more stories when scroll to the end of the page
+  load_pages("#stories", "در حال دریافت خبرهای بیشتر...")
+
+
+  #toggle voters div to show/hide list of voters
+  $(document).on('click', 'a.toggle-voters', (e) ->
+    e.preventDefault()
+    $(this).parent().parent().parent().next("div.row").slideToggle()
+  )
 
   # Show optins when clicking voting button
   votingOptions =

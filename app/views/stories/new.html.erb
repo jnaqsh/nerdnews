@@ -10,15 +10,7 @@
 <% end %>
 
 <% if params[:preview_button] %>
-  <div class='preview'>
-    <div class='alert'>
-      <button type="button" class="close" data-dismiss="alert">×</button>
-      <strong>هشدار</strong> این یک پیش‌نمایش است. خبر شما هنوز ثبت نشده است.
-    </div>
-
-    <%= render @story %>
-
-  </div>
+  <%= render partial: "preview_story", object: @story %>
 <% end %>
 
 <div class="row">

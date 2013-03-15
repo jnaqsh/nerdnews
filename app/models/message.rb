@@ -2,7 +2,7 @@ class Message < ActiveRecord::Base
   attr_accessible :message, :subject
 
   validates_presence_of :message, :subject, :sender, :receiver
-  validates_length_of :subject, maximum: 20, minimum: 3
+  validates_length_of :subject, maximum: 40, minimum: 3
   validates_length_of :message, maximum: 700, minimum: 10
 
   belongs_to :sender, class_name: User

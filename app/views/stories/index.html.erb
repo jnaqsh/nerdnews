@@ -1,5 +1,5 @@
 <% set_meta_tags title: [t('stories.title'), t('.title')],
-                 description: 'نردنیوز شبکه اجتماعی خبر برای افراد گیک فناوری است',
+                 description: 'یک شبکهٔ اجتماعی خبر برای افراد نرد و گیک که علاقه به اخبار فناوری دارند. در این شبکه همه افراد می‌توانند خبر بنویسند و محدودیتی وجود ندارد. هر خبر دارای امتیازی است که خبرهای امتیاز پایین جایگاه خوبی در این شبکه ندارند.',
                  keywords: 'اخبار, صفحه اصلی, فناوری,گیک,خوره,نرد,نردنیوز,شبکه اجتماعی خبر',
                  canonical: root_url %>
 
@@ -16,8 +16,12 @@
     </h1>
 <% end %>
 
-<div id="stories">
-  <%= (render @stories) || "خبر مورد نظر پیدا نشد" %>
+<div class="alert alert-info" id="show_stories" style="display: none">
+  خبرهای جدیدی منتشر گردیده‌است - <a href="#">کلیک کنید تا آن‌ها را ببینید</a>
 </div>
+
+<%= content_tag :div, id: "stories", data: {url: recent_stories_url(format: :js)} do %>
+  <%= (render @stories) || "خبر مورد نظر پیدا نشد" %>
+<% end %>
 
 <%= paginate @stories %>

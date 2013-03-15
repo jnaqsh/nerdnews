@@ -55,7 +55,11 @@
 body {
 	padding-top: 80px;
   padding-bottom: 80px;
+  &.win{
+    font-family: @sanzFontFamily;
+  }
 }
+
 @import "twitter/bootstrap/responsive";
 
 // Set the correct sprite paths
@@ -95,8 +99,15 @@ body {
        url('IranianSans.ttf') format('truetype'); /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
 }
 
+@font-face {
+  font-family: "Iranian Sanz";
+  src: url('iransansz-webfont.eot?#') format('eot'), /* IE6–8 */
+       url('iransansz-webfont.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+       url('iransansz-webfont.ttf') format('truetype'); /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
+}
 @linkColorHover:                rgb(51, 154, 51);
 @sansFontFamily:                "Iranian Sans", Tahoma,"Helvetica Neue", Helvetica, Arial, sans-serif;
+@sanzFontFamily:                "Iranian Sanz", Tahoma,"Helvetica Neue", Helvetica, Arial, sans-serif;
 @navbarHeight:                  60px;
 @navbarLinkColorHover:          green;
 @navbarLinkColorActive:         green;

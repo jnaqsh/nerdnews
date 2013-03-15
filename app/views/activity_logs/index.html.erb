@@ -1,0 +1,17 @@
+<% set_meta_tags  title: [t('activity_logs.title')],
+                  noindex: true %>
+<%- model_class = ActivityLog.new.class -%>
+
+<%= content_for :search do %>
+  <%= render "search" %>
+<% end %>
+
+<% content_for :page_header do %>
+  <h1>
+    <%=t 'activity_logs.title', :default => model_class.model_name.human %>
+  </h1>
+<% end %>
+
+<%= render partial: "activity_logs", object: @activity_logs %>
+
+<%= paginate @activity_logs %>

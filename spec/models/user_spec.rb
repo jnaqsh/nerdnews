@@ -8,7 +8,12 @@ describe User do
 
     context "when is a guest user" do
       let(:user){ User.new }
+      let(:story){ FactoryGirl.create(:story)}
+      let(:approved_story){ FactoryGirl.create(:approved_story)}
 
+      it { user.should_not have_ability([:index, :show], for: ActivityLog.new)}
+      it { user.should_not have_ability([:index, :show, :new, :edit, :create, :destroy], for: Announcement.new)}
+      it { user.should have_ability(:hide, for: Announcement.new)}
       it { user.should have_ability(:create, for: Comment.new)}
       it { user.should_not have_ability([:read, :update, :destroy], for: Comment.new)}
       it { user.should have_ability([:create, :failure], for: Identity.new)}
@@ -19,7 +24,9 @@ describe User do
       it { user.should_not have_ability([:read, :create, :update], for: Rating.new)}
       it { user.should have_ability([:new, :create], for: :session)}
       it { user.should_not have_ability(:destroy, for: :session)}
-      it { user.should have_ability([:read, :create], for: Story.new)}
+      it { user.should have_ability([:index, :create, :recent], for: Story.new)}
+      it { user.should have_ability(:show, for: approved_story)}
+      it { user.should_not have_ability(:show, for: story)}
       it { user.should_not have_ability([:publish, :unpublished, :update, :destroy], for: Story.new)}
       it { user.should have_ability(:index, for: Tag.new)}
       it { user.should_not have_ability([:create, :show, :update, :destroy], for: Tag.new)}
@@ -34,7 +41,13 @@ describe User do
       let(:user){ FactoryGirl.create(:user) }
       let(:user2){ FactoryGirl.create(:user)}
 
+      it { user.should_not have_ability(:show, for: ActivityLog.new)}
+      it { user.should have_ability(:index, for: ActivityLog.new)}
+      it { user.should_not have_ability([:index, :show, :new, :edit, :create, :destroy], for: Announcement.new)}
+      it { user.should have_ability(:hide, for: Announcement.new)}
       it { user.should have_ability(:create, for: Comment.new)}
+      it { user.should have_ability([:update, :destroy], for: user.comments.build)}
+      it { user.should_not have_ability(:update, for: user2.comments.build)}
       it { user.should_not have_ability([:read, :update, :destroy], for: Comment.new)}
       it { user.should have_ability([:create, :failure], for: Identity.new)}
       it { user.should have_ability([:index, :destroy], for: user.identities.new) }
@@ -51,14 +64,14 @@ describe User do
       it { user.should_not have_ability([:read, :create, :update], for: Rating.new)}
       it { user.should_not have_ability([:new, :create], for: :session)}
       it { user.should have_ability(:destroy, for: :session)}
-      it { user.should have_ability([:read, :create], for: Story.new)}
-      it { user.should_not have_ability([:publish, :unpublished, :update, :destroy], for: Story.new)}
-#      it { user.should have_ability(:activity_logs), for: user}
-#      it { user.should_not have_ability(:activity_logs), for: user2}
+      it { user.should have_ability([:read, :create, :recent, :unpublished], for: Story.new)}
+      it { user.should_not have_ability([:publish, :update, :destroy], for: Story.new)}
+      it { user.should have_ability(:activity_logs, for: user)}
+      it { user.should_not have_ability(:activity_logs, for: user2)}
       it { user.should have_ability(:index, for: Tag.new)}
       it { user.should_not have_ability([:create, :show, :update, :destroy], for: Tag.new)}
       it { user.should have_ability([:show, :posts, :comments, :favorites], for: User.new)}
-      it { user.should have_ability([:update, :destroy], for: user)}
+      it { user.should have_ability(:update, for: user)}
       it { user.should_not have_ability([:create, :index, :destroy, :update], for: User.new)}
       it { user.should have_ability(:create, for: Vote.new)}
       it { user.should_not have_ability(:bypass_captcha, for: user)}
@@ -68,7 +81,10 @@ describe User do
       let(:user){ FactoryGirl.create(:approved_user) }
       let(:user2){ FactoryGirl.create(:user)}
 
-      it { user.should have_ability(:manage, for: Comment.new)}
+      it { user.should have_ability(:update, for: user.comments.build)}
+      it { user.should_not have_ability(:update, for: user2.comments.build)}
+      it { user.should_not have_ability([:index, :show, :new, :edit, :create, :destroy], for: Announcement.new)}
+      it { user.should have_ability(:hide, for: Announcement.new)}
       it { user.should have_ability([:create, :failure], for: Identity.new)}
       it { user.should have_ability([:index, :destroy], for: user.identities.new)}
       it { user.should have_ability([:index, :destroy], for: user.received_messages.new)}
@@ -84,22 +100,29 @@ describe User do
       it { user.should_not have_ability([:read, :create, :update], for: Rating.new)}
       it { user.should_not have_ability([:new, :create], for: :session)}
       it { user.should have_ability(:destroy, for: :session)}
-      it { user.should have_ability([:manage], for: Story.new)}
+      it { user.should have_ability([:read, :create, :publish, :unpublished, :recent], for: Story.new)}
+      it { user.should have_ability(:update, for: user.stories.build)}
+      it { user.should_not have_ability(:update, for: user2.stories.build)}
       it { user.should have_ability([:read, :create, :update], for: Tag.new)}
       it { user.should_not have_ability(:destroy, for: Tag.new)}
       it { user.should have_ability([:show, :posts, :comments, :favorites], for: User.new)}
-#      it { user.should_not have_ability(:activity_logs), for: user2}
-#      it { user.should have_ability(:activity_logs), for: user}
-      it { user.should have_ability([:update, :destroy], for: user)}
+      it { user.should_not have_ability(:activity_logs, for: user2)}
+      it { user.should have_ability(:activity_logs, for: user)}
+      it { user.should have_ability(:update, for: user)}
+      it { user.should_not have_ability(:update, for: user2)}
       it { user.should_not have_ability([:create, :index, :destroy, :update], for: User.new)}
       it { user.should have_ability(:create, for: Vote.new)}
       it { user.should have_ability(:bypass_captcha, for: user)}
+      it { user.should_not have_ability(:show, for: ActivityLog.new)}
+      it { user.should have_ability(:index, for: ActivityLog.new)}
     end
 
     context "when is a founder user" do
       let(:user){ FactoryGirl.create(:founder_user) }
       let(:user2){ FactoryGirl.create(:user)}
 
+      it { user.should have_ability([:index, :show], for: ActivityLog.new)}
+      it { user.should have_ability(:manage, for: Announcement.new)}
       it { user.should have_ability(:manage, for: Comment.new)}
       it { user.should have_ability([:create, :failure], for: Identity.new)}
       it { user.should have_ability([:index, :destroy], for: user.identities.new)}

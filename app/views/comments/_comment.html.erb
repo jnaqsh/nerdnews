@@ -35,14 +35,14 @@
         </span>
         <% if comment.website.present? %>
           <i class='icon-link'></i>
-          <%= link_to 'website', comment.website %>
+          <%= link_to 'وب‌سایت', comment.website %>
         <% end %>
       </small>
     </h5>
 
     <div>
       <p>
-        <%= comment.content %>
+        <%= sanitize(RedCloth.new(comment.content, [:filter_html, :filter_styles]).to_html) %>
       </p>
     </div>
 

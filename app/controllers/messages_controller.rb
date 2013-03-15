@@ -9,7 +9,7 @@ class MessagesController < ApplicationController
     @message = @user.received_messages.build
     authorize! :index, @message
 
-    @messages = Message.messages(@user).order('created_at desc').page(params[:page]).per(10)
+    @messages = Message.messages(@user).includes(:receiver, :sender).order('created_at desc').page(params[:page]).per(10)
 
     @messages.each {|m| m.mark_as_read if m.receiver == current_user}
 
@@ -40,7 +40,9 @@ class MessagesController < ApplicationController
     respond_to do |format|
       if @message.save
         UserMailer.delay.message_notify(@message)
-        record_activity "برای #{@message.receiver.full_name} پیام فرستادید"
+
+        record_activity %Q(برای #{view_context.link_to @message.receiver.full_name, user_path(@message.receiver)} پیام فرستاد)
+
         format.html { redirect_to user_messages_path(current_user),
           notice: t('controllers.messages.create.flash.success', name: @user.full_name) }
       else
@@ -55,7 +57,7 @@ class MessagesController < ApplicationController
 
     @message.destroy
 
-    record_activity "پیام شماره #{@message.id.to_farsi} را حذف کردید"
+    record_activity "پیام شماره #{@message.id.to_farsi} را حذف کرد"
 
     respond_to do |format|
       format.html { redirect_to user_messages_path(current_user) }

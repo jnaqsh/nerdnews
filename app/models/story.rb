@@ -4,7 +4,7 @@ class Story < ActiveRecord::Base
   acts_as_paranoid
   acts_as_textcaptcha
 
-  HIDE_THRESHOLD = -30
+  HIDE_THRESHOLD = -8
 
   attr_accessible :content, :publish_date, :title, :source,
     :tag_names, :view_counter, :publisher_id, :tag_ids
@@ -53,20 +53,26 @@ class Story < ActiveRecord::Base
   attr_reader :tag_names
 
   searchable do
+    integer :id
     text :title, boost: 5
     text :content
     text :comments do
       comments.map(&:content)
     end
     time :publish_date
+    time :created_at
     boolean :hide
     text :user do
       user.full_name if user.present?
+      user.email if user.present?
+    end
+    text :tags do
+      tags.map(&:name)
     end
   end
 
   def published?
-    self.publish_date.present? ? true : false
+    publish_date.present? ? true : false
   end
 
   def perform_textcaptcha?
@@ -90,7 +96,7 @@ class Story < ActiveRecord::Base
   def mark_as_published(user, url)
     self.update_attributes({publish_date: Time.zone.now, publisher: user}, without_protection: true)
     # conditional due to error on request user spec
-    Rails.env.production? ? Tweet.tweet(Twitter::Client.new, "خبر جدید: #{self.title}", url) : true
+    Rails.env.production? ? Tweet.tweet(Twitter::Client.new, "#{self.title}", url) : true
   end
 
   def user_voted?(user)

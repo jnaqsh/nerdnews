@@ -10,13 +10,8 @@ jQuery ->
   #   noResultsText: "یافت نشد"
   #   searchingText: "در حال جستجو..."
 
-  if $('#tags-list').next('.pagination').length
-    $(window).scroll ->
-      url = $('.pagination a[rel="next"]').attr('href')
-      if url && $(window).scrollTop() > $(document).height() - $(window).height() - 50
-        $('.pagination').text("در حال دریافت تگ‌های بیشتر...")
-        $.getScript(url)
-    $(window).scroll()
+  #loads more tags when scroll to the end of the page
+  load_pages("#tags-list", "در حال دریافت تگ‌های بیشتر...")
 
   # Used in stories/_form
   $("#story_tag_names").select2({
@@ -59,6 +54,14 @@ jQuery ->
     formatInputTooShort: (term, minLength)->
       minLength + " حرف دیگر وارد کنید"
     })
+
+  $("ul.select2-choices").sortable({
+    containment: 'parent',
+    start: ->
+      $("#story_tag_names").select2("onSortStart")
+    update: ->
+      $("#story_tag_names").select2("onSortEnd")
+  })
 
   $("#tag_search").select2({
     minimumInputLength: 1

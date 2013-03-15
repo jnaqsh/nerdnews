@@ -9,7 +9,6 @@ describe ActivityLog do
   it { should respond_to :action }
   it { should respond_to :params }
   it { should respond_to :note }
-  it { should respond_to :note_link }
 
   describe "relations" do
     it {should belong_to :user}

@@ -1,5 +1,6 @@
 require "bundler/capistrano"
 require "delayed/recipes"
+require 'capistrano/maintenance'
 
 server "server.jnaqsh.com", :web, :app, :db, primary: true
 
@@ -59,7 +60,7 @@ namespace :deploy do
     put File.read("config/textcaptcha.example.yml"), "#{shared_path}/config/textcaptcha.yml"
     put File.read("config/dropbox.example.yml"), "#{shared_path}/config/dropbox.yml"
     put File.read("config/twitter.example.yml"), "#{shared_path}/config/twitter.yml"
-    FileUtils.touch "#{shared_path}/db/under_construction_mails.txt"
+    run "touch #{shared_path}/db/under_construction_mails.txt"
     puts "Now edit the config files in #{shared_path}."
   end
   after "deploy:setup", "deploy:setup_config"
@@ -91,7 +92,7 @@ namespace :deploy do
     run "cd #{release_path}; RAILS_ENV=production bundle exec rake paperclip:refresh:missing_styles"
   end
 
-  after "deploy:migrate", "deploy:build_missing_paperclip_styles"
+#  after "deploy:migrate", "deploy:build_missing_paperclip_styles"
 end
 
 namespace :deploy do
@@ -103,11 +104,11 @@ end
 namespace :solr do
   desc "start solr"
   task :start, :roles => :app, :except => { :no_release => true } do
-    run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec sunspot-solr start --port=8983 --data-directory=#{shared_path}/solr/data --pid-dir=#{shared_path}/pids"
+    run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec sunspot-solr start --port=8983 --data-directory=#{shared_path}/solr/data --pid-dir=#{shared_path}/pids --solr-home=#{current_path}/solr"
   end
   desc "stop solr"
   task :stop, :roles => :app, :except => { :no_release => true } do
-    run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec sunspot-solr stop --port=8983 --data-directory=#{shared_path}/solr/data --pid-dir=#{shared_path}/pids"
+    run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec sunspot-solr stop --port=8983 --data-directory=#{shared_path}/solr/data --pid-dir=#{shared_path}/pids --solr-home=#{current_path}/solr"
   end
   desc "reindex the whole database"
   task :reindex, :roles => :app do

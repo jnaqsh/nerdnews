@@ -1,0 +1,10 @@
+$('#stories').append('<%= j render partial: 'stories/story', collection: @stories %>');
+<% if @stories.next_page %>
+  $(".pagination").replaceWith('<%= j paginate(@stories) %>');
+<% else %>
+  $('.pagination').remove();
+<% end %>
+
+<% sleep 1 %>
+
+$("[rel=tooltip]").tooltip()

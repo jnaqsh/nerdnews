@@ -82,6 +82,7 @@ class UsersController < ApplicationController
 
       respond_to do |format|
         if @user.save
+          record_activity %Q(کاربر #{view_context.link_to @user.full_name, user_path(@user)} در نردنیوز ثبت‌نام کرد)
           # send a welcome message and instruction for setting password
           @user.delay.signup_confirmation
 
@@ -129,7 +130,7 @@ class UsersController < ApplicationController
     else
       respond_to do |format|
         if @user.update_attributes(params[:user])
-          record_activity "پروفایل خود را به‌روز کردید"
+          record_activity %Q(پروفایل خود را ویرایش کرد)
           format.html { redirect_to @user, notice: t('controllers.users.update.flash.success') }
           format.json { head :no_content }
         else
@@ -169,7 +170,7 @@ class UsersController < ApplicationController
   # GET /users/1/comments.json
   def comments
     @user = User.find(params[:id])
-    @comments = @user.comments.order('created_at desc').page(params[:page])
+    @comments = @user.comments.includes(:story).order('created_at desc').page(params[:page])
 
     respond_to do |format|
       format.html # comments.html.erb
@@ -182,7 +183,7 @@ class UsersController < ApplicationController
   # GET /users/1/favorites.json
   def favorites
     @user = User.find(params[:id])
-    @favorites = @user.votes.where(voteable_type: "Story").order('created_at desc').page(params[:page])
+    @favorites = @user.votes.where(voteable_type: "Story").includes(:voteable, :rating).order('created_at desc').page(params[:page])
 
     respond_to do |format|
       format.html # favorites.html.erb

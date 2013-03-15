@@ -3,7 +3,7 @@ class Comment < ActiveRecord::Base
 
   include Rakismet::Model
 
-  HIDE_THRESHOLD = -30
+  HIDE_THRESHOLD = -8
 
   scope :approved, where(approved: true)
 

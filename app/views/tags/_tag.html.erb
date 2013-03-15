@@ -1,7 +1,7 @@
 <li class="span2">
   <div class="thumbnail">
     <%= image_tag tag.thumbnail.url(:thumb), alt: tag.name %>
-    <h4><%= link_to truncate(tag.name, length: 12), stories_path(tag: tag.name) %></h4>
+    <h4><%= link_to tag.name.truncate(11), stories_path(tag: tag.name) %></h4>
 
     <% if (can? :edit, Tag) or (can? :destroy, Tag) %>
     <p>

@@ -3,14 +3,15 @@ module StoriesHelper
     if cookies[:votes].present?
       cookie_array = YAML.load cookies[:votes]
       cookie_array.include? story.id
-    else current_user
-      story.user_voted?(current_user) or !story.approved?
+    elsif current_user
+      story.user_voted?(current_user)
     end
   end
 
   def thumbnail_url(story)
     unless story.tags.first.nil?
-      "#{root_url.gsub(/\/$/, '') + story.tags.first.thumbnail.url}"
+#      "#{root_url.gsub(/\/$/, '') + story.tags.first.thumbnail.url}"
+      story.tags.first.thumbnail.url #using dropbox in production
     end
   end
 
@@ -23,5 +24,13 @@ module StoriesHelper
       end
     end
     return false
+  end
+
+  def positive_or_negative(vote)
+    if vote.rating.weight >= 0
+      "label-success"
+    else
+      "label-important"
+    end
   end
 end

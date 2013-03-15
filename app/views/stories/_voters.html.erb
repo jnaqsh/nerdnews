@@ -1,0 +1,13 @@
+<% if story.id && !params[:preview_button] %>
+  <div class='row voters' style="display: none">
+    <% if can? :create, Vote %>
+      <div class="well span10">
+        <% story.votes.each do |vote| %>
+          <%= content_tag :span, class: "label #{positive_or_negative(vote)}" do %>
+            <%= link_to vote.user.full_name, user_path(vote.user), title: vote.rating.name, rel: "tooltip" %>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

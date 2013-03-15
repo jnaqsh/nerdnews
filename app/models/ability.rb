@@ -6,6 +6,8 @@ class Ability
     #
        user ||= User.new # guest user (not logged in)
        if user.role? :founder
+         can [:show, :index], ActivityLog
+         can :manage, Announcement
          can :manage, Comment
          can [:create, :failure], Identity
          can [:index, :destroy], Identity, user: { :id => user.id }
@@ -24,7 +26,10 @@ class Ability
          can :bypass_captcha, user
          can :add_to_favorites, User
        elsif user.role? :approved
-         can :manage, Comment
+         can :index, ActivityLog
+         can :hide, Announcement
+         can :create, Comment
+         can [:update, :destroy], Comment, user: {id: user.id}
          can [:create, :failure], Identity
          can [:index, :destroy], Identity, user: { :id => user.id }
          can [:index, :destroy], Message, receiver: { :id => user.id }
@@ -33,16 +38,20 @@ class Ability
          can :index, :mypage
          can :show, Page
          can :destroy, :session
-         can :manage, Story
+         can [:read, :create, :publish, :unpublished, :recent], Story
+         can [:update, :destroy], Story, user: {id: user.id}
          can [:read, :create, :update], Tag
          can [:show, :posts, :comments, :favorites], User
          can :activity_logs, User, id: user.id
-         can [:update, :destroy], User, :id => user.id
-         can :create, Vote
+         can :update, User, :id => user.id
          can :bypass_captcha, user
          can :add_to_favorites, User
+         can :create, Vote
        elsif user.role? :new_user
+         can :index, ActivityLog
+         can :hide, Announcement
          can :create, Comment
+         can [:update, :destroy], Comment, user: {id: user.id}
          can [:create, :failure], Identity
          can [:index, :destroy], Identity, user: { :id => user.id }
          can [:index, :destroy], Message, receiver: { :id => user.id }
@@ -51,20 +60,24 @@ class Ability
          can :index, :mypage
          can :show, Page
          can :destroy, :session
-         can [:read, :create], Story
+         can [:read, :create, :recent, :unpublished], Story
+         can [:update, :destroy], Story, user: {id: user.id}
          can :index, Tag
          can [:show, :posts, :comments, :favorites], User
          can :activity_logs, User, id: user.id
-         can [:update, :destroy], User, :id => user.id
-         can :create, Vote
+         can :update, User, :id => user.id
          cannot :bypass_captcha, user
          can :add_to_favorites, User
+         can :create, Vote
        else # guest user
          can :create, Comment
+         can :hide, Announcement
          can [:create, :failure], Identity
          can :show, Page
          can [:new, :create], :session
-         can [:read, :create], Story
+         can [:index, :create, :recent], Story
+         can :show, Story
+         cannot :show, Story, publish_date: nil
          can :index, Tag
          can [:create, :show, :posts, :comments, :favorites], User
          cannot :bypass_captcha, User

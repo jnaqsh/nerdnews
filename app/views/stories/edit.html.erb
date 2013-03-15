@@ -6,6 +6,10 @@
                                    :default => "Edit #{model_class.model_name.human}") %></h1>
 <% end %>
 
+<% if params[:preview_button] %>
+  <%= render partial: "preview_story", object: @story %>
+<% end %>
+
 <div class="row">
    <!-- main content -->
    <div class="span9">

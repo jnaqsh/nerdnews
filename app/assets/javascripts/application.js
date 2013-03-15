@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require twitter/bootstrap/bootstrap-transition
 //= require twitter/bootstrap/bootstrap-dropdown
 //= require twitter/bootstrap/bootstrap-tab
@@ -24,3 +25,4 @@
 //= require users.js.coffee
 //= require stories.js.coffee
 //= require comments.js.coffee
+//= require activity_logs

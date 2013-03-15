@@ -1,6 +1,6 @@
 <% if story.id && !params[:preview_button] %>
   <div class='row'>
-    <% if can? :create, Vote and story.published? %>
+    <% if can? :create, Vote %>
       <div id='voting-buttons-<%= story.id %>' class='span1 btn-group pull-right' >
 
         <%= render 'stories/voting_buttons', story: story %>
@@ -27,10 +27,10 @@
       </div>
     <% end %>
     <div class='pull-left'>
-      <% if can? :update, story %>
+      <% if (can? :update, story) && (!story.published? or current_user.role? "founder") %>
         <%= link_to t('.edit', :default => t("helpers.links.edit")), edit_story_path(story), :class => 'btn btn-mini' %>
       <% end %>
-      <% if can? :destroy, story %>
+      <% if (can? :destroy, story) && (!story.published? or current_user.role? "founder") %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       story_path(story),
                       :method => :delete,
@@ -38,7 +38,7 @@
                       :class => 'btn btn-mini btn-danger'
                        %>
       <% end %>
-      <% if (can? :publish, story) && !story.publish_date %>
+      <% if (can? :publish, story) && !story.published? %>
         <%= link_to t('.publish', default: t('helpers.links.publish')), publish_story_path(story),
             class: "btn btn-mini btn-primary", method: :put %>
       <% end %>

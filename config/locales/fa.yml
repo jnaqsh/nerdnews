@@ -1,5 +1,12 @@
 fa:
   controllers:
+    announcements:
+      create:
+        flash:
+          success: "اطلاعیه جدید با موفقیت ایجاد گردید."
+      update:
+        flash:
+          success: "اطلاعیه با موفقیت ویرایش گردید."
     under_construction_email_storage:
       create:
         flash:
@@ -7,8 +14,7 @@ fa:
     stories:
       create:
         flash:
-          success:  "خبر شما با موفقیت ایجاد گردید و منتشر شد."
-          success_for_guest_and_new_users: "خبر شما با موفقیت ایجاد گردید، بعد از این‌که یکی از مدیرها آن را تایید کرد، منتشر می‌شود."
+          success: "خبر شما با موفقیت ایجاد گردید، بعد از این‌که یکی از مدیرها آن را تایید کرد، منتشر می‌شود. <a href='%{link}'>خبرهای منتشرنشده را در این‌جا</a> ببینید."
       show:
         story_not_found: "خبر مورد نظر پیدا نشد."
         flash:
@@ -103,6 +109,23 @@ fa:
           fail: "زمان بازنشانی گذرواژه تمام شده‌است، دوباره سعی کنید."
           success: "گذرواژه جدید با موفقیت بازنشانی شد."
 
+  announcements:
+    title: "اطلاعیه‌ها"
+    index:
+      title: "فهرست اطلاعیه‌ها"
+    new:
+      title: "اطلاعیه جدید"
+    edit:
+      title: "ویرایش اطلاعیه"
+    show:
+      title: "نمایش اطلاعیه"
+  activity_logs:
+    title: "آخرین تغییرات"
+    index:
+      search: "جستجو"
+      title: "فهرست"
+    search:
+      search: "جستجو"
   static_pages:
     faq:
       title: "سوالات رایج"
@@ -147,7 +170,7 @@ fa:
   mypage:
     title: 'صفحه شخصی'
     index:
-      title: '%{name}'
+      title: 'صفحه شخصی %{name}'
 
   sessions:
     new:
@@ -177,6 +200,7 @@ fa:
     application:
       anonymous_user: "شخص ناشناس"
     links:
+      show: "نمایش"
       new: "جدید"
       edit: "ویرایش"
       destroy: "حذف"
@@ -197,12 +221,14 @@ fa:
       title: "تازه‌ترین‌ها"
       new: "خبری جدید بنویسید"
       point: "امتیاز: "
+      views_count: "نمایش: "
     new:
       title: 'خبر جدید'
     edit:
       title: 'ویرایش خبر'
     story:
       story_details: 'توسط %{user} در %{date}'
+      voters: "رای‌دهندگان"
     show:
       comments: "دیدگاه‌ها"
       no_comments: "هیچ دیدگاهی وجود ندارد."
@@ -282,10 +308,14 @@ fa:
       identities: 'حساب‌های OpenID'
       messages: 'پیام‌ها'
       pages: "صفحات"
+      activity_logs: "آخرین تغییرات"
+      announcements: "اطلاعیه‌ها"
     head:
       title: 'نردنیوز'
 
   layouts:
+    application:
+      hide_announcement: "مخفی کردن"
     user_profile:
       messages: "پیام‌ها"
       send_message: "ارسال پیام"
@@ -340,8 +370,15 @@ fa:
       identities: "حساب‌های OpenID"
       message: 'پیام'
       rating: 'امتیاز'
+      activity_log: "تاریخچه فعالیت"
+      announcement: "اطلاعیه"
 
     attributes:
+      announcement:
+        id: "شماره"
+        message: "پیام"
+        starts_at: "تاریخ شروع"
+        ends_at: "تاریخ پایان"
       story:
         title:  "عنوان"
         content:  "محتوا"
@@ -351,6 +388,15 @@ fa:
         tag_names: "تگ‌ها"
         source: 'منبع'
         spam_answer: "پاسخ دهید"
+      activity_log:
+        user: "کاربر"
+        browser: "مرورگر"
+        ip_address: "آدرس آی‌پی"
+        controller: "کنترل‌کننده"
+        action: "عمل"
+        note: "اطلاعات بیشتر"
+        note_link: "پیوند اطلاعات بیشتر"
+        params: "پارامترها"
 
       comment:
         name: "نام"

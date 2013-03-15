@@ -2,16 +2,14 @@ class TagsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @search = Tag.search do
+    @tags = Tag.search do
       fulltext params[:tag_search]
       order_by :created_at, :desc
-      paginate :page => params[:page], :per_page => 20
-    end
-    @tags = @search.results
-    # @tags = params[:tag_search].present? ? @search.results : Tag.order(:name).page(params[:page]).per(20)
+      paginate :page => params[:page], :per_page => 100
+    end.results
+
     respond_to do |format|
       format.html
-      # format.json {render json: @tags.tokens(params[:q])}
       format.json {render json: @tags}
       format.js
     end

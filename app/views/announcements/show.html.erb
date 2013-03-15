@@ -1,0 +1,24 @@
+<% set_meta_tags  title: [t('announcements.title'), t('.title')] %>
+
+<%- model_class = @announcement.class -%>
+<% content_for :page_header do %>
+  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+<% end %>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:message) %>:</strong></dt>
+  <dd><%= @announcement.message %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:starts_at) %>:</strong></dt>
+  <dd><%= to_jalali @announcement.starts_at %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:ends_at) %>:</strong></dt>
+  <dd><%= to_jalali @announcement.ends_at %></dd>
+</dl>
+
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              announcements_path, :class => 'btn'  %>
+  <% if can? :edit, Announcement %>
+    <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                edit_announcement_path(@announcement), :class => 'btn btn-primary' %>
+  <% end %>
+</div>
