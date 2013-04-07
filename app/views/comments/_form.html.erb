@@ -67,8 +67,6 @@
         input_html: {value: current_user.email, class: "span5"} %>
       <%= f.input :website, readonly: true, as: :hidden,
         input_html: {value: current_user.website, class: "span5"} %>
-      <%= f.input :user_id, as: :hidden,
-        input_html: {value: current_user.id} %>
     <% end %>
 
   </div>

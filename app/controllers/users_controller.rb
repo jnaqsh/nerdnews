@@ -190,7 +190,7 @@ class UsersController < ApplicationController
 
   def add_to_favorites
     @user = User.find(params[:id])
-    @tag = Tag.find_by_name(params[:tag])
+
     respond_to do |format|
       if @user.add_to_favorites(params[:tag])
         format.html { redirect_to root_path, notice: 'Added' }
