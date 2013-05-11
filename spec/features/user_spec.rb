@@ -184,14 +184,14 @@ describe '/Users' do
         visit story_path @story
       end
 
-      it 'shows the rating items for story' do
+      it 'shows the rating items for story', focus: true do
         find('button.btn-thumbs-up').click
         find("div.thumbs-up-list").should be_visible
-        find("div.thumbs-down-list").should_not be_visible
+        page.should_not have_css('div.thumbs-down-list')
 
         find('button.btn-thumbs-down').click
-        find("div.thumbs-up-list").should_not be_visible
         find("div.thumbs-down-list").should be_visible
+        page.should_not have_css('div.thumbs-up-list')
       end
 
       it 'rates a story successfully' do
