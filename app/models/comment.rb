@@ -11,7 +11,7 @@ class Comment < ActiveRecord::Base
   belongs_to :story, counter_cache: true
   belongs_to :user, counter_cache: true
 
-  attr_accessible :content, :name, :email, :website, :user_id, :parent_id
+  attr_accessible :content, :name, :email, :website, :parent_id
   rakismet_attrs author: :name, author_email: :email, author_url: :website
 
   before_validation :smart_add_url_protocol
