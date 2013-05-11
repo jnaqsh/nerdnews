@@ -15,7 +15,7 @@ describe "Stories" do
 
       before do
         visit root_url
-        click_link "جدید"
+        find('.page-header').click_link "جدید"
         current_path.should eq(new_story_path)
       end
 
@@ -46,7 +46,7 @@ describe "Stories" do
           I18n.t("activerecord.errors.models.story.attributes.spam_answer.incorrect_answer"))
         user = FactoryGirl.create(:approved_user)
         login user
-        click_link 'جدید'
+        find('.page-header').click_link "جدید"
         current_path.should eq(new_story_path)
         page.should have_no_selector('story_spam_answer')
         fill_in "story_title", with: Faker::Lorem.characters(10)

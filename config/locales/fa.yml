@@ -148,6 +148,7 @@ fa:
       title: "ثبت‌نام"
     form:
       submit: "تایید"
+      confirm: "مطمئنید؟ تغییرات شما اعمال نخواهد شد."
     signup_form:
       submit: "تایید"
     index:

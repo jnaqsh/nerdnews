@@ -52,10 +52,10 @@ describe "Comments" do
     it 'shows the rating items for comment' do
       find('button.btn-comments-thumbs-up').click
       find("div.thumbs-up-list").should be_visible
-      find("div.thumbs-down-list").should_not be_visible
+      page.should_not have_css('div.thumbs-down-list')
 
       find('button.btn-comments-thumbs-down').click
-      find("div.thumbs-up-list").should_not be_visible
+      page.should_not have_css('div.thumbs-up-list')
       find("div.thumbs-down-list").should be_visible
     end
 

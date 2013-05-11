@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.12'
+gem 'rails', '3.2.13'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -97,9 +97,10 @@ group :test do
   gem 'guard-rspec'
   gem 'faker'
   gem 'sunspot_test'
-  gem 'guard-spork'
+  # gem 'guard-spork'
+  gem 'guard-zeus'
   gem 'launchy'
-  gem 'rb-inotify', '~> 0.8.8', :require => false
+  # gem 'rb-inotify', '~> 0.9', :require => false
   gem 'shoulda-matchers'
   gem 'poltergeist'
   gem 'webmock'
