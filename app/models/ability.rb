@@ -2,86 +2,16 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    # Define abilities for the passed in user here. For example:
-    #
-       user ||= User.new # guest user (not logged in)
-       if user.role? :founder
-         can [:show, :index], ActivityLog
-         can :manage, Announcement
-         can :manage, Comment
-         can [:create, :failure], Identity
-         can [:index, :destroy], Identity, user: { :id => user.id }
-         can [:index, :destroy], Message, receiver: { :id => user.id }
-         can [:index, :create], Message, sender: { :id => user.id }
-         cannot :create, Message, receiver: { :id => user.id }
-         can :index, :mypage
-         can :manage, Page
-         can :manage, Rating
-         can :destroy, :session
-         can :manage, Story
-         can :manage, Role
-         can :manage, Tag
-         can :manage, User
-         can :create, Vote
-         can :bypass_captcha, user
-         can :add_to_favorites, User
-       elsif user.role? :approved
-         can :index, ActivityLog
-         can :hide, Announcement
-         can :create, Comment
-         can [:update, :destroy], Comment, user: {id: user.id}
-         can [:create, :failure], Identity
-         can [:index, :destroy], Identity, user: { :id => user.id }
-         can [:index, :destroy], Message, receiver: { :id => user.id }
-         can [:index, :create], Message, sender: { :id => user.id }
-         cannot :create, Message, receiver: { :id => user.id }
-         can :index, :mypage
-         can :show, Page
-         can :destroy, :session
-         can [:read, :create, :publish, :unpublished, :recent], Story
-         can [:update, :destroy], Story, user: {id: user.id}
-         can [:read, :create, :update], Tag
-         can [:show, :posts, :comments, :favorites], User
-         can :activity_logs, User, id: user.id
-         can :update, User, :id => user.id
-         can :bypass_captcha, user
-         can :add_to_favorites, User
-         can :create, Vote
-       elsif user.role? :new_user
-         can :index, ActivityLog
-         can :hide, Announcement
-         can :create, Comment
-         can [:update, :destroy], Comment, user: {id: user.id}
-         can [:create, :failure], Identity
-         can [:index, :destroy], Identity, user: { :id => user.id }
-         can [:index, :destroy], Message, receiver: { :id => user.id }
-         can [:index, :create], Message, sender: { :id => user.id }
-         cannot :create, Message, receiver: { :id => user.id }
-         can :index, :mypage
-         can :show, Page
-         can :destroy, :session
-         can [:read, :create, :recent, :unpublished], Story
-         can [:update, :destroy], Story, user: {id: user.id}
-         can :index, Tag
-         can [:show, :posts, :comments, :favorites], User
-         can :activity_logs, User, id: user.id
-         can :update, User, :id => user.id
-         cannot :bypass_captcha, user
-         can :add_to_favorites, User
-         can :create, Vote
-       else # guest user
-         can :create, Comment
-         can :hide, Announcement
-         can [:create, :failure], Identity
-         can :show, Page
-         can [:new, :create], :session
-         can [:index, :create, :recent], Story
-         can :show, Story
-         cannot :show, Story, publish_date: nil
-         can :index, Tag
-         can [:create, :show, :posts, :comments, :favorites], User
-         cannot :bypass_captcha, User
-       end
+    user ||= User.new # guest user (not logged in)
+    if user.role? :founder
+     founder_user_permissions(user)
+    elsif user.role? :approved
+     approved_user_permissions(user)
+    elsif user.role? :new_user
+     new_user_permissions(user)
+    else # guest user
+     guest_user_permissions
+    end
     #
     # The first argument to `can` is the action you are giving the user permission to do.
     # If you pass :manage it will apply to every action. Other common actions here are
@@ -96,5 +26,117 @@ class Ability
     #   can :update, Article, :published => true
     #
     # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities
+  end
+
+  private
+
+  def guest_user_permissions
+    # Comment model
+    can :create, Comment
+
+    # Announcement model
+    can :hide, Announcement
+
+    # Identity model
+    can [:create, :failure], Identity
+
+    # Page model
+    can :show, Page
+
+    # sessions controller
+    can [:new, :create], :session
+
+    # Story model
+    can [:read, :create, :recent], Story
+    cannot :show, Story, publish_date: nil
+
+    # Tag model
+    can :index, Tag
+
+    # User model
+    can [:create, :show, :posts, :comments, :favorites], User
+    cannot :bypass_captcha, User
+  end
+
+  def new_user_permissions(user)
+    # a new user can do anything a guest user can
+    guest_user_permissions
+
+    # ActivityLog model
+    can :index, ActivityLog
+
+    # Comment model
+    can [:update, :destroy], Comment, user: {id: user.id}
+
+    # Identity model
+    can [:index, :destroy], Identity, user: {id: user.id}
+
+    # Message model
+    can [:index, :destroy], Message, receiver: { :id => user.id }
+    can [:index, :create], Message, sender: { :id => user.id }
+    cannot :create, Message, receiver: { :id => user.id }
+
+    # mypage controller
+    can :index, :mypage
+
+    # sessions controller
+    can :destroy, :session
+    cannot [:new, :create], :session
+
+    # Story model
+    can :unpublished, Story
+    can :update, Story, user: {id: user.id}
+
+    # User model
+    can [:update, :add_to_favorites, :activity_logs], user
+
+    # Vote model
+    can :create, Vote
+  end
+
+  def approved_user_permissions(user)
+    # an approved user can do anything a new_user can
+    new_user_permissions(user)
+
+    # Story model
+    can :publish, Story
+
+    # Tag model
+    can [:create, :update], Tag
+
+    # User model
+    can :bypass_captcha, user
+  end
+
+  def founder_user_permissions(user)
+    # a founder user can do anything a approved_user can
+    approved_user_permissions(user)
+
+    # ActivityLog model
+    can :show, ActivityLog
+
+    # Announcement model
+    can :manage, Announcement
+
+    # Comment model
+    can :manage, Comment
+
+    # Page model
+    can :manage, Page
+
+    # Rating model
+    can :manage, Rating
+
+    # Story model
+    can :manage, Story
+
+    # Role model
+    can :manage, Role
+
+    # Tag model
+    can :manage, Tag
+
+    # User model
+    can :manage, User
   end
 end
