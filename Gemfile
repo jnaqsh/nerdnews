@@ -94,12 +94,12 @@ end
 group :test do
   gem 'factory_girl_rails'
   gem 'capybara'
-  gem 'guard-rspec'
+  # gem 'guard-rspec'
   gem 'faker'
   gem 'sunspot_test'
-  gem 'guard-spork'
+  # gem 'guard-spork'
   gem 'launchy'
-  gem 'rb-inotify', '~> 0.8.8', :require => false
+  # gem 'rb-inotify', '~> 0.8.8', :require => false
   gem 'shoulda-matchers'
   gem 'poltergeist'
   gem 'webmock'
