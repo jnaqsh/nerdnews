@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe "Announcements" do
-  it 'displays active announcements' do
+  it 'displays active announcements', js: true do
     Announcement.create! message: "Hello world!", starts_at: 10.hour.ago, ends_at: 1.day.from_now
     Announcement.create! message: "Upcoming", starts_at: 10.minutes.from_now, ends_at: 1.hour.from_now
     visit root_path
