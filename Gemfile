@@ -9,7 +9,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
 
-  # adding multiple field in one text_field like tagging
+  # adding multiple fields in one text_field like tagging
   gem 'select2-rails'
 end
 
@@ -19,10 +19,7 @@ gem 'acts_as_paranoid'
 # it uses for making active class on menus
 gem 'active_link_to'
 
-# it warns about eager loading and just for development mode
-gem 'bullet', group: :development
-
-# apparenty it's famous jquery for rails
+# apparenty it's famous jquery lib for rails
 gem 'jquery-rails'
 
 # default label for i18n in rails
@@ -31,8 +28,8 @@ gem 'rails-i18n', git: 'https://github.com/iCEAGE/rails-i18n.git'
 # encryption like passwords
 gem 'bcrypt-ruby', '~> 3.0.0'
 
-
 gem 'debugger'
+
 gem 'simple_form'
 
 # it uses for managing users in multiple roles
@@ -84,15 +81,19 @@ gem 'less-rails'
 
 # rbootstrap is a gem for RTL twitter bootstrap
 gem 'twitter-bootstrap-rails', git: "https://github.com/jnaqsh/twitter-bootstrap-rails.git"
-s
+
 # for textcaptcha in creating story
 gem 'acts_as_textcaptcha', git: "https://github.com/jnaqsh/acts_as_textcaptcha.git"
 
+# it uses for meta tags in html like description tag
 gem 'meta-tags', require: 'meta_tags'
+
+# it's famous akismet in rails, for fighting with spams
 gem 'rakismet'
 
 gem 'daemons'
 
+# it's cron in rails
 gem 'whenever', :require => false
 
 # gems for delaying a job like sending mail
@@ -126,6 +127,9 @@ group :development do
   gem 'sqlite3'
   gem 'better_errors'
   gem 'binding_of_caller'
+
+  # it warns about eager loading and just for development mode
+  gem 'bullet'
 end
 
 group :development, :test do
