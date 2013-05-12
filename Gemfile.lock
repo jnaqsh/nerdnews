@@ -215,6 +215,7 @@ GEM
       jwt (~> 0.1.4)
       multi_json (~> 1.0)
       rack (~> 1.2)
+    oj (2.0.12)
     omniauth (1.1.2)
       hashie (~> 1.2)
       rack
@@ -263,6 +264,8 @@ GEM
       slop (~> 3.4)
     pry-rails (0.2.2)
       pry (>= 0.9.10)
+    rabl (0.8.4)
+      activesupport (>= 2.3.14)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -430,6 +433,7 @@ DEPENDENCIES
   letter_opener
   meta-tags
   mysql2
+  oj
   omniauth-facebook
   omniauth-github
   omniauth-openid
@@ -439,6 +443,7 @@ DEPENDENCIES
   poltergeist
   progress_bar
   pry-rails
+  rabl
   rails (= 3.2.12)
   rails-i18n!
   rakismet

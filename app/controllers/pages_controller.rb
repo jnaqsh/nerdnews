@@ -7,7 +7,6 @@ class PagesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @pages }
     end
   end
 
@@ -24,7 +23,6 @@ class PagesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @page }
     end
   end
 
@@ -35,7 +33,6 @@ class PagesController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @page }
     end
   end
 
@@ -55,7 +52,6 @@ class PagesController < ApplicationController
         format.json { render json: @page, status: :created, location: @page }
       else
         format.html { render action: "new" }
-        format.json { render json: @page.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -71,7 +67,6 @@ class PagesController < ApplicationController
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
-        format.json { render json: @page.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -84,7 +79,6 @@ class PagesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to pages_url }
-      format.json { head :no_content }
     end
   end
 end

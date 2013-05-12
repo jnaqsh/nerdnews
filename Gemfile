@@ -74,6 +74,11 @@ gem 'under_construction'
 # Deploy with Capistrano
 gem 'capistrano'
 
+# for creating json api
+gem 'rabl'
+# Also add either `oj` or `yajl-ruby` as the JSON parser
+gem 'oj'
+
 group :production do
   gem 'execjs'
   gem 'therubyracer'

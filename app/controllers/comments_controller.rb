@@ -10,7 +10,6 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @comments }
     end
   end
 
@@ -21,7 +20,6 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @comment }
     end
   end
 
@@ -34,7 +32,6 @@ class CommentsController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.js
-      format.json { render json: @comment }
     end
   end
 
@@ -62,10 +59,8 @@ class CommentsController < ApplicationController
         UserMailer.delay.comment_reply(@comment.id) unless @comment.parent.nil?
         rate_user(current_user, 1) if current_user.present?
         format.html { redirect_to @story, notice: t('controllers.comments.create.flash.success') }
-        format.json { render json: @comment, status: :created, location: @comment }
       else
         format.html { render template: "stories/show" }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -82,10 +77,8 @@ class CommentsController < ApplicationController
 
         format.html { redirect_to story_path(@comment.story),
           notice: t('controllers.comments.update.flash.success') }
-        format.json { head :no_content }
       else
         format.html { render action: "edit" }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -100,7 +93,6 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to story_path(@comment.story) }
-      format.json { head :no_content }
     end
   end
 end
