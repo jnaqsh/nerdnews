@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.12'
+gem 'rails', '3.2.13'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -8,58 +8,96 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
+
+  # adding multiple field in one text_field like tagging
   gem 'select2-rails'
 end
 
+# it adds a deleted_at column to database
 gem 'acts_as_paranoid'
 
+# it uses for making active class on menus
 gem 'active_link_to'
 
+# it warns about eager loading and just for development mode
 gem 'bullet', group: :development
 
+# apparenty it's famous jquery for rails
 gem 'jquery-rails'
+
+# default label for i18n in rails
 gem 'rails-i18n', git: 'https://github.com/iCEAGE/rails-i18n.git'
+
+# encryption like passwords
 gem 'bcrypt-ruby', '~> 3.0.0'
+
+
 gem 'debugger'
 gem 'simple_form'
-gem "cancan"
-gem 'kaminari'
-gem 'sunspot_rails'
-gem 'sunspot_solr' # optional pre-packaged Solr distribution for use in development
 
+# it uses for managing users in multiple roles
+gem "cancan"
+
+# for pagination
+gem 'kaminari'
+
+# a wrapper for apache solr in rails
+gem 'sunspot_rails'
+gem 'sunspot_solr'
+
+# for textilize in rails
 gem 'RedCloth'
+
 # plain formatter for redcloth
 gem "red_cloth_formatters_plain", "~> 0.2.0"
 
 # for maintenance page in capistrano
 gem "capistrano-maintenance"
 
-# gem 'rack-mini-profiler'
+# jalali (persian) date calendar
 gem 'jalalidate'
+
+# for some stuff in persian language like converting numbers to farsi
 gem 'farsifu'
+
+# it uses for ancestry things like nested comments
 gem 'ancestry'
 
+# it used for uploading files in rails
 gem 'paperclip'
-gem "paperclip-dropbox"
+gem "paperclip-dropbox" # it's like a plugin for paperclip to use dropbox instead local
 
 # progress_bar for reindexing sunspot
 gem 'progress_bar'
 
+# omniauth authentication gems
 gem 'omniauth-github'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'omniauth-openid'
+
+# the gem that uses in url naming
 gem 'friendly_id'
+
 gem 'therubyracer'
 gem 'less-rails'
+
+# rbootstrap is a gem for RTL twitter bootstrap
 gem 'twitter-bootstrap-rails', git: "https://github.com/jnaqsh/twitter-bootstrap-rails.git"
+s
+# for textcaptcha in creating story
 gem 'acts_as_textcaptcha', git: "https://github.com/jnaqsh/acts_as_textcaptcha.git"
+
 gem 'meta-tags', require: 'meta_tags'
 gem 'rakismet'
-gem 'delayed_job_active_record'
+
 gem 'daemons'
-gem 'delayed_job_web'
+
 gem 'whenever', :require => false
+
+# gems for delaying a job like sending mail
+gem 'delayed_job_web'
+gem 'delayed_job_active_record'
 
 # mails execeptions to admin of site
 gem 'exception_notification'
@@ -67,17 +105,15 @@ gem 'exception_notification'
 #for testing email in development mode
 gem 'letter_opener', group: :development
 
+# gem for twitting story
 gem 'twitter'
-
-gem 'under_construction'
 
 # Deploy with Capistrano
 gem 'capistrano'
 
 # for creating json api
 gem 'rabl'
-# Also add either `oj` or `yajl-ruby` as the JSON parser
-gem 'oj'
+gem 'oj' # Also add either `oj` or `yajl-ruby` as the JSON parser
 
 group :production do
   gem 'execjs'
@@ -98,14 +134,15 @@ end
 
 group :test do
   gem 'factory_girl_rails'
-  gem 'capybara'
+  gem "capybara", "~> 2.1.0"
   gem 'guard-rspec'
   gem 'faker'
   gem 'sunspot_test'
-  gem 'guard-spork'
+  # gem 'guard-spork'
+  gem 'guard-zeus'
   gem 'launchy'
-  gem 'rb-inotify', '~> 0.8.8', :require => false
+  # gem 'rb-inotify', '~> 0.9', :require => false
   gem 'shoulda-matchers'
-  gem 'poltergeist'
+  gem "poltergeist", "~> 1.3.0"
   gem 'webmock'
 end

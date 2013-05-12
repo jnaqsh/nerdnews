@@ -65,8 +65,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     if params[:cancel]
-      session.delete :authhash
-      session.delete :service_id
+      delete_sessions
       redirect_to root_url, flash: { error: t('controllers.users.create.flash.canceled') }
     else
       @user = User.new(params[:user])
@@ -100,6 +99,21 @@ class UsersController < ApplicationController
           format.html { render action: "new" }
         end
       end
+    end
+  end
+
+  def delete_sessions
+    session.delete :authhash
+    session.delete :service_id
+  end
+
+  def log_in(user)
+    cookies.permanent.signed[:user_id] = user.id if session[:authhash].present?
+  end
+
+  def build_identity_if_used_openid(user)
+    if session[:authhash].present?
+      user.identities.build(provider: session[:authhash][:provider], uid: session[:authhash][:uid])
     end
   end
 
