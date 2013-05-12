@@ -19,7 +19,6 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @users, except: [:password_digest] }
       format.js
     end
   end
@@ -39,7 +38,6 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @user, except: [:password_digest] }
     end
   end
 
@@ -55,7 +53,6 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @user, except: [:password_digest] }
     end
   end
 
@@ -132,10 +129,8 @@ class UsersController < ApplicationController
         if @user.update_attributes(params[:user])
           record_activity %Q(پروفایل خود را ویرایش کرد)
           format.html { redirect_to @user, notice: t('controllers.users.update.flash.success') }
-          format.json { head :no_content }
         else
           format.html { render action: "edit" }
-          format.json { render json: @user.errors, status: :unprocessable_entity }
         end
       end
     end
@@ -149,7 +144,6 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to users_url }
-      format.json { head :no_content }
     end
   end
 

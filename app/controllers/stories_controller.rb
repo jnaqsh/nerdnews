@@ -27,7 +27,7 @@ class StoriesController < ApplicationController
       format.html # index.html.erb
       format.js
       format.atom
-      format.json { render json: @stories }
+      format.json
     end
   end
 
@@ -43,16 +43,17 @@ class StoriesController < ApplicationController
 
       story_path = Rails.env.production? ? story_path(@story).downcase : story_path(@story) #monkey patch due to error in production (downcase)
 
-      if request.path != story_path
-        redirect_to @story, status: :moved_permanently, only_path: true
-        return
+      respond_to do |format|
+        format.json
+
+        if request.path != story_path
+          format.html {redirect_to @story, status: :moved_permanently}
+        else
+          format.html
+        end
       end
     else
       raise ActiveRecord::RecordNotFound, t("controllers.stories.show.story_not_found")
-    end
-
-    respond_to do |format|
-      format.html
     end
   end
 
@@ -66,7 +67,6 @@ class StoriesController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @story }
     end
   end
 
@@ -97,10 +97,8 @@ class StoriesController < ApplicationController
 
           format.html { redirect_to root_path, only_path: true,
             notice: t("controllers.stories.create.flash.success", link: unpublished_stories_path).html_safe }
-          format.json { render json: @story, status: :created, location: @story }
         else
           format.html { render action: "new" }
-          format.json { render json: @story.errors, status: :unprocessable_entity }
         end
       end
     end
@@ -125,11 +123,8 @@ class StoriesController < ApplicationController
           else
             format.html { redirect_to unpublished_stories_path, notice: t('controllers.stories.update.flash.success') }
           end
-
-          format.json { head :no_content }
         else
           format.html { render action: "edit" }
-          format.json { render json: @story.errors, status: :unprocessable_entity }
         end
       end
     end
@@ -147,7 +142,6 @@ class StoriesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to stories_url }
-      format.json { head :no_content }
     end
   end
 
