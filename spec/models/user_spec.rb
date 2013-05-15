@@ -347,8 +347,11 @@ describe User do
 
   it 'updates the favorite tags' do
     user = FactoryGirl.create(:user, favorite_tags: 'nerd')
-    user.add_to_favorites('news')
-    pp user.favorite_tags_array
+    # should add "news" to favorite tags
+    user.add_or_remove_favorite_tag('news')
     user.reload.favorite_tags_array.should be_include('news')
+    # should remove "news" to favorite tags
+    user.add_or_remove_favorite_tag('news')
+    user.reload.favorite_tags_array.should_not be_include('news')
   end
 end
