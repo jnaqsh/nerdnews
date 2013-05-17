@@ -89,6 +89,7 @@ class StoriesController < ApplicationController
 
     respond_to do |format|
       if params[:preview_button]
+        @story.textcaptcha
         format.html { render action: "new" }
       else
         if @story.save

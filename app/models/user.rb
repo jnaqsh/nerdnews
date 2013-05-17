@@ -73,12 +73,18 @@ class User < ActiveRecord::Base
   end
 
   def included_tag_as_favorite?(tag)
-    favorite_tags_array.to_a.include? tag unless favorite_tags_array.blank?
+    favorite_tags_array.include? tag unless favorite_tags_array.blank?
   end
 
   # appends tag to the favorite tags
-  def add_to_favorites(tag)
-    self.update_attributes(favorite_tags: favorite_tags.to_s + (self.favorite_tags.blank? ? tag : ",#{tag}"))
+  def add_or_remove_favorite_tag(tag)
+    if included_tag_as_favorite? tag
+      chached_favorite_tags_array = favorite_tags_array
+      chached_favorite_tags_array.delete tag
+      self.update_attributes(favorite_tags: chached_favorite_tags_array.join(","))
+    else
+      self.update_attributes(favorite_tags: favorite_tags.to_s + (self.favorite_tags.blank? ? tag : ",#{tag}"))
+    end
   end
 
   private

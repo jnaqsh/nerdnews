@@ -196,11 +196,14 @@ class UsersController < ApplicationController
     end
   end
 
+  # Add a tag to users favorites
+  # Does it belongs to here or tags controller?
   def add_to_favorites
     @user = User.find(params[:id])
+    @tag = Tag.find_by_name(params[:tag])
 
     respond_to do |format|
-      if @user.add_to_favorites(params[:tag])
+      if @user.add_or_remove_favorite_tag(params[:tag])
         format.html { redirect_to root_path, notice: 'Added' }
         format.js
       else
