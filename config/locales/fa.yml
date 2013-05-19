@@ -149,6 +149,7 @@ fa:
     form:
       submit: "تایید"
       confirm: "مطمئنید؟ تغییرات شما اعمال نخواهد شد."
+      change-avatar: "جهت تغییر آواتار خود به سایت Gravatar مراجعه کنید"
     signup_form:
       submit: "تایید"
     index:
