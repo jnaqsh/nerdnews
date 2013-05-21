@@ -16,6 +16,8 @@
 
   <%= f.input :favorite_tags, input_html: {class: "span3"} %>
 
+  <%= f.hint link_to t(".change-avatar"), "http://gravatar.com" %>
+
   <% if can? :edit, Role %>
     <%= f.association :roles, :as => :radio_buttons, :checked => @user.role_ids %>
   <% end %>
