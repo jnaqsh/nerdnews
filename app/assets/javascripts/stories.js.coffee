@@ -72,3 +72,23 @@ jQuery ->
     .ajaxStop( ->
       $("#loading-indicator").hide()
     )
+
+  # Character counter for story form
+  $("textarea[data-maxlength]").each( ->
+      thiz = $(@)
+      maxLength = parseInt(thiz.attr("data-maxlength"))
+      $('label[for=story_content]').append('<br /><p class="counterSpan label label-success">' + maxLength + '</p>')
+      counterSpan = $('p.counterSpan')
+
+      thiz.on('keyup', ->
+          currentCount = maxLength - thiz.val().length
+          counterSpan.text(Math.abs currentCount)
+
+          if currentCount < 0
+            counterSpan.removeClass('label-success')
+            counterSpan.addClass('label-important')
+          else
+            counterSpan.removeClass('label-important')
+            counterSpan.addClass('label-success')
+      )
+    )

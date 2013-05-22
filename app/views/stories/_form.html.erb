@@ -8,7 +8,10 @@
               placeholder: t('.source_placeholder')
               %>
   <%= f.input :content,
-              input_html: {rows: 15, class: "span6", 'data-trigger' => "focus"},
+              input_html: {rows: 15,
+                            class: "span6",
+                            'data-trigger' => "focus",
+                            'data-maxlength' => Story::CONTENT_MAX_LENGTH},
               placeholder: t('.content_placeholder')%>
 
   <%= f.input :tag_names, input_html: {data: {tags: @story.tags}, class: "span6", value: ' '} %>

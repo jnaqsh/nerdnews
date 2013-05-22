@@ -3,32 +3,13 @@
 class Story < ActiveRecord::Base
   acts_as_paranoid
   acts_as_textcaptcha
+  extend FriendlyId
 
   HIDE_THRESHOLD = -8
+  CONTENT_MAX_LENGTH = 1500
 
   attr_accessible :content, :publish_date, :title, :source,
     :tag_names, :view_counter, :publisher_id, :tag_ids
-
-  extend FriendlyId
-  friendly_id :title_foo, use: [:slugged, :history]
-
-  def title_foo
-    "#{title}"
-  end
-
-  def normalize_friendly_id(string)
-    sep = "-"
-    parameterized_string = string
-    parameterized_string.gsub!(/[^a-z0-9\-_اآبپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیءئؤيإأةك۱۲۳۴۵۶۷۸۹۰ٔ‌]+/i, sep)
-    unless sep.nil? || sep.empty?
-      re_sep = Regexp.escape(sep)
-      # No more than one of the separator in a row.
-      parameterized_string.gsub!(/#{re_sep}{2,}/, sep)
-      # Remove leading/trailing separator.
-      parameterized_string.gsub!(/^#{re_sep}|#{re_sep}$/i, '')
-    end
-    parameterized_string.downcase
-  end
 
   belongs_to :remover, class_name: "User"
   belongs_to :publisher, class_name: "User"
@@ -46,7 +27,7 @@ class Story < ActiveRecord::Base
   before_validation :smart_add_url_protocol
 
   validates_length_of :title, maximum: 100, minimum: 10
-  validates_length_of :content, minimum: 250, maximum: 1500
+  validates_length_of :content, minimum: 250, maximum: CONTENT_MAX_LENGTH
   validates  :title, :content, presence: true
   validates :source, allow_blank: true, uri: true
 
@@ -105,6 +86,27 @@ class Story < ActiveRecord::Base
 
   def approved?
     self.publish_date.present?
+  end
+
+  # FriendlyId, TODO: Move to it's own method
+  friendly_id :title_foo, use: [:slugged, :history]
+
+  def title_foo
+    "#{title}"
+  end
+
+  def normalize_friendly_id(string)
+    sep = "-"
+    parameterized_string = string
+    parameterized_string.gsub!(/[^a-z0-9\-_اآبپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیءئؤيإأةك۱۲۳۴۵۶۷۸۹۰ٔ‌]+/i, sep)
+    unless sep.nil? || sep.empty?
+      re_sep = Regexp.escape(sep)
+      # No more than one of the separator in a row.
+      parameterized_string.gsub!(/#{re_sep}{2,}/, sep)
+      # Remove leading/trailing separator.
+      parameterized_string.gsub!(/^#{re_sep}|#{re_sep}$/i, '')
+    end
+    parameterized_string.downcase
   end
 
 protected
