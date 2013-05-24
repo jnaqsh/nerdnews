@@ -81,7 +81,8 @@ class UsersController < ApplicationController
         if @user.save
           record_activity %Q(کاربر #{view_context.link_to @user.full_name, user_path(@user)} در نردنیوز ثبت‌نام کرد)
           # send a welcome message and instruction for setting password
-          @user.delay.signup_confirmation
+          password_reset = PasswordReset.new(@user)
+          password_reset.delay.signup_confirmation
 
           # login with new user if confirm with openid
           if session[:authhash].present?

@@ -40,42 +40,34 @@ class User < ActiveRecord::Base
     time :created_at
   end
 
-  def send_password_reset
-    generate_token(:password_reset_token)
-    self.password_reset_sent_at = Time.zone.now
-    save!
-    UserMailer.password_reset(self.id).deliver
-  end
-
-  def signup_confirmation
-    generate_token(:password_reset_token)
-    self.password_reset_sent_at = Time.zone.now
-    save!
-    UserMailer.signup_confirmation(self.id).deliver
-  end
-
-  def role?(role)
-    defined_roles.include? role.to_s
-  end
-
+  # role
   def defined_roles
     roles.map do |role|
       role.name
     end
   end
 
+  # role
+  def role?(role)
+    defined_roles.include? role.to_s
+  end
+
+  # messages
   def count_unread_messages
     self.received_messages.where(unread: true).count
   end
 
+  # tags
   def favorite_tags_array
       self.favorite_tags.split(',') unless favorite_tags.blank?
   end
 
+  # tags
   def included_tag_as_favorite?(tag)
     favorite_tags_array.include? tag unless favorite_tags_array.blank?
   end
 
+  # tags
   # appends tag to the favorite tags
   def add_or_remove_favorite_tag(tag)
     if included_tag_as_favorite? tag
@@ -89,22 +81,19 @@ class User < ActiveRecord::Base
 
   private
 
-  def generate_token(column)
-    begin
-      self[column] = SecureRandom.urlsafe_base64
-    end while User.exists?(column => self[column])
-  end
-
+  # role
   def set_new_user_role
     if self.roles.empty?
       self.roles << (Role.find_by_name("new_user") or Role.create(name: "new_user"))
     end
   end
 
+  # helper
   def full_name_foo
     "#{full_name}"
   end
 
+  # friendly id
   def normalize_friendly_id(string)
     sep = "-"
     parameterized_string = string
@@ -119,6 +108,7 @@ class User < ActiveRecord::Base
     parameterized_string.downcase
   end
 
+  # helper
   def smart_add_url_protocol
     if self.website.present?
       unless self.website[/^https?:\/\//]
@@ -127,6 +117,7 @@ class User < ActiveRecord::Base
     end
   end
 
+  # roles
   protected
   # Searches through users and mark them to be approved or not based on KARMA_THRESHOLD
   def self.promote_users

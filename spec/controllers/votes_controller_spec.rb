@@ -44,7 +44,7 @@ describe VotesController do
         rating2 = FactoryGirl.create(:rating, weight: -3)
         expect {
           post :create, story_id: @story.id, rating_id: @rating, positive: true, voteable: "stories"
-          post :create, story_id: @story.id, rating_id: rating2, positive: true, voteable: "stories"
+          post :create, story_id: @story.id, rating_id: rating2, voteable: "stories"
         }.to change { @story.reload.total_point }.by(-2)
       end
 

@@ -8,7 +8,7 @@ describe Vote do
     it { should belong_to :voteable }
   end
 
-  context "/validation", focus: true do
+  context "/validation" do
     let(:story)   { FactoryGirl.create(:story) }
     let(:rating)  { FactoryGirl.create(:rating) }
     let(:user)    { FactoryGirl.create(:user) }
