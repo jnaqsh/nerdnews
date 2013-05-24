@@ -40,6 +40,10 @@ class User < ActiveRecord::Base
     time :created_at
   end
 
+  def favored_tags
+    @favored_tags ||= FavoredTags.new self
+  end
+
   # role
   def defined_roles
     roles.map do |role|
@@ -55,28 +59,6 @@ class User < ActiveRecord::Base
   # messages
   def count_unread_messages
     self.received_messages.where(unread: true).count
-  end
-
-  # tags
-  def favorite_tags_array
-      self.favorite_tags.split(',') unless favorite_tags.blank?
-  end
-
-  # tags
-  def included_tag_as_favorite?(tag)
-    favorite_tags_array.include? tag unless favorite_tags_array.blank?
-  end
-
-  # tags
-  # appends tag to the favorite tags
-  def add_or_remove_favorite_tag(tag)
-    if included_tag_as_favorite? tag
-      chached_favorite_tags_array = favorite_tags_array
-      chached_favorite_tags_array.delete tag
-      self.update_attributes(favorite_tags: chached_favorite_tags_array.join(","))
-    else
-      self.update_attributes(favorite_tags: favorite_tags.to_s + (self.favorite_tags.blank? ? tag : ",#{tag}"))
-    end
   end
 
   private
