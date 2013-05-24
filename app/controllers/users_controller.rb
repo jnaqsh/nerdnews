@@ -204,7 +204,7 @@ class UsersController < ApplicationController
     @tag = Tag.find_by_name(params[:tag])
 
     respond_to do |format|
-      if @user.add_or_remove_favorite_tag(params[:tag])
+      if @user.favored_tags.save!(params[:tag])
         format.html { redirect_to root_path, notice: 'Added' }
         format.js
       else

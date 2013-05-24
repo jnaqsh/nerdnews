@@ -105,7 +105,7 @@ describe '/Users' do
       story.tags << tag
       visit story_path(story)
       click_link "1"
-      @user.reload.favorite_tags_array.should be_include(tag.name)
+      @user.reload.favored_tags.to_a.should be_include(tag.name)
     end
   end
 
