@@ -123,8 +123,6 @@ group :production do
 end
 
 group :development do
-  gem 'pry-rails'
-  gem 'pry-nav'
   gem 'sqlite3'
   gem 'better_errors'
   gem 'binding_of_caller'
@@ -135,6 +133,8 @@ end
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'pry-rails'
+  gem 'pry-nav'
 end
 
 group :test do
