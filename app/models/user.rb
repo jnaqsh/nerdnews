@@ -61,6 +61,10 @@ class User < ActiveRecord::Base
     self.received_messages.where(unread: true).count
   end
 
+  def count_unpublished_stories
+    self.stories.not_approved.count
+  end
+
   private
 
   # role
@@ -70,7 +74,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  # helper
+  # friendly id
   def full_name_foo
     "#{full_name}"
   end
