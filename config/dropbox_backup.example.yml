@@ -1,0 +1,8 @@
+# for backup
+development:
+  app_key: YOUR_APP_KEY
+  app_secret: YOUR_APP_SECRET
+
+production:
+  app_key: YOUR_APP_KEY
+  app_secret: YOUR_APP_SECRET

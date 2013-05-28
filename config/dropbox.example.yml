@@ -1,6 +1,7 @@
-app_key: "DROPBOX_APP_KEY"
-app_secret: "DROPBOX_APP_SECRET"
-access_token: "DROPBOX_ACCESS_TOKEN"
-access_token_secret: "DROPBOX_ACCESS_TOKEN_SECRET"
-user_id: "DROPBOX_USER_ID"
-access_type: "DROPBOX_ACCESS_TYPE"
+# for paperclip-data
+app_key: YOUR_APP_KEY
+app_secret: YOUR_APP_SECRET
+access_token: YOUR_ACCESS_TOKEN
+access_token_secret: YOUR_ACCESS_TOKEN_SECRET
+user_id: YOUR_USER_ID
+access_type: YOUR_ACCESS_TYPE

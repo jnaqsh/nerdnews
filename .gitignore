@@ -28,5 +28,6 @@ pickle-email-*.html
 /config/twitter.yml
 db/under_construction_mails.txt
 config/dropbox.yml
+config/dropbox_backup.yml
 custom_plan.rb
 zeus.json
