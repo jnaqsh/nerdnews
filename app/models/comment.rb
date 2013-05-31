@@ -45,7 +45,7 @@ class Comment < ActiveRecord::Base
 
   def mark_as_not_spam
     self.ham!
-    self.update_attribute approved: true
+    self.update_attribute :approved, true
   end
 
   def votes_sum

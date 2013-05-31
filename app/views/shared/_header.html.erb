@@ -68,6 +68,10 @@
 
           <li class="divider"></li>
 
+          <% if can? :manage, Comment %>
+            <li><%= link_to t('.comments'), comments_path %></li>
+          <% end %>
+
           <% if can? :create, Tag %>
             <li><%= link_to t('.tags'), tags_path %></li>
           <% end %>

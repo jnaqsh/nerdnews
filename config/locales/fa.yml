@@ -32,6 +32,12 @@ fa:
       update:
         flash:
           success:  "دیدگاه شما با موفقیت به‌روز شد."
+      mark_as_spam:
+        flash:
+          success:  "با موفقیت به عنوان اسپم مشخص شد."
+      mark_as_not_spam:
+        flash:
+          success:  "با موفقیت به عنوان غیر اسپم مشخص شد."
     users:
       create:
         flash:
@@ -211,6 +217,8 @@ fa:
       cancel: "لغو"
       publish: "انتشار"
       preview: "پیش‌نمایش"
+      spam: "اسپم"
+      not_spam: "اسپم نیست"
     actions: "عملیات"
     titles:
       new: "%{model} جدید"
@@ -262,7 +270,11 @@ fa:
   comments:
     title: 'دیدگاه‌ها'
     index:
-      title: 'فهرست'
+      title: 'مدیریت دیدگاه‌ها'
+      from: 'نویسنده'
+      comment: 'دیدگاه'
+      in_response: 'در پاسخ'
+      sent: 'ارسال شده در: '
     form:
       write_your_comment: 'دیدگاه خود را بنویسید...'
       You!: 'شما!'
@@ -305,6 +317,7 @@ fa:
       search: "جستجو"
       unpublished_stories: "خبرهای منتشرنشده"
       users: 'کاربرها'
+      comments: 'مدیریت دیدگاه‌ها'
       ratings: 'ایجاد گزینه امتیاز'
       identities: 'حساب‌های OpenID'
       messages: 'پیام‌ها'
