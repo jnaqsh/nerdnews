@@ -24,6 +24,6 @@ class MypageController < ApplicationController
   private
 
   def favorite_tags
-    current_user.favorite_tags_array ? current_user.favorite_tags_array : []
+    current_user.favorite_tags ? current_user.favored_tags.to_a : []
   end
 end

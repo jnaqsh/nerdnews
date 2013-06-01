@@ -42,9 +42,11 @@ describe VotesController do
 
       it 'increases Stories total point' do
         rating2 = FactoryGirl.create(:rating, weight: -3)
+        user2 = FactoryGirl.create(:user)
         expect {
           post :create, story_id: @story.id, rating_id: @rating, positive: true, voteable: "stories"
-          post :create, story_id: @story.id, rating_id: rating2, positive: true, voteable: "stories"
+          cookies.signed[:user_id] = user2.id # Another user logged in, a user cannot vote twice
+          post :create, story_id: @story.id, rating_id: rating2, voteable: "stories"
         }.to change { @story.reload.total_point }.by(-2)
       end
 

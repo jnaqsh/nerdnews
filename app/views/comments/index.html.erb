@@ -1,42 +1,55 @@
-<% set_meta_tags  title: [t('comments.title'), t('.title')],
-                  noindex: true %>
-<%- model_class = Comment.new.class -%>
 <% content_for :page_header do %>
-  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+  <h1><%=t '.title', :default => "مدیریت پیام‌ها" %></h1>
 <% end %>
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:content) %></th>
-      <th><%= model_class.human_attribute_name(:story_id) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th style="width:20%"><%= t('.from') %></th>
+      <th><%= t('.comment') %></th>
+      <th style="width:15%"><%= t('.in_response') %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
-    <% @story.comments.each do |comment| %>
-      <tr>
-        <td><%= link_to comment.id, story_comments_path(comment.story comment) %></td>
-        <td><%= comment.name %></td>
-        <td><%= comment.content %></td>
-        <td><%= comment.story_id %></td>
-        <td><%=l comment.created_at %></td>
+    <% @comments.each do |comment| %>
+      <tr <%= "class=spam" if !comment.approved? %> >
         <td>
+          <%= image_tag avatar_url(comment, 32), class: 'pull-right img-polaroid clearfix', style: 'margin:5px' %>
+          <%= content_tag :b, comment.name %>
+          <br />
+          <%= comment.email %>
+          <br />
+          <%= comment.user_ip %>
+        </td>
+        <td>
+          <small>
+          <%= content_tag :span,
+            link_to(t('.sent') + to_jalali(comment.created_at), story_path(comment.story, :anchor => "comment_#{comment.id}")), class: 'muted'
+          %>
+        </small>
+        <%= content_tag :p, comment.content %>
+        </td>
+        <td><%= link_to comment.story.title, story_path(comment.story) %></td>
+        <td>
+          <% if comment.approved? %>
+            <%= link_to t('.spam', :default => t("helpers.links.spam")),
+              mark_as_spam_story_comment_path(comment.story, comment), :method => :put  %>
+          <% else %>
+            <%= link_to t('.not_spam', :default => t("helpers.links.not_spam")),
+              mark_as_not_spam_story_comment_path(comment.story, comment), :method => :put %>
+          <% end %>
+          <span>|</span>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_story_comment_path(comment.story, comment), :class => 'btn btn-mini' %>
+                      edit_story_comment_path(comment.story, comment) %>
+          <span>|</span>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       story_comment_path(comment.story, comment),
                       :method => :delete,
-                      :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
-                      :class => 'btn btn-mini btn-danger' %>
+                      :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_story_comment_path,
-            :class => 'btn btn-primary' %>
+<%= paginate @comments %>

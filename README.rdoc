@@ -8,6 +8,36 @@ This project is under GPL 3 license.
 If you wanna see a demo of this project you can see it:
 http://nerdnews.ir/
 
+== API
+
+=== Stories
+  GET    /stories.json
+    This action gets 20 most recent stories and for getting next 20 most recent stories,
+    you have to send page parameters.
+  Optional Parameters
+    page
+  Response
+    The response would be a json arrays of stories which has the following fields:
+      title:string => title of the story
+      content:text => content of the story
+      total_point:integer => total point of the story
+      hide:boolean => indicates that story must be hidden or not
+      comments_count:integer => number of comments for the story
+      view_counter:integer => number of views for the story
+      positive_votes_count:integer => number of positive votes for the story
+      negative_votes_count:integer => number of negative votes for the story
+      published_at:string => publish date of the story in Jalali Date
+      author:string => author of the story
+      reference_url:string => reference of the story that would be a link
+      story_url:string => story url
+      comments:array => array of comments for the story which has the following fields:
+        id:integer => ID of the comment
+        name:string => name of the user who comments
+        positive_votes_count:integer => number of positive votes for the comment
+        negative_votes_count:integer => number of negative votes for the comment
+        total_point:integer => total point of the comment
+        content:text => content of the comment
+
 == LICENSE
 This project just another free and open source news site that everyone can create news and create comments and so on.
     Copyright (C) 2012  Hamed Ramezanian

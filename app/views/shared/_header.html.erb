@@ -1,4 +1,9 @@
-<% unread_messages = current_user.count_unread_messages if current_user %>
+<%
+  if current_user
+    unread_messages = current_user.count_unread_messages
+    unpublished_stories = current_user.count_unpublished_stories
+  end
+ %>
 <div class="navbar-inner">
 
   <div class="container">
@@ -45,7 +50,16 @@
           <% end %>
 
           <% if can? :unpublished, Story %>
-            <li><%= link_to t('.unpublished_stories'), unpublished_stories_path %></li>
+            <li>
+              <%= link_to unpublished_stories_path do %>
+                <%= t('.unpublished_stories') %>
+                <% if unpublished_stories > 0 %>
+                  <span class="label label-important">
+                    <%= unpublished_stories.to_farsi %>
+                  </span>
+                <% end %>
+              <% end %>
+            </li>
           <% end %>
 
           <% if can? :index, :mypage %>
@@ -53,6 +67,10 @@
           <% end %>
 
           <li class="divider"></li>
+
+          <% if can? :manage, Comment %>
+            <li><%= link_to t('.comments'), comments_path %></li>
+          <% end %>
 
           <% if can? :create, Tag %>
             <li><%= link_to t('.tags'), tags_path %></li>
