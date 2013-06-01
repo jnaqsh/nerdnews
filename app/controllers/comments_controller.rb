@@ -2,19 +2,18 @@
 
 class CommentsController < ApplicationController
   load_and_authorize_resource
+
   # GET /comments
-  # GET /comments.json
   def index
-    @comments = Comment.all
-    @story = Story.find(params[:story_id])
+    @comments = Comment.includes(:story).order("created_at DESC").page params[:page]
 
     respond_to do |format|
       format.html # index.html.erb
     end
   end
 
-  # GET /comments/1
-  # GET /comments/1.json
+  # GET /stories/1/comments/1
+  # GET /stories/1/comments/1.json
   def show
     @comment = Comment.find(params[:id])
 
@@ -23,8 +22,8 @@ class CommentsController < ApplicationController
     end
   end
 
-  # GET /comments/new
-  # GET /comments/new.json
+  # GET /stories/1/comments/new
+  # GET /stories/1/comments/new.json
   def new
     @comment = Comment.new(parent_id: params[:parent_id])
     @story = Story.find(params[:story_id])
@@ -35,14 +34,14 @@ class CommentsController < ApplicationController
     end
   end
 
-  # GET /comments/1/edit
+  # GET /stories/1/comments/1/edit
   def edit
     @comment = Comment.find(params[:id])
     @story = Story.find(params[:story_id])
   end
 
-  # POST /comments
-  # POST /comments.json
+  # POST /stories/1/comments
+  # POST /stories/1/comments.json
   def create
     @story = Story.find(params[:story_id])
     @comment = @story.comments.build(params[:comment])
@@ -65,8 +64,8 @@ class CommentsController < ApplicationController
     end
   end
 
-  # PUT /comments/1
-  # PUT /comments/1.json
+  # PUT /stories/1/comments/1
+  # PUT /stories/1/comments/1.json
   def update
     @comment = Comment.find(params[:id])
     @story = Story.find(params[:story_id])
@@ -83,8 +82,8 @@ class CommentsController < ApplicationController
     end
   end
 
-  # DELETE /comments/1
-  # DELETE /comments/1.json
+  # DELETE /stories/1/comments/1
+  # DELETE /stories/1/comments/1.json
   def destroy
     @comment = Comment.find(params[:id])
     @comment.destroy
@@ -93,6 +92,28 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to story_path(@comment.story) }
+    end
+  end
+
+  # PUT /stories/1/comments/1/mark_as_spam
+  def mark_as_spam
+    @comment = Comment.find(params[:id])
+
+    respond_to do |format|
+      if @comment.mark_as_spam and @comment.save
+        format.html { redirect_to comments_path, notice: t('controllers.comments.mark_as_spam.flash.success') }
+      end
+    end
+  end
+
+  # PUT /stories/1/comments/1/unmark_as_spam
+  def mark_as_not_spam
+    @comment = Comment.find(params[:id])
+
+    respond_to do |format|
+      if @comment.mark_as_not_spam and @comment.save
+        format.html { redirect_to comments_path, notice: t('controllers.comments.mark_as_not_spam.flash.success') }
+      end
     end
   end
 end

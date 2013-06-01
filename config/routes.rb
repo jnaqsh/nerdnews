@@ -49,13 +49,17 @@ Nerdnews::Application.routes.draw do
   # Stories
   resources :stories do
     resources :votes, :defaults => { :voteable => 'stories' }
-    resources :comments do
+    resources :comments, :except => :index do
+      put "mark_as_spam", :on => :member
+      put "mark_as_not_spam", :on => :member
       resources :votes, :defaults => { :voteable => 'comments' }
     end
     get 'unpublished', :on => :collection
     put 'publish', :on => :member
     get 'recent', on: :collection
   end
+
+  get "/comments" => "comments#index"
 
   get "/:permalink" => "pages#show", as: "page_by_permalink"
 

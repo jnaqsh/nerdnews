@@ -6,7 +6,7 @@ node :content do |story|
   RedCloth.new(story.content, [:filter_html, :filter_styles]).to_plain
 end
 
-node :publish_date do |story|
+node :published_at do |story|
   to_jalali(story.publish_date) if story.approved?
 end
 

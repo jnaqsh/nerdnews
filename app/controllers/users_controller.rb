@@ -81,7 +81,8 @@ class UsersController < ApplicationController
         if @user.save
           record_activity %Q(کاربر #{view_context.link_to @user.full_name, user_path(@user)} در نردنیوز ثبت‌نام کرد)
           # send a welcome message and instruction for setting password
-          @user.delay.signup_confirmation
+          password_reset = PasswordReset.new(@user)
+          password_reset.delay.signup_confirmation
 
           # login with new user if confirm with openid
           if session[:authhash].present?
@@ -203,7 +204,7 @@ class UsersController < ApplicationController
     @tag = Tag.find_by_name(params[:tag])
 
     respond_to do |format|
-      if @user.add_or_remove_favorite_tag(params[:tag])
+      if @user.favored_tags.save!(params[:tag])
         format.html { redirect_to root_path, notice: 'Added' }
         format.js
       else

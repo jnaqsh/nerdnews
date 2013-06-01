@@ -20,7 +20,7 @@ describe User do
 
       # comments
       it { user.should have_ability(:create, for: Comment.new)}
-      it { user.should_not have_ability([:read, :update, :destroy], for: Comment.new)}
+      it { user.should_not have_ability([:read, :update, :destroy, :mark_as_spam, :mark_as_not_spam], for: Comment.new)}
 
       # identities
       it { user.should have_ability([:create, :failure], for: Identity.new)}
@@ -77,7 +77,7 @@ describe User do
 
       # comments
       it { user.should have_ability(:create, for: Comment.new)}
-      it { user.should_not have_ability([:read, :update, :destroy], for: Comment.new)}
+      it { user.should_not have_ability([:read, :update, :destroy, :mark_as_spam, :mark_as_not_spam], for: Comment.new)}
       it { user.should have_ability([:update, :destroy], for: user.comments.build)}
       it { user.should_not have_ability([:update, :destroy], for: user2.comments.build)}
 
@@ -145,7 +145,7 @@ describe User do
 
       # comments
       it { user.should have_ability(:create, for: Comment.new)}
-      it { user.should_not have_ability([:read, :update, :destroy], for: Comment.new)}
+      it { user.should_not have_ability([:read, :update, :destroy, :mark_as_spam, :mark_as_not_spam], for: Comment.new)}
       it { user.should have_ability([:update, :destroy], for: user.comments.build)}
       it { user.should_not have_ability([:update, :destroy], for: user2.comments.build)}
 
@@ -253,27 +253,6 @@ describe User do
     end
   end
 
-  describe "#send_password_reset" do
-    let(:user) { FactoryGirl.create(:user) }
-
-    it "generates a unique password_reset_token each time" do
-      user.send_password_reset
-      last_token = user.password_reset_token
-      user.send_password_reset
-      user.password_reset_token.should_not eq(last_token)
-    end
-
-    it "saves the time the password reset was sent" do
-      user.send_password_reset
-      user.reload.password_reset_sent_at.should be_present
-    end
-
-    it "delivers email to user" do
-      user.send_password_reset
-      last_email.to.should include(user.email)
-    end
-  end
-
   context "/relations" do
     it { should have_and_belong_to_many :roles }
     it { should have_many :stories}
@@ -339,19 +318,4 @@ describe User do
     end
   end
 
-  it 'returns true if tag is favorited' do
-    user = FactoryGirl.create(:user, favorite_tags: 'nerd')
-    user.included_tag_as_favorite?('nerd').should be_true
-    user.included_tag_as_favorite?('news').should be_false
-  end
-
-  it 'updates the favorite tags' do
-    user = FactoryGirl.create(:user, favorite_tags: 'nerd')
-    # should add "news" to favorite tags
-    user.add_or_remove_favorite_tag('news')
-    user.reload.favorite_tags_array.should be_include('news')
-    # should remove "news" to favorite tags
-    user.add_or_remove_favorite_tag('news')
-    user.reload.favorite_tags_array.should_not be_include('news')
-  end
 end

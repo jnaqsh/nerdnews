@@ -13,7 +13,7 @@
       <% unless status %>
         <ul class="tags">
           <% story.tags.each do |tag| %>
-          <% favored = true if current_user and current_user.included_tag_as_favorite?(tag.name) %>
+          <% favored = true if current_user and current_user.favored_tags.include?(tag.name) %>
             <%= content_tag :li, rel: "tooltip", title: tag.name do %>
               <p>
                 <%= link_to stories_url(tag: tag.name) do %>

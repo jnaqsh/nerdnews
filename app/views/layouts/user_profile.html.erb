@@ -19,7 +19,10 @@
 
       <div class='row'>
         <div class='span3'>
-          <%= image_tag avatar_url(@user, 256), class: 'img-polaroid' %>
+          <div class="avatar text-center">
+            <%= image_tag avatar_url(@user, 256), class: 'img-polaroid' %>
+            <%= link_to t(".change-avatar"), "http://gravatar.com/", target: "_blank", class: "text-center" %>
+          </div>
           <div class='user info'>
 
             <div class='user user-name'>
@@ -61,7 +64,7 @@
             <div class='user user-tags tags-holder'>
               <p><%=t '.favorite_tags' %></p>
               <% unless @user.favorite_tags.blank? %>
-                <% @user.favorite_tags_array.each do |tag| %>
+                <% @user.favored_tags.to_a.each do |tag| %>
                   <%= link_to stories_path(tag: tag) do %>
                     <span class='label'><%= tag %></span>
                   <% end %>
