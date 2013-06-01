@@ -22,7 +22,7 @@ set :default_environment, {
 
 set :scm, "git"
 set :repository, "https://github.com/jnaqsh/#{application}.git"
-set :branch, "wip"
+set :branch, "master"
 
 set :rails_env, "production" #added for delayed job
 
