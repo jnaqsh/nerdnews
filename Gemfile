@@ -10,7 +10,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 
   # adding multiple fields in one text_field like tagging
-  gem 'select2-rails'
+  gem 'select2-rails', '~> 3.2.1'
 end
 
 # it adds a deleted_at column to database
@@ -30,7 +30,7 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 
 gem 'debugger'
 
-gem 'simple_form'
+gem 'simple_form', '~> 2.0.4'
 
 # it uses for managing users in multiple roles
 gem "cancan"
