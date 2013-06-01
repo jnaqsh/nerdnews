@@ -155,7 +155,6 @@ fa:
     form:
       submit: "تایید"
       confirm: "مطمئنید؟ تغییرات شما اعمال نخواهد شد."
-      change-avatar: "جهت تغییر آواتار خود به سایت Gravatar مراجعه کنید"
     signup_form:
       submit: "تایید"
     index:
@@ -349,6 +348,7 @@ fa:
       no_article: 'پست تایید شده‌ای ارسال نشده است.'
       no_article: 'هیچ نظری ارسال نشده.'
       no_favorite: 'هیچ موردی ثبت نشده است.'
+      change-avatar: "تغییر آواتار"
 
   activemodel:
     errors:
