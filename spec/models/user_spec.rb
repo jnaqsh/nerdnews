@@ -20,7 +20,7 @@ describe User do
 
       # comments
       it { user.should have_ability(:create, for: Comment.new)}
-      it { user.should_not have_ability([:read, :update, :destroy], for: Comment.new)}
+      it { user.should_not have_ability([:read, :update, :destroy, :mark_as_spam, :mark_as_not_spam], for: Comment.new)}
 
       # identities
       it { user.should have_ability([:create, :failure], for: Identity.new)}
@@ -77,7 +77,7 @@ describe User do
 
       # comments
       it { user.should have_ability(:create, for: Comment.new)}
-      it { user.should_not have_ability([:read, :update, :destroy], for: Comment.new)}
+      it { user.should_not have_ability([:read, :update, :destroy, :mark_as_spam, :mark_as_not_spam], for: Comment.new)}
       it { user.should have_ability([:update, :destroy], for: user.comments.build)}
       it { user.should_not have_ability([:update, :destroy], for: user2.comments.build)}
 
@@ -145,7 +145,7 @@ describe User do
 
       # comments
       it { user.should have_ability(:create, for: Comment.new)}
-      it { user.should_not have_ability([:read, :update, :destroy], for: Comment.new)}
+      it { user.should_not have_ability([:read, :update, :destroy, :mark_as_spam, :mark_as_not_spam], for: Comment.new)}
       it { user.should have_ability([:update, :destroy], for: user.comments.build)}
       it { user.should_not have_ability([:update, :destroy], for: user2.comments.build)}
 
