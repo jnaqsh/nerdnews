@@ -34,8 +34,10 @@
               <%= t('.registered_from') + time_ago_in_words(@user.created_at) + ' قبل'%></p>
               <p><i class="icon-th"></i>
               <%=t '.website', website: @user.website || t('.not_mentioned') %></p>
-              <p><i class="icon-envelope"></i>
-              <%= mail_to @user.email, nil, :replace_at => ' at ', replace_dot: ' dot ', encode: 'hex' %></p>
+              <% if @user.email_visibility? %>
+                <p><i class="icon-envelope"></i>
+                <%= mail_to @user.email, nil, :replace_at => ' at ', replace_dot: ' dot ', encode: 'hex' %></p>
+              <% end %>
               <p><i class='icon-user-md'></i>
               <%= t('.role', role: @user.roles[0].to_persian) %></p>
             </div>
