@@ -65,7 +65,7 @@ describe '/Users' do
       page.should have_content "وارد نردنیوز شد"
     end
 
-    it "doesnt show email if email_visibility is flase", focus: true do
+    it "doesnt show email if email_visibility is flase" do
       user = FactoryGirl.create(:user, email_visibility: false)
       visit users_path(user)
       page.should_not have_content user.email
