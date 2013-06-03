@@ -15,7 +15,8 @@ class CommentsController < ApplicationController
   # GET /stories/1/comments/1
   # GET /stories/1/comments/1.json
   def show
-    @comment = Comment.find(params[:id])
+    @story = Story.find(params[:story_id])
+    @comment = @story.comments.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -36,8 +37,8 @@ class CommentsController < ApplicationController
 
   # GET /stories/1/comments/1/edit
   def edit
-    @comment = Comment.find(params[:id])
     @story = Story.find(params[:story_id])
+    @comment = @story.comments.find(params[:id])
   end
 
   # POST /stories/1/comments
@@ -67,8 +68,9 @@ class CommentsController < ApplicationController
   # PUT /stories/1/comments/1
   # PUT /stories/1/comments/1.json
   def update
-    @comment = Comment.find(params[:id])
     @story = Story.find(params[:story_id])
+    @comment = @story.comments.find(params[:id])
+
 
     respond_to do |format|
       if @comment.update_attributes(params[:comment])
@@ -85,7 +87,8 @@ class CommentsController < ApplicationController
   # DELETE /stories/1/comments/1
   # DELETE /stories/1/comments/1.json
   def destroy
-    @comment = Comment.find(params[:id])
+    @story = Story.find(params[:story_id])
+    @comment = @story.comments.find(params[:id])
     @comment.destroy
 
     record_activity %Q(دیدگاه در خبر #{view_context.link_to @story.title.truncate(40), story_path(@story, :anchor => "comment_#{@comment.id}")} را حذف کرد)
@@ -97,7 +100,8 @@ class CommentsController < ApplicationController
 
   # PUT /stories/1/comments/1/mark_as_spam
   def mark_as_spam
-    @comment = Comment.find(params[:id])
+    @story = Story.find(params[:story_id])
+    @comment = @story.comments.find(params[:id])
 
     respond_to do |format|
       if @comment.mark_as_spam and @comment.save
@@ -108,7 +112,8 @@ class CommentsController < ApplicationController
 
   # PUT /stories/1/comments/1/unmark_as_spam
   def mark_as_not_spam
-    @comment = Comment.find(params[:id])
+    @story = Story.find(params[:story_id])
+    @comment = @story.comments.find(params[:id])
 
     respond_to do |format|
       if @comment.mark_as_not_spam and @comment.save
