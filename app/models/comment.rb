@@ -16,6 +16,7 @@ class Comment < ActiveRecord::Base
 
   before_validation :smart_add_url_protocol
   before_create :is_spam?
+  before_save :update_counter
 
   validates :name, :content, :user_ip, :user_agent, :referrer, presence: true
   validates :email, email_format: true, presence: true
@@ -46,6 +47,7 @@ class Comment < ActiveRecord::Base
   def mark_as_not_spam
     self.ham!
     self.update_attribute :approved, true
+    Story.increment_counter :comments_count, story.id
   end
 
   def votes_sum
@@ -76,5 +78,11 @@ class Comment < ActiveRecord::Base
     def is_spam?
       self.approved = !self.spam?
       true # Send True to not prevent from saving record
+    end
+
+    def update_counter
+      unless approved
+        Story.decrement_counter :comments_count, story.id
+      end
     end
 end

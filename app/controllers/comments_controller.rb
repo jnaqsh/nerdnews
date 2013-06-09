@@ -104,7 +104,7 @@ class CommentsController < ApplicationController
     @comment = @story.comments.find(params[:id])
 
     respond_to do |format|
-      if @comment.mark_as_spam and @comment.save
+      if @comment.mark_as_spam
         format.html { redirect_to comments_path, notice: t('controllers.comments.mark_as_spam.flash.success') }
       end
     end
@@ -116,7 +116,7 @@ class CommentsController < ApplicationController
     @comment = @story.comments.find(params[:id])
 
     respond_to do |format|
-      if @comment.mark_as_not_spam and @comment.save
+      if @comment.mark_as_not_spam
         format.html { redirect_to comments_path, notice: t('controllers.comments.mark_as_not_spam.flash.success') }
       end
     end

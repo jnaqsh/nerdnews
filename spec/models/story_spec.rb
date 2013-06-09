@@ -64,4 +64,36 @@ describe Story do
       expect(story4.reload.hide?).to be_true
     end
   end
+
+  context "counter", focus: true do
+    before do
+      @story = FactoryGirl.create(:story)
+    end
+
+    it 'should increment counter after creating a comment' do
+      expect do
+        @comment = FactoryGirl.create(:comment, story: @story)
+      end.to change{@story.reload.comments_count}.by(1)
+    end
+
+    it "should decrement counter if comment marked as spam/unapproved" do
+      expect do
+        @comment = FactoryGirl.create(:comment, story: @story, approved: false)
+      end.to_not change{@story.reload.comments_count}
+    end
+
+    it "should decrement comments_counter if comment marked as spam" do
+      @comment = FactoryGirl.create(:comment, story: @story, approved: true)
+      expect do
+        @comment.mark_as_spam
+      end.to change{@story.reload.comments_count}.by(-1)
+    end
+
+    it "should increment comments_counter if comment marked as not spam" do
+      @comment = FactoryGirl.create(:comment, story: @story, approved: false)
+      expect do
+        @comment.mark_as_not_spam
+      end.to change{@story.reload.comments_count}.by(1)
+    end
+  end
 end
