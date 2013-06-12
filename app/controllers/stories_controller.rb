@@ -26,7 +26,10 @@ class StoriesController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.js
-      format.atom
+      format.atom do
+        headers["Content-Type"] = 'application/atom+xml; charset=utf-8'
+        @stories = Story.approved.order "created_at DESC"
+      end
       format.json
     end
   end

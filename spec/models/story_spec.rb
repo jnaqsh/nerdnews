@@ -65,7 +65,7 @@ describe Story do
     end
   end
 
-  context "counter", focus: true do
+  context "counter" do
     before do
       @story = FactoryGirl.create(:story)
     end
