@@ -39,7 +39,7 @@
 
       <% if story.published? %>
         <% unless status or params[:preview_button] %>
-          <%= render partial: 'stories/social_share', locals: {title: story.title, share_url: story_url(story)} %>
+          <%= render partial: 'stories/social_share', locals: {title: story.title, share_url: story_url(story), story_id: story.id} %>
         <% end %>
       <% end %>
 

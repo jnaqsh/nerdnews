@@ -28,4 +28,10 @@ class UserMailer < ActionMailer::Base
     @user = @message.receiver
     mail to: @user.email, subject: "نردنیوز: شخصی برای شما پیام خصوصی گذاشته است"
   end
+
+  def share_by_mail(params)
+    @params = params
+    @story = Story.find(params[:story_id])
+    mail to: params[:reciever], subject: "نردنیوز: #{params[:name]} خبری را با شما به اشتراک گذاشته است"
+  end
 end

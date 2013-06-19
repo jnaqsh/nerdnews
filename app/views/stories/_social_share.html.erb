@@ -8,4 +8,38 @@
   <li>
     <a href="https://m.google.com/app/plus/x/?v=compose&content=<%= title %>&url=<%= Rack::Utils.escape(share_url) %>" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><i class="icon-google-plus-sign"></i></a>
   </li>
+  <li>
+    <a href="#mailModal<%= story_id %>" data-toggle="modal">
+      <i class="icon-envelope-alt"></i>
+    </a>
+
+    <div id="mailModal<%= story_id %>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel"><%= t(".share_by_mail") %></h3>
+      </div>
+      <div class="modal-body">
+        <div class="span5">
+          <%= simple_form_for :share_mail, { url: share_by_mail_create_path, method: "post"} do |f| %>
+          <div class="row">
+          <div class="span2">
+          <%= f.input :name, label: t('.name'), input_html: {class: "span2"} %>
+          <%= f.input :reciever, label: t(".reciever"), input_html: {class: "span2"} %>
+          </div>
+          <div class="span3">
+          <%= f.input :body, label: t(".body"), as: :text, input_html: {rows: 10, class: "span3", value: "سلام!\nیک خبر جالب در نرد نیوز منتشر شده، بهش سر بزن!"} %>
+          <h5><small class='muted'>*لینک و نام مطلب به طور خودکار اضافه خواهد شد</small></h5>
+          </div>
+          <%= f.input :story_id, as: :hidden, input_html: { value: story_id } %>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true"><%= t(".close") %></button>
+        <%= f.submit t(".submit") %>
+      </div>
+        <% end %>
+    </div>
+
+    </li>
 </ul>
