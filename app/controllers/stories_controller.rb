@@ -23,6 +23,8 @@ class StoriesController < ApplicationController
       paginate :page => params[:page], :per_page => 20
     end.results
 
+    @share_by_mail = ShareByMail.new(current_user)
+
     respond_to do |format|
       format.html # index.html.erb
       format.js

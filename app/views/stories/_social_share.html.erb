@@ -20,7 +20,7 @@
       </div>
       <div class="modal-body">
         <div class="span5">
-          <%= simple_form_for :share_mail, { url: share_by_mail_create_path, method: "post"} do |f| %>
+          <%= simple_form_for @share_by_mail, { url: share_by_mail_create_path, method: "post"} do |f| %>
           <div class="row">
           <div class="span2">
           <%= f.input :name, label: t('.name'), input_html: {class: "span2"} %>
