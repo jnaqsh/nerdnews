@@ -11,6 +11,10 @@ class MypageController < ApplicationController
       paginate :page => params[:page], :per_page => 20
     end.results
 
+    @share_by_mail = ShareByMail.new(current_user)
+    @share_by_mail.textcaptcha
+    bypass_captcha_or_not @share_by_mail
+
     respond_to do |format|
       if !@stories || @stories.empty?
         format.html { flash.now[:notice] = t('.controllers.mypage.flash.add_tags') }

@@ -24,6 +24,8 @@ class StoriesController < ApplicationController
     end.results
 
     @share_by_mail = ShareByMail.new(current_user)
+    @share_by_mail.textcaptcha
+    bypass_captcha_or_not @share_by_mail
 
     respond_to do |format|
       format.html # index.html.erb
@@ -40,6 +42,10 @@ class StoriesController < ApplicationController
   # GET /stories/1.json
   def show
     @story = Story.includes([:tags, :user, :publisher, {:votes => [:rating, :user]}]).find(params[:id])
+
+    @share_by_mail = ShareByMail.new(current_user)
+    @share_by_mail.textcaptcha
+    bypass_captcha_or_not @share_by_mail
 
     if @story
       @story.increment!(:view_counter)
@@ -98,7 +104,6 @@ class StoriesController < ApplicationController
         format.html { render action: "new" }
       else
         if @story.save
-
           record_activity %Q(خبر #{view_context.link_to @story.title.truncate(40), story_path(@story)} را ایجاد کرد)
 
           format.html { redirect_to root_path, only_path: true,

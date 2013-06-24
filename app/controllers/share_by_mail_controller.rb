@@ -1,7 +1,7 @@
 class ShareByMailController < ApplicationController
   def create
     @share_by_mail = ShareByMail.new(current_user)
-    # raise
+
     respond_to do |format|
       if @share_by_mail.submit(params[:share_by_mail])
         UserMailer.delay.share_by_mail(params[:share_by_mail])
