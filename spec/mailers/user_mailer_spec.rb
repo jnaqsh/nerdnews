@@ -57,4 +57,18 @@ describe UserMailer do
       mail.from.should eq(["do_not_reply@nerdnews.ir"])
     end
   end
+
+  describe "Share By Mail" do
+    let(:story) { FactoryGirl.create(:story) }
+    let(:params) { {name: 'arash', reciever: 'test@mail.com', body:'this is some random text', story_id: story.id} }
+    let(:mail) {UserMailer.share_by_mail(params)}
+
+    it "sends email correctly for sharing a story" do
+      mail.subject.should eq("نردنیوز: #{params[:name]} خبری را با شما به اشتراک گذاشته است")
+      mail.to.should eq([params[:reciever]])
+      mail.body.encoded.should include(params[:body])
+      mail.body.encoded.should include(story.title)
+      mail.body.encoded.should include(story_url(story))
+    end
+  end
 end
