@@ -1,5 +1,5 @@
 object @story
-attributes :title, :total_point, :hide, :comments_count, :view_counter, :positive_votes_count,
+attributes :id, :title, :total_point, :hide, :comments_count, :view_counter, :positive_votes_count,
   :negative_votes_count
 
 node :content do |story|
@@ -27,5 +27,17 @@ child :comments do
 
   node :content do |comment|
     comment.content
+  end
+end
+
+child :tags do
+  attributes :id, :name
+
+  node :url do |tag|
+    stories_url tag: tag.name
+  end
+
+  node :thumbnail_url do |tag|
+    tag.thumbnail.url :thumb
   end
 end
