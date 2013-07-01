@@ -55,13 +55,12 @@ class StoriesController < ApplicationController
       story_path = Rails.env.production? ? story_path(@story).downcase : story_path(@story) #monkey patch due to error in production (downcase)
 
       respond_to do |format|
-        format.json
-
         if request.path != story_path
           format.html {redirect_to @story, status: :moved_permanently}
         else
           format.html
         end
+        format.json
       end
     else
       raise ActiveRecord::RecordNotFound, t("controllers.stories.show.story_not_found")
