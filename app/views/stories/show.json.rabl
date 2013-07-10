@@ -3,7 +3,7 @@ attributes :id, :title, :total_point, :hide, :comments_count, :view_counter, :po
   :negative_votes_count
 
 node :content do |story|
-  RedCloth.new(story.content, [:filter_html, :filter_styles]).to_plain
+  RedCloth.new(story.content, [:filter_html, :filter_styles]).to_html
 end
 
 node :published_at do |story|
@@ -12,6 +12,10 @@ end
 
 node :author do |story|
   user_name(story, true)
+end
+
+node :author_avatar do |story|
+  avatar_url story.user
 end
 
 node :reference_url do |story|

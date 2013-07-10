@@ -20,7 +20,7 @@ http://nerdnews.ir/
     The response would be a json arrays of stories which has the following fields:
       id:integer => ID of the story
       title:string => title of the story
-      content:text => content of the story
+      content:text => content of the story in html format
       total_point:integer => total point of the story
       hide:boolean => indicates that story must be hidden or not
       comments_count:integer => number of comments for the story
@@ -29,6 +29,7 @@ http://nerdnews.ir/
       negative_votes_count:integer => number of negative votes for the story
       published_at:string => publish date of the story in Jalali Date
       author:string => author of the story
+      author_avatar:string => avatar of the author story
       reference_url:string => reference of the story that would be a link
       story_url:string => story url
       comments:array => array of comments for the story which has the following fields:
