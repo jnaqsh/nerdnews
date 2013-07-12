@@ -21,7 +21,9 @@
         <div class='span3'>
           <div class="avatar text-center">
             <%= image_tag avatar_url(@user, 256), class: 'img-polaroid' %>
-            <%= link_to t(".change-avatar"), "http://gravatar.com/", target: "_blank", class: "text-center" %>
+            <% if can? :update, @user %>
+              <%= link_to t(".change-avatar"), "http://gravatar.com/", target: "_blank", class: "text-center" %>
+            <% end %>
           </div>
           <div class='user info'>
 
