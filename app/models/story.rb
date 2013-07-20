@@ -77,7 +77,7 @@ class Story < ActiveRecord::Base
   def mark_as_published(user, url)
     self.update_attributes({publish_date: Time.zone.now, publisher: user}, without_protection: true)
     # conditional due to error on request user spec
-    Rails.env.production? ? Tweet.tweet(Twitter::Client.new, "#{self.title}", url) : true
+    Rails.env.production? ? Tweet.tweet(Twitter::Client.new, "#{self.title} ##{self.tags.first.name}", url) : true
   end
 
   def user_voted?(user)
