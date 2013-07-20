@@ -4,7 +4,7 @@
 
 ---
 از: <%= @message.sender.full_name %>
-<%= @message.message %>
+<%= sanitize(RedCloth.new(@message.message, [:filter_html, :filter_styles]).to_html) %>
 
 پیوند آن در نردنیوز:
 <%= user_messages_url(@user) %>

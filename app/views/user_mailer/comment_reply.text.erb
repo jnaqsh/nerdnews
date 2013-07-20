@@ -4,7 +4,7 @@
 
 ---
 از: <%= @comment.name %>
-<%= @comment.content %>
+<%= sanitize(RedCloth.new(@comment.content, [:filter_html, :filter_styles]).to_html) %>
 
 پیوند آن در نردنیوز:
 <%= story_url(@comment.story, anchor: "comment_#{@comment.id}") %>
