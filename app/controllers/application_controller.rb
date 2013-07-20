@@ -30,4 +30,10 @@ class ApplicationController < ActionController::Base
     @activity.params = params.inspect
     @activity.save
   end
+
+  def share_by_mail
+    @share_by_mail = ShareByMail.new(current_user)
+    @share_by_mail.textcaptcha
+    bypass_captcha_or_not @share_by_mail
+  end
 end

@@ -24,8 +24,8 @@
   <% end %>
 
   <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
-    <%= f.submit t('.preview', :default => t("helpers.links.preview")), :class => 'btn btn-primary', name: "preview_button" %>
+    <%= f.submit nil, :class => 'btn btn-primary', data: { disable_with: t('view.disable_with') } %>
+    <%= f.submit t('.preview', :default => t("helpers.links.preview")), :class => 'btn btn-primary', name: "preview_button", data: { disable_with: t('view.disable_with') } %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 stories_path, :class => 'btn' %>
   </div>

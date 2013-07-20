@@ -29,6 +29,8 @@ class CommentsController < ApplicationController
     @comment = Comment.new(parent_id: params[:parent_id])
     @story = Story.find(params[:story_id])
 
+    share_by_mail
+
     respond_to do |format|
       format.html # new.html.erb
       format.js
@@ -60,6 +62,7 @@ class CommentsController < ApplicationController
         rate_user(current_user, 1) if current_user.present?
         format.html { redirect_to @story, notice: t('controllers.comments.create.flash.success') }
       else
+        share_by_mail
         format.html { render template: "stories/show" }
       end
     end

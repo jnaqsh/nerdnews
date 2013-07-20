@@ -8,6 +8,8 @@ class StoriesController < ApplicationController
   def recent
     @stories = Story.approved.where('publish_date > ? and hide = ?', Time.at(params[:after].to_f), false).order("publish_date desc")
 
+    share_by_mail
+
     respond_to do |format|
       format.js
     end
@@ -23,9 +25,7 @@ class StoriesController < ApplicationController
       paginate :page => params[:page], :per_page => 20
     end.results
 
-    @share_by_mail = ShareByMail.new(current_user)
-    @share_by_mail.textcaptcha
-    bypass_captcha_or_not @share_by_mail
+    share_by_mail
 
     respond_to do |format|
       format.html # index.html.erb
@@ -43,9 +43,7 @@ class StoriesController < ApplicationController
   def show
     @story = Story.includes([:tags, :user, :publisher, {:votes => [:rating, :user]}]).find(params[:id])
 
-    @share_by_mail = ShareByMail.new(current_user)
-    @share_by_mail.textcaptcha
-    bypass_captcha_or_not @share_by_mail
+    share_by_mail
 
     if @story
       @story.increment!(:view_counter)

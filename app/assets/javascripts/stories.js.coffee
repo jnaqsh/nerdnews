@@ -29,6 +29,11 @@
     $('#show_stories').hide()
 
 jQuery ->
+  # to prevent send multiple times
+  $(document).on('click', '.story_operation a', (e) ->
+    $(this).remove();
+  )
+
   #load recent stories just added recently
   if $("#stories").length > 0
     StoryPoller.poll()

@@ -31,7 +31,7 @@
           /
           <%= link_to t('shared.header.register'), new_user_path %>
         </p>
-        <%= f.submit nil, :class => 'btn btn-primary' %>
+        <%= f.submit nil, :class => 'btn btn-primary', data: { disable_with: t('view.disable_with') } %>
       </div>
 
     <% elsif ["edit", "update"].include?(params[:action]) %>
@@ -48,7 +48,7 @@
         <div class='span2' style='text-align: center'>
           <%= image_tag avatar_url(current_user, 64), class: 'img-polaroid' %>
           <p><b><%= link_to current_user.full_name, user_path(current_user) %></b></p>
-          <%= f.submit nil, :class => 'btn btn-primary' %>
+          <%= f.submit nil, :class => 'btn btn-primary', data: { disable_with: t('view.disable_with') } %>
         </div>
 
     <% else %>
@@ -57,7 +57,7 @@
         <%= link_to current_user.full_name, user_path(current_user) %>
 
         <span class='pull-left'>
-          <%= f.submit nil, :class => 'btn btn-primary' %>
+          <%= f.submit nil, :class => 'btn btn-primary', data: { disable_with: t('view.disable_with') } %>
         </span>
       </div>
 

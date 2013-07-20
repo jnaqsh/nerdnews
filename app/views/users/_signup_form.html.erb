@@ -9,6 +9,6 @@
     <%= f.input_field :email, placeholder: I18n.t('activerecord.attributes.user.email') %>
   <% end %>
 
-  <%= f.button :submit, t('.submit'), class: "btn-primary" %>
+  <%= f.button :submit, t('.submit'), class: "btn-primary", data: { disable_with: t('view.disable_with') } %>
   <%= f.submit t("helpers.links.cancel"), name: 'cancel', class: 'btn' %>
 <% end %>

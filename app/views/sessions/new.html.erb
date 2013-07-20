@@ -34,7 +34,7 @@
           <%= check_box_tag :remember_me, 1, params[:remember_me] %>
           مرا به خاطر بسپار
         <% end %>
-        <%= submit_tag t('.login'), class: "btn btn-primary" %>
+        <%= submit_tag t('.login'), class: "btn btn-primary", data: { disable_with: t('view.disable_with') } %>
 
       </div>
     </div>
