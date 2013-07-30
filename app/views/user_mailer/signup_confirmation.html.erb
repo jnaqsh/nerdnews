@@ -1,0 +1,14 @@
+<h3>سلام <%= @user.full_name %>!</h3>
+<p class="lead">ممنون از عضویت شما در سایت نردنیوز :)</p>
+<p>برای مشخص کردن گذرواژه خود بر روی این <a href="<%= edit_password_reset_url(@user.password_reset_token) %>">پیوند</a> کلیک کنید یا پیوند زیر را در مرورگر خود کپی کنید:</p>
+
+<table class="callout">
+  <tr>
+    <th>
+      <p><%= edit_password_reset_url(@user.password_reset_token) %></p>
+    </th>
+  </tr>
+</table>
+
+<p>چنانچه این ایمیل مربوط به شما نیست، آن را نادیده بگیرید.</p>
+<br>

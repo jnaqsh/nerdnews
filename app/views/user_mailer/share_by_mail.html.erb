@@ -1,0 +1,14 @@
+<p class="lead"><%= @params[:name] %> متن زیر را نوشته و میخواهد خبری را با شما به اشتراک بگذارد:</p>
+
+<table class="callout">
+  <tr>
+    <th>
+      <p>
+        <a href="<%= story_url(@story) %>"><%= @params[:body] %></a>
+      </p>
+    </th>
+  </tr>
+</table>
+
+<p>برای مشاهده خبر در نرد‌نیوز بر روی این <a href="<%= story_url(@story) %>">پیوند</a> کلیک کنید.</p>
+<br>
