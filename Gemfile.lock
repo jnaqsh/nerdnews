@@ -99,6 +99,8 @@ GEM
     columnize (0.3.6)
     commonjs (0.2.6)
     crack (0.3.2)
+    css_parser (1.3.4)
+      addressable
     daemons (1.1.9)
     debug_inspector (0.0.2)
     debugger (1.5.0)
@@ -181,8 +183,6 @@ GEM
     less-rails (2.3.3)
       actionpack (>= 3.1)
       less (~> 2.3.1)
-    letter_opener (1.1.1)
-      launchy (~> 2.2)
     libv8 (3.11.8.17)
     listen (1.1.0)
       rb-fsevent (>= 0.9.3)
@@ -305,6 +305,11 @@ GEM
     red_cloth_formatters_plain (0.2.0)
       RedCloth (>= 4.2.3)
     ref (1.0.4)
+    roadie (2.4.1)
+      actionmailer (> 3.0.0, < 5.0.0)
+      css_parser (~> 1.3.4)
+      nokogiri (> 1.5.0, < 1.7.0)
+      sprockets
     rsolr (1.0.9)
       builder (>= 2.1.2)
     rspec (2.13.0)
@@ -419,7 +424,6 @@ DEPENDENCIES
   kaminari
   launchy
   less-rails
-  letter_opener
   meta-tags
   mysql2
   oj
@@ -438,6 +442,7 @@ DEPENDENCIES
   rails-i18n!
   rakismet
   red_cloth_formatters_plain (~> 0.2.0)
+  roadie
   rspec-rails
   sass-rails (~> 3.2.3)
   select2-rails (~> 3.2.1)

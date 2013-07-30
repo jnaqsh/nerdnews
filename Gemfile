@@ -103,9 +103,6 @@ gem 'delayed_job_active_record'
 # mails execeptions to admin of site
 gem 'exception_notification'
 
-#for testing email in development mode
-gem 'letter_opener', group: :development
-
 # gem for twitting story
 gem 'twitter'
 
@@ -115,6 +112,9 @@ gem 'capistrano'
 # for creating json api
 gem 'rabl'
 gem 'oj' # Also add either `oj` or `yajl-ruby` as the JSON parser
+
+# To send HTML mails
+gem 'roadie'
 
 group :production do
   gem 'execjs'
