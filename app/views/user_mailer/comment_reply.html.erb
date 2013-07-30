@@ -8,75 +8,75 @@
 <body bgcolor="#FFFFFF">
 <!-- HEADER -->
 <table class="head-wrap">
-	<tr>
-		<td></td>
-		<td class="header container" >
-			<div class="content">
-				<table>
-					<tr>
-						<td><img alt="Logo" src="http://nerdnews.ir/assets/NerdLogo-58px-1548fb6119332d93c163009c6fab508a.png" /></td>
-						<td align="right"><h5 class="collapse">نرد‌نیوز</h5></td>
-					</tr>
-				</table>
-			</div>
-		</td>
-		<td></td>
-	</tr>
+  <tr>
+    <td></td>
+    <td class="header container" >
+      <div class="content">
+        <table>
+          <tr>
+            <td><img alt="Logo" src="http://nerdnews.ir/assets/NerdLogo-58px-1548fb6119332d93c163009c6fab508a.png" /></td>
+            <td align="right"><h5 class="collapse">نرد‌نیوز</h5></td>
+          </tr>
+        </table>
+      </div>
+    </td>
+    <td></td>
+  </tr>
 </table>
 <!-- /HEADER -->
 <!-- BODY -->
 <table class="body-wrap">
-	<tr>
-		<td></td>
-		<td class="container">
-			<div class="content">
-			<table>
-				<tr>
-					<td>
-						<h3>سلام <%= @comment.parent.name %>!</h3>
-						<p class="lead">شخصی به دیدگاه شما پاسخ داده‌است:</p>
-						<!-- Body -->
-						<table class="callout">
-							<tr>
-								<th>
-									<b>از: <%= @comment.name %></b>
-									<br>
-									<%= sanitize RedCloth.new(@comment.content, [:filter_html, :filter_styles]).to_html %>
-								</th>
-							</tr>
-						</table>
-						<p>برای مشاهده آن در نرد‌نیوز و جواب دادن به آن بر روی لینک <a href="<%= story_url(@comment.story, anchor: "comment_#{@comment.id}") %>">کلیک</a> کنید. چنانچه این ایمیل مربوط به شما نیست، آن را نادیده بگیرید.
-						<br>
-						<!-- /Callout Panel -->
-						<!-- social & contact -->
-						<table class="social" width="100%">
-							<tr>
-								<td>
-									<!-- column 1 -->
-									<h5 style="text-align: center">با ما باشید</h5>
-									<table class="column">
-										<tr>
-											<td>
-												<p><a href="https://facebook.com/farsi.nerdnews" class="soc-btn fb">Facebook</a>
-												<a href="https://twitter.com/farsi_nerdnews" class="soc-btn tw">Twitter</a></p>
-											</td>
-											<td>
-												<p><a href="https://plus.google.com/b/111646924484501471492/111646924484501471492" class="soc-btn gp">+Google</a>
-												<a href="https://github.com/jnaqsh/nerdnews" class="soc-btn ms">GitHub</a></p>
-											</td>
-										</tr>
-									</table><!-- /column 1 -->	
-									<span class="clear"></span>
-								</td>
-							</tr>
-						</table><!-- /social & contact -->
-					</td>
-				</tr>
-			</table>
-			</div><!-- /content -->
-		</td>
-		<td></td>
-	</tr>
+  <tr>
+    <td></td>
+    <td class="container">
+      <div class="content">
+      <table>
+        <tr>
+          <td>
+            <h3>سلام <%= @comment.parent.name %>!</h3>
+            <p class="lead">شخصی به دیدگاه شما پاسخ داده‌است:</p>
+            <!-- Body -->
+            <table class="callout">
+              <tr>
+                <th>
+                  <b>از: <%= @comment.name %></b>
+                  <br>
+                  <%= sanitize RedCloth.new(@comment.content, [:filter_html, :filter_styles]).to_html %>
+                </th>
+              </tr>
+            </table>
+            <p>برای مشاهده آن در نرد‌نیوز و جواب دادن به آن بر روی لینک <a href="<%= story_url(@comment.story, anchor: "comment_#{@comment.id}") %>">کلیک</a> کنید. چنانچه این ایمیل مربوط به شما نیست، آن را نادیده بگیرید.
+            <br>
+            <!-- /Callout Panel -->
+            <!-- social & contact -->
+            <table class="social" width="100%">
+              <tr>
+                <td>
+                  <!-- column 1 -->
+                  <h5 style="text-align: center">با ما باشید</h5>
+                  <table class="column">
+                    <tr>
+                      <td>
+                        <p><a href="https://facebook.com/farsi.nerdnews" class="soc-btn fb">Facebook</a>
+                        <a href="https://twitter.com/farsi_nerdnews" class="soc-btn tw">Twitter</a></p>
+                      </td>
+                      <td>
+                        <p><a href="https://plus.google.com/b/111646924484501471492/111646924484501471492" class="soc-btn gp">+Google</a>
+                        <a href="https://github.com/jnaqsh/nerdnews" class="soc-btn ms">GitHub</a></p>
+                      </td>
+                    </tr>
+                  </table><!-- /column 1 -->  
+                  <span class="clear"></span>
+                </td>
+              </tr>
+            </table><!-- /social & contact -->
+          </td>
+        </tr>
+      </table>
+      </div><!-- /content -->
+    </td>
+    <td></td>
+  </tr>
 </table>
 <!-- /BODY -->
 </body>
