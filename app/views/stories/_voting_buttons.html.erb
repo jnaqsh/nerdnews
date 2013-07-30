@@ -3,11 +3,11 @@
     <%= story.positive_votes_count.to_farsi %>
     <i class='icon-thumbs-up'></i>
   </span>
-  <!-- <span class='btn btn-danger disabled'>
+  <span class='btn btn-danger disabled'>
     <i class='icon-thumbs-down'></i>
-    <%# story.negative_votes_count.to_farsi %>
-  </span> -->
+    <%= story.negative_votes_count.to_farsi %>
+  </span>
 <% else %>
   <button class="btn btn-success btn-thumbs-up" data-id='<%= story.id %>'><%= story.positive_votes_count.to_farsi %> <i class='icon-thumbs-up'></i></button>
-<!--   <button class="btn btn-danger btn-thumbs-down" data-id='<%= story.id %>'><i class='icon-thumbs-down'></i> <%# story.negative_votes_count.to_farsi %></button> -->
+  <button class="btn btn-danger btn-thumbs-down" data-id='<%= story.id %>'><i class='icon-thumbs-down'></i> <%= story.negative_votes_count.to_farsi %></button>
 <% end %>
