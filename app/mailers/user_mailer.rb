@@ -1,7 +1,7 @@
 #encoding: utf-8
 
 class UserMailer < ActionMailer::Base
-  default from: "do_not_reply@nerdnews.ir"
+  default :css => 'email', from: "do_not_reply@nerdnews.ir"
 
   def comment_reply(comment_id)
     @comment = Comment.find(comment_id)
