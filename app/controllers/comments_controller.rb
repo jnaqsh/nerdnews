@@ -51,19 +51,22 @@ class CommentsController < ApplicationController
     @comment.user = current_user ? current_user : nil
     @comment.parent_id = params[:comment][:parent_id].empty? ? nil : Comment.find(params[:comment][:parent_id])
     @comment.add_user_requests_data = request
-    @comments = @story.comments.arrange(order: :created_at)
 
     respond_to do |format|
       if @comment.save
+        # get the organised comments to use in create.js file
+        @comments = @story.comments.arrange(order: :created_at)
 
         record_activity %Q(دیدگاهی جدید برای خبر #{view_context.link_to @story.title.truncate(40), story_path(@story, :anchor => "comment_#{@comment.id}")} ایجاد کرد)
 
         UserMailer.delay.comment_reply(@comment.id) unless @comment.parent.nil?
         rate_user(current_user, 1) if current_user.present?
         format.html { redirect_to @story, notice: t('controllers.comments.create.flash.success') }
+        format.js
       else
         share_by_mail
         format.html { render template: "stories/show" }
+        format.js
       end
     end
   end

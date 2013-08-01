@@ -1,6 +1,4 @@
-<%= simple_form_for [@story, @comment], :html => { :class => '' } do |f| %>
-<div class='comment-form'>
-
+<%= simple_form_for [@story, @comment], :html => { :class => '' }, remote: true do |f| %>
   <div class='row'>
     <div class='span6'>
 
@@ -71,4 +69,3 @@
 
   </div>
 <% end %>
-</div>
