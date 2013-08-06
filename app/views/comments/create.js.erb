@@ -16,4 +16,6 @@
     // I reduced 80 pixel from top to prevent nav bar to cover the comment
     scrollTop: $("#comment_<%= @comment.id %>").offset().top - 80
   }, 2000);
+  // Update Comments counter
+  $("#story_<%= @story.id %>").text("دیدگاه‌ها <%= @story.reload.comments_count.to_farsi %>")
 <% end %>

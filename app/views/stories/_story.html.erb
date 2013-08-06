@@ -69,7 +69,7 @@
           <% if story.id %>
             <span>
               <i class='icon-comments-alt' title="تعداد دیدگاه‌ها"></i>
-              <%= link_to story_path(story) do %>
+              <%= link_to story_path(story), html_options = { id: "story_#{story.id}" } do %>
                 <%=t 'stories.show.comments' %>
                 <%= story.comments_count.to_farsi %>
               <% end %>
