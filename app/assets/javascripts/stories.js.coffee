@@ -26,6 +26,7 @@
   showStories: (e) ->
     e.preventDefault()
     $('.story').show()
+    $('#stories hr').show()
     $('#show_stories').hide()
 
 jQuery ->
