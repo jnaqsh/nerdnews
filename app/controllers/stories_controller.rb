@@ -6,7 +6,7 @@ class StoriesController < ApplicationController
   # GET /stories.json
 
   def recent
-    @stories = Story.approved.where('publish_date > ? and hide = ?', Time.at(params[:after].to_f), false).order("publish_date desc")
+    @stories = Story.approved.includes([:tags, :user, :publisher]).where('publish_date > ? and hide = ?', Time.at(params[:after].to_f), false).order("publish_date desc")
 
     share_by_mail
 
