@@ -34,8 +34,11 @@ jQuery ->
     $(this).remove();
   )
 
+  current_url = document.URL;
+  regxp = /^http:\/\/[^\/]*(\/stories|\/)$/;
+
   #load recent stories just added recently
-  if $("#stories").length > 0
+  if (($("#stories").length > 0) && (regxp.test(current_url)))
     StoryPoller.poll()
     $("#show_stories a").click StoryPoller.showStories
 
