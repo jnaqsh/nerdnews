@@ -90,6 +90,9 @@ class Ability
     # User model
     can [:update, :add_to_favorites, :activity_logs], user
 
+    # User model
+    can :bypass_captcha, user
+
     # Vote model
     can :create, Vote
   end
