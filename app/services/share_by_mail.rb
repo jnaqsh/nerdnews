@@ -9,22 +9,28 @@ class ShareByMail
   attr_accessor :name, :reciever, :body, :spam_answer, :spam_answers
   validates_presence_of :reciever, :name
 
-  def initialize(user)
+  def initialize(user, args = {})
     @user = user
+    if !args.empty?
+      self.name          = args[:name]
+      self.reciever      = args[:reciever]
+      self.body          = args[:body]
+      self.spam_answer   = args[:spam_answer]
+      self.spam_answers  = args[:spam_answers]
+    end
   end
   
   def persisted?
     false
   end
 
-  def submit(params)
-    self.name         = params[:name]
-    self.reciever     = params[:reciever]
-    self.body         = params[:body]
-    self.spam_answer  = params[:spam_answer]
-    self.spam_answers = params[:spam_answers]
-
-    valid? ? true : false
+  def submit
+    # raise
+    if valid?
+      true
+    else
+      false
+    end
   end
 
   def perform_textcaptcha?
