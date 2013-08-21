@@ -149,7 +149,6 @@ describe '/Users' do
         expect {
           fill_in 'story_title', with: @story.title
           fill_in 'story_content', with: @story.content
-          fill_in 'story_spam_answer', with: "four"
           click_button 'ایجاد'
         }.to change { @user.reload.user_rate }.by(0)
       end
@@ -160,7 +159,6 @@ describe '/Users' do
         expect {
           fill_in 'story_title', with: @story.title
           fill_in 'story_content', with: @story.content
-          fill_in 'story_spam_answer', with: "four"
           click_button 'ایجاد'
           logout
           login @approved_user

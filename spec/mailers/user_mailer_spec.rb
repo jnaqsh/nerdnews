@@ -58,7 +58,7 @@ describe UserMailer do
     end
   end
 
-  describe "Share By Mail", focus: true do
+  describe "Share By Mail" do
     let(:story) { FactoryGirl.create(:story) }
     let(:params) { {name: 'arash', reciever: 'test@mail.com', body:'this is some random text', story_id: story.id} }
     let(:mail) {UserMailer.share_by_mail(params)}
