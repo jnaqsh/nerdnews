@@ -76,8 +76,16 @@ class Story < ActiveRecord::Base
 
   def mark_as_published(user, url)
     self.update_attributes({publish_date: Time.zone.now, publisher: user}, without_protection: true)
+
+    # provide tweet content
+    if self.tags && self.tags.first
+      tweet_content = "#{self.title} ##{self.tags.first.name}"
+    else
+      tweet_content = "#{self.title}"
+    end
+
     # conditional due to error on request user spec
-    Rails.env.production? ? Tweet.tweet(Twitter::Client.new, "#{self.title} ##{self.tags.first.name}", url) : true
+    Rails.env.production? ? Tweet.tweet(Twitter::Client.new, tweet_content, url) : true
   end
 
   def user_voted?(user)
