@@ -35,11 +35,13 @@ Nerdnews::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 
-  config.action_mailer.default_url_options = {host: "localhost:3000"}
+  config.action_mailer.default_url_options = {host: "localhost", port: 3000}
 
   config.middleware.use ExceptionNotifier,
     sender_address: 'do_not_reply@nerdnews.ir',
     exception_recipients: "h.ramezanian@jnaqsh.com"
 
-  config.action_mailer.delivery_method = :letter_opener
+  # Configure to use with mailcatcher
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
 end

@@ -4,7 +4,7 @@
                  canonical: story_url(@story),
                  open_graph: {
                     title: "#{@story.title}",
-                    type: 'news',
+                    type: 'website',
                     url: "#{story_url(@story)}",
                     image: thumbnail_url(@story) } %>
 
@@ -18,7 +18,9 @@
 <div class="comments span8 offset2">
 
   <% if can? :create, Comment %>
-    <%= render "comments/form" %>
+    <div class='comment-form'>
+      <%= render "comments/form" %>
+    </div>
   <% end %>
 
   <div id='comments-container'>

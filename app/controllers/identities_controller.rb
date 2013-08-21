@@ -10,7 +10,7 @@ class IdentitiesController < ApplicationController
   # This handles signing in and adding an authentication provider to existing accounts itself
   def create
     session[:authhash] = nil #ensure no one sets it
-    params[:provider] ? provider = params[:provider] : provider = 'No provider recognized (invalid callback)'
+    provider = params[:provider] ? params[:provider] : 'No provider recognized (invalid callback)'
     omniauth = request.env['omniauth.auth']
     # raise omniauth.to_yaml
     @authhash = Hash.new

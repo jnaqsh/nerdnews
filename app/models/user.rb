@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   friendly_id :full_name_foo, use: [:slugged, :history]
 
   attr_accessible :email, :full_name, :website, :password, :role_ids,
-                  :password_confirmation, :favorite_tags
+                  :password_confirmation, :favorite_tags, :email_visibility
 
   has_secure_password
 

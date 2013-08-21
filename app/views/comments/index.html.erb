@@ -24,28 +24,36 @@
         <td>
           <small>
           <%= content_tag :span,
-            link_to(t('.sent') + to_jalali(comment.created_at), story_path(comment.story, :anchor => "comment_#{comment.id}")), class: 'muted'
+            link_to(t('.sent') + to_jalali(comment.created_at),
+            story_path(comment.story, :anchor => "comment_#{comment.id}")),
+            class: 'muted'
           %>
         </small>
-        <%= content_tag :p, comment.content %>
+        <%= content_tag :p, sanitize(RedCloth.new(comment.content, [:filter_html, :filter_styles]).to_html) %>
         </td>
         <td><%= link_to comment.story.title, story_path(comment.story) %></td>
         <td>
           <% if comment.approved? %>
-            <%= link_to t('.spam', :default => t("helpers.links.spam")),
-              mark_as_spam_story_comment_path(comment.story, comment), :method => :put  %>
+            <%= link_to t('.spam',
+                :default => t("helpers.links.spam")),
+                mark_as_spam_story_comment_path(comment.story, comment),
+                :method => :put  %>
           <% else %>
-            <%= link_to t('.not_spam', :default => t("helpers.links.not_spam")),
-              mark_as_not_spam_story_comment_path(comment.story, comment), :method => :put %>
+            <%= link_to t('.not_spam',
+              :default => t("helpers.links.not_spam")),
+              mark_as_not_spam_story_comment_path(comment.story, comment),
+              :method => :put %>
           <% end %>
           <span>|</span>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_story_comment_path(comment.story, comment) %>
+          <%= link_to t('.edit',
+              :default => t("helpers.links.edit")),
+              edit_story_comment_path(comment.story, comment) %>
           <span>|</span>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      story_comment_path(comment.story, comment),
-                      :method => :delete,
-                      :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) %>
+          <%= link_to t('.destroy',
+              :default => t("helpers.links.destroy")),
+              story_comment_path(comment.story, comment),
+              :method => :delete,
+              :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) %>
         </td>
       </tr>
     <% end %>

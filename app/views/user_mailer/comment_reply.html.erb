@@ -1,0 +1,16 @@
+<h3>سلام <%= @comment.parent.name %>!</h3>
+<p class="lead">شخصی به دیدگاه شما پاسخ داده‌است:</p>
+
+<table class="callout">
+  <tr>
+    <th>
+      <b>از: <%= @comment.name %></b>
+      <br>
+      <%= sanitize RedCloth.new(@comment.content, [:filter_html, :filter_styles]).to_html %>
+    </th>
+  </tr>
+</table>
+
+<p>برای مشاهده آن در نرد‌نیوز و جواب دادن به آن بر روی لینک <a href="<%= story_url(@comment.story, anchor: "comment_#{@comment.id}") %>">کلیک</a> کنید. چنانچه این ایمیل مربوط به شما نیست، آن را نادیده بگیرید.
+</p>
+<br>

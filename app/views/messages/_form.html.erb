@@ -4,6 +4,6 @@
               input_html: {rows: 15, class: "span6", 'data-trigger' => "focus"} %>
 
   <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= f.submit nil, :class => 'btn btn-primary', data: { disable_with: t('view.disable_with') } %>
   </div>
 <% end %>

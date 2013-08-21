@@ -6,7 +6,9 @@ class StoriesController < ApplicationController
   # GET /stories.json
 
   def recent
-    @stories = Story.approved.where('publish_date > ? and hide = ?', Time.at(params[:after].to_f), false).order("publish_date desc")
+    @stories = Story.approved.includes([:tags, :user, :publisher]).where('publish_date > ? and hide = ?', Time.at(params[:after].to_f), false).order("publish_date desc")
+
+    share_by_mail
 
     respond_to do |format|
       format.js
@@ -23,10 +25,15 @@ class StoriesController < ApplicationController
       paginate :page => params[:page], :per_page => 20
     end.results
 
+    share_by_mail
+
     respond_to do |format|
       format.html # index.html.erb
       format.js
-      format.atom
+      format.atom do
+        headers["Content-Type"] = 'application/atom+xml; charset=utf-8'
+        @stories = Story.approved.order "created_at DESC"
+      end
       format.json
     end
   end
@@ -36,6 +43,8 @@ class StoriesController < ApplicationController
   def show
     @story = Story.includes([:tags, :user, :publisher, {:votes => [:rating, :user]}]).find(params[:id])
 
+    share_by_mail
+
     if @story
       @story.increment!(:view_counter)
       @comment = @story.comments.build
@@ -44,13 +53,12 @@ class StoriesController < ApplicationController
       story_path = Rails.env.production? ? story_path(@story).downcase : story_path(@story) #monkey patch due to error in production (downcase)
 
       respond_to do |format|
-        format.json
-
         if request.path != story_path
           format.html {redirect_to @story, status: :moved_permanently}
         else
           format.html
         end
+        format.json
       end
     else
       raise ActiveRecord::RecordNotFound, t("controllers.stories.show.story_not_found")
@@ -93,7 +101,6 @@ class StoriesController < ApplicationController
         format.html { render action: "new" }
       else
         if @story.save
-
           record_activity %Q(خبر #{view_context.link_to @story.title.truncate(40), story_path(@story)} را ایجاد کرد)
 
           format.html { redirect_to root_path, only_path: true,

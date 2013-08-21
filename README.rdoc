@@ -18,8 +18,9 @@ http://nerdnews.ir/
     page
   Response
     The response would be a json arrays of stories which has the following fields:
+      id:integer => ID of the story
       title:string => title of the story
-      content:text => content of the story
+      content:text => content of the story in html format
       total_point:integer => total point of the story
       hide:boolean => indicates that story must be hidden or not
       comments_count:integer => number of comments for the story
@@ -28,6 +29,7 @@ http://nerdnews.ir/
       negative_votes_count:integer => number of negative votes for the story
       published_at:string => publish date of the story in Jalali Date
       author:string => author of the story
+      author_avatar:string => avatar of the author story
       reference_url:string => reference of the story that would be a link
       story_url:string => story url
       comments:array => array of comments for the story which has the following fields:
@@ -37,6 +39,11 @@ http://nerdnews.ir/
         negative_votes_count:integer => number of negative votes for the comment
         total_point:integer => total point of the comment
         content:text => content of the comment
+      tags:array => array of tags for the story which has the following fields:
+        id:integer => ID of the tag
+        name:string => Name of the tag
+        url:string => the tag url
+        thumbnail_url:string => the tag's thumbnail url
 
 == LICENSE
 This project just another free and open source news site that everyone can create news and create comments and so on.

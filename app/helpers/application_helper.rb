@@ -10,8 +10,12 @@ module ApplicationHelper
   # end
 
   def avatar_url(user, size = 20)
-    gravater_id = Digest::MD5.hexdigest(user.email.downcase)
-    "http://gravatar.com/avatar/#{gravater_id}.png?s=#{size}&d=mm"
+    if user
+      gravater_id = Digest::MD5.hexdigest(user.email.downcase)
+      "http://gravatar.com/avatar/#{gravater_id}.png?s=#{size}&d=mm"
+    else
+      image_url "nobody.png"
+    end
   end
 
   def to_jalali(date, options = {})
@@ -49,7 +53,7 @@ module ApplicationHelper
 
   def source_of_story(story)
     if story && story.source
-      link_to "منبع اصلی خبر", story.source, target: "_blank"
+      link_to "منبع", story.source, target: "_blank"
     end
   end
 
@@ -99,5 +103,13 @@ module ApplicationHelper
          ua.include?('x11') || ua.include?('linux') ? 'linux' :
          ua.include?('win') ? 'win' : nil
     "#{br}#{" " unless br.nil? or os.nil?}#{os}"
+  end
+
+  def image_url(source)
+    abs_path = image_path(source)
+    unless abs_path =~ /^http/
+      abs_path = "#{request.protocol}#{request.host_with_port}#{abs_path}"
+    end
+   abs_path
   end
 end

@@ -125,7 +125,7 @@ describe User do
       it { user.should_not have_ability([:create, :index, :destroy, :update,
         :activity_logs, :add_to_favorites], for: User.new)}
       it { user.should have_ability(:add_to_favorites, for: user)}
-      it { user.should_not have_ability(:bypass_captcha, for: user)}
+      it { user.should have_ability(:bypass_captcha, for: user)}
 
       # votes
       it { user.should have_ability(:create, for: Vote.new)}

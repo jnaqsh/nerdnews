@@ -33,7 +33,7 @@ describe Comment do
   describe "Spams" do
     let(:comment) { FactoryGirl.create :comment }
     it 'shouldnt show not approved/spam comment' do
-      false_comment = FactoryGirl.create :comment, name: 'viagra-test-123'
+      false_comment = FactoryGirl.create :comment, name: 'viagra-test-123', story_id: story.id
       Comment.approved.should include comment
       Comment.approved.should_not include false_comment
     end

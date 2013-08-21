@@ -89,6 +89,7 @@ class Ability
 
     # User model
     can [:update, :add_to_favorites, :activity_logs], user
+    can :bypass_captcha, user
 
     # Vote model
     can :create, Vote
@@ -103,9 +104,6 @@ class Ability
 
     # Tag model
     can [:create, :update], Tag
-
-    # User model
-    can :bypass_captcha, user
   end
 
   def founder_user_permissions(user)

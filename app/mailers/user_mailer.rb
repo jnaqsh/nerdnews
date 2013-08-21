@@ -1,7 +1,7 @@
 #encoding: utf-8
 
 class UserMailer < ActionMailer::Base
-  default from: "do_not_reply@nerdnews.ir"
+  default :css => 'email', from: "do_not_reply@nerdnews.ir"
 
   def comment_reply(comment_id)
     @comment = Comment.find(comment_id)
@@ -27,5 +27,11 @@ class UserMailer < ActionMailer::Base
     @message = Message.find(message_id)
     @user = @message.receiver
     mail to: @user.email, subject: "نردنیوز: شخصی برای شما پیام خصوصی گذاشته است"
+  end
+
+  def share_by_mail(params)
+    @params = params
+    @story = Story.find(params[:story_id])
+    mail to: params[:reciever], subject: "نردنیوز: #{params[:name]} خبری را با شما به اشتراک گذاشته است"
   end
 end

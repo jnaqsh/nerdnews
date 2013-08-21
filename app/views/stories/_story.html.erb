@@ -39,7 +39,7 @@
 
       <% if story.published? %>
         <% unless status or params[:preview_button] %>
-          <%= render partial: 'stories/social_share', locals: {title: story.title, share_url: story_url(story)} %>
+          <%= render partial: 'stories/social_share', locals: {title: story.title, share_url: story_url(story), story_id: story.id} %>
         <% end %>
       <% end %>
 
@@ -69,7 +69,7 @@
           <% if story.id %>
             <span>
               <i class='icon-comments-alt' title="تعداد دیدگاه‌ها"></i>
-              <%= link_to story_path(story) do %>
+              <%= link_to story_path(story), html_options = { id: "story_#{story.id}" } do %>
                 <%=t 'stories.show.comments' %>
                 <%= story.comments_count.to_farsi %>
               <% end %>
@@ -89,6 +89,13 @@
               <%= link_to t('.voters'), "#", class: "toggle-voters" %>
             </span>
           <% end %>
+
+          <% if story && story.source %>
+            <span>
+              <i class='icon-book' title="منبع اصلی"></i>
+              <%= source_of_story(story) %>
+            </span>
+          <% end %>
         </small>
       </h5>
 
@@ -98,7 +105,6 @@
         <p><%= user_name(story) %> می‌نویسد:</p>
         <blockquote>
           <%= sanitize(RedCloth.new(story.content, [:filter_html, :filter_styles]).to_html) %><br />
-          <%= source_of_story(story) %>
         </blockquote>
       <% end %>
 

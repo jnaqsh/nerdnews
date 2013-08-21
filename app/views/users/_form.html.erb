@@ -9,6 +9,8 @@
     <%= f.input_field :email %>
   <% end %>
 
+  <%= f.input :email_visibility, :as => :radio_buttons, label: 'نمایش ایمیل در پروفایل؟' %>
+
   <%= f.input :website, :wrapper => :prepend do %>
     <span class="add-on"><i class="icon-th"></i></span>
     <%= f.input_field :website %>
@@ -21,7 +23,7 @@
   <% end %>
 
   <div class="form-actions">
-    <%= f.button :submit, t('.submit'), class: 'btn-primary' %>
+    <%= f.button :submit, t('.submit'), class: 'btn-primary', data: { disable_with: t('view.disable_with') } %>
     <%= link_to t("helpers.links.cancel"), :back, name: 'cancel', class: 'btn', confirm: t('.confirm') %>
   </div>
 

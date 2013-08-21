@@ -26,7 +26,7 @@
         </ul>
       </div>
     <% end %>
-    <div class='pull-left'>
+    <div class='pull-left story_operation'>
       <% if (can? :update, story) && (!story.published? or current_user.role? "founder") %>
         <%= link_to t('.edit', :default => t("helpers.links.edit")), edit_story_path(story), :class => 'btn btn-mini' %>
       <% end %>

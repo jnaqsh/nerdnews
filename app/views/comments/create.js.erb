@@ -1,0 +1,21 @@
+<% if @comment.invalid? %>
+  // rerender the form to show errors
+  $('.comment-form').html('<%= j render "form" %>')
+<% else %>
+  // Remove form contents
+  $(':input:not(input[type=submit])').val('');
+  // Remove error class and span for content of errors
+  $('.control-group')
+      .removeClass('error')
+    .find('span')
+    .remove()
+  // rerender comments to add the comments
+  $('#comments-container').html('<%= j nested_comments @comments %>');
+  // scroll to added comment
+  $('html, body').animate({
+    // I reduced 80 pixel from top to prevent nav bar to cover the comment
+    scrollTop: $("#comment_<%= @comment.id %>").offset().top - 80
+  }, 2000);
+  // Update Comments counter
+  $("#story_<%= @story.id %>").text("دیدگاه‌ها <%= @story.reload.comments_count.to_farsi %>")
+<% end %>

@@ -15,7 +15,8 @@ class CommentsController < ApplicationController
   # GET /stories/1/comments/1
   # GET /stories/1/comments/1.json
   def show
-    @comment = Comment.find(params[:id])
+    @story = Story.find(params[:story_id])
+    @comment = @story.comments.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -28,6 +29,8 @@ class CommentsController < ApplicationController
     @comment = Comment.new(parent_id: params[:parent_id])
     @story = Story.find(params[:story_id])
 
+    share_by_mail
+
     respond_to do |format|
       format.html # new.html.erb
       format.js
@@ -36,8 +39,8 @@ class CommentsController < ApplicationController
 
   # GET /stories/1/comments/1/edit
   def edit
-    @comment = Comment.find(params[:id])
     @story = Story.find(params[:story_id])
+    @comment = @story.comments.find(params[:id])
   end
 
   # POST /stories/1/comments
@@ -48,18 +51,22 @@ class CommentsController < ApplicationController
     @comment.user = current_user ? current_user : nil
     @comment.parent_id = params[:comment][:parent_id].empty? ? nil : Comment.find(params[:comment][:parent_id])
     @comment.add_user_requests_data = request
-    @comments = @story.comments.arrange(order: :created_at)
 
     respond_to do |format|
       if @comment.save
+        # get the organised comments to use in create.js file
+        @comments = @story.comments.arrange(order: :created_at)
 
-        record_activity %Q(دیدگاهی جدید برای خبر #{view_context.link_to @story.title.truncate(40), story_path(@story, :anchor => "comment_#{@comment.id}")} ایجاد کرد)
+        record_activity %Q(دیدگاهی جدید برای خبر #{view_context.link_to @story.title.truncate(40), story_path(@story, :anchor => "comment_#{@comment.id}")} ایجاد کرد) if @comment.approved?
 
         UserMailer.delay.comment_reply(@comment.id) unless @comment.parent.nil?
         rate_user(current_user, 1) if current_user.present?
         format.html { redirect_to @story, notice: t('controllers.comments.create.flash.success') }
+        format.js
       else
+        share_by_mail
         format.html { render template: "stories/show" }
+        format.js
       end
     end
   end
@@ -67,8 +74,9 @@ class CommentsController < ApplicationController
   # PUT /stories/1/comments/1
   # PUT /stories/1/comments/1.json
   def update
-    @comment = Comment.find(params[:id])
     @story = Story.find(params[:story_id])
+    @comment = @story.comments.find(params[:id])
+
 
     respond_to do |format|
       if @comment.update_attributes(params[:comment])
@@ -85,7 +93,8 @@ class CommentsController < ApplicationController
   # DELETE /stories/1/comments/1
   # DELETE /stories/1/comments/1.json
   def destroy
-    @comment = Comment.find(params[:id])
+    @story = Story.find(params[:story_id])
+    @comment = @story.comments.find(params[:id])
     @comment.destroy
 
     record_activity %Q(دیدگاه در خبر #{view_context.link_to @story.title.truncate(40), story_path(@story, :anchor => "comment_#{@comment.id}")} را حذف کرد)
@@ -97,10 +106,11 @@ class CommentsController < ApplicationController
 
   # PUT /stories/1/comments/1/mark_as_spam
   def mark_as_spam
-    @comment = Comment.find(params[:id])
+    @story = Story.find(params[:story_id])
+    @comment = @story.comments.find(params[:id])
 
     respond_to do |format|
-      if @comment.mark_as_spam and @comment.save
+      if @comment.mark_as_spam
         format.html { redirect_to comments_path, notice: t('controllers.comments.mark_as_spam.flash.success') }
       end
     end
@@ -108,10 +118,11 @@ class CommentsController < ApplicationController
 
   # PUT /stories/1/comments/1/unmark_as_spam
   def mark_as_not_spam
-    @comment = Comment.find(params[:id])
+    @story = Story.find(params[:story_id])
+    @comment = @story.comments.find(params[:id])
 
     respond_to do |format|
-      if @comment.mark_as_not_spam and @comment.save
+      if @comment.mark_as_not_spam
         format.html { redirect_to comments_path, notice: t('controllers.comments.mark_as_not_spam.flash.success') }
       end
     end
