@@ -15,7 +15,7 @@ atom_feed({'xmlns:app' => 'http://www.w3.org/2007/app',
           end
         end
 
-        if story.comments.approved
+        if story.comments_count > 0 and story.comments.approved
           xhtml.hr
           xhtml.p "dir" => "rtl" do
             xhtml.b "دیدگاه‌ها:"
