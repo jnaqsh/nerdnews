@@ -29,10 +29,20 @@
     $('#stories hr').show()
     $('#show_stories').hide()
 
+@popitup = (url) ->
+  newwindow = window.open(url,'name','height=600,width=600')
+  if window.focus
+    newwindow.focus()
+  return false
+
 jQuery ->
   # to prevent send multiple times
   $(document).on('click', '.story_operation a', (e) ->
     $(this).remove();
+  )
+
+  $('ul.social-icons').on('click', '.popup', (e) ->
+    popitup $(this).attr('href')
   )
 
   current_url = document.URL;
