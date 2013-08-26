@@ -48,9 +48,17 @@ class CommentsController < ApplicationController
   def create
     @story = Story.find(params[:story_id])
     @comment = @story.comments.build(params[:comment])
-    @comment.user = current_user ? current_user : nil
+    @comment.user = nil
     @comment.parent_id = params[:comment][:parent_id].empty? ? nil : Comment.find(params[:comment][:parent_id])
     @comment.add_user_requests_data = request
+
+    # If user exist and logged in
+    if current_user
+      @comment.name = current_user.full_name
+      @comment.email = current_user.email
+      @comment.website = current_user.website
+      @comment.user = current_user
+    end
 
     respond_to do |format|
       if @comment.save

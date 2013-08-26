@@ -43,11 +43,11 @@
 
       </div>
 
-        <div class='span2' style='text-align: center'>
-          <%= image_tag avatar_url(current_user, 64), class: 'img-polaroid' %>
-          <p><b><%= link_to current_user.full_name, user_path(current_user) %></b></p>
-          <%= f.submit nil, :class => 'btn btn-primary', data: { disable_with: t('view.disable_with') } %>
-        </div>
+      <div class='span2' style='text-align: center'>
+        <%= image_tag avatar_url(current_user, 64), class: 'img-polaroid' %>
+        <p><b><%= link_to current_user.full_name, user_path(current_user) %></b></p>
+        <%= f.submit nil, :class => 'btn btn-primary', data: { disable_with: t('view.disable_with') } %>
+      </div>
 
     <% else %>
       <div id='commenter-info', class='span6'>
@@ -58,13 +58,6 @@
           <%= f.submit nil, :class => 'btn btn-primary', data: { disable_with: t('view.disable_with') } %>
         </span>
       </div>
-
-      <%= f.input :name, readonly: true, as: :hidden,
-        input_html: {value: current_user.full_name, class: "span5"} %>
-      <%= f.input :email, readonly: true, as: :hidden,
-        input_html: {value: current_user.email, class: "span5"} %>
-      <%= f.input :website, readonly: true, as: :hidden,
-        input_html: {value: current_user.website, class: "span5"} %>
     <% end %>
 
   </div>
