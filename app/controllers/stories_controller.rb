@@ -21,7 +21,7 @@ class StoriesController < ApplicationController
       format.js { stories_index }
       format.atom do
         headers["Content-Type"] = 'application/atom+xml; charset=utf-8'
-        @stories = Story.includes([:comments, :user]).where('stories.publish_date IS NOT NULL AND stories.hide IS NOT ?', true).where('comments.approved = ?', true).order('publish_date desc').limit(100)
+        @stories = Story.includes([:comments, :user]).where('stories.publish_date IS NOT ? AND comments.approved = ? AND stories.hide = ?', nil, true, false).order('publish_date desc').limit(100)
       end
       format.json { stories_index }
     end
