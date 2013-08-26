@@ -16,25 +16,14 @@ class StoriesController < ApplicationController
   end
 
   def index
-    @stories = Story.search(:include => [:tags, :user, :publisher, {:votes => [:rating, :user]}]) do
-      without(:publish_date, nil)
-      without(:hide, true)
-      fulltext params[:search]
-      fulltext params[:tag]
-      order_by :publish_date, :desc
-      paginate :page => params[:page], :per_page => 20
-    end.results
-
-    share_by_mail
-
     respond_to do |format|
-      format.html # index.html.erb
-      format.js
+      format.html { stories_index } # index.html.erb
+      format.js { stories_index }
       format.atom do
         headers["Content-Type"] = 'application/atom+xml; charset=utf-8'
-        @stories = Story.approved.order "created_at DESC"
+        @stories = Story.includes([:comments, :user]).where('stories.publish_date IS NOT NULL AND stories.hide IS NOT ?', true).where('comments.approved = ?', true).order('publish_date desc').limit(100)
       end
-      format.json
+      format.json { stories_index }
     end
   end
 
@@ -178,5 +167,20 @@ class StoriesController < ApplicationController
     respond_to do |format|
       format.html
     end
+  end
+
+  private
+
+  def stories_index
+    @stories = Story.search(:include => [:tags, :user, :publisher, {:votes => [:rating, :user]}]) do
+      without(:publish_date, nil)
+      without(:hide, true)
+      fulltext params[:search]
+      fulltext params[:tag]
+      order_by :publish_date, :desc
+      paginate :page => params[:page], :per_page => 20
+    end.results
+
+    share_by_mail
   end
 end

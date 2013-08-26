@@ -13,7 +13,7 @@ class Story < ActiveRecord::Base
 
   belongs_to :remover, class_name: "User"
   belongs_to :publisher, class_name: "User"
-  has_many :comments, dependent: :destroy
+  has_many :comments, dependent: :destroy, :order => 'created_at DESC'
   has_many :taggings, dependent: :destroy
   has_many :tags, :through => :taggings,
                   :after_add => :calculate_count,

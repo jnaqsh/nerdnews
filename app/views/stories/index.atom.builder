@@ -5,6 +5,8 @@ atom_feed({'xmlns:app' => 'http://www.w3.org/2007/app',
   feed.updated Story.maximum(:created_at)
 
   @stories.each do |story|
+    story_comments = story.comments
+
     feed.entry story, :published => story.publish_date do |entry|
       entry.title(story.title)
       entry.content :type => 'xhtml' do |xhtml|
@@ -15,16 +17,21 @@ atom_feed({'xmlns:app' => 'http://www.w3.org/2007/app',
           end
         end
 
-        if story.comments_count > 0 and story.comments.approved
+        if story.comments_count > 0 and story_comments
           xhtml.hr
           xhtml.p "dir" => "rtl" do
-            xhtml.b "دیدگاه‌ها:"
+            xhtml.a href: story_url(story, anchor: "comments"), target: "_blank" do
+              xhtml.b "دیدگاه‌ها: (#{story.comments_count.to_farsi})"
+            end
           end
-          story.comments.approved.each do |comment|
+          story_comments.each_with_index do |comment, index|
+            break if index == 5
             xhtml.p "dir" => "rtl" do
               xhtml.b comment.name + ' <' + to_jalali(comment.created_at) + '>'
             end
-            xhtml.p comment.content, "dir" => "rtl"
+            xhtml.p "dir" => "rtl" do
+              xhtml.p << sanitize(RedCloth.new(comment.content).to_html)
+            end
           end
         end
       end

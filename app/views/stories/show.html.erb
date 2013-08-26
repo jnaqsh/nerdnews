@@ -24,7 +24,7 @@
   <% end %>
 
   <div id='comments-container'>
-    <h2><%= t('.comments') %></h2>
+    <h2 id="comments"><%= t('.comments') %></h2>
     <%= (nested_comments @comments) || t('.no_comments') %>
   </div>
 </div>
