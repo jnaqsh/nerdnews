@@ -61,7 +61,6 @@ class Comment < ActiveRecord::Base
     recent_comments = where(created_at: (Time.now.midnight - 1.day)..Time.now.midnight)
     recent_comments.each do |comment|
       comment.update_attribute :approved, false if comment.total_point < Comment::HIDE_THRESHOLD
-      comment.index!
     end
   end
 
