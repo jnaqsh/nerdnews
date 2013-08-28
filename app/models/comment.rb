@@ -15,8 +15,7 @@ class Comment < ActiveRecord::Base
   rakismet_attrs author: :name, author_email: :email, author_url: :website
 
   before_validation :smart_add_url_protocol
-  before_create :is_spam?
-  before_save :update_counter
+  before_save :is_spam?, :update_counter
 
   validates :name, :content, :user_ip, :user_agent, :referrer, presence: true
   validates :email, email_format: true, presence: true
