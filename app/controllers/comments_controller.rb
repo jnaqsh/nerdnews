@@ -63,7 +63,7 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.save
         # get the organised comments to use in create.js file
-        @comments = @story.comments.arrange(order: :created_at)
+        @comments = @story.comments.approved.arrange(order: :created_at)
 
         record_activity %Q(دیدگاهی جدید برای خبر #{view_context.link_to @story.title.truncate(40), story_path(@story, :anchor => "comment_#{@comment.id}")} ایجاد کرد) if @comment.approved?
 
