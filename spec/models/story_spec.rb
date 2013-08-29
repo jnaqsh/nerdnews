@@ -76,9 +76,9 @@ describe Story do
       end.to change{@story.reload.comments_count}.by(1)
     end
 
-    it "should decrement counter if comment marked as spam/unapproved" do
+    it "should not change counter if a comment is a spam" do
       expect do
-        @comment = FactoryGirl.create(:comment, story: @story, approved: false)
+        @comment = FactoryGirl.create(:comment, story: @story, name: "viagra-test-123")
       end.to_not change{@story.reload.comments_count}
     end
 
