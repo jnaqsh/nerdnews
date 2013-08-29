@@ -5,7 +5,7 @@ atom_feed({'xmlns:app' => 'http://www.w3.org/2007/app',
   feed.updated Story.maximum(:created_at)
 
   @stories.each do |story|
-    story_comments = story.comments
+    story_comments = story.comments.approved
 
     feed.entry story, :published => story.publish_date do |entry|
       entry.title(story.title)
