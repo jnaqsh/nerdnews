@@ -13,5 +13,7 @@
     <%= render partial: 'stories/story', collection: @stories %>
   </div>
 
+<%= render 'stories/share_by_mail_modal_container' %>
+
   <%= paginate @stories %>
 <% end %>

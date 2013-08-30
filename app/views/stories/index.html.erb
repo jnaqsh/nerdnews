@@ -24,4 +24,6 @@
   <%= (render @stories) || "خبر مورد نظر پیدا نشد" %>
 <% end %>
 
+<%= render 'share_by_mail_modal_container' %>
+
 <%= paginate @stories %>

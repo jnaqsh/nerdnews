@@ -1,4 +1,15 @@
 class ShareByMailController < ApplicationController
+  def show
+    @share_by_mail  = ShareByMail.new(current_user)
+    @story_id       = params[:id]
+    @share_by_mail.textcaptcha
+    bypass_captcha_or_not @share_by_mail
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def create
     @share_by_mail = ShareByMail.new(current_user, params[:share_by_mail])
     bypass_captcha_or_not @share_by_mail
