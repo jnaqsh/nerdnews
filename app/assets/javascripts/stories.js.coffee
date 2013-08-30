@@ -18,9 +18,11 @@
     $.get($("#stories").data('url'), after: $('.story').first().data('timestamp'))
 
   addStories: (stories) ->
-    if stories.length > 0
+    stories_number = stories.match(/<article/gi)
+    if stories_number.length
       $("#stories").prepend($(stories).hide())
       $("#show_stories").show()
+      Tinycon.setBubble(stories_number.length)
     @poll()
 
   showStories: (e) ->
@@ -28,6 +30,7 @@
     $('.story').show()
     $('#stories hr').show()
     $('#show_stories').hide()
+    Tinycon.setBubble(0)
 
 @popitup = (url) ->
   newwindow = window.open(url,'name','height=600,width=600')
