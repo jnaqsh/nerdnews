@@ -72,6 +72,7 @@ gem 'omniauth-github'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'omniauth-openid'
+gem 'omniauth-persona'
 
 # the gem that uses in url naming
 gem 'friendly_id'
