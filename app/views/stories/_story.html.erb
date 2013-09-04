@@ -104,7 +104,7 @@
       <% unless status %>
         <p><%= user_name(story) %> می‌نویسد:</p>
         <blockquote>
-          <%= sanitize(RedCloth.new(story.content, [:filter_html, :filter_styles]).to_html) %><br />
+          <%= sanitize(RedCloth.new(story.content, [:filter_html, :filter_styles]).to_html) %>
         </blockquote>
       <% end %>
 
