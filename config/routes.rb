@@ -1,4 +1,6 @@
 Nerdnews::Application.routes.draw do
+  use_doorkeeper
+
   post "share_by_mail/create"
   get "share_by_mail/show"
 

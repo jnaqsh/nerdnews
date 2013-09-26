@@ -114,6 +114,9 @@ gem 'capistrano'
 gem 'rabl'
 gem 'oj' # Also add either `oj` or `yajl-ruby` as the JSON parser
 
+# OAuth2 support
+gem 'doorkeeper'
+
 # To send HTML mails
 gem 'roadie'
 
