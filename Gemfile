@@ -27,6 +27,7 @@ gem 'active_link_to'
 
 # apparenty it's famous jquery lib for rails
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 
 # default label for i18n in rails
 gem 'rails-i18n', git: 'https://github.com/iCEAGE/rails-i18n.git'
