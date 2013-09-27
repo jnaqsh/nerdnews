@@ -37,9 +37,12 @@ Nerdnews::Application.configure do
 
   config.action_mailer.default_url_options = {host: "localhost", port: 3000}
 
-  config.middleware.use ExceptionNotifier,
-    sender_address: 'do_not_reply@nerdnews.ir',
-    exception_recipients: "h.ramezanian@jnaqsh.com"
+  config.middleware.use ExceptionNotification::Rack,
+  :email => {
+    :email_prefix => "[NerdNews] ",
+    :sender_address => %{"DoNotReply" <do_not_reply@nerdnews.ir>},
+    :exception_recipients => %w{h.ramezanian@jnaqsh.com}
+  }
 
   # Configure to use with mailcatcher
   config.action_mailer.delivery_method = :smtp
