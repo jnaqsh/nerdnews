@@ -84,7 +84,10 @@ Nerdnews::Application.configure do
     }
   }
 
-  config.middleware.use ExceptionNotifier,
-    sender_address: 'do_not_reply@nerdnews.ir',
-    exception_recipients: "h.ramezanian@jnaqsh.com"
+  config.middleware.use ExceptionNotification::Rack,
+  :email => {
+    :email_prefix => "[NerdNews] ",
+    :sender_address => %{"DoNotReply" <do_not_reply@nerdnews.ir>},
+    :exception_recipients => %w{h.ramezanian@jnaqsh.com}
+  }
 end
