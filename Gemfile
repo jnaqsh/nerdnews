@@ -1,20 +1,26 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.14'
+gem 'rails', '4.0.0'
 
 # Gems used only for assets and not required
 # in production environments by default.
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'uglifier', '>= 1.0.3'
+gem 'sass-rails',   '~> 4.0.0'
+gem 'coffee-rails', '~> 4.0.0'
+gem 'uglifier', '>= 1.3.0'
 
-  # adding multiple fields in one text_field like tagging
-  gem 'select2-rails', '~> 3.2.1'
-end
+# Gem that are removed from Rails 4. I'll added them back
+# to make it easier for migration
+gem 'protected_attributes'
+gem 'activerecord-deprecated_finders'
+
+# adding multiple fields in one text_field like tagging
+gem 'select2-rails'
+
+# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+gem 'turbolinks'
 
 # it adds a deleted_at column to database
-gem 'acts_as_paranoid'
+# gem 'acts_as_paranoid' not working with rails 4 yet
 
 # it uses for making active class on menus
 gem 'active_link_to'
@@ -30,7 +36,7 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 
 gem 'debugger'
 
-gem 'simple_form', '~> 2.0.4'
+gem 'simple_form', '~> 3.0.0'
 
 # it uses for managing users in multiple roles
 gem "cancan"
