@@ -361,12 +361,13 @@ GEM
     sunspot (2.0.0)
       pr_geohash (~> 1.0)
       rsolr (~> 1.0.7)
+    sunspot-rails-tester (1.0.0)
+      sunspot_rails (>= 1.2)
+      sunspot_solr (>= 1.2)
     sunspot_rails (2.0.0)
       nokogiri
       sunspot (= 2.0.0)
     sunspot_solr (2.0.0)
-    sunspot_test (0.4.0)
-      sunspot_rails (>= 1.2.1)
     therubyracer (0.11.4)
       libv8 (~> 3.11.8.12)
       ref
@@ -457,9 +458,9 @@ DEPENDENCIES
   shoulda-matchers
   simple_form (~> 2.0.4)
   sqlite3
+  sunspot-rails-tester
   sunspot_rails
   sunspot_solr
-  sunspot_test
   therubyracer
   twitter
   twitter-bootstrap-rails!

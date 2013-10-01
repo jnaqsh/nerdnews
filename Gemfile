@@ -77,6 +77,7 @@ gem 'omniauth-persona'
 # the gem that uses in url naming
 gem 'friendly_id'
 
+# Compile less files
 gem 'therubyracer'
 gem 'less-rails'
 
@@ -130,7 +131,6 @@ group :development do
   gem 'sqlite3'
   gem 'better_errors'
   gem 'binding_of_caller'
-
   # it warns about eager loading and just for development mode
   gem 'bullet'
 end
@@ -146,8 +146,7 @@ group :test do
   gem "capybara", "~> 2.1.0"
   gem 'guard-rspec'
   gem 'faker'
-  gem 'sunspot_test'
-  # gem 'guard-spork'
+  gem 'sunspot-rails-tester'
   gem 'guard-zeus'
   gem 'launchy'
   # gem 'rb-inotify', '~> 0.9', :require => false

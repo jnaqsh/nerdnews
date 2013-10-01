@@ -6,12 +6,14 @@ ENV["RAILS_ENV"] = 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 # require 'rspec/autorun' # causes error with Zeus
-require 'sunspot_test/rspec'
 require 'capybara/rspec'
 require 'capybara/poltergeist'
 require "paperclip/matchers"
 Capybara.javascript_driver = :poltergeist
 require 'webmock/rspec'
+# Config Sunspot
+$original_sunspot_session = Sunspot.session
+
 # Allow local connections!
 WebMock.disable_net_connect!(:allow_localhost => true)
 
@@ -20,8 +22,22 @@ WebMock.disable_net_connect!(:allow_localhost => true)
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 RSpec.configure do |config|
+  # Config Sunspot
+  config.before do
+    Sunspot.session = Sunspot::Rails::StubSessionProxy.new($original_sunspot_session)
+  end
+
+  config.before :each, solr: true do
+    Sunspot::Rails::Tester.start_original_sunspot_session
+    Sunspot.session = $original_sunspot_session
+    Sunspot.remove_all!
+  end
+  # /Config Sunspot
+
+  # Focus:true
   config.filter_run focus: true
   config.run_all_when_everything_filtered = true
+
   # ## Mock Framework
   #
   # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
