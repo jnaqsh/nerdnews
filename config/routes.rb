@@ -1,4 +1,10 @@
 Nerdnews::Application.routes.draw do
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :stories
+    end
+  end
+
   use_doorkeeper
 
   post "share_by_mail/create"
