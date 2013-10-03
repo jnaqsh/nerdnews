@@ -2,8 +2,6 @@
 
 class StoriesController < ApplicationController
   load_and_authorize_resource
-  # GET /stories
-  # GET /stories.json
 
   def recent
     @stories = Story.approved.includes([:tags, :user, :publisher]).where('publish_date > ? and hide = ?', Time.at(params[:after].to_f), false).order("publish_date desc")
@@ -15,6 +13,7 @@ class StoriesController < ApplicationController
     end
   end
 
+  # GET /stories
   def index
     respond_to do |format|
       format.html { stories_index } # index.html.erb
@@ -23,12 +22,10 @@ class StoriesController < ApplicationController
         headers["Content-Type"] = 'application/atom+xml; charset=utf-8'
         @stories = Story.includes([:comments, :user]).where('stories.publish_date IS NOT ? AND stories.hide = ?', nil, false).order('publish_date desc').limit(100)
       end
-      format.json { stories_index }
     end
   end
 
   # GET /stories/1
-  # GET /stories/1.json
   def show
     @story = Story.includes([:tags, :user, :publisher, {:votes => [:rating, :user]}]).find(params[:id])
 
@@ -47,7 +44,6 @@ class StoriesController < ApplicationController
         else
           format.html
         end
-        format.json
       end
     else
       raise ActiveRecord::RecordNotFound, t("controllers.stories.show.story_not_found")
