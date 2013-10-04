@@ -74,11 +74,6 @@ Nerdnews::Application.routes.draw do
 
   get "/:permalink" => "pages#show", as: "page_by_permalink"
 
-
-  namespace :admin do
-    get '', to: 'dashboard#index'
-  end
-
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
