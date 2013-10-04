@@ -174,15 +174,9 @@ GEM
     jquery-rails (3.0.4)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
-<<<<<<< HEAD
     jquery-ui-rails (4.1.0)
       railties (>= 3.1.0)
     json (1.8.1)
-=======
-    jquery-ui-rails (4.0.5)
-      railties (>= 3.1.0)
-    json (1.8.0)
->>>>>>> jqueryUi is removed from jquery-rails. adds jquery-ui-rails to Gemfile
     jwt (0.1.8)
       multi_json (>= 1.5)
     kaminari (0.15.0)
