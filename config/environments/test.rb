@@ -1,4 +1,8 @@
 Nerdnews::Application.configure do
+  # Rails 4 needs this option, We're using zeus to preload our test environment
+  # So I turned it on
+  config.eager_load = true
+  
   # Settings specified here will take precedence over those in config/application.rb
 
   # The test environment is used exclusively to run your application's

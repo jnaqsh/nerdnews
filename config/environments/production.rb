@@ -1,4 +1,7 @@
 Nerdnews::Application.configure do
+  # Rails 4 needs this option
+  config.eager_load = true
+  
   # Settings specified here will take precedence over those in config/application.rb
 
   # Code is not reloaded between requests
