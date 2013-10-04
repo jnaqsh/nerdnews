@@ -86,7 +86,7 @@ gem 'friendly_id'
 
 # Compile less files
 gem 'therubyracer'
-gem 'less-rails'
+gem 'less-rails', '2.3.3'
 
 # rbootstrap is a gem for RTL twitter bootstrap
 gem 'twitter-bootstrap-rails', git: "https://github.com/jnaqsh/twitter-bootstrap-rails.git"

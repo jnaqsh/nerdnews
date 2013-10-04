@@ -180,11 +180,11 @@ GEM
       activesupport (>= 3.0.0)
     launchy (2.3.0)
       addressable (~> 2.3)
-    less (2.4.0)
-      commonjs (~> 0.2.7)
-    less-rails (2.4.2)
+    less (2.3.2)
+      commonjs (~> 0.2.6)
+    less-rails (2.3.3)
       actionpack (>= 3.1)
-      less (~> 2.4.0)
+      less (~> 2.3.1)
     libv8 (3.16.14.3)
     listen (1.3.1)
       rb-fsevent (>= 0.9.3)
@@ -363,12 +363,13 @@ GEM
     sunspot (2.0.0)
       pr_geohash (~> 1.0)
       rsolr (~> 1.0.7)
+    sunspot-rails-tester (1.0.0)
+      sunspot_rails (>= 1.2)
+      sunspot_solr (>= 1.2)
     sunspot_rails (2.0.0)
       nokogiri
       sunspot (= 2.0.0)
     sunspot_solr (2.0.0)
-    sunspot_test (0.4.0)
-      sunspot_rails (>= 1.2.1)
     therubyracer (0.12.0)
       libv8 (~> 3.16.14.0)
       ref
@@ -437,7 +438,7 @@ DEPENDENCIES
   jquery-ui-rails
   kaminari
   launchy
-  less-rails
+  less-rails (= 2.3.3)
   meta-tags
   mysql2
   oj
@@ -465,9 +466,9 @@ DEPENDENCIES
   shoulda-matchers
   simple_form (~> 3.0.0)
   sqlite3
+  sunspot-rails-tester
   sunspot_rails
   sunspot_solr
-  sunspot_test
   therubyracer
   turbolinks
   twitter
