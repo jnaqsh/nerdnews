@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   KARMA_THRESHOLD = 100
 
   extend FriendlyId
-  friendly_id :full_name_foo, use: [:slugged, :history]
+  friendly_id :full_name, use: [:slugged, :history]
 
   attr_accessible :email, :full_name, :website, :password, :role_ids,
                   :password_confirmation, :favorite_tags, :email_visibility
@@ -87,11 +87,6 @@ class User < ActiveRecord::Base
     if self.roles.empty?
       self.roles << (Role.find_by_name("new_user") or Role.create(name: "new_user"))
     end
-  end
-
-  # friendly id
-  def full_name_foo
-    "#{full_name}"
   end
 
   # helper
