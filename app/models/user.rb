@@ -65,20 +65,6 @@ class User < ActiveRecord::Base
     self.stories.not_approved.count
   end
 
-  private
-
-  # role
-  def set_new_user_role
-    if self.roles.empty?
-      self.roles << (Role.find_by_name("new_user") or Role.create(name: "new_user"))
-    end
-  end
-
-  # friendly id
-  def full_name_foo
-    "#{full_name}"
-  end
-
   # friendly id
   def normalize_friendly_id(string)
     sep = "-"
@@ -92,6 +78,20 @@ class User < ActiveRecord::Base
       parameterized_string.gsub!(/^#{re_sep}|#{re_sep}$/i, '')
     end
     parameterized_string.downcase
+  end
+
+  private
+
+  # role
+  def set_new_user_role
+    if self.roles.empty?
+      self.roles << (Role.find_by_name("new_user") or Role.create(name: "new_user"))
+    end
+  end
+
+  # friendly id
+  def full_name_foo
+    "#{full_name}"
   end
 
   # helper
