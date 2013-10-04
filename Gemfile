@@ -82,7 +82,7 @@ gem 'omniauth-openid'
 gem 'omniauth-persona'
 
 # the gem that uses in url naming
-gem 'friendly_id'
+gem 'friendly_id', '~> 5.0.0.rc2'
 
 # Compile less files
 gem 'therubyracer'
