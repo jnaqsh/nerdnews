@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 class StoriesController < ApplicationController
+  before_action :set_story, only: [:edit, :update, :destroy, :publish]
   load_and_authorize_resource
 
   def recent
@@ -65,7 +66,6 @@ class StoriesController < ApplicationController
 
   # GET /stories/1/edit
   def edit
-    @story = Story.find(params[:id])
   end
 
   # POST /stories
@@ -73,9 +73,9 @@ class StoriesController < ApplicationController
   def create
     if current_user
       @user = current_user
-      @story = @user.stories.build(params[:story])
+      @story = @user.stories.build(story_params)
     else
-      @story = Story.new(params[:story])
+      @story = Story.new(story_params)
     end
 
     bypass_captcha_or_not @story
@@ -100,14 +100,13 @@ class StoriesController < ApplicationController
   # PUT /stories/1
   # PUT /stories/1.json
   def update
-    @story = Story.find(params[:id])
-    @story.attributes = params[:story]
+    @story.attributes = story_params
 
     respond_to do |format|
       if params[:preview_button]
         format.html { render action: "edit" }
       else
-        if @story.update_attributes(params[:story])
+        if @story.update(story_params)
 
           record_activity %Q(خبر #{view_context.link_to @story.title.truncate(40), story_path(@story)} را ویرایش کرد)
 
@@ -126,10 +125,9 @@ class StoriesController < ApplicationController
   # DELETE /stories/1
   # DELETE /stories/1.json
   def destroy
-    @story = Story.find(params[:id])
     @story.destroy
 
-    @story.update_attributes({remover: current_user}, without_protection: true)
+    @story.update({remover: current_user}, without_protection: true)
 
     record_activity %Q(خبر #{view_context.link_to @story.title.truncate(40), story_path(@story)} را حذف کرد)
 
@@ -140,8 +138,6 @@ class StoriesController < ApplicationController
 
   # PUT /stories/1/publish
   def publish
-    @story = Story.find(params[:id])
-
     respond_to do |format|
       if @story.mark_as_published(current_user, story_url(@story))
 
@@ -166,17 +162,25 @@ class StoriesController < ApplicationController
   end
 
   private
+    def stories_index
+      @stories = Story.search(:include => [:tags, :user, :publisher, {:votes => [:rating, :user]}]) do
+        without(:publish_date, nil)
+        without(:hide, true)
+        fulltext params[:search]
+        fulltext params[:tag]
+        order_by :publish_date, :desc
+        paginate :page => params[:page], :per_page => 20
+      end.results
 
-  def stories_index
-    @stories = Story.search(:include => [:tags, :user, :publisher, {:votes => [:rating, :user]}]) do
-      without(:publish_date, nil)
-      without(:hide, true)
-      fulltext params[:search]
-      fulltext params[:tag]
-      order_by :publish_date, :desc
-      paginate :page => params[:page], :per_page => 20
-    end.results
+      share_by_mail
+    end
 
-    share_by_mail
-  end
+    def set_story
+      @story = Story.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def story_params
+      params.require(:story).permit(:title, :content, :source, :tag_names)
+    end
 end
