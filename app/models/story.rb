@@ -8,9 +8,6 @@ class Story < ActiveRecord::Base
   HIDE_THRESHOLD = -8
   CONTENT_MAX_LENGTH = 1500
 
-  attr_accessible :content, :publish_date, :title, :source,
-    :tag_names, :view_counter, :publisher_id, :tag_ids
-
   belongs_to :remover, class_name: "User"
   belongs_to :publisher, class_name: "User"
   has_many :comments, dependent: :destroy
@@ -75,7 +72,7 @@ class Story < ActiveRecord::Base
   end
 
   def mark_as_published(user, url)
-    self.update_attributes({publish_date: Time.zone.now, publisher: user}, without_protection: true)
+    self.update({publish_date: Time.zone.now, publisher: user})
 
     # provide tweet content
     if self.tags && self.tags.first
