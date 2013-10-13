@@ -10,7 +10,6 @@ gem 'uglifier', '>= 1.3.0'
 
 # Gem that are removed from Rails 4. I'll added them back
 # to make it easier for migration
-gem 'protected_attributes'
 gem 'activerecord-deprecated_finders'
 
 # adding multiple fields in one text_field like tagging
