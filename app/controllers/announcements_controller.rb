@@ -1,4 +1,5 @@
 class AnnouncementsController < ApplicationController
+  before_action :set_announcement, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
 
   def index
@@ -10,7 +11,6 @@ class AnnouncementsController < ApplicationController
   end
 
   def show
-    @announcement = Announcement.find(params[:id])
   end
 
   def new
@@ -18,7 +18,7 @@ class AnnouncementsController < ApplicationController
   end
 
   def create
-    @announcement = Announcement.new(params[:announcement])
+    @announcement = Announcement.new(announcement_params)
 
     respond_to do |format|
       if @announcement.save
@@ -30,14 +30,11 @@ class AnnouncementsController < ApplicationController
   end
 
   def edit
-    @announcement = Announcement.find(params[:id])
   end
 
   def update
-    @announcement = Announcement.find(params[:id])
-
     respond_to do |format|
-      if @announcement.update_attributes(params[:announcement])
+      if @announcement.update_attributes(announcement_params)
         format.html {redirect_to @announcement, notice: t('controllers.announcements.update.flash.success')}
       else
         format.html {render action: :edit}
@@ -46,7 +43,6 @@ class AnnouncementsController < ApplicationController
   end
 
   def destroy
-    @announcement = Announcement.find(params[:id])
     @announcement.destroy
 
     respond_to do |format|
@@ -69,4 +65,13 @@ class AnnouncementsController < ApplicationController
       format.js
     end
   end
+
+  private
+    def set_announcement
+      @announcement = Announcement.find(params[:id])
+    end
+
+    def announcement_params
+      params.require(:announcement).permit(:message, :starts_at, :ends_at)
+    end
 end
