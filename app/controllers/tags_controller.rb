@@ -20,7 +20,7 @@ class TagsController < ApplicationController
   end
 
   def create
-    @tag = Tag.new(params[:tag])
+    @tag = Tag.new(tag_params)
 
     respond_to do |format|
       if @tag.save
@@ -45,11 +45,17 @@ class TagsController < ApplicationController
   def update
 
     respond_to do |format|
-      if @tag.update_attributes(params[:tag])
+      if @tag.update_attributes(tag_params)
         format.html { redirect_to tags_path, notice: t('controllers.tags.update.flash.success') }
       else
         format.html { render action: 'edit' }
       end
     end
   end
+
+  private
+
+    def tag_params
+      params.require(:tag).permit(:name, :thumbnail)
+    end
 end
