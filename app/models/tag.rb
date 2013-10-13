@@ -1,8 +1,6 @@
 #encoding: utf-8
 
 class Tag < ActiveRecord::Base
-  attr_accessible :name, :thumbnail
-
   has_attached_file :thumbnail, :styles => { thumb: "64x64#" }, :default_url => "missing_64.png"
 
   has_many :taggings, dependent: :destroy
