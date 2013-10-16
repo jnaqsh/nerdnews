@@ -5,13 +5,12 @@ class Comment < ActiveRecord::Base
 
   HIDE_THRESHOLD = -8
 
-  scope :approved, where(approved: true)
+  scope :approved, -> { where(approved: true) }
 
   has_many :votes, as: :voteable
   belongs_to :story, counter_cache: true
   belongs_to :user, counter_cache: true
 
-  attr_accessible :content, :name, :email, :website, :parent_id
   rakismet_attrs author: :name, author_email: :email, author_url: :website
 
   before_validation :smart_add_url_protocol
