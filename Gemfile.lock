@@ -7,10 +7,10 @@ GIT
 
 GIT
   remote: https://github.com/jnaqsh/acts_as_textcaptcha.git
-  revision: 6a0c8691cc13af1ffc44944cf750fe43ebf7c401
+  revision: 638b1f4c46c5e82f1bddb9c10b2f900c9d17f624
   specs:
-    acts_as_textcaptcha (3.0.5)
-      bcrypt-ruby
+    acts_as_textcaptcha (3.0.10)
+      bcrypt-ruby (~> 3.0.1)
 
 GIT
   remote: https://github.com/jnaqsh/twitter-bootstrap-rails.git
