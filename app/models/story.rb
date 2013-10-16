@@ -18,8 +18,8 @@ class Story < ActiveRecord::Base
   has_many :votes, as: :voteable
   belongs_to :user, counter_cache: true
 
-  scope :not_approved, where(:publish_date => nil)
-  scope :approved, where("publish_date", present?)
+  scope :not_approved, -> { where(:publish_date => nil) }
+  scope :approved, -> { where("publish_date", present?) }
 
   before_validation :smart_add_url_protocol
 
