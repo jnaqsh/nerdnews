@@ -25,7 +25,7 @@ class RatingsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @rating.update_attributes(params[:rating])
+      if @rating.update_attributes(rating_params)
         format.html { redirect_to ratings_path, notice: t('controllers.ratings.update.flash.success') }
       end
     end
@@ -38,4 +38,9 @@ class RatingsController < ApplicationController
       end
     end
   end
+
+  private
+    def rating_params
+      params.require(:rating).permit(:name, :weight, :rating_target)
+    end
 end
