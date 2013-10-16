@@ -44,7 +44,7 @@ class PagesController < ApplicationController
   # POST /pages
   # POST /pages.json
   def create
-    @page = Page.new(params[:page])
+    @page = Page.new(page_params)
 
     respond_to do |format|
       if @page.save
@@ -62,7 +62,7 @@ class PagesController < ApplicationController
     @page = Page.find(params[:id])
 
     respond_to do |format|
-      if @page.update_attributes(params[:page])
+      if @page.update_attributes(page_params)
         format.html { redirect_to @page, notice: t('controllers.pages.update.flash.success') }
         format.json { head :no_content }
       else
@@ -81,4 +81,9 @@ class PagesController < ApplicationController
       format.html { redirect_to pages_url }
     end
   end
+
+  private
+    def page_params
+      params.require(:page).permit(:content, :name, :permalink)
+    end
 end
