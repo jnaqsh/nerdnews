@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 class CommentsController < ApplicationController
+  before_action :set_comment, only: [:show, :edit, :update, :destroy, :mark_as_spam, :mark_as_not_spam]
   load_and_authorize_resource
 
   # GET /comments
@@ -15,9 +16,6 @@ class CommentsController < ApplicationController
   # GET /stories/1/comments/1
   # GET /stories/1/comments/1.json
   def show
-    @story = Story.find(params[:story_id])
-    @comment = @story.comments.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
     end
@@ -39,17 +37,15 @@ class CommentsController < ApplicationController
 
   # GET /stories/1/comments/1/edit
   def edit
-    @story = Story.find(params[:story_id])
-    @comment = @story.comments.find(params[:id])
   end
 
   # POST /stories/1/comments
   # POST /stories/1/comments.json
   def create
     @story = Story.find(params[:story_id])
-    @comment = @story.comments.build(params[:comment])
+    @comment = @story.comments.build(comment_params)
     @comment.user = nil
-    @comment.parent_id = params[:comment][:parent_id].empty? ? nil : Comment.find(params[:comment][:parent_id])
+    @comment.parent_id = comment_params[:parent_id].empty? ? nil : Comment.find(comment_params[:parent_id])
     @comment.add_user_requests_data = request
 
     # If user exist and logged in
@@ -82,12 +78,8 @@ class CommentsController < ApplicationController
   # PUT /stories/1/comments/1
   # PUT /stories/1/comments/1.json
   def update
-    @story = Story.find(params[:story_id])
-    @comment = @story.comments.find(params[:id])
-
-
     respond_to do |format|
-      if @comment.update_attributes(params[:comment])
+      if @comment.update_attributes(comment_params)
         record_activity %Q(دیدگاه در خبر #{view_context.link_to @story.title.truncate(40), story_path(@story, :anchor => "comment_#{@comment.id}")} را ویرایش کرد)
 
         format.html { redirect_to story_path(@comment.story),
@@ -101,8 +93,6 @@ class CommentsController < ApplicationController
   # DELETE /stories/1/comments/1
   # DELETE /stories/1/comments/1.json
   def destroy
-    @story = Story.find(params[:story_id])
-    @comment = @story.comments.find(params[:id])
     @comment.destroy
 
     record_activity %Q(دیدگاه در خبر #{view_context.link_to @story.title.truncate(40), story_path(@story, :anchor => "comment_#{@comment.id}")} را حذف کرد)
@@ -114,9 +104,6 @@ class CommentsController < ApplicationController
 
   # PUT /stories/1/comments/1/mark_as_spam
   def mark_as_spam
-    @story = Story.find(params[:story_id])
-    @comment = @story.comments.find(params[:id])
-
     respond_to do |format|
       if @comment.mark_as_spam
         format.html { redirect_to comments_path, notice: t('controllers.comments.mark_as_spam.flash.success') }
@@ -126,13 +113,20 @@ class CommentsController < ApplicationController
 
   # PUT /stories/1/comments/1/unmark_as_spam
   def mark_as_not_spam
-    @story = Story.find(params[:story_id])
-    @comment = @story.comments.find(params[:id])
-
     respond_to do |format|
       if @comment.mark_as_not_spam
         format.html { redirect_to comments_path, notice: t('controllers.comments.mark_as_not_spam.flash.success') }
       end
     end
   end
+
+  private
+    def set_comment
+      @story = Story.find(params[:story_id])
+      @comment = @story.comments.find(params[:id])
+    end
+
+    def comment_params
+      params.require(:comment).permit(:name, :content, :email, :website, :parent_id)
+    end
 end
