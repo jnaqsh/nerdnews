@@ -32,7 +32,7 @@ class MessagesController < ApplicationController
   end
 
   def create
-    @message = @user.received_messages.build(params[:message])
+    @message = @user.received_messages.build(message_params)
     @message.sender = current_user
 
     authorize! :create, @message
@@ -63,4 +63,9 @@ class MessagesController < ApplicationController
       format.html { redirect_to user_messages_path(current_user) }
     end
   end
+
+  private
+    def message_params
+      params.require(:message).permit(:message, :subject)
+    end
 end
