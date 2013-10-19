@@ -17,7 +17,7 @@ class MypageController < ApplicationController
 
     respond_to do |format|
       if !@stories || @stories.empty?
-        format.html { flash.now[:notice] = t('.controllers.mypage.flash.add_tags') }
+        format.html { flash.now[:notice] = t('controllers.mypage.flash.add_tags') }
       else
         format.html
       end
@@ -28,6 +28,6 @@ class MypageController < ApplicationController
   private
 
   def favorite_tags
-    current_user.favorite_tags ? current_user.favored_tags.to_a : []
+    !current_user.favorite_tags.empty? ? current_user.favored_tags.to_a : []
   end
 end
