@@ -88,7 +88,7 @@ class Ability
     can :update, Story, user: {id: user.id}
 
     # User model
-    can [:update, :add_to_favorites, :activity_logs], user
+    can [:update, :add_to_favorites, :activity_logs], User, :id => user.id
     can :bypass_captcha, user
 
     # Vote model
