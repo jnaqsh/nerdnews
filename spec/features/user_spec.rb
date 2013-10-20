@@ -25,7 +25,7 @@ describe '/Users' do
       login @user
       visit user_path(@user)
       click_link 'ویرایش پروفایل'
-      fill_in 'ایمیل', with: 'arash@email.com'
+      fill_in 'user[email]', with: 'arash@email.com'
       click_button 'تایید'
       @user.reload.email.should == 'arash@email.com'
     end
@@ -224,6 +224,7 @@ describe '/Users' do
       end
 
       it 'wont let known user to vote after voting for first time' do
+        binding.pry
         page.should have_selector 'button.btn-thumbs-up'
         find('button.btn-thumbs-up').click
         click_link @pos.name
@@ -236,6 +237,7 @@ describe '/Users' do
         find('button.btn-thumbs-up').click
         click_link @pos.name
         visit story_path @story
+        save_and_open_page
         click_link I18n.t('stories.story.voters')
         within("div.voters") {page.should have_content @user.full_name}
         click_link I18n.t('stories.story.voters')
