@@ -10,12 +10,12 @@ class IdentitiesController < ApplicationController
   # This handles signing in and adding an authentication provider to existing accounts itself
   def create
     session[:authhash] = nil #ensure no one sets it
-    provider = params[:provider] ? params[:provider] : 'No provider recognized (invalid callback)'
+    provider = identity_params[:provider] ? identity_params[:provider] : 'No provider recognized (invalid callback)'
     omniauth = request.env['omniauth.auth']
     # raise omniauth.to_yaml
     @authhash = Hash.new
 
-    if omniauth and params[:provider]
+    if omniauth and identity_params[:provider]
       if ['myopenid', 'google', 'twitter', 'github', 'yahoo', 'persona'].include? provider
         omniauth['info']['email'] ? @authhash[:email] =  omniauth['info']['email'] : @authhash[:email] = ''
         omniauth['info']['name'] ? @authhash[:name] =  omniauth['info']['name'] : @authhash[:name] = ''
@@ -75,4 +75,8 @@ class IdentitiesController < ApplicationController
   def failure
     redirect_to root_url, flash: { error: t('controllers.identities.flash.notloggedin') }
   end
+  private
+    def identity_params
+      params.permit(:oauth_token, :oauth_verifier, :controller, :action, :provider)
+    end
 end
