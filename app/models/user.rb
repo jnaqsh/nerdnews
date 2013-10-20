@@ -5,9 +5,6 @@ class User < ActiveRecord::Base
   extend FriendlyId
   friendly_id :full_name, use: [:slugged, :history]
 
-  attr_accessible :email, :full_name, :website, :password, :role_ids,
-                  :password_confirmation, :favorite_tags, :email_visibility
-
   has_secure_password
 
   has_and_belongs_to_many :roles
