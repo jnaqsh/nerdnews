@@ -27,7 +27,6 @@ describe Comment do
     it {should validate_presence_of(:referrer)}
     it {should_not allow_value("test@gmail.").for(:email)}
     it {should allow_value("hamed@example.com").for(:email)}
-    it {should_not allow_mass_assignment_of(:id)}
   end
 
   describe "Spams" do
