@@ -1,5 +1,11 @@
 require 'rspec/expectations'
 
+def diff(h1,h2)
+  h1.dup.delete_if { |k, v|
+    h2[k] == v
+  }.merge!(h2.dup.delete_if { |k, v| h1.has_key?(k) })
+end
+
 RSpec::Matchers.define :have_ability do |ability_hash, options = {}|
   match do |user|
     ability         = Ability.new(user)
@@ -10,7 +16,8 @@ RSpec::Matchers.define :have_ability do |ability_hash, options = {}|
     ability_hash.each do |action, true_or_false|
       @ability_result[action] = ability.can?(action, target)
     end
-    !ability_hash.diff(@ability_result).any?
+    # !ability_hash.diff(@ability_result).any?
+    !diff(ability_hash, @ability_result).any?
   end
 
   failure_message_for_should do |user|
