@@ -22,7 +22,7 @@
       <% else %>
         <p>
           <i class="icon-remove-sign"></i>
-          <%= link_to t(".remove_identity"), identity, :confirm => t('helpers.links.confirm'), :method => :delete, :class => "remove" %>
+          <%= link_to t(".remove_identity"), identity, data: {confirm: t('helpers.links.confirm')}, :method => :delete, :class => "remove" %>
         </p>
       <% end %>
       </div>
