@@ -276,13 +276,17 @@ describe User do
     it { should validate_presence_of(:email) }
     it { should allow_value("asd@asdas.com").for(:email) }
     it { should_not allow_value("Asdasd@asd").for(:email) }
-    it { should validate_uniqueness_of(:email).case_insensitive }
     it { should validate_confirmation_of(:password) }
     it { should allow_value("www.example.com").for(:website) }
     it { should_not allow_value("www.").for(:website) }
     it { should allow_value('').for(:website) }
     it { should allow_value("http://www.example.com/").for(:website) }
     it { should_not allow_value("http://www.example").for(:website) }
+    it 'uniquness of email' do
+      # Seems that there's bug in Shoulda that prevent this to work without saving the user
+      user = FactoryGirl.create(:user)
+      user.should validate_uniqueness_of(:email).case_insensitive
+    end
   end
 
   context 'Authentication' do
