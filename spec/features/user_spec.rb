@@ -224,7 +224,6 @@ describe '/Users' do
       end
 
       it 'wont let known user to vote after voting for first time' do
-        binding.pry
         page.should have_selector 'button.btn-thumbs-up'
         find('button.btn-thumbs-up').click
         click_link @pos.name
