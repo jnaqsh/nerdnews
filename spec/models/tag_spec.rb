@@ -19,9 +19,5 @@ describe Tag do
           allowing('image/jpeg', 'image/jpg', 'image/png')}
     it {should validate_attachment_size(:thumbnail).
           less_than(100.kilobytes).greater_than(0.kilobytes)}
-    it {should_not allow_mass_assignment_of(:thumbnail_file_name)}
-    it {should_not allow_mass_assignment_of(:thumbnail_content_type)}
-    it {should_not allow_mass_assignment_of(:thumbnail_file_size)}
-    it {should_not allow_mass_assignment_of(:thumbnail_updated_at)}
   end
 end
