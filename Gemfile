@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.0'
+gem 'rails', '4.0.1'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -81,7 +81,7 @@ gem 'omniauth-openid'
 gem 'omniauth-persona'
 
 # the gem that uses in url naming
-gem 'friendly_id', '~> 5.0.0.rc2'
+gem 'friendly_id'
 
 # Compile less files
 gem 'therubyracer'
