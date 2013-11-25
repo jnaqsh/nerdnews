@@ -32,7 +32,7 @@ gem 'jquery-ui-rails'
 gem 'rails-i18n', git: 'https://github.com/iCEAGE/rails-i18n.git'
 
 # encryption like passwords
-gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'bcrypt-ruby', '~> 3.1.2'
 
 gem 'debugger'
 
@@ -55,7 +55,7 @@ gem 'RedCloth'
 gem "red_cloth_formatters_plain", "~> 0.2.0"
 
 # for maintenance page in capistrano
-gem "capistrano-maintenance"
+# gem "capistrano-maintenance"
 
 # jalali (persian) date calendar
 gem 'jalalidate'
