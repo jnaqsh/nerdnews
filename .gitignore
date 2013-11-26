@@ -17,6 +17,9 @@ pickle-email-*.html
 /.git
 /solr/data
 /solr/pids
+/solr/default
+/solr/development
+/solr/test
 .tags
 .tags_sorted_by_file
 /db/schema.rb
