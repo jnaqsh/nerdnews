@@ -1,12 +1,12 @@
 # encoding: utf-8
 require 'spec_helper'
 
-describe "activity logs", search: true do
+describe "activity logs", solr: true do
   it "should a new or approved user gets latest activity logs" do
     user = FactoryGirl.create(:approved_user)
-
     create_story user
     Sunspot.commit
+
     click_link "user-menu"
     click_link "آخرین تغییرات"
     current_path.should eq(activity_logs_path)
