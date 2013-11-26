@@ -236,7 +236,6 @@ describe '/Users' do
         find('button.btn-thumbs-up').click
         click_link @pos.name
         visit story_path @story
-        save_and_open_page
         click_link I18n.t('stories.story.voters')
         within("div.voters") {page.should have_content @user.full_name}
         click_link I18n.t('stories.story.voters')

@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
   validates_presence_of :full_name, :email
   validates :email, email_format: true
   validates :password, confirmation: true
+  validates :password_confirmation, presence: true
   validates_uniqueness_of :email, case_sensitive: false
   validates_length_of :full_name, maximum: 30, minimum: 4
   validates :website, allow_blank: true, uri: true
