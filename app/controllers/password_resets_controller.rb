@@ -3,14 +3,14 @@ class PasswordResetsController < ApplicationController
   end
 
   def create
-    user = User.find_by_email(params[:email])
+    user = User.find_by(email: params[:email])
     password_reset = PasswordReset.new(user)
     password_reset.delay.send_password_reset if user
     redirect_to root_url, notice: t('controllers.password_resets.create.flash.success')
   end
 
   def edit
-    @user = User.find_by_password_reset_token!(params[:id])
+    @user = User.find_by!(password_reset_token: params[:id])
   end
 
   def update
