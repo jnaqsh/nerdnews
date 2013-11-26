@@ -157,6 +157,6 @@ group :test do
   gem 'launchy'
   # gem 'rb-inotify', '~> 0.9', :require => false
   gem 'shoulda-matchers'
-  gem "poltergeist", "~> 1.3.0"
+  gem "poltergeist", "~> 1.4.0"
   gem 'webmock'
 end
