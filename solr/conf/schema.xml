@@ -15,10 +15,10 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 -->
-<!--  
+<!--
  This is the Solr schema file. This file should be named "schema.xml" and
  should be in the conf directory under the solr home
- (i.e. ./solr/conf/schema.xml by default) 
+ (i.e. ./solr/conf/schema.xml by default)
  or located where the classloader for the Solr webapp can find it.
 
  This example schema is the recommended starting point for users.
@@ -45,20 +45,11 @@
 -->
 <schema name="sunspot" version="1.0">
   <types>
-    <!-- field type definitions. The "name" attribute is
-       just a label to be used by field definitions.  The "class"
-       attribute and any other attributes determine the real
-       behavior of the fieldType.
-         Class names starting with "solr" refer to java classes in the
-       org.apache.solr.analysis package.
-    -->
-    
-    <!-- Theese're added by Arash too! see: https://github.com/sunspot/sunspot/wiki/Matching-substrings-in-fulltext-search -->
     <fieldType class="solr.TextField" name="text_pre" positionIncrementGap="100">
       <analyzer type="index">
         <tokenizer class="solr.WhitespaceTokenizerFactory"/>
         <filter class="solr.LowerCaseFilterFactory"/>
-        <filter class="solr.EdgeNGramFilterFactory" minGramSize="1" maxGramSize="10" side="front"/>
+        <filter class="solr.EdgeNGramFilterFactory" minGramSize="2" maxGramSize="10" side="front"/>
       </analyzer>
       <analyzer type="query">
         <tokenizer class="solr.WhitespaceTokenizerFactory"/>
@@ -66,6 +57,13 @@
       </analyzer>
     </fieldType>
 
+    <!-- field type definitions. The "name" attribute is
+       just a label to be used by field definitions.  The "class"
+       attribute and any other attributes determine the real
+       behavior of the fieldType.
+         Class names starting with "solr" refer to java classes in the
+       org.apache.solr.analysis package.
+    -->
     <!-- *** This fieldType is used by Sunspot! *** -->
     <fieldType name="string" class="solr.StrField" omitNorms="true"/>
     <!-- *** This fieldType is used by Sunspot! *** -->
@@ -78,6 +76,7 @@
         <tokenizer class="solr.StandardTokenizerFactory"/>
         <filter class="solr.StandardFilterFactory"/>
         <filter class="solr.LowerCaseFilterFactory"/>
+        <filter class="solr.PorterStemFilterFactory"/>
       </analyzer>
     </fieldType>
     <!-- *** This fieldType is used by Sunspot! *** -->
@@ -98,11 +97,15 @@
     <fieldType name="tfloat" class="solr.TrieFloatField" omitNorms="true"/>
     <!-- *** This fieldType is used by Sunspot! *** -->
     <fieldType name="tdate" class="solr.TrieDateField" omitNorms="true"/>
+
+    <!-- A specialized field for geospatial search. If indexed, this fieldType must not be multivalued. -->
+    <fieldType name="location" class="solr.LatLonType" subFieldSuffix="_coordinate"/>
   </types>
   <fields>
+    <dynamicField name="*_textp" stored="false" type="text_pre" multiValued="true" indexed="true"/>
     <!-- Valid attributes for fields:
      name: mandatory - the name for the field
-     type: mandatory - the name of a previously defined type from the 
+     type: mandatory - the name of a previously defined type from the
        <types> section
      indexed: true if this field should be indexed (searchable or sortable)
      stored: true if this field should be retrievable
@@ -118,9 +121,9 @@
        given field.
        When using MoreLikeThis, fields used for similarity should be
        stored for best performance.
-     termPositions: Store position information with the term vector.  
+     termPositions: Store position information with the term vector.
        This will increase storage costs.
-     termOffsets: Store offset information with the term vector. This 
+     termOffsets: Store offset information with the term vector. This
        will increase storage costs.
      default: a value that should be used if no value is specified
        when adding a document.
@@ -237,10 +240,21 @@
     <dynamicField name="*_ets" stored="true" termVectors="true" type="tdouble" multiValued="false" indexed="true"/>
     <!-- *** This dynamicField is used by Sunspot! *** -->
     <dynamicField name="*_etms" stored="true" termVectors="true" type="tdouble" multiValued="true" indexed="true"/>
-    <!-- *** This dynamicField is added by Arash! *** -->
-    <dynamicField name="*_textp" stored="false" type="text_pre" multiValued="true" indexed="true"/>
+
+    <!-- Type used to index the lat and lon components for the "location" FieldType -->
+    <dynamicField name="*_coordinate"  type="tdouble" indexed="true"  stored="false" multiValued="false"/>
+    <dynamicField name="*_p" type="location" indexed="true" stored="true" multiValued="false"/>
+
+    <dynamicField name="*_ll" stored="false" type="location" multiValued="false" indexed="true"/>
+    <dynamicField name="*_llm" stored="false" type="location" multiValued="true" indexed="true"/>
+    <dynamicField name="*_lls" stored="true" type="location" multiValued="false" indexed="true"/>
+    <dynamicField name="*_llms" stored="true" type="location" multiValued="true" indexed="true"/>
+
+    <!-- required by Solr 4 -->
+    <field name="_version_" type="string" indexed="true" stored="true" multiValued="false" />
   </fields>
-  <!-- Field to use to determine and enforce document uniqueness. 
+
+  <!-- Field to use to determine and enforce document uniqueness.
       Unless this field is marked with required="false", it will be a required field
    -->
   <uniqueKey>id</uniqueKey>
