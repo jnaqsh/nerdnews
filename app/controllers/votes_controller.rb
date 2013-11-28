@@ -5,10 +5,10 @@ class VotesController < ApplicationController
 
   def create
     begin
-      @rating         = Rating.find(params[:rating_id])
+      @rating         = Rating.find(votes_params[:rating_id])
       @user           = current_user
       @vote           = Vote.new()
-      voteable_helper = VoteableHelper.new(params, @vote)
+      voteable_helper = VoteableHelper.new(votes_params, @vote)
       @voteable       = voteable_helper.voteable_object
       @vote.voteable  = @voteable
       @vote.rating    = @rating
@@ -18,7 +18,7 @@ class VotesController < ApplicationController
       return
     end
 
-    type = params[:positive].present? and params[:positive] == true
+    type = votes_params[:positive].present? and votes_params[:positive] == true
 
     respond_to do |format|
       if @vote.save
@@ -46,4 +46,8 @@ private
     end
   end
 
+  def votes_params
+    # params.permit!
+    params.permit(:positive, :rating_id, :voteable, :controller, :story_id, :comment_id)
+  end
 end

@@ -13,8 +13,6 @@ describe Vote do
     let(:rating)  { FactoryGirl.create(:rating) }
     let(:user)    { FactoryGirl.create(:user) }
 
-    it {should validate_uniqueness_of(:voteable_id)}
-
     it 'checks for uniquness' do
 
       vote1 = Vote.new do |v|
@@ -30,8 +28,6 @@ describe Vote do
       end
 
       vote1.save
-      vote1.id.should eq(1)
-
       vote2.save
       vote2.id.should be_nil
     end
