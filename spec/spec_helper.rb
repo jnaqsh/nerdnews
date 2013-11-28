@@ -11,6 +11,7 @@ require 'capybara/poltergeist'
 require "paperclip/matchers"
 Capybara.javascript_driver = :poltergeist
 require 'webmock/rspec'
+require 'database_cleaner'
 # Config Sunspot
 $original_sunspot_session = Sunspot.session
 
@@ -52,7 +53,7 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = false
 
   # If true, the base class of anonymous controllers will be inferred
   # automatically. This will be the default behavior in future versions of
@@ -72,19 +73,6 @@ RSpec.configure do |config|
   config.include Paperclip::Shoulda::Matchers
   config.before(:each) { reset_email }
 end
-
-class ActiveRecord::Base
-  mattr_accessor :shared_connection
-  @@shared_connection = nil
-
-  def self.connection
-    @@shared_connection || retrieve_connection
-  end
-end
-
-# Forces all threads to share the same connection. This works on
-# Capybara because it starts the web server in a thread.
-ActiveRecord::Base.shared_connection = ActiveRecord::Base.connection
 
 # Set OmniAuth to Mock it's connection
 OmniAuth.config.test_mode = true
