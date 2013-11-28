@@ -3,7 +3,7 @@ require 'spec_helper'
 
 describe "Ratings" do
   describe "GET /ratings" do
-    
+
     before do
       user = FactoryGirl.create(:founder_user)
       login user
@@ -22,23 +22,28 @@ describe "Ratings" do
       page.should have_content 'جالب'
     end
 
-    it 'should edit a rating' do
-      rating = FactoryGirl.create(:rating)
-      visit ratings_path
-      click_link rating.name
-      fill_in 'نام', with: 'قشنگ'
-      click_button 'به‌روزرسانی'
-      current_path.should eq ratings_path
-      page.should have_content 'موفقیت'
-      page.should have_content 'قشنگ'
-    end
+    context 'Edit/Destroy' do
 
-    it 'should destroy a rating' do
-      rating = FactoryGirl.create(:rating)
-      visit ratings_path
-      click_link 'حذف'
-      page.should have_content 'موفقیت'
-      page.should_not have_content rating.name
+      before(:each) do
+        @rating = FactoryGirl.create(:rating)
+      end
+
+      it 'should edit a rating' do
+        visit ratings_path
+        click_link @rating.name
+        fill_in 'نام', with: 'قشنگ'
+        click_button 'به‌روزرسانی'
+        current_path.should eq ratings_path
+        page.should have_content 'موفقیت'
+        page.should have_content 'قشنگ'
+      end
+
+      it 'should destroy a rating' do
+        visit ratings_path
+        click_link 'حذف'
+        page.should have_content 'موفقیت'
+        page.should_not have_content @rating.name
+      end
     end
   end
 end
