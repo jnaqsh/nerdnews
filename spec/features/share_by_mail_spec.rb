@@ -2,13 +2,13 @@
 
 require 'spec_helper'
 
-describe 'Share By Mail' do
+describe 'Share By Mail', js: true do
   before do
     @story  = FactoryGirl.create :approved_story
     @user   = FactoryGirl.create :user
   end
 
-  it "sends email to share story via unknown user", js: true do
+  it "sends email to share story via unknown user"  do
     visit story_path(@story)
     within 'article ul.social-icons' do
       find(:xpath, "//a[@data-target='#mailModal']").click
@@ -21,7 +21,7 @@ describe 'Share By Mail' do
     last_email.to.should include('arash@example.com')
   end
 
-  it "sends email to share story via known user", js: true do
+  it "sends email to share story via known user" do
     login @user
     visit story_path(@story)
     within 'article ul.social-icons' do
