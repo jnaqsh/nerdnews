@@ -22,7 +22,7 @@ describe "Ratings" do
       page.should have_content 'جالب'
     end
 
-    context 'Edit/Destroy', focus: true do
+    context 'Edit/Destroy' do
 
       before(:each) do
         @rating = FactoryGirl.create(:rating)
