@@ -159,4 +159,5 @@ group :test do
   gem 'shoulda-matchers'
   gem "poltergeist", "~> 1.4.0"
   gem 'webmock'
+  gem 'database_cleaner'
 end
