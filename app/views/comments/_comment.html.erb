@@ -57,8 +57,7 @@
           <ul>
             <% Rating.positive('comments').each do |rating| %>
               <li class='icon-hand-left'>
-                <%= link_to rating.name, story_comment_votes_path(comment.story, comment, rating_id: rating, positive: true),
-                  method: :post, remote: true %>
+                <%= link_to rating.name, story_comment_votes_path(comment.story, comment, rating_id: rating, positive: true), method: :post, remote: true %>
               </li>
             <% end %>
           </ul>
