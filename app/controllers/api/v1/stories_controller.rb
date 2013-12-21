@@ -1,6 +1,8 @@
 module Api
   module V1
     class StoriesController < ApplicationController
+      doorkeeper_for :index, :scopes => [:public]
+      # doorkeeper_for :index
       respond_to :json
 
       def index
@@ -11,7 +13,7 @@ module Api
         @story = Story.includes([:tags, :user, :publisher, {:votes => [:rating, :user]}]).find(params[:id])
         respond_with @story
       end
-      
+
       private
 
       def stories_index
@@ -23,12 +25,10 @@ module Api
           order_by :publish_date, :desc
           paginate :page => params[:page], :per_page => 20
         end.results
-
-        share_by_mail
       end
-    
+
     end
-    
+
   end
-  
+
 end

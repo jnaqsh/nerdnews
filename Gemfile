@@ -122,7 +122,7 @@ gem 'rabl'
 gem 'oj' # Also add either `oj` or `yajl-ruby` as the JSON parser
 
 # OAuth2 support
-gem 'doorkeeper'
+gem 'doorkeeper', '~> 1.0.0.rc1'
 
 # To send HTML mails
 gem 'roadie'
