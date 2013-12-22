@@ -145,6 +145,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'pry-rails'
   gem 'pry-nav'
+  # Formatter for rspec
+  gem 'fuubar'
 end
 
 group :test do
