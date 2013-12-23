@@ -25,7 +25,7 @@ class Story < ActiveRecord::Base
 
   validates_length_of :title, maximum: 100, minimum: 10
   validates_length_of :content, minimum: 250, maximum: CONTENT_MAX_LENGTH
-  validates  :title, :content, presence: true
+  validates :title, :content, presence: true
   validates :source, allow_blank: true, uri: true
 
   attr_reader :tag_names
@@ -58,16 +58,10 @@ class Story < ActiveRecord::Base
   end
 
   def tag_names=(tokens)
-    # self.tag_ids = Tag.ids_from_tokens(tokens)
     tags_array = tokens.split(",")
     self.tags.clear
     tags_array.each do |tag|
-      found_tag = Tag.find_by_name(tag.strip)
-      if !found_tag.blank?
-        self.tags << found_tag if !self.tags.include?(found_tag)
-      else
-        self.tags << Tag.create!(name: tag.strip) if tag.strip.size != 0
-      end
+      self.tags.find_or_initialize_by(name: tag.strip) if tag.strip.size != 0
     end
   end
 
