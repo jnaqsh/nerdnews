@@ -3,6 +3,7 @@ require 'spec_helper'
 
 describe "Comments" do
   let(:user)  { FactoryGirl.create :user }
+  let(:founder_user) { FactoryGirl.create :founder_user }
   let(:story) { FactoryGirl.create :approved_story }
 
   it "sends and reply to a comment" do
@@ -82,6 +83,21 @@ describe "Comments" do
       click_link pos.name
       visit story_path story
       page.should_not have_selector 'button.btn-comments-thumbs-up'
+    end
+  end
+
+  context '#destroy_spams' do
+    before do
+      login founder_user
+    end
+
+    it 'destroys all spam', focus: true do
+      FactoryGirl.create_list :comment, 10, story_id: story.id, name: 'viagra-test-123'
+      expect(Comment.unapproved.size).to eq(10)
+      visit comments_path
+      click_link 'destroy_spams'
+      page.should have_content 'موفقیت'
+      expect(Comment.unapproved.size).to eq(0)
     end
   end
 end

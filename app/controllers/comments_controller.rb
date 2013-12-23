@@ -102,6 +102,15 @@ class CommentsController < ApplicationController
     end
   end
 
+  # DELETE /comments/destroy_spams
+  def destroy_spams
+    Comment.unapproved.destroy_all
+
+    respond_to do |format|
+      format.html { redirect_to comments_path, notice: t('controllers.comments.destroy_spams.flash.success') }
+    end
+  end
+
   # PUT /stories/1/comments/1/mark_as_spam
   def mark_as_spam
     respond_to do |format|

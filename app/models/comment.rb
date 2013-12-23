@@ -5,7 +5,8 @@ class Comment < ActiveRecord::Base
 
   HIDE_THRESHOLD = -8
 
-  scope :approved, -> { where(approved: true) }
+  scope :approved,    -> { where(approved: true) }
+  scope :unapproved,  -> { where(approved: false) }
 
   has_many :votes, as: :voteable
   belongs_to :story, counter_cache: true

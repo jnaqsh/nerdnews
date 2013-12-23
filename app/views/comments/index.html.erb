@@ -1,6 +1,11 @@
 <% content_for :page_header do %>
   <h1><%=t '.title', :default => "مدیریت پیام‌ها" %></h1>
 <% end %>
+
+<div>
+  <%= link_to t('.destroy_spams') + "(#{Comment.unapproved.size.to_farsi})", comments_destroy_spams_path, id: 'destroy_spams', method: :delete %>
+</div>
+
 <table class="table table-striped">
   <thead>
     <tr>

@@ -38,6 +38,9 @@ fa:
       mark_as_not_spam:
         flash:
           success:  "با موفقیت به عنوان غیر اسپم مشخص شد."
+      destroy_spams:
+        flash:
+          success: "عملیات حذف اسپم‌ها با موفقیت انجام شد."
     users:
       create:
         flash:
@@ -292,6 +295,7 @@ fa:
       comment: 'دیدگاه'
       in_response: 'در پاسخ'
       sent: 'ارسال شده در: '
+      destroy_spams: 'حذف اسپم‌ها '
     form:
       write_your_comment: 'دیدگاه خود را بنویسید...'
       You!: 'شما!'
