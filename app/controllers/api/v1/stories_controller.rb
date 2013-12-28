@@ -1,7 +1,7 @@
 module Api
   module V1
     class StoriesController < ApplicationController
-      doorkeeper_for :index, :scopes => [:public]
+      doorkeeper_for :index, :show, :scopes => ['public']
       # doorkeeper_for :index
       respond_to :json
 
