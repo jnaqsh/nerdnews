@@ -91,7 +91,7 @@ describe "Comments" do
       login founder_user
     end
 
-    it 'destroys all spam', focus: true do
+    it 'destroys all spam' do
       FactoryGirl.create_list :comment, 10, story_id: story.id, name: 'viagra-test-123'
       expect(Comment.unapproved.size).to eq(10)
       visit comments_path
