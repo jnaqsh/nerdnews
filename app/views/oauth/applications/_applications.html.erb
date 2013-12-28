@@ -1,0 +1,30 @@
+<table class="table table-striped">
+  <tbody>
+     <thead>
+        <tr>
+          <th>نام</th>
+          <th>آدرس بازگشتی</th>
+          <th>تاریخ ایجاد</th>
+          <th>عملیات</th>
+        </tr>
+      </thead>
+    <% applications.each do |application| %>
+      <tr>
+        <td title="نام">
+          <%= application.name %>
+        </td>
+        <td title="آدرس بازگشتی">
+          <i class='icon-reply'></i>
+          <%= application.redirect_uri %>
+        </td>
+        <td title="تاریخ ایجاد">
+          <%= to_jalali(application.created_at) %>
+        </td>
+        <td title='عملیات'>
+          <%= link_to t('helpers.links.edit'), edit_oauth_application_path(application) %> |
+          <%= link_to 'حذف', oauth_application_path(application.id), method: :delete, data: { :confirm => t('.confirm', default: t("helpers.links.confirm") )} %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

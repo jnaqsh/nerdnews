@@ -487,3 +487,21 @@ fa:
   unauthorized:
     manage:
       all: 'شما اجازه دسترسی به این صفحه را ندارید، لطفا ابتدا وارد شوید.'
+
+  oauth:
+    applications:
+      index:
+        applications: 'برنامه‌ها'
+        no_applications: 'شما هنوز برنامه‌ای ایجاد نکرده‌اید.'
+      new:
+        new_application: 'ثبت برنامه جدید'
+      show:
+        header: 'برنامه: %{name}'
+        confirm: 'آیا مطمئنید؟'
+      edit:
+        header: 'ویرایش برنامه: %{name}'
+      form:
+        submit: 'ثبت'
+        confirm: 'ثبت برنامه لغو شود؟'
+        name: 'نام'
+        redirect_uri: 'آدرس بازگشتی'

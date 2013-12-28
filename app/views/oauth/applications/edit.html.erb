@@ -1,0 +1,10 @@
+<% content_for :page_header do %>
+  <h1><%= t('.header', name: @application.name) %></h1>
+<% end %>
+
+<div class="row">
+  <!-- main content -->
+  <div class="span12">
+    <%= render 'form' %>
+  </div>
+</div>

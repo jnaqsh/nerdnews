@@ -5,7 +5,9 @@ Nerdnews::Application.routes.draw do
     end
   end
 
-  use_doorkeeper
+  use_doorkeeper do
+    controllers :applications => 'oauth/applications'
+  end
 
   post "share_by_mail/create"
   get "share_by_mail/show"

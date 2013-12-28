@@ -1,0 +1,17 @@
+<%= simple_form_for [:oauth, @application], :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :name, label: t('.name') %>
+
+  <%= f.input :redirect_uri, label: t('.redirect_uri') do %>
+    <%= f.input_field :redirect_uri %>
+    <% if Doorkeeper.configuration.test_redirect_uri %>
+      <span class="help-block">
+        جهت آزمایش‌های محلی از <%= Doorkeeper.configuration.test_redirect_uri %> استفاده کنید.
+      </span>
+    <% end %>
+  <% end %>
+
+  <div class="form-actions">
+    <%= f.button :submit, t('.submit'), class: 'btn-primary', data: { disable_with: t('view.disable_with') } %>
+    <%= link_to t("helpers.links.cancel"), :back, name: 'cancel', class: 'btn', data: { confirm: t('.confirm') } %>
+  </div>
+<% end %>

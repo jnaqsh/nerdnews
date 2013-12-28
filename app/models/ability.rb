@@ -93,6 +93,10 @@ class Ability
 
     # Vote model
     can :create, Vote
+
+    # Oauth::ApplicationsController
+    can [:index, :new, :show, :create], Doorkeeper::Application
+    can [:edit, :update, :destroy], Doorkeeper::Application, user: {id: user.id}
   end
 
   def approved_user_permissions(user)

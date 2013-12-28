@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   has_many :activity_logs
   has_many :published_stories, class_name: "Story", foreign_key: "publisher_id"
   has_many :removed_stories, class_name: "Story", foreign_key: "remover_id"
+  has_many :oauth_applications, class_name: 'Doorkeeper::Application', as: :owner
 
   validates_presence_of :full_name, :email
   validates :email, email_format: true
