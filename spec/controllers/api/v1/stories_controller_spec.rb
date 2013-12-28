@@ -7,7 +7,7 @@ describe Api::V1::StoriesController, focus: true do
 
     let(:token) do
       double :accessible? => true,
-             :scopes => [:public]
+             :scopes => ['public']
     end
 
     before(:each) do
