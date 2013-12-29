@@ -1,0 +1,8 @@
+<% content_for :page_header do %>
+  <h2><%#= t('.authorize_app?', name: @pre_auth.client.name) %></h2>
+<% end %>
+
+<div class="span12">
+  <h3>کد دسترسی:</h3>
+  <code id="authorization_code"><%= params[:code] %></code>
+</div>

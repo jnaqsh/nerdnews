@@ -7,6 +7,8 @@ Nerdnews::Application.routes.draw do
 
   use_doorkeeper do
     controllers :applications => 'oauth/applications'
+    controllers :authorizations => 'oauth/authorizations'
+    controllers :authorized_applications => 'oauth/authorized_applications'
   end
 
   post "share_by_mail/create"

@@ -11,7 +11,9 @@
     <% applications.each do |application| %>
       <tr>
         <td title="نام">
-          <%= application.name %>
+          <%= link_to oauth_application_path(application) do %>
+            <%= application.name %>
+          <% end %>
         </td>
         <td title="آدرس بازگشتی">
           <i class='icon-reply'></i>

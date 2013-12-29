@@ -513,3 +513,17 @@ fa:
           notice: 'برنامه با موفقت بروزرسانی شد'
         destroy:
           notice: 'برنامه با موفقیت حذف شد'
+    authorizations:
+      new:
+        authorize_app?: 'اجازه دسترسی برنامه %{name} را به حساب خود می‌دهید؟'
+        application_ability: 'این برنامه قادر خواهد بود:'
+        authorize: 'تایید دسترسی'
+        deny: 'لغو'
+        or: 'یا'
+    authorized_applications:
+      index:
+        connected_apps: 'برنامه‌های متصل شده'
+        application: 'برنامه'
+        created_at: 'تاریخ ایجاد'
+        actions: 'عملیات'
+        revoke: 'حذف دسترسی'
