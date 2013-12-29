@@ -6,6 +6,9 @@
   <p><%= t('.no_applications') %></p>
 <% end %>
 
-<p><%= link_to 'ایجاد برنامه جدید', new_oauth_application_path %></p>
+<p>
+  <i class='icon-plus'></i>
+  <%= link_to 'ایجاد برنامه جدید', new_oauth_application_path %>
+</p>
 
 <%= render partial: 'applications', object: @applications %>

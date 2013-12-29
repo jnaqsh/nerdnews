@@ -21,7 +21,7 @@
     <h3>کنش‌ها</h3>
     <p><%= link_to 'فهرست همه برنامه‌ها', oauth_applications_path %></p>
     <p><%= link_to 'ویرایش', edit_oauth_application_path(@application) %></p>
-    <p><%= link_to 'حذف', oauth_application_path(@application), method: :delete, data: { :confirm => t('.confirm', :default => t("helpers.links.confirm", } %></p>
+    <p><%= link_to 'حذف', oauth_application_path(@application), method: :delete, data: { :confirm => t('.confirm', :default => t("helpers.links.confirm")) } %></p>
 
   </div>
 </div>
