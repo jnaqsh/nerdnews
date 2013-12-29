@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: messages
+#
+#  id          :integer          not null, primary key
+#  sender_id   :integer
+#  receiver_id :integer
+#  subject     :string(255)
+#  message     :text
+#  unread      :boolean          default(TRUE)
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
 class Message < ActiveRecord::Base
   # attr_accessible :message, :subject
 

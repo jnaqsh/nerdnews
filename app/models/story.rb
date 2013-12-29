@@ -1,4 +1,28 @@
 #encoding: utf-8
+# == Schema Information
+#
+# Table name: stories
+#
+#  id                   :integer          not null, primary key
+#  title                :string(255)
+#  content              :text
+#  publish_date         :datetime
+#  user_id              :integer
+#  slug                 :string(255)
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  comments_count       :integer          default(0)
+#  view_counter         :integer          default(0)
+#  positive_votes_count :integer          default(0)
+#  negative_votes_count :integer          default(0)
+#  source               :string(255)
+#  publisher_id         :integer
+#  total_point          :integer          default(0)
+#  hide                 :boolean          default(FALSE)
+#  deleted_at           :datetime
+#  remover_id           :integer
+#
+
 
 class Story < ActiveRecord::Base
   # acts_as_paranoid
