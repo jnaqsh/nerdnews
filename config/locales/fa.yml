@@ -493,6 +493,7 @@ fa:
       index:
         applications: 'برنامه‌ها'
         no_applications: 'شما هنوز برنامه‌ای ایجاد نکرده‌اید.'
+        new_application: 'ایجاد برنامه جدید'
       new:
         new_application: 'ثبت برنامه جدید'
       show:
@@ -505,3 +506,10 @@ fa:
         confirm: 'ثبت برنامه لغو شود؟'
         name: 'نام'
         redirect_uri: 'آدرس بازگشتی'
+      flash:
+        create:
+          notice: 'برنامه با موفقت ایجاد شد'
+        update:
+          notice: 'برنامه با موفقت بروزرسانی شد'
+        destroy:
+          notice: 'برنامه با موفقیت حذف شد'
