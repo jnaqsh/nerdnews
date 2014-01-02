@@ -46,6 +46,7 @@ class Story < ActiveRecord::Base
   scope :approved, -> { where("publish_date", present?) }
 
   before_validation :smart_add_url_protocol
+  after_save :assign_tags_to_story
 
   validates_length_of :title, maximum: 100, minimum: 10
   validates_length_of :content, minimum: 250, maximum: CONTENT_MAX_LENGTH
@@ -53,6 +54,7 @@ class Story < ActiveRecord::Base
   validates :source, allow_blank: true, uri: true
 
   attr_reader :tag_names
+  attr_accessor :preview_tags
 
   searchable do
     integer :id
@@ -83,9 +85,12 @@ class Story < ActiveRecord::Base
 
   def tag_names=(tokens)
     tags_array = tokens.split(",")
-    self.tags.clear
+    self.preview_tags = []
     tags_array.each do |tag|
-      self.tags.find_or_initialize_by(name: tag.strip) if tag.strip.size != 0
+       if tag.strip.size != 0
+         the_tag = Tag.where(name: tag.strip).first_or_initialize
+         self.preview_tags << the_tag
+       end
     end
   end
 
@@ -144,6 +149,10 @@ protected
   end
 
 private
+  def assign_tags_to_story
+    self.tags = self.preview_tags if self.preview_tags
+  end
+
   def calculate_count(tag)
     tag.update_attribute :stories_count, tag.stories.count
   end

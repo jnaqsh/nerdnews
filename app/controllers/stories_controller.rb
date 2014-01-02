@@ -83,6 +83,7 @@ class StoriesController < ApplicationController
     respond_to do |format|
       if params[:preview_button]
         @story.textcaptcha
+        params[:tags] = @story.preview_tags
         format.html { render action: "new" }
       else
         if @story.save
@@ -104,6 +105,7 @@ class StoriesController < ApplicationController
 
     respond_to do |format|
       if params[:preview_button]
+        params[:tags] = @story.preview_tags
         format.html { render action: "edit" }
       else
         if @story.update(story_params)
@@ -181,6 +183,10 @@ class StoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def story_params
-      params.require(:story).permit(:title, :content, :source, :tag_names, :spam_answers, :spam_answer)
+      params.require(:story)
+        .permit(
+          :title, :content, :source, :tag_names, :spam_answers,
+          :spam_answer, :tags
+        )
     end
 end
