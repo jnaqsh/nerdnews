@@ -19,6 +19,10 @@
 
       <%= f.input :website, label: false, input_html: {class: 'span4'}, placeholder: "#{t('activerecord.attributes.comment.website')}" %>
 
+      <%= textcaptcha_fields(f) do %>
+        <%= f.input :spam_answer, label: false, placeholder: @comment.spam_question, input_html: {class: "span4"} %>
+      <% end %>
+
       </div>
 
       <div class='span2' style='text-align: center'>

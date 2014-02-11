@@ -24,7 +24,7 @@
 
 class Comment < ActiveRecord::Base
   # acts_as_paranoid
-
+  acts_as_textcaptcha
   include Rakismet::Model
 
   HIDE_THRESHOLD = -8
@@ -46,6 +46,10 @@ class Comment < ActiveRecord::Base
   validates :website, allow_blank: true, uri: true
 
   has_ancestry
+
+  def perform_textcaptcha?
+    !skip_textcaptcha
+  end
 
   def user_voted?(user)
     !self.votes.where("user_id = ?", user).blank?

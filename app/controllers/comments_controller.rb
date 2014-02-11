@@ -25,8 +25,10 @@ class CommentsController < ApplicationController
   # GET /stories/1/comments/new.json
   def new
     @comment = Comment.new(parent_id: params[:parent_id])
+    @comment.textcaptcha
     @story = Story.find(params[:story_id])
 
+    bypass_captcha_or_not @comment
     share_by_mail
 
     respond_to do |format|
@@ -55,6 +57,8 @@ class CommentsController < ApplicationController
       @comment.website = current_user.website
       @comment.user = current_user
     end
+
+    bypass_captcha_or_not @comment
 
     respond_to do |format|
       if @comment.save
@@ -136,6 +140,6 @@ class CommentsController < ApplicationController
     end
 
     def comment_params
-      params.require(:comment).permit(:name, :content, :email, :website, :parent_id)
+      params.require(:comment).permit(:name, :content, :email, :website, :parent_id, :spam_answers, :spam_answer)
     end
 end

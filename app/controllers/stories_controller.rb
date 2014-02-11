@@ -35,6 +35,10 @@ class StoriesController < ApplicationController
     if @story
       @story.increment!(:view_counter)
       @comment = @story.comments.build
+      # Textcaptcha for comment form
+      @comment.textcaptcha
+      bypass_captcha_or_not @comment
+
       @comments = @story.comments.approved.includes(:user, :story).arrange(order: :created_at)
 
       story_path = Rails.env.production? ? story_path(@story).downcase : story_path(@story) #monkey patch due to error in production (downcase)

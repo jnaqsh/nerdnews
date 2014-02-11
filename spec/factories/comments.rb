@@ -47,6 +47,11 @@ FactoryGirl.define do
     c.user_agent { 'Mozilla/5.0' }
     c.referrer { 'http://localhost' }
 
+    after(:build) do |comment|
+      comment.textcaptcha
+      comment.spam_answer = "four"
+    end
+
     factory :comment_reply do
       after(:build) {|c| c.ancestry = create(:comment).id}
       after(:build) {|c| c.story = create(:approved_story) }

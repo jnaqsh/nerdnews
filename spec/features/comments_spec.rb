@@ -6,39 +6,69 @@ describe "Comments" do
   let(:founder_user) { FactoryGirl.create :founder_user }
   let(:story) { FactoryGirl.create :approved_story }
 
-  it "sends and reply to a comment" do
-    # Stub request to akismet
-    stub_akismet_connection
+  describe "/sending comment" do
+    before do
+      # Stub request to akismet
+      stub_akismet_connection
+    end
 
-    visit new_story_comment_path story.id
-    fill_in "comment_name", with: user.full_name
-    fill_in "comment_email", with: user.email
-    fill_in "comment_website", with: user.website
-    fill_in "comment_content", with: Faker::Lorem.paragraph
-    click_button "ایجاد"
-    page.should have_content "موفقیت"
-    current_path.should eq(story_path story)
-    click_link "پاسخ"
-    fill_in "comment_name", with: user.full_name
-    fill_in "comment_email", with: user.email
-    fill_in "comment_website", with: user.website
-    fill_in "comment_content", with: Faker::Lorem.paragraph
-    click_button "ایجاد"
-    page.should have_content("موفقیت")
-  end
+    context '/Unknown user' do
+      it "sends and reply to a comment" do
+        visit new_story_comment_path story.id
+        fill_in "comment_name", with: user.full_name
+        fill_in "comment_email", with: user.email
+        fill_in "comment_website", with: user.website
+        fill_in "comment_content", with: Faker::Lorem.paragraph
+        fill_in "comment_spam_answer", with: "four"
+        click_button "ایجاد"
+        page.should have_content "موفقیت"
 
-  it "Sends email to original author when replies" do
-    # Stub request to akismet
-    stub_akismet_connection
+        current_path.should eq(story_path story)
+        click_link "پاسخ"
+        fill_in "comment_name", with: user.full_name
+        fill_in "comment_email", with: user.email
+        fill_in "comment_website", with: user.website
+        fill_in "comment_content", with: Faker::Lorem.paragraph
+        fill_in "comment_spam_answer", with: "four"
+        click_button "ایجاد"
+        page.should have_content("موفقیت")
+      end
+    end
 
-    comment = FactoryGirl.create :comment, story_id: story.id, user_id: user.id
-    visit story_path story
-    click_link "پاسخ"
-    fill_in "comment_name", with: user.full_name
-    fill_in "comment_email", with: user.email
-    fill_in "comment_content", with: Faker::Lorem.paragraph
-    click_button 'ایجاد'
-    last_email.to.should include(comment.email)
+    context '/Known user' do
+      before do
+        login user
+      end
+
+      it "sends and reply to a comment" do
+        visit new_story_comment_path story.id
+        fill_in "comment_content", with: Faker::Lorem.paragraph
+        click_button "ایجاد"
+        page.should have_content "موفقیت"
+
+        current_path.should eq(story_path story)
+        click_link "پاسخ"
+        fill_in "comment_content", with: Faker::Lorem.paragraph
+        click_button "ایجاد"
+        page.should have_content("موفقیت")
+      end
+
+    end
+
+    context '/Sending mail' do
+      it "Sends email to original author when replies" do
+        comment = FactoryGirl.create :comment, story_id: story.id, user_id: user.id
+        visit story_path story
+        click_link "پاسخ"
+        fill_in "comment_name", with: user.full_name
+        fill_in "comment_email", with: user.email
+        fill_in "comment_content", with: Faker::Lorem.paragraph
+        fill_in "comment_spam_answer", with: "four"
+        click_button 'ایجاد'
+        last_email.to.should include(comment.email)
+      end
+    end
+
   end
 
   context '/Rating', js: true do
