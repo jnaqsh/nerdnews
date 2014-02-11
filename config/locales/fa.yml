@@ -75,6 +75,9 @@ fa:
       update:
         flash:
           success: "تگ با موفقیت ویرایش شد."
+      destroy_multiple:
+        flash:
+          success: 'با موفقیت حذف شدند.'
     ratings:
       create:
         flash:
@@ -282,6 +285,7 @@ fa:
       title: 'فهرست'
       search: 'جستجو'
       new: "تگ جدید"
+      destroy_multiple: 'حذف انتخاب شده‌ها'
     edit:
       title: 'ویرایش تگ'
     new:

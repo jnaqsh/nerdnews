@@ -40,7 +40,11 @@ Nerdnews::Application.routes.draw do
   resources :ratings
   resources :password_resets
   resources :pages
-  resources :tags
+  resources :tags do
+    collection do
+      delete 'destroy_multiple'
+    end
+  end
   resources :mypage, only: :index
   resources :announcements do
     get :hide, on: :member

@@ -39,6 +39,14 @@ class TagsController < ApplicationController
     end
   end
 
+  def destroy_multiple
+    Tag.destroy params[:tags] unless params[:tags].nil?
+
+    respond_to do |format|
+      format.html { redirect_to tags_path, notice: t('controllers.tags.destroy_multiple.flash.success') }
+    end
+  end
+
   def edit
   end
 
@@ -56,6 +64,6 @@ class TagsController < ApplicationController
   private
 
     def tag_params
-      params.require(:tag).permit(:name, :thumbnail)
+      params.require(:tag).permit(:name, :thumbnail, :tags)
     end
 end

@@ -1,7 +1,7 @@
 # encoding: UTF-8
 require 'spec_helper'
 
-describe "Tags", search: true do
+describe "Tags", solr: true do
   before do
     approved_user = FactoryGirl.create(:approved_user)
     login approved_user
@@ -40,4 +40,19 @@ describe "Tags", search: true do
     page.should have_content(story.title)
     page.should_not have_content(story1.title)
   end
+
+  it 'destroy multiple tags', focus: true do
+    logout
+    founder_user = FactoryGirl.create(:founder_user)
+    login founder_user
+
+    tag = FactoryGirl.create(:tag)
+    Sunspot.commit
+
+    visit tags_path
+    check("tag_#{tag.id}")
+    click_button 'حذف انتخاب شده‌ها'
+    page.should have_content("موفقیت")
+  end
+
 end
