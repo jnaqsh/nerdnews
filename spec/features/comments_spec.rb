@@ -111,6 +111,7 @@ describe "Comments" do
       visit story_path story
       find('button.btn-comments-thumbs-up').click
       click_link pos.name
+      sleep 1
       visit story_path story
       page.should_not have_selector 'button.btn-comments-thumbs-up'
     end
