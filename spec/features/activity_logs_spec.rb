@@ -28,19 +28,11 @@ describe "activity logs", solr: true do
   end
 
   it "should not spam comments appears on activiy logs" do
-    user = FactoryGirl.create(:user)
-    story = FactoryGirl.create :approved_story
-
     # Stub request to akismet
     stub_akismet_connection_for_spam
-
-    visit new_story_comment_path story.id
-    fill_in "comment_name", with: "viagra-test-123"
-    fill_in "comment_email", with: user.email
-    fill_in "comment_website", with: user.website
-    fill_in "comment_content", with: Faker::Lorem.paragraph
-    click_button "ایجاد"
-    page.should have_content "موفقیت"
+    user = FactoryGirl.create(:user)
+    story = FactoryGirl.create :approved_story
+    FactoryGirl.create :comment, story_id: story.id, name: 'viagra-test-123'
 
     login user
 
