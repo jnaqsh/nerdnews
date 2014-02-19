@@ -63,7 +63,8 @@ jQuery ->
   #toggle voters div to show/hide list of voters
   $(document).on('click', 'a.toggle-voters', (e) ->
     e.preventDefault()
-    $(this).parent().parent().parent().next("div.row").slideToggle()
+    id = $(this).attr('data-id')
+    $("div[data-id=#{id}]").slideToggle()
   )
 
   # Show optins when clicking voting button
