@@ -41,7 +41,7 @@ describe "Tags", solr: true do
     page.should_not have_content(story1.title)
   end
 
-  it 'destroy multiple tags', focus: true do
+  it 'destroy multiple tags' do
     logout
     founder_user = FactoryGirl.create(:founder_user)
     login founder_user
