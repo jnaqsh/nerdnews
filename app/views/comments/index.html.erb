@@ -58,7 +58,7 @@
               :default => t("helpers.links.destroy")),
               story_comment_path(comment.story, comment),
               :method => :delete,
-              :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) %>
+              data: { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) } %>
         </td>
       </tr>
     <% end %>
