@@ -102,7 +102,7 @@ gem 'rakismet'
 gem 'daemons'
 
 # it's cron in rails
-gem 'whenever', :require => false
+gem "whenever", "~> 0.9.0", :require => false
 
 # gems for delaying a job like sending mail
 gem 'delayed_job_web'
@@ -113,9 +113,6 @@ gem 'exception_notification'
 
 # gem for twitting story
 gem 'twitter'
-
-# Deploy with Capistrano
-gem 'capistrano'
 
 # for creating json api
 gem 'rabl'
@@ -136,8 +133,12 @@ group :development do
   gem 'sqlite3'
   gem 'better_errors'
   gem 'binding_of_caller'
+
   # it warns about eager loading and just for development mode
   gem 'bullet'
+
+  # Deploy with Capistrano
+  gem 'capistrano-rails', '~> 1.0.0'
 end
 
 group :development, :test do
