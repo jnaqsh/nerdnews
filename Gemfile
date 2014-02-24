@@ -139,6 +139,8 @@ group :development do
 
   # Deploy with Capistrano
   gem 'capistrano-rails', '~> 1.0.0'
+  gem 'capistrano-rbenv', '~> 2.0'
+  gem 'capistrano-bundler', '~> 1.1.2'
 end
 
 group :development, :test do

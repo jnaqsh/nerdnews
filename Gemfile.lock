@@ -72,8 +72,14 @@ GEM
       i18n
       rake (>= 10.0.0)
       sshkit (~> 1.3)
+    capistrano-bundler (1.1.2)
+      capistrano (~> 3.0)
+      sshkit (~> 1.2)
     capistrano-rails (1.0.0)
       capistrano
+    capistrano-rbenv (2.0.2)
+      capistrano (~> 3.1)
+      sshkit (~> 1.3)
     capybara (2.1.0)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -436,7 +442,9 @@ DEPENDENCIES
   binding_of_caller
   bullet
   cancan
+  capistrano-bundler (~> 1.1.2)
   capistrano-rails (~> 1.0.0)
+  capistrano-rbenv (~> 2.0)
   capybara (~> 2.1.0)
   coffee-rails (~> 4.0.0)
   daemons
