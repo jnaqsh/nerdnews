@@ -5,10 +5,11 @@ set :application, 'nerdnews'
 set :repo_url, 'git@github.com:jnaqsh/nerdnews.git'
 
 # Default branch is :master
-ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
+#ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
 # Default deploy_to directory is /var/www/my_app
 set :deploy_to, '/home/deployer/apps/nerdnews'
+set :rails_env, "production"
 
 # Default value for :scm is :git
 # set :scm, :git
