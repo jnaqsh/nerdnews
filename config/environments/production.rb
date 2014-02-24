@@ -1,7 +1,7 @@
 Nerdnews::Application.configure do
   # Rails 4 needs this option
   config.eager_load = true
-  
+
   # Settings specified here will take precedence over those in config/application.rb
 
   # Code is not reloaded between requests
@@ -87,6 +87,6 @@ Nerdnews::Application.configure do
   :email => {
     :email_prefix => "[NerdNews] ",
     :sender_address => %{"DoNotReply" <do_not_reply@nerdnews.ir>},
-    :exception_recipients => %w{h.ramezanian@jnaqsh.com}
+    :exception_recipients => %w{hamed.r.nik@gmail.com}
   }
 end
