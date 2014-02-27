@@ -10,7 +10,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   provider :openid, store: OpenID::Store::Filesystem.new('/tmp'), name: 'myopenid', identifier: 'myopenid.com'
   provider :openid, store: OpenID::Store::Filesystem.new('/tmp'), name: 'google', identifier: 'https://www.google.com/accounts/o8/id'
   provider :openid, store: OpenID::Store::Filesystem.new('/tmp'), name: 'yahoo', identifier: 'https://yahoo.com'
-  provider :persona
+  provider :browser_id
 end
 
 OmniAuth.config.on_failure = Proc.new { |env|

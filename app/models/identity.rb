@@ -13,7 +13,7 @@
 class Identity < ActiveRecord::Base
   belongs_to :user
 
-  PROVIDERS = ['persona', 'myopenid', 'google', 'twitter', 'github', 'yahoo']
+  PROVIDERS = ['browser_id', 'myopenid', 'google', 'twitter', 'github', 'yahoo']
 
   def self.providers
     PROVIDERS

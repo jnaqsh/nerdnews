@@ -25,7 +25,7 @@ Nerdnews::Application.routes.draw do
   get "/delayed_job" => DelayedJobWeb, :anchor => false
 
   # External Auth
-  get '/auth/:provider/callback' => 'identities#create'
+  match '/auth/:provider/callback', to: 'identities#create', via: [:get, :post]
   get '/auth/failure' => 'identities#failure'
 
   # Identities (Used for OmniAuth)
