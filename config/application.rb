@@ -31,6 +31,11 @@ module Nerdnews
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :fa
 
+    # to get ride of deprection error (http://stackoverflow.com/a/20381730/1455811)
+    config.i18n.enforce_available_locales = true
+    # or if one of your gem compete for pre-loading, use
+    I18n.config.enforce_available_locales = true
+
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
 

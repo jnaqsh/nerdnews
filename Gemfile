@@ -70,8 +70,8 @@ gem 'ancestry'
 gem 'paperclip'
 gem "paperclip-dropbox" # it's like a plugin for paperclip to use dropbox instead local
 
-# progress_bar for reindexing sunspot
-gem 'progress_bar'
+# progress_bar for reindexing sunspot (http://answer.techwikihow.com/574579/sunspot-reindex-error-progress_bar-related.html) TODO: replace original progress_bar when it gets fixed
+gem 'progress_bar', github: 'fivedigit/progress_bar'
 
 # omniauth authentication gems
 gem 'omniauth-github'
