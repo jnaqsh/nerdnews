@@ -67,8 +67,8 @@ gem 'farsifu'
 gem 'ancestry'
 
 # it used for uploading files in rails
-gem 'paperclip'
-gem "paperclip-dropbox" # it's like a plugin for paperclip to use dropbox instead local
+gem 'paperclip', "= 3.5.4"
+gem "paperclip-dropbox", "= 1.2.0" # it's a plugin for paperclip to use dropbox instead local
 
 # progress_bar for reindexing sunspot (http://answer.techwikihow.com/574579/sunspot-reindex-error-progress_bar-related.html) TODO: replace original progress_bar when it gets fixed
 gem 'progress_bar', github: 'fivedigit/progress_bar'
