@@ -33,15 +33,4 @@ class Tag < ActiveRecord::Base
     text :id
     time :created_at
   end
-
-  # private
-
-  #   def self.tokens(query)
-  #     tags = where("name like ?", "%#{query}%").select(:id, :name)
-  #   end
-
-  #   def self.ids_from_tokens(tokens)
-  #     tokens.gsub!(/<<<(.+?)>>>/) { create!(name: $1).id }
-  #     tokens.split(',')
-  #   end
 end

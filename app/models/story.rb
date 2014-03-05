@@ -46,7 +46,7 @@ class Story < ActiveRecord::Base
   scope :approved, -> { where("publish_date", present?) }
 
   before_validation :smart_add_url_protocol
-  after_save :assign_tags_to_story
+  after_save :assign_tags_to_story, :order_tags
 
   validates_length_of :title, maximum: 100, minimum: 10
   validates_length_of :content, minimum: 250, maximum: CONTENT_MAX_LENGTH
@@ -149,8 +149,19 @@ protected
   end
 
 private
+  # assignes previews_tags to tags= and makes relations
+  # runs after save hook
   def assign_tags_to_story
     self.tags = self.preview_tags if self.preview_tags
+  end
+
+  # add index to each tagging relation based on users tags order
+  # runs after save hook
+  def order_tags
+    self.taggings.each.with_index(1) do |tagging, index|
+      tagging.position = index
+      tagging.save
+    end
   end
 
   def calculate_count(tag)
