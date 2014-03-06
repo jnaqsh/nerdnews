@@ -1,11 +1,11 @@
 <%= simple_form_for @user, html: {class: "form-inline"} do |f| %>
   <%= f.input :full_name, :wrapper => :prepend, label: false do %>
-    <span class="add-on"><i class="icon-user"></i></span>
+    <span class="add-on"><i class="fa fa-user"></i></span>
       <%= f.input_field :full_name, placeholder: I18n.t('activerecord.attributes.user.full_name') %>
   <% end %>
 
   <%= f.input :email, :wrapper => :prepend, label: false do %>
-    <span class="add-on"><i class="icon-envelope"></i></span>
+    <span class="add-on"><i class="fa fa-envelope"></i></span>
     <%= f.input_field :email, placeholder: I18n.t('activerecord.attributes.user.email') %>
   <% end %>
 

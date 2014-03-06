@@ -1,18 +1,18 @@
 <%= simple_form_for @user, :html => { :class => 'form-horizontal' } do |f| %>
   <%= f.input :full_name, :wrapper => :prepend do %>
-    <span class="add-on"><i class="icon-user"></i></span>
+    <span class="add-on"><i class="fa fa-user"></i></span>
       <%= f.input_field :full_name %>
   <% end %>
 
   <%= f.input :email, :wrapper => :prepend do %>
-    <span class="add-on"><i class="icon-envelope"></i></span>
+    <span class="add-on"><i class="fa fa-envelope"></i></span>
     <%= f.input_field :email %>
   <% end %>
 
   <%= f.input :email_visibility, :as => :radio_buttons, label: 'نمایش ایمیل در پروفایل؟' %>
 
   <%= f.input :website, :wrapper => :prepend do %>
-    <span class="add-on"><i class="icon-th"></i></span>
+    <span class="add-on"><i class="fa fa-th"></i></span>
     <%= f.input_field :website %>
   <% end %>
 

@@ -22,7 +22,7 @@
                 <span class="tag_id_<%= tag.id %> <%= 'yellow' if favored %>">
                   <% if current_user %>
                     <%= link_to add_to_favorites_user_path(id: current_user, tag: tag.name), class: "#{'yellow' if favored}", method: :post, remote: true do %>
-                      <i class='icon-star'>1</i>
+                      <i class='fa fa-star'>1</i>
                     <% end %>
                   <% end %>
                 </span>
@@ -47,25 +47,25 @@
 
         <small>
           <span>
-            <i class='icon-plus' title="امتیاز"></i>
+            <i class='fa fa-plus' title="امتیاز"></i>
             <%= t('stories.index.point') + story.total_point.to_farsi %>
           </span>
 
           <span>
 
           <span>
-            <i class='icon-user' title="نویسنده"></i>
+            <i class='fa fa-user' title="نویسنده"></i>
             <%= user_name(story) %>
           </span>
 
           <span>
-            <i class='icon-calendar' title="تاریخ انتشار"></i>
+            <i class='fa fa-calendar' title="تاریخ انتشار"></i>
             <%= to_jalali(story.publish_date) if story.approved? %>
           </span>
 
           <% if story.id %>
             <span>
-              <i class='icon-comments-alt' title="تعداد دیدگاه‌ها"></i>
+              <i class='fa fa-comment' title="تعداد دیدگاه‌ها"></i>
               <%= link_to story_path(story), html_options = { id: "story_#{story.id}" } do %>
                 <%=t 'stories.show.comments' %>
                 <%= story.comments_count.to_farsi %>
@@ -75,21 +75,21 @@
 
           <% if story.published? %>
             <span>
-              <i class='icon-ok' title="تاییدکننده"></i>
+              <i class='fa fa-check' title="تاییدکننده"></i>
               <%= link_to story.publisher.full_name, user_path(story.publisher) %>
             </span>
           <% end %>
 
           <% if (can? :create, Vote) && story.votes.any? %>
             <span>
-              <i class='icon-thumbs-up' title="رای‌دهندگان"></i>
+              <i class='fa fa-thumbs-o-up' title="رای‌دهندگان"></i>
               <%= link_to t('.voters'), "#", class: "toggle-voters", data: { id: story.id } %>
             </span>
           <% end %>
 
           <% if story && story.source %>
             <span>
-              <i class='icon-book' title="منبع اصلی"></i>
+              <i class='fa fa-book' title="منبع اصلی"></i>
               <%= source_of_story(story) %>
             </span>
           <% end %>

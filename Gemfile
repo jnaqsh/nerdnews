@@ -34,7 +34,7 @@ gem 'rails-i18n', git: 'https://github.com/iCEAGE/rails-i18n.git'
 # encryption like passwords
 gem 'bcrypt-ruby', '~> 3.1.2'
 
-gem 'debugger'
+gem "debugger", "~> 1.6.6"
 
 gem 'simple_form', '~> 3.0.0'
 
@@ -88,7 +88,7 @@ gem 'therubyracer'
 gem 'less-rails', '2.3.3'
 
 # rbootstrap is a gem for RTL twitter bootstrap
-gem 'twitter-bootstrap-rails', git: "https://github.com/jnaqsh/twitter-bootstrap-rails.git"
+gem 'twitter-bootstrap-rails', github: "jnaqsh/twitter-bootstrap-rails", branch: "new_version", ref: "64e8b"
 
 # for textcaptcha in creating story
 gem 'acts_as_textcaptcha', git: "https://github.com/jnaqsh/acts_as_textcaptcha.git"

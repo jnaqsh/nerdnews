@@ -32,15 +32,15 @@
             </div>
 
             <div class='user user-assets'>
-              <p><i class="icon-user"></i>
+              <p><i class="fa fa-user"></i>
               <%= t('.registered_from') + time_ago_in_words(@user.created_at) + ' قبل'%></p>
-              <p><i class="icon-th"></i>
+              <p><i class="fa fa-th"></i>
               <%=t '.website', website: @user.website || t('.not_mentioned') %></p>
               <% if @user.email_visibility? %>
-                <p><i class="icon-envelope"></i>
+                <p><i class="fa fa-envelope"></i>
                 <%= mail_to @user.email, nil, :replace_at => ' at ', replace_dot: ' dot ', encode: 'hex' %></p>
               <% end %>
-              <p><i class='icon-user-md'></i>
+              <p><i class='fa fa-user-md'></i>
               <%= t('.role', role: @user.roles[0].to_persian) %></p>
             </div>
             <% if can? :edit, @user %>

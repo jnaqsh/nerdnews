@@ -17,7 +17,7 @@
 
       <% if comment.parent.present? %>
         <small class='muted'>
-        <i class='icon-arrow-left'></i>
+        <i class='fa fa-arrow-left'></i>
         در جواب
         <%= comment.parent.name %>
       </small>
@@ -28,13 +28,13 @@
     <h5 class="muted">
       <small>
         <span>
-          <i class='icon-calendar'></i>
+          <i class='fa fa-calendar'></i>
             <%= link_to story_path(comment.story, :anchor => "comment_#{comment.id}") do %>
             <%= time_ago_in_words(comment.created_at).to_farsi + ' قبل' %>
             <% end %>
         </span>
         <% if comment.website.present? %>
-          <i class='icon-link'></i>
+          <i class='fa fa-link'></i>
           <%= link_to 'وب‌سایت', comment.website %>
         <% end %>
       </small>
@@ -56,7 +56,7 @@
         <div class='span3 thumbs-up-list' id='thumbs-up-list-<%= comment.id %>'>
           <ul>
             <% Rating.positive('comments').each do |rating| %>
-              <li class='icon-hand-left'>
+              <li class='fa fa-hand-o-left'>
                 <%= link_to rating.name, story_comment_votes_path(comment.story, comment, rating_id: rating, positive: true), method: :post, remote: true %>
               </li>
             <% end %>
@@ -66,7 +66,7 @@
         <div class='span3 thumbs-down-list' id='thumbs-down-list-<%= comment.id %>'>
           <ul>
             <% Rating.negative('comments').each do |rating| %>
-              <li class='icon-hand-left'>
+              <li class='fa fa-hand-o-left'>
                 <%= link_to rating.name, story_comment_votes_path(comment.story, comment, rating_id: rating), method: :post, remote: true %>
               </li>
             <% end %>
