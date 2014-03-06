@@ -34,3 +34,4 @@ config/dropbox.yml
 config/dropbox_backup.yml
 custom_plan.rb
 zeus.json
+Procfile
