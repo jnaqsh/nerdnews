@@ -16,7 +16,7 @@ class IdentitiesController < ApplicationController
     @authhash = Hash.new
 
     if omniauth and provider
-      if ['myopenid', 'google', 'twitter', 'github', 'yahoo', 'browser_id'].include? provider
+      if ['default', 'myopenid', 'google', 'twitter', 'github', 'yahoo', 'browser_id'].include? provider
         omniauth['info']['email'] ? @authhash[:email] =  omniauth['info']['email'] : @authhash[:email] = ''
         omniauth['info']['name'] ? @authhash[:name] =  omniauth['info']['name'] : @authhash[:name] = ''
         omniauth['uid'] ? @authhash[:uid] = omniauth['uid'].to_s : @authhash[:uid] = ''
