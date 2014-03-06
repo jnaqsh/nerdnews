@@ -22,7 +22,7 @@
                 <span class="tag_id_<%= tag.id %> <%= 'yellow' if favored %>">
                   <% if current_user %>
                     <%= link_to add_to_favorites_user_path(id: current_user, tag: tag.name), class: "#{'yellow' if favored}", method: :post, remote: true do %>
-                      <i class='fa fa-star'>1</i>
+                      <i class='fa fa-star'></i>
                     <% end %>
                   <% end %>
                 </span>
