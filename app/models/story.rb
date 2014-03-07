@@ -66,6 +66,12 @@ class Story < ActiveRecord::Base
     time :publish_date
     time :created_at
     boolean :hide
+    boolean :approved do
+      self.approved?
+    end
+    string :tags_name, :multiple => true do
+      tags.map(&:name)
+    end
     text :user do
       user.full_name if user.present?
       user.email if user.present?
