@@ -133,12 +133,12 @@ class StoriesController < ApplicationController
   def destroy
     @story.destroy
 
-    @story.update({remover: current_user}, without_protection: true)
+    @story.update(remover: current_user)
 
     record_activity %Q(خبر #{view_context.link_to @story.title.truncate(40), story_path(@story)} را حذف کرد)
 
     respond_to do |format|
-      format.html { redirect_to stories_url }
+      format.html { redirect_to :back }
     end
   end
 
