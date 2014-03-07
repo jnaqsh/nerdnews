@@ -12,7 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.ui.all
+//= require jquery.ui.core
+//= require jquery.ui.sortable
 //= require tinycon
 //= require twitter/bootstrap/bootstrap-transition
 //= require twitter/bootstrap/bootstrap-dropdown
