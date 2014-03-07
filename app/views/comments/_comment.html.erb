@@ -2,7 +2,7 @@
 <% status = hide_comment?(comment) %>
 <div class="comment <%= "grey-out" if status %>" id="comment_<%= comment.id %>">
   <div>
-    <%= image_tag avatar_url(comment, 32), class: 'pull-right img-polaroid clearfix' %>
+    <%= image_tag avatar_url(comment, 32), class: 'pull-right img-polaroid clearfix', alt: 'avatar' %>
   </div>
 
   <div class="main">

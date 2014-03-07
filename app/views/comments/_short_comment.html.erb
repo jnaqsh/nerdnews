@@ -16,7 +16,7 @@
     <% @comments.each do |comment| %>
       <tr <%= "class=spam" if !comment.approved? %> >
         <td>
-          <%= image_tag avatar_url(comment, 32), class: 'pull-right img-polaroid clearfix', style: 'margin:5px' %>
+          <%= image_tag avatar_url(comment, 32), class: 'pull-right img-polaroid clearfix', style: 'margin:5px', alt: 'avatar' %>
           <%= content_tag :b, comment.name %>
           <br />
           <%= comment.email %>

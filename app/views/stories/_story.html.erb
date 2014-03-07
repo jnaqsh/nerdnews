@@ -7,7 +7,7 @@
     <div class='span1 visible-desktop'>
       <div class='story-image'>
       <% if tags.any? %>
-        <%= link_to image_tag(tags.first.thumbnail.url(:thumb), class: 'img-polaroid'), stories_url(tag: tags.first.name) %>
+        <%= link_to image_tag(tags.first.thumbnail.url(:thumb), class: 'img-polaroid'), stories_url(tag: tags.first.name), alt: 'logo' %>
       <% end %>
       </div>
       <% unless status %>
