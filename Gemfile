@@ -19,7 +19,7 @@ gem 'select2-rails'
 gem 'turbolinks'
 
 # it adds a deleted_at column to database
-# gem 'acts_as_paranoid' not working with rails 4 yet
+gem 'paranoia', '~> 2.0'
 
 # it uses for making active class on menus
 gem 'active_link_to'
