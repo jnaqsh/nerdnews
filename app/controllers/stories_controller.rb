@@ -152,7 +152,7 @@ class StoriesController < ApplicationController
 
         record_activity %Q(خبر #{view_context.link_to @story.title.truncate(40), story_path(@story)} را منتشر کرد)
 
-        format.html { redirect_to story_path(@story),
+        format.html { redirect_to :back,
           notice: t('controllers.stories.publish.flash.success') }
       end
     end
