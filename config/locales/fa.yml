@@ -293,7 +293,7 @@ fa:
 
   comments:
     title: 'دیدگاه‌ها'
-    index:
+    short_comment:
       title: 'مدیریت دیدگاه‌ها'
       from: 'نویسنده'
       comment: 'دیدگاه'
@@ -306,7 +306,7 @@ fa:
     show:
       title: 'نمایش دیدگاه'
     edit:
-      title: 'نمایش دیدگاه'
+      title: 'ویرایش دیدگاه'
     new:
       title: 'دیدگاه جدید'
 

@@ -10,6 +10,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
+      format.js
     end
   end
 
@@ -103,6 +104,15 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to story_path(@comment.story) }
+    end
+  end
+
+  def spams
+    @comments = Comment.unapproved.includes(:story).order("created_at DESC").page params[:page]
+
+    respond_to do |format|
+      format.html { render :action => :index }
+      format.js
     end
   end
 

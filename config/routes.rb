@@ -79,6 +79,7 @@ Nerdnews::Application.routes.draw do
   end
 
   get "/comments" => "comments#index"
+  get "/comments/spams" => "comments#spams"
   delete "/comments/destroy_spams" => 'comments#destroy_spams'
 
   get "/:permalink" => "pages#show", as: "page_by_permalink"
