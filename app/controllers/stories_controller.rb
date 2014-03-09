@@ -41,10 +41,8 @@ class StoriesController < ApplicationController
 
       @comments = @story.comments.approved.includes(:user, :story).arrange(order: :created_at)
 
-      story_path = Rails.env.production? ? story_path(@story).downcase : story_path(@story) #monkey patch due to error in production (downcase)
-
       respond_to do |format|
-        if request.path != story_path
+        if request.path != story_path(@story)
           format.html {redirect_to @story, status: :moved_permanently}
         else
           format.html
