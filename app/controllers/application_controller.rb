@@ -27,7 +27,9 @@ class ApplicationController < ActionController::Base
     @activity.ip_address = request.env['REMOTE_ADDR']
     @activity.controller = controller_name
     @activity.action = action_name
-    @activity.params = params.inspect
+    params.delete(:password)
+    params.delete(:authenticity_token)
+    @activity.params = params.to_json
     @activity.save
   end
 
