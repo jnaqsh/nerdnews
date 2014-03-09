@@ -23,8 +23,8 @@
 class User < ActiveRecord::Base
   KARMA_THRESHOLD = 100
 
-  extend FriendlyId
-  friendly_id :full_name, use: [:slugged, :history]
+  include FriendlyId
+  friendly_id :full_name, use: :slugged
 
   has_secure_password
 

@@ -27,7 +27,7 @@
 class Story < ActiveRecord::Base
   acts_as_paranoid
   acts_as_textcaptcha
-  extend FriendlyId
+  include FriendlyId
 
   HIDE_THRESHOLD = -8
   CONTENT_MAX_LENGTH = 1500
@@ -123,11 +123,7 @@ class Story < ActiveRecord::Base
   end
 
   # FriendlyId, TODO: Move to it's own method
-  friendly_id :title_foo, use: [:slugged, :history]
-
-  def title_foo
-    "#{title}"
-  end
+  friendly_id :title, use: [:slugged, :history]
 
   def normalize_friendly_id(string)
     sep = "-"
