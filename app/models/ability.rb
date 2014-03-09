@@ -108,6 +108,9 @@ class Ability
 
     # Tag model
     can [:create, :update], Tag
+
+    # Vote model
+    can :view_voters, user
   end
 
   def founder_user_permissions(user)

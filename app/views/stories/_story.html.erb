@@ -84,7 +84,7 @@
             </span>
           <% end %>
 
-          <% if (can? :create, Vote) && story.votes.any? %>
+          <% if (can? :view_voters, current_user) && story.votes.any? %>
             <span>
               <i class='fa fa-thumbs-o-up' title="رای‌دهندگان"></i>
               <%= link_to t('.voters'), "#", class: "toggle-voters", data: { id: story.id } %>
