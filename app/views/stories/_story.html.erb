@@ -61,9 +61,9 @@
           <span>
             <i class='fa fa-calendar' title="تاریخ انتشار"></i>
             <% if story.approved? %>
-              <%= to_jalali(story.publish_date) %>
+              <%= to_jalali(story.publish_date) if story.publish_date %>
             <% else %>
-              <%= to_jalali(story.created_at) %>
+              <%= to_jalali(story.created_at) if story.created_at %>
             <% end %>
           </span>
 
