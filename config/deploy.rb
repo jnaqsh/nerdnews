@@ -33,7 +33,7 @@ set :rbenv_roles, :all # default value
 set :linked_files, %w{config/database.yml config/application_configs.yml config/sunspot.yml config/textcaptcha.yml config/dropbox.yml config/dropbox_backup.yml config/twitter.yml}
 
 # Default value for linked_dirs is []
-set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system db/db_backup solr/data}
+set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system db/db_backup solr/production solr/pids}
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -60,4 +60,48 @@ namespace :deploy do
     end
   end
 
+end
+
+namespace :solr do
+
+  %w[start stop].each do |command|
+    desc "#{command} solr"
+    task command do
+      on roles(:app) do
+        solr_pid = "#{shared_path}/solr/pids/#{fetch(:rails_env)}/sunspot-solr-#{fetch(:rails_env)}.pid"
+        if command == "start" or (test "[ -f #{solr_pid} ]" and test "kill -0 $( cat #{solr_pid} )")
+          within current_path do
+            with rails_env: fetch(:rails_env) do
+              execute :rake, "sunspot:solr:#{command}"
+            end
+          end
+        end
+      end
+    end
+  end
+
+  desc "restart solr"
+  task :restart do
+    invoke 'solr:stop'
+    invoke 'solr:start'
+  end
+
+  after 'deploy:finished', 'solr:restart'
+
+  desc "reindex the whole solr database"
+  task :reindex do
+    invoke 'solr:stop'
+    on roles(:app) do
+      execute :rm, "-rf #{shared_path}/solr/#{fetch(:rails_env)}/*"
+    end
+    invoke 'solr:start'
+    on roles(:app) do
+      within current_path do
+        with rails_env: fetch(:rails_env) do
+          info "Reindexing Solr database"
+          execute :rake, 'sunspot:solr:reindex[,,true]'
+        end
+      end
+    end
+  end
 end
