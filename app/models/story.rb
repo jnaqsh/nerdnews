@@ -160,7 +160,9 @@ private
   # add index to each tagging relation based on users tags order
   # runs after save hook
   def order_tags
-    self.taggings.each.with_index(1) do |tagging, index|
+    return if preview_tags.nil?
+    self.preview_tags.each.with_index(1) do |tag, index|
+      tagging = self.taggings.where(tag_id: tag.id).first
       tagging.position = index
       tagging.save
     end
