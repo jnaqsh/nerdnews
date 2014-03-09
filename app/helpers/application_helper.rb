@@ -71,6 +71,12 @@ module ApplicationHelper
     end
   end
 
+  def thumbnail_url(tag)
+    unless tag.nil?
+      tag.thumbnail.url(:thumb).gsub(/https/, 'http') #using dropbox in production
+    end
+  end
+
   private
   # The ruby version of the CSS Browser Selector with some additions
   # This code is from: https://github.com/attinteractive/css_browser_selector

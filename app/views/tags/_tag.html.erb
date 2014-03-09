@@ -1,6 +1,6 @@
 <li class="span2">
   <div class="thumbnail">
-    <%= image_tag tag.thumbnail.url(:thumb), alt: tag.name %>
+    <%= image_tag thumbnail_url(tag), alt: tag.name %>
     <h4>
       <%= check_box_tag "tags[]", tag.id, false, id: "tag_#{tag.id}" %>
       <%= link_to tag.name.truncate(11), stories_path(tag: tag.name) %>

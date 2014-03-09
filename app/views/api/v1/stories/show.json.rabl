@@ -42,6 +42,6 @@ child :tags do
   end
 
   node :thumbnail_url do |tag|
-    tag.thumbnail.url :thumb
+    thumbnail_url tag
   end
 end

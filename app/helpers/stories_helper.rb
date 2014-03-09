@@ -8,13 +8,6 @@ module StoriesHelper
     end
   end
 
-  def thumbnail_url(story)
-    unless story.tags.first.nil?
-#      "#{root_url.gsub(/\/$/, '') + story.tags.first.thumbnail.url}"
-      story.tags.first.thumbnail.url #using dropbox in production
-    end
-  end
-
   def hide_story?(story)
     if story.total_point < Story::HIDE_THRESHOLD
       if current_page?(controller: "stories", action: "index") or
