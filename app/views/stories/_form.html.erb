@@ -1,4 +1,4 @@
-<% tags = params[:preview_button] ? params[:tags] : @story.tags %>
+<% tags = params[:tags] || @story.tags %>
 
 <%= simple_form_for @story, :html => { :class => 'form-horizontal' } do |f| %>
   <%= f.input :title,

@@ -94,6 +94,7 @@ class StoriesController < ApplicationController
           format.html { redirect_to root_path, only_path: true,
             notice: t("controllers.stories.create.flash.success", link: unpublished_stories_path).html_safe }
         else
+          params[:tags] = @story.preview_tags
           format.html { render action: "new" }
         end
       end
