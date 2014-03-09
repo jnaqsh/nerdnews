@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 @load_pages = (divID='#stories', messageReplace='در حال دریافت...') ->
-  if $("#{divID}").next('.pagination').length
+  if $("#{divID}").length && $('.pagination').length
     $(window).scroll ->
       url = $('.pagination a[rel="next"]').attr('href')
       if url && $(window).scrollTop() > $(document).height() - $(window).height() - 2500
