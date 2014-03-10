@@ -24,9 +24,11 @@
 <div class='row'>
   <div class='span12'>
     <%= form_tag destroy_multiple_tags_path, :method => :delete do %>
-      <div class='destroy_multiple_button'>
-        <%= submit_tag t(".destroy_multiple"), class: 'btn btn-danger', data: { confirm: t('helpers.links.confirm') } %>
-      </div>
+      <% if can? :destroy, Tag %>
+        <div class='destroy_multiple_button'>
+          <%= submit_tag t(".destroy_multiple"), class: 'btn btn-danger', data: { confirm: t('helpers.links.confirm') } %>
+        </div>
+      <% end %>
 
       <ul class="thumbnails" id="tags-list">
         <%= render(@tags) %>
