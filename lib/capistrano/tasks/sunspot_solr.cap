@@ -1,0 +1,40 @@
+namespace :solr do
+  %w[start stop].each do |command|
+    desc "#{command} solr"
+    task command do
+      on roles(:app) do
+        solr_pid = "#{shared_path}/solr/pids/#{fetch(:rails_env)}/sunspot-solr-#{fetch(:rails_env)}.pid"
+        if command == "start" or (test "[ -f #{solr_pid} ]" and test "kill -0 $( cat #{solr_pid} )")
+          within current_path do
+            with rails_env: fetch(:rails_env) do
+              execute :'bin/rake', "sunspot:solr:#{command}"
+            end
+          end
+        end
+      end
+    end
+  end
+
+  desc "restart solr"
+  task :restart do
+    invoke 'solr:stop'
+    invoke 'solr:start'
+  end
+
+  desc "reindex the whole solr database"
+  task :reindex do
+    invoke 'solr:stop'
+    on roles(:app) do
+      execute :rm, "-rf #{shared_path}/solr/#{fetch(:rails_env)}/*"
+    end
+    invoke 'solr:start'
+    on roles(:app) do
+      within current_path do
+        with rails_env: fetch(:rails_env) do
+          info "Reindexing Solr database"
+          execute :'bin/rake', 'sunspot:solr:reindex[,,true]'
+        end
+      end
+    end
+  end
+end

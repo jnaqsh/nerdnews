@@ -24,7 +24,7 @@ set :rails_env, "production"
 # set :pty, true
 
 set :rbenv_type, :user # or :system, depends on your rbenv setup
-set :rbenv_ruby, '2.1.0'
+set :rbenv_ruby, '2.1.1'
 set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
 set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 set :rbenv_roles, :all # default value
@@ -33,16 +33,15 @@ set :rbenv_roles, :all # default value
 set :linked_files, %w{config/database.yml config/application_configs.yml config/sunspot.yml config/textcaptcha.yml config/dropbox.yml config/dropbox_backup.yml config/twitter.yml}
 
 # Default value for linked_dirs is []
-set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system db/db_backup solr/production solr/pids}
+set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system db/db_backup solr/production solr/pids}
 
 # Default value for default_env is {}
-# set :default_env, { path: "/opt/ruby/bin:$PATH" }
+set :default_env, { path: "~/.rbenv/shims:~/.rbenv/bin:$PATH" }
 
 # Default value for keep_releases is 5
 set :keep_releases, 5
 
 namespace :deploy do
-
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
@@ -51,56 +50,13 @@ namespace :deploy do
   end
 
   after :publishing, :restart
+  after :publishing, 'delayed_job:restart'
+  after :publishing, 'solr:restart'
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       within release_path do
-        execute :rake, 'tmp:clear'
-      end
-    end
-  end
-
-end
-
-namespace :solr do
-
-  %w[start stop].each do |command|
-    desc "#{command} solr"
-    task command do
-      on roles(:app) do
-        solr_pid = "#{shared_path}/solr/pids/#{fetch(:rails_env)}/sunspot-solr-#{fetch(:rails_env)}.pid"
-        if command == "start" or (test "[ -f #{solr_pid} ]" and test "kill -0 $( cat #{solr_pid} )")
-          within current_path do
-            with rails_env: fetch(:rails_env) do
-              execute :rake, "sunspot:solr:#{command}"
-            end
-          end
-        end
-      end
-    end
-  end
-
-  desc "restart solr"
-  task :restart do
-    invoke 'solr:stop'
-    invoke 'solr:start'
-  end
-
-  after 'deploy:finished', 'solr:restart'
-
-  desc "reindex the whole solr database"
-  task :reindex do
-    invoke 'solr:stop'
-    on roles(:app) do
-      execute :rm, "-rf #{shared_path}/solr/#{fetch(:rails_env)}/*"
-    end
-    invoke 'solr:start'
-    on roles(:app) do
-      within current_path do
-        with rails_env: fetch(:rails_env) do
-          info "Reindexing Solr database"
-          execute :rake, 'sunspot:solr:reindex[,,true]'
-        end
+        execute :'bin/rake', 'tmp:clear'
       end
     end
   end
