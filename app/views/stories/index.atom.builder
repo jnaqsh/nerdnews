@@ -1,6 +1,5 @@
 atom_feed({'xmlns:app' => 'http://www.w3.org/2007/app',
       'xmlns:openSearch' => 'http://a9.com/-/spec/opensearch/1.1/'}) do |feed|
-  feed.language "fa_IR"
   feed.title("نردنیوز")
   feed.updated Story.maximum(:created_at)
 
