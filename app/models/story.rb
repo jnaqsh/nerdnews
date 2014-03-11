@@ -105,13 +105,13 @@ class Story < ActiveRecord::Base
 
     # provide tweet content
     if self.tags && self.tags.first
-      tweet_content = "#{self.title} ##{self.tags.first.name}"
+      tweet_content = "#{self.title} ##{self.tags.first.name.gsub(/ /, '_')}"
     else
       tweet_content = "#{self.title}"
     end
 
     # conditional due to error on request user spec
-    Rails.env.production? ? Tweet.tweet(Twitter::Client.new, tweet_content, url) : true
+    Rails.env.production? ? Tweet.tweet(tweet_content, url) : true
   end
 
   def user_voted?(user)
