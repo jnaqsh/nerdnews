@@ -14,7 +14,7 @@
 # definition into the server list. The second argument
 # something that quacks like a hash can be used to set
 # extended properties on the server.
-server '107.170.70.109', user: 'deployer', roles: %w{web app db}
+server 'oggy.jnaqsh.com', user: 'deployer', roles: %w{web app db}
 
 set :branch, "wip"
 
