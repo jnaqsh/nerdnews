@@ -6,22 +6,39 @@ ENV["RAILS_ENV"] = 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 # require 'rspec/autorun' # causes error with Zeus
-require 'sunspot_test/rspec'
 require 'capybara/rspec'
 require 'capybara/poltergeist'
 require "paperclip/matchers"
 Capybara.javascript_driver = :poltergeist
 require 'webmock/rspec'
+require 'database_cleaner'
+# Config Sunspot
+$original_sunspot_session = Sunspot.session
+
 # Allow local connections!
 WebMock.disable_net_connect!(:allow_localhost => true)
-
+Capybara.default_wait_time = 3
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 RSpec.configure do |config|
+  # Config Sunspot
+  config.before do
+    Sunspot.session = Sunspot::Rails::StubSessionProxy.new($original_sunspot_session)
+  end
+
+  config.before :each, solr: true do
+    Sunspot::Rails::Tester.start_original_sunspot_session
+    Sunspot.session = $original_sunspot_session
+    Sunspot.remove_all!
+  end
+  # /Config Sunspot
+
+  # Focus:true
   config.filter_run focus: true
   config.run_all_when_everything_filtered = true
+
   # ## Mock Framework
   #
   # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
@@ -36,7 +53,7 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = false
 
   # If true, the base class of anonymous controllers will be inferred
   # automatically. This will be the default behavior in future versions of
@@ -56,19 +73,6 @@ RSpec.configure do |config|
   config.include Paperclip::Shoulda::Matchers
   config.before(:each) { reset_email }
 end
-
-class ActiveRecord::Base
-  mattr_accessor :shared_connection
-  @@shared_connection = nil
-
-  def self.connection
-    @@shared_connection || retrieve_connection
-  end
-end
-
-# Forces all threads to share the same connection. This works on
-# Capybara because it starts the web server in a thread.
-ActiveRecord::Base.shared_connection = ActiveRecord::Base.connection
 
 # Set OmniAuth to Mock it's connection
 OmniAuth.config.test_mode = true

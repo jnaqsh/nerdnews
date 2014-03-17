@@ -1,4 +1,7 @@
 Nerdnews::Application.configure do
+  # Rails 4 needs this option
+  config.eager_load = true
+
   # Settings specified here will take precedence over those in config/application.rb
 
   # Code is not reloaded between requests
@@ -70,21 +73,20 @@ Nerdnews::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-  # Log the query plan for queries taking more than this (works
-  # with SQLite, MySQL, and PostgreSQL)
-  # config.active_record.auto_explain_threshold_in_seconds = 0.5
-
   config.action_mailer.default_url_options = {host: "nerdnews.ir"}
 
   config.paperclip_defaults = {
     :storage => :dropbox,
     :dropbox_credentials => "#{Rails.root}/config/dropbox.yml",
     :dropbox_options => {
-      :unique_filename => true
+      path: proc { |style| "#{self.class.to_s.downcase}_#{id}_#{self.thumbnail.name.to_s}#{File.extname(self.thumbnail.original_filename).downcase}" }
     }
   }
 
-  config.middleware.use ExceptionNotifier,
-    sender_address: 'do_not_reply@nerdnews.ir',
-    exception_recipients: "h.ramezanian@jnaqsh.com"
+  config.middleware.use ExceptionNotification::Rack,
+  :email => {
+    :email_prefix => "[NerdNews] ",
+    :sender_address => %{"DoNotReply" <do_not_reply@nerdnews.ir>},
+    :exception_recipients => %w{hamed.r.nik@gmail.com}
+  }
 end

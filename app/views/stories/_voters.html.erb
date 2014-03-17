@@ -1,5 +1,5 @@
 <% if story.id && !params[:preview_button] %>
-  <div class='row voters' style="display: none">
+  <div class='row voters' style="display: none" data-id="<%= story.id %>">
     <% if can? :create, Vote %>
       <div class="well span10">
         <% story.votes.each do |vote| %>

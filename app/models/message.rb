@@ -1,5 +1,19 @@
+# == Schema Information
+#
+# Table name: messages
+#
+#  id          :integer          not null, primary key
+#  sender_id   :integer
+#  receiver_id :integer
+#  subject     :string(255)
+#  message     :text
+#  unread      :boolean          default(TRUE)
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
 class Message < ActiveRecord::Base
-  attr_accessible :message, :subject
+  # attr_accessible :message, :subject
 
   validates_presence_of :message, :subject, :sender, :receiver
   validates_length_of :subject, maximum: 40, minimum: 3

@@ -1,17 +1,41 @@
+# == Schema Information
+#
+# Table name: comments
+#
+#  id                   :integer          not null, primary key
+#  name                 :string(255)
+#  content              :text
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  story_id             :integer
+#  user_id              :integer
+#  email                :string(255)
+#  ancestry             :string(255)
+#  website              :string(255)
+#  positive_votes_count :integer          default(0)
+#  negative_votes_count :integer          default(0)
+#  user_ip              :string(255)
+#  user_agent           :string(255)
+#  referrer             :string(255)
+#  approved             :boolean          default(TRUE)
+#  total_point          :integer          default(0)
+#  deleted_at           :datetime
+#
+
 class Comment < ActiveRecord::Base
   acts_as_paranoid
-
+  acts_as_textcaptcha
   include Rakismet::Model
 
   HIDE_THRESHOLD = -8
 
-  scope :approved, where(approved: true)
+  scope :approved,    -> { where(approved: true) }
+  scope :unapproved,  -> { where(approved: false) }
 
   has_many :votes, as: :voteable
   belongs_to :story, counter_cache: true
   belongs_to :user, counter_cache: true
 
-  attr_accessible :content, :name, :email, :website, :parent_id
   rakismet_attrs author: :name, author_email: :email, author_url: :website
 
   before_validation :smart_add_url_protocol
@@ -22,6 +46,10 @@ class Comment < ActiveRecord::Base
   validates :website, allow_blank: true, uri: true
 
   has_ancestry
+
+  def perform_textcaptcha?
+    !skip_textcaptcha
+  end
 
   def user_voted?(user)
     !self.votes.where("user_id = ?", user).blank?

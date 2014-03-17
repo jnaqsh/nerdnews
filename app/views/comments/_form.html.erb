@@ -5,6 +5,10 @@
       <%= f.input :parent_id, as: :hidden %>
       <%= f.input :content, label: false, placeholder: "#{t('.write_your_comment')}", input_html: {rows: 3, class: "span6"} %>
 
+      <%= textcaptcha_fields(f) do %>
+        <%= f.input :spam_answer, label: false, placeholder: @comment.spam_question, input_html: {class: "span6"} %>
+      <% end %>
+
     </div>
   </div>
 

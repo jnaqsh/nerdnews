@@ -1,3 +1,27 @@
+# == Schema Information
+#
+# Table name: comments
+#
+#  id                   :integer          not null, primary key
+#  name                 :string(255)
+#  content              :text
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  story_id             :integer
+#  user_id              :integer
+#  email                :string(255)
+#  ancestry             :string(255)
+#  website              :string(255)
+#  positive_votes_count :integer          default(0)
+#  negative_votes_count :integer          default(0)
+#  user_ip              :string(255)
+#  user_agent           :string(255)
+#  referrer             :string(255)
+#  approved             :boolean          default(TRUE)
+#  total_point          :integer          default(0)
+#  deleted_at           :datetime
+#
+
 require 'spec_helper'
 
 describe Comment do
@@ -27,7 +51,6 @@ describe Comment do
     it {should validate_presence_of(:referrer)}
     it {should_not allow_value("test@gmail.").for(:email)}
     it {should allow_value("hamed@example.com").for(:email)}
-    it {should_not allow_mass_assignment_of(:id)}
   end
 
   describe "Spams" do

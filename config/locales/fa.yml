@@ -38,6 +38,9 @@ fa:
       mark_as_not_spam:
         flash:
           success:  "با موفقیت به عنوان غیر اسپم مشخص شد."
+      destroy_spams:
+        flash:
+          success: "عملیات حذف اسپم‌ها با موفقیت انجام شد."
     users:
       create:
         flash:
@@ -72,6 +75,9 @@ fa:
       update:
         flash:
           success: "تگ با موفقیت ویرایش شد."
+      destroy_multiple:
+        flash:
+          success: 'با موفقیت حذف شدند.'
     ratings:
       create:
         flash:
@@ -256,13 +262,14 @@ fa:
       title_placeholder: "بهترین عنوان ۶ تا ۱۰ کلمه است (حداکثر ۱۰۰ کاراکتر)"
       source_placeholder: 'چنانچه منبع خبر مشخص است آن را وارد کنید. در غیر این صورت در متن به منابع لینک دهید.'
       content_placeholder: "بدنه اصلی خبر خود را اینجا بنویسید. لطفا سعی کنید از کلمات خود استفاده کنید. اگر از منابع دیگر نقل‌وقول می‌کنید، آدرس‌های مرتبط را در متن وارد کنید. اگر از منبع اصلی خبر مطمئن هستید آنها را در متن بگنجانید. خبری که منبع مشخصی نداشته باشد، حذف می‌گردد. متن خبر می‌تواند حداکثر ۱۵۰۰ کاراکتر باشد."
-    social_share:
+    share_by_mail_modal:
       share_by_mail: 'اشتراک‌گذاری با رایانامه'
       name: 'نام شما'
       reciever: 'رایانامه گیرنده'
       body: 'متن رایانامه'
       submit: 'ارسال'
       close: 'بستن'
+      loading: 'درحال بارگیری. چند لحظه صبر کنید.'
 
   messages:
     title: 'پیام‌ها'
@@ -278,6 +285,7 @@ fa:
       title: 'فهرست'
       search: 'جستجو'
       new: "تگ جدید"
+      destroy_multiple: 'حذف انتخاب شده‌ها'
     edit:
       title: 'ویرایش تگ'
     new:
@@ -285,19 +293,20 @@ fa:
 
   comments:
     title: 'دیدگاه‌ها'
-    index:
+    short_comment:
       title: 'مدیریت دیدگاه‌ها'
       from: 'نویسنده'
       comment: 'دیدگاه'
       in_response: 'در پاسخ'
       sent: 'ارسال شده در: '
+      destroy_spams: 'حذف اسپم‌ها '
     form:
       write_your_comment: 'دیدگاه خود را بنویسید...'
       You!: 'شما!'
     show:
       title: 'نمایش دیدگاه'
     edit:
-      title: 'نمایش دیدگاه'
+      title: 'ویرایش دیدگاه'
     new:
       title: 'دیدگاه جدید'
 
@@ -482,3 +491,43 @@ fa:
   unauthorized:
     manage:
       all: 'شما اجازه دسترسی به این صفحه را ندارید، لطفا ابتدا وارد شوید.'
+
+  oauth:
+    applications:
+      index:
+        applications: 'برنامه‌ها'
+        no_applications: 'شما هنوز برنامه‌ای ایجاد نکرده‌اید.'
+        new_application: 'ایجاد برنامه جدید'
+      new:
+        new_application: 'ثبت برنامه جدید'
+      show:
+        header: 'برنامه: %{name}'
+        confirm: 'آیا مطمئنید؟'
+      edit:
+        header: 'ویرایش برنامه: %{name}'
+      form:
+        submit: 'ثبت'
+        confirm: 'ثبت برنامه لغو شود؟'
+        name: 'نام'
+        redirect_uri: 'آدرس بازگشتی'
+      flash:
+        create:
+          notice: 'برنامه با موفقت ایجاد شد'
+        update:
+          notice: 'برنامه با موفقت بروزرسانی شد'
+        destroy:
+          notice: 'برنامه با موفقیت حذف شد'
+    authorizations:
+      new:
+        authorize_app?: 'اجازه دسترسی برنامه %{name} را به حساب خود می‌دهید؟'
+        application_ability: 'این برنامه قادر خواهد بود:'
+        authorize: 'تایید دسترسی'
+        deny: 'لغو'
+        or: 'یا'
+    authorized_applications:
+      index:
+        connected_apps: 'برنامه‌های متصل شده'
+        application: 'برنامه'
+        created_at: 'تاریخ ایجاد'
+        actions: 'عملیات'
+        revoke: 'حذف دسترسی'

@@ -1,19 +1,19 @@
 <!-- cache status of Story -->
 <% status = hide_story?(story) %>
-
+<% tags = params[:preview_button] ? params[:tags] : story.tags %>
 <%= content_tag :article, class: "story #{'grey-out' if status}",
       data: {timestamp: story.publish_date.to_f} do %>
   <div class='row'>
     <div class='span1 visible-desktop'>
       <div class='story-image'>
-      <% unless story.tags.blank? %>
-        <%= link_to image_tag(story.tags.first.thumbnail.url(:thumb), class: 'img-polaroid'), stories_url(tag: story.tags.first.name) %>
+      <% if tags.any? %>
+        <%= link_to image_tag(thumbnail_url(tags.first), class: 'img-polaroid'), stories_url(tag: tags.first.name), alt: 'logo' %>
       <% end %>
       </div>
       <% unless status %>
         <ul class="tags">
-          <% story.tags.each do |tag| %>
-          <% favored = true if current_user and current_user.favored_tags.include?(tag.name) %>
+          <% tags.each do |tag| %>
+            <% favored = true if current_user and current_user.favored_tags.include?(tag.name) %>
             <%= content_tag :li, rel: "tooltip", title: tag.name do %>
               <p>
                 <%= link_to stories_url(tag: tag.name) do %>
@@ -22,7 +22,7 @@
                 <span class="tag_id_<%= tag.id %> <%= 'yellow' if favored %>">
                   <% if current_user %>
                     <%= link_to add_to_favorites_user_path(id: current_user, tag: tag.name), class: "#{'yellow' if favored}", method: :post, remote: true do %>
-                      <i class='icon-star'>1</i>
+                      <i class='fa fa-star'></i>
                     <% end %>
                   <% end %>
                 </span>
@@ -47,28 +47,29 @@
 
         <small>
           <span>
-            <i class='icon-plus' title="امتیاز"></i>
+            <i class='fa fa-plus' title="امتیاز"></i>
             <%= t('stories.index.point') + story.total_point.to_farsi %>
           </span>
 
           <span>
-            <i class='icon-eye-open' title="تعداد نمایش"></i>
-            <%= t('stories.index.views_count') + story.view_counter.to_farsi %>
-          </span>
 
           <span>
-            <i class='icon-user' title="نویسنده"></i>
+            <i class='fa fa-user' title="نویسنده"></i>
             <%= user_name(story) %>
           </span>
 
           <span>
-            <i class='icon-calendar' title="تاریخ انتشار"></i>
-            <%= to_jalali(story.publish_date) if story.approved? %>
+            <i class='fa fa-calendar' title="تاریخ انتشار"></i>
+            <% if story.approved? %>
+              <%= to_jalali(story.publish_date) if story.publish_date %>
+            <% else %>
+              <%= to_jalali(story.created_at) if story.created_at %>
+            <% end %>
           </span>
 
           <% if story.id %>
             <span>
-              <i class='icon-comments-alt' title="تعداد دیدگاه‌ها"></i>
+              <i class='fa fa-comment' title="تعداد دیدگاه‌ها"></i>
               <%= link_to story_path(story), html_options = { id: "story_#{story.id}" } do %>
                 <%=t 'stories.show.comments' %>
                 <%= story.comments_count.to_farsi %>
@@ -78,21 +79,21 @@
 
           <% if story.published? %>
             <span>
-              <i class='icon-ok' title="تاییدکننده"></i>
+              <i class='fa fa-check' title="تاییدکننده"></i>
               <%= link_to story.publisher.full_name, user_path(story.publisher) %>
             </span>
           <% end %>
 
-          <% if (can? :create, Vote) && story.votes.any? %>
+          <% if (can? :view_voters, current_user) && story.votes.any? %>
             <span>
-              <i class='icon-thumbs-up' title="رای‌دهندگان"></i>
-              <%= link_to t('.voters'), "#", class: "toggle-voters" %>
+              <i class='fa fa-thumbs-o-up' title="رای‌دهندگان"></i>
+              <%= link_to t('.voters'), "#", class: "toggle-voters", data: { id: story.id } %>
             </span>
           <% end %>
 
           <% if story && story.source %>
             <span>
-              <i class='icon-book' title="منبع اصلی"></i>
+              <i class='fa fa-book' title="منبع اصلی"></i>
               <%= source_of_story(story) %>
             </span>
           <% end %>
@@ -104,7 +105,7 @@
       <% unless status %>
         <p><%= user_name(story) %> می‌نویسد:</p>
         <blockquote>
-          <%= sanitize(RedCloth.new(story.content, [:filter_html, :filter_styles]).to_html) %><br />
+          <%= sanitize(RedCloth.new(story.content, [:filter_html, :filter_styles]).to_html) %>
         </blockquote>
       <% end %>
 

@@ -1,12 +1,30 @@
 # encoding:utf-8
+# == Schema Information
+#
+# Table name: users
+#
+#  id                     :integer          not null, primary key
+#  full_name              :string(255)
+#  email                  :string(255)
+#  password_digest        :string(255)
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  comments_count         :integer          default(0)
+#  stories_count          :integer          default(0)
+#  user_rate              :integer          default(0)
+#  website                :string(255)
+#  favorite_tags          :string(255)
+#  password_reset_token   :string(255)
+#  password_reset_sent_at :datetime
+#  slug                   :string(255)
+#  email_visibility       :boolean          default(TRUE)
+#
+
 class User < ActiveRecord::Base
   KARMA_THRESHOLD = 100
 
-  extend FriendlyId
-  friendly_id :full_name_foo, use: [:slugged, :history]
-
-  attr_accessible :email, :full_name, :website, :password, :role_ids,
-                  :password_confirmation, :favorite_tags, :email_visibility
+  include FriendlyId
+  friendly_id :full_name, use: :slugged
 
   has_secure_password
 
@@ -20,6 +38,7 @@ class User < ActiveRecord::Base
   has_many :activity_logs
   has_many :published_stories, class_name: "Story", foreign_key: "publisher_id"
   has_many :removed_stories, class_name: "Story", foreign_key: "remover_id"
+  has_many :oauth_applications, class_name: 'Doorkeeper::Application', as: :owner
 
   validates_presence_of :full_name, :email
   validates :email, email_format: true
@@ -65,20 +84,6 @@ class User < ActiveRecord::Base
     self.stories.not_approved.count
   end
 
-  private
-
-  # role
-  def set_new_user_role
-    if self.roles.empty?
-      self.roles << (Role.find_by_name("new_user") or Role.create(name: "new_user"))
-    end
-  end
-
-  # friendly id
-  def full_name_foo
-    "#{full_name}"
-  end
-
   # friendly id
   def normalize_friendly_id(string)
     sep = "-"
@@ -92,6 +97,15 @@ class User < ActiveRecord::Base
       parameterized_string.gsub!(/^#{re_sep}|#{re_sep}$/i, '')
     end
     parameterized_string.downcase
+  end
+
+  private
+
+  # role
+  def set_new_user_role
+    if self.roles.empty?
+      self.roles << (Role.find_by_name("new_user") or Role.create(name: "new_user"))
+    end
   end
 
   # helper

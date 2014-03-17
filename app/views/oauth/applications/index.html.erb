@@ -1,0 +1,14 @@
+<% content_for :page_header do %>
+  <h1><%= t('.applications') %></h1>
+<% end %>
+
+<% if @applications.size == 0 %>
+  <p><%= t('.no_applications') %></p>
+<% end %>
+
+<p>
+  <i class='fa fa-plus'></i>
+  <%= link_to t('.new_application'), new_oauth_application_path %>
+</p>
+
+<%= render partial: 'applications', object: @applications %>

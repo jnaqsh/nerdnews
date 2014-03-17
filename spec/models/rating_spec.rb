@@ -1,4 +1,16 @@
 # encoding: utf-8
+# == Schema Information
+#
+# Table name: ratings
+#
+#  id            :integer          not null, primary key
+#  name          :string(255)
+#  weight        :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  rating_target :string(255)
+#
+
 require 'spec_helper'
 
 describe Rating do

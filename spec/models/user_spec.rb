@@ -1,3 +1,24 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                     :integer          not null, primary key
+#  full_name              :string(255)
+#  email                  :string(255)
+#  password_digest        :string(255)
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  comments_count         :integer          default(0)
+#  stories_count          :integer          default(0)
+#  user_rate              :integer          default(0)
+#  website                :string(255)
+#  favorite_tags          :string(255)
+#  password_reset_token   :string(255)
+#  password_reset_sent_at :datetime
+#  slug                   :string(255)
+#  email_visibility       :boolean          default(TRUE)
+#
+
 require 'spec_helper'
 require "cancan/matchers"
 
@@ -276,13 +297,17 @@ describe User do
     it { should validate_presence_of(:email) }
     it { should allow_value("asd@asdas.com").for(:email) }
     it { should_not allow_value("Asdasd@asd").for(:email) }
-    it { should validate_uniqueness_of(:email).case_insensitive }
     it { should validate_confirmation_of(:password) }
     it { should allow_value("www.example.com").for(:website) }
     it { should_not allow_value("www.").for(:website) }
     it { should allow_value('').for(:website) }
     it { should allow_value("http://www.example.com/").for(:website) }
     it { should_not allow_value("http://www.example").for(:website) }
+    it 'uniquness of email' do
+      # Seems that there's bug in Shoulda that prevent this to work without saving the user
+      user = FactoryGirl.create(:user)
+      user.should validate_uniqueness_of(:email).case_insensitive
+    end
   end
 
   context 'Authentication' do

@@ -1,36 +1,42 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.13'
+gem 'rails', '4.0.4'
 
 # Gems used only for assets and not required
 # in production environments by default.
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'uglifier', '>= 1.0.3'
+gem 'sass-rails',   '~> 4.0.0'
+gem 'coffee-rails', '~> 4.0.0'
+gem 'uglifier', '>= 1.3.0'
 
-  # adding multiple fields in one text_field like tagging
-  gem 'select2-rails', '~> 3.2.1'
-end
+# Gem that are removed from Rails 4. I'll added them back
+# to make it easier for migration
+gem 'activerecord-deprecated_finders'
+
+# adding multiple fields in one text_field like tagging
+gem 'select2-rails'
+
+# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+gem 'turbolinks'
 
 # it adds a deleted_at column to database
-gem 'acts_as_paranoid'
+gem 'paranoia', '~> 2.0'
 
 # it uses for making active class on menus
 gem 'active_link_to'
 
 # apparenty it's famous jquery lib for rails
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 
 # default label for i18n in rails
 gem 'rails-i18n', git: 'https://github.com/iCEAGE/rails-i18n.git'
 
 # encryption like passwords
-gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'bcrypt-ruby', '~> 3.1.2'
 
-gem 'debugger'
+gem "debugger", "~> 1.6.6"
 
-gem 'simple_form', '~> 2.0.4'
+gem 'simple_form', '~> 3.0.0'
 
 # it uses for managing users in multiple roles
 gem "cancan"
@@ -49,7 +55,7 @@ gem 'RedCloth'
 gem "red_cloth_formatters_plain", "~> 0.2.0"
 
 # for maintenance page in capistrano
-gem "capistrano-maintenance"
+# gem "capistrano-maintenance"
 
 # jalali (persian) date calendar
 gem 'jalalidate'
@@ -61,26 +67,28 @@ gem 'farsifu'
 gem 'ancestry'
 
 # it used for uploading files in rails
-gem 'paperclip'
-gem "paperclip-dropbox" # it's like a plugin for paperclip to use dropbox instead local
+gem 'paperclip', "= 3.5.4"
+gem "paperclip-dropbox", "= 1.2.0" # it's a plugin for paperclip to use dropbox instead local
 
-# progress_bar for reindexing sunspot
-gem 'progress_bar'
+# progress_bar for reindexing sunspot (http://answer.techwikihow.com/574579/sunspot-reindex-error-progress_bar-related.html) TODO: replace original progress_bar when it gets fixed
+gem 'progress_bar', github: 'fivedigit/progress_bar'
 
 # omniauth authentication gems
 gem 'omniauth-github'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'omniauth-openid'
+gem 'omniauth-browserid'
 
 # the gem that uses in url naming
 gem 'friendly_id'
 
+# Compile less files
 gem 'therubyracer'
-gem 'less-rails'
+gem 'less-rails', '2.3.3'
 
 # rbootstrap is a gem for RTL twitter bootstrap
-gem 'twitter-bootstrap-rails', git: "https://github.com/jnaqsh/twitter-bootstrap-rails.git"
+gem 'twitter-bootstrap-rails', github: "jnaqsh/twitter-bootstrap-rails", branch: "new_version", ref: "64e8b"
 
 # for textcaptcha in creating story
 gem 'acts_as_textcaptcha', git: "https://github.com/jnaqsh/acts_as_textcaptcha.git"
@@ -94,7 +102,7 @@ gem 'rakismet'
 gem 'daemons'
 
 # it's cron in rails
-gem 'whenever', :require => false
+gem "whenever", "~> 0.9.0", :require => false
 
 # gems for delaying a job like sending mail
 gem 'delayed_job_web'
@@ -106,19 +114,18 @@ gem 'exception_notification'
 # gem for twitting story
 gem 'twitter'
 
-# Deploy with Capistrano
-gem 'capistrano'
-
 # for creating json api
 gem 'rabl'
 gem 'oj' # Also add either `oj` or `yajl-ruby` as the JSON parser
+
+# OAuth2 support
+gem 'doorkeeper', '~> 1.0.0.rc1'
 
 # To send HTML mails
 gem 'roadie'
 
 group :production do
   gem 'execjs'
-  gem 'therubyracer'
   gem 'mysql2'
 end
 
@@ -129,12 +136,19 @@ group :development do
 
   # it warns about eager loading and just for development mode
   gem 'bullet'
+
+  # Deploy with Capistrano
+  gem 'capistrano-rails', '~> 1.0.0'
+  gem 'capistrano-rbenv', '~> 2.0'
+  gem 'capistrano-bundler', '~> 1.1.2'
 end
 
 group :development, :test do
   gem 'rspec-rails'
   gem 'pry-rails'
   gem 'pry-nav'
+  # Formatter for rspec
+  gem 'fuubar'
 end
 
 group :test do
@@ -142,12 +156,12 @@ group :test do
   gem "capybara", "~> 2.1.0"
   gem 'guard-rspec'
   gem 'faker'
-  gem 'sunspot_test'
-  # gem 'guard-spork'
+  gem 'sunspot-rails-tester'
   gem 'guard-zeus'
   gem 'launchy'
   # gem 'rb-inotify', '~> 0.9', :require => false
   gem 'shoulda-matchers'
-  gem "poltergeist", "~> 1.3.0"
+  gem "poltergeist", "~> 1.4.0"
   gem 'webmock'
+  gem 'database_cleaner'
 end

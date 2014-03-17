@@ -12,7 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui
+//= require jquery.ui.core
+//= require jquery.ui.sortable
+//= require tinycon
 //= require twitter/bootstrap/bootstrap-transition
 //= require twitter/bootstrap/bootstrap-dropdown
 //= require twitter/bootstrap/bootstrap-tab

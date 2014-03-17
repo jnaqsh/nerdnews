@@ -1,6 +1,5 @@
 atom_feed({'xmlns:app' => 'http://www.w3.org/2007/app',
       'xmlns:openSearch' => 'http://a9.com/-/spec/opensearch/1.1/'}) do |feed|
-  feed.language "fa_IR"
   feed.title("نردنیوز")
   feed.updated Story.maximum(:created_at)
 
@@ -15,6 +14,22 @@ atom_feed({'xmlns:app' => 'http://www.w3.org/2007/app',
           unless story.source.blank?
             xhtml.a "منبع اصلی خبر", "href" => story.source, "target" => "_blank"
           end
+
+          # Social Sharing Icons
+          xhtml.p do
+            xhtml.a href: "http://www.facebook.com/sharer.php?u=#{story_url(story)}", target: '_blank' do
+              xhtml.img src: "#{image_path 'social-icons/fc-webicon-facebook-m.png'}", alt: "Google+"
+            end
+
+            xhtml.a href: "http://twitter.com/home?status=#{story.title} #{story_url(story)}", target: '_blank' do
+              xhtml.img src: "#{image_path 'social-icons/fc-webicon-twitter-m.png'}", alt: "Google+"
+            end
+
+            xhtml.a href: "https://plus.google.com/share?url=#{story_url(story)}&hl=fa&subject=#{story.title}", target: '_blank' do
+              xhtml.img src: "#{image_path 'social-icons/fc-webicon-googleplus-m.png'}", alt: "Google+"
+            end
+          end
+
         end
 
         if story.comments_count > 0 and story_comments

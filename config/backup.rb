@@ -20,15 +20,15 @@ Backup::Model.new(:db_backup, "Backup database") do
 
   compress_with Bzip2
 
-  store_with Dropbox do |db|
-    db.api_key    = dropbox_config[RAILS_ENV]["app_key"]
-    db.api_secret = dropbox_config[RAILS_ENV]["app_secret"]
-    # Dropbox Access Type
-    # The default value is :app_folder
-    # Change this to :dropbox if needed
-    db.path       = '/'
-    db.keep       = 30
-  end
+#  store_with Dropbox do |db|
+#    db.api_key    = dropbox_config[RAILS_ENV]["app_key"]
+#    db.api_secret = dropbox_config[RAILS_ENV]["app_secret"]
+#    # Dropbox Access Type
+#    # The default value is :app_folder
+#    # Change this to :dropbox if needed
+#    db.path       = '/'
+#    db.keep       = 30
+#  end
 
   store_with Local do |local|
     local.path = 'db/'

@@ -88,11 +88,15 @@ class Ability
     can :update, Story, user: {id: user.id}
 
     # User model
-    can [:update, :add_to_favorites, :activity_logs], user
+    can [:update, :add_to_favorites, :activity_logs], User, :id => user.id
     can :bypass_captcha, user
 
     # Vote model
     can :create, Vote
+
+    # Oauth::ApplicationsController
+    can [:index, :new, :show, :create], Doorkeeper::Application
+    can [:edit, :update, :destroy], Doorkeeper::Application, user: {id: user.id}
   end
 
   def approved_user_permissions(user)
@@ -104,6 +108,9 @@ class Ability
 
     # Tag model
     can [:create, :update], Tag
+
+    # Vote model
+    can :view_voters, user
   end
 
   def founder_user_permissions(user)

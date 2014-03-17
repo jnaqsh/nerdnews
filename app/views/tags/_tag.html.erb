@@ -1,7 +1,12 @@
 <li class="span2">
   <div class="thumbnail">
-    <%= image_tag tag.thumbnail.url(:thumb), alt: tag.name %>
-    <h4><%= link_to tag.name.truncate(11), stories_path(tag: tag.name) %></h4>
+    <%= image_tag thumbnail_url(tag), alt: tag.name %>
+    <h4>
+      <% if can? :destroy, Tag %>
+        <%= check_box_tag "tags[]", tag.id, false, id: "tag_#{tag.id}" %>
+      <% end %>
+      <%= link_to tag.name.truncate(11), stories_path(tag: tag.name) %>
+    </h4>
 
     <% if (can? :edit, Tag) or (can? :destroy, Tag) %>
     <p>

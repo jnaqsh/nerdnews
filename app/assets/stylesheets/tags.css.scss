@@ -8,6 +8,10 @@
   }
 }
 
+.destroy_multiple_button {
+  margin-bottom: 10px;
+}
+
 ul.tags {
   margin: auto;
 }
@@ -98,10 +102,6 @@ ul.tags {
     color: white;
     &.yellow {
       color: yellow;
-    }
-
-    i.icon-star {
-      line-height: 19px;
     }
   }
 }

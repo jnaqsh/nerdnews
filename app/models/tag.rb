@@ -1,8 +1,21 @@
 #encoding: utf-8
+# == Schema Information
+#
+# Table name: tags
+#
+#  id                     :integer          not null, primary key
+#  name                   :string(255)
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  stories_count          :integer          default(1)
+#  thumbnail_file_name    :string(255)
+#  thumbnail_content_type :string(255)
+#  thumbnail_file_size    :integer
+#  thumbnail_updated_at   :datetime
+#
+
 
 class Tag < ActiveRecord::Base
-  attr_accessible :name, :thumbnail
-
   has_attached_file :thumbnail, :styles => { thumb: "64x64#" }, :default_url => "missing_64.png"
 
   has_many :taggings, dependent: :destroy
@@ -20,15 +33,4 @@ class Tag < ActiveRecord::Base
     text :id
     time :created_at
   end
-
-  # private
-
-  #   def self.tokens(query)
-  #     tags = where("name like ?", "%#{query}%").select(:id, :name)
-  #   end
-
-  #   def self.ids_from_tokens(tokens)
-  #     tokens.gsub!(/<<<(.+?)>>>/) { create!(name: $1).id }
-  #     tokens.split(',')
-  #   end
 end

@@ -13,7 +13,7 @@
 
 <div class = 'row'>
   <div class='span2'>
-    <%= form_tag tags_path, remote: true, method: :get, class: 'form-search' do %>
+    <%= form_tag tags_path, remote: true, :method => :get, class: 'form-search' do %>
       <div class='row'>
         <%= text_field_tag :tag_search, params[:tag_search], class: "span2 search-query", placeholder: t(".search") %>
       </div>
@@ -23,9 +23,18 @@
 
 <div class='row'>
   <div class='span12'>
-    <ul class="thumbnails" id="tags-list">
-      <%= render(@tags) %>
-    </ul>
+    <%= form_tag destroy_multiple_tags_path, :method => :delete do %>
+      <% if can? :destroy, Tag %>
+        <div class='destroy_multiple_button'>
+          <%= submit_tag t(".destroy_multiple"), class: 'btn btn-danger', data: { confirm: t('helpers.links.confirm') } %>
+        </div>
+      <% end %>
+
+      <ul class="thumbnails" id="tags-list">
+        <%= render(@tags) %>
+      </ul>
+
+    <% end %>
     <%= paginate @tags %>
   </div>
 </div>

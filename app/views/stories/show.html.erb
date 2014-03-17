@@ -6,7 +6,7 @@
                     title: "#{@story.title}",
                     type: 'website',
                     url: "#{story_url(@story)}",
-                    image: thumbnail_url(@story) } %>
+                    image: thumbnail_url(@story.tags.first) } %>
 
 <%- model_class = @story.class -%>
 <% content_for :page_header do %>
@@ -28,3 +28,5 @@
     <%= (nested_comments @comments) || t('.no_comments') %>
   </div>
 </div>
+
+<%= render 'share_by_mail_modal_container' %>

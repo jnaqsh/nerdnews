@@ -1,0 +1,24 @@
+<% content_for :page_header do %>
+  <h2><%= t('.connected_apps') %></h2>
+<% end %>
+
+<div class="span11">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th><%= t('.application') %></th>
+        <th><%= t('.created_at') %></th>
+        <th><%= t('.actions') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @applications.each do |application| %>
+        <tr>
+          <td><%= link_to application.name, oauth_application_path(application) %></td>
+          <td><%= to_jalali(application.created_at) %></td>
+          <td><%= link_to t('.revoke'), oauth_authorized_application_path(application), method: :delete, class: 'btn btn-danger', data: { :confirm => t('.confirm', default: t("helpers.links.confirm") )} %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -3,7 +3,7 @@
     <% user_stories.each do |user_story| %>
       <tr>
         <td>
-          <i class='icon-book'></i>
+          <i class='fa fa-book'></i>
           <%= link_to story_path(user_story) do %>
             <%= truncate user_story.title %>
           <% end %>
@@ -12,19 +12,19 @@
           <%= to_jalali(user_story.publish_date) %>
         </td>
         <td title="تعداد دیدگاه‌ها">
-          <i class='icon-comment'></i>
+          <i class='fa fa-comment'></i>
           <%= user_story.comments_count.to_farsi %>
         </td>
-        <td title="تعداد نمایش">
-          <i class='icon-eye-open'></i>
-          <%= user_story.view_counter.to_farsi %>
+        <td title="امتیاز">
+          <i class='fa fa-plus'></i>
+          <%= user_story.total_point.to_farsi %>
         </td>
         <td title="تعداد نظر مثبت">
-          <i class='icon-thumbs-up'></i>
+          <i class='fa fa-thumbs-o-up'></i>
           <%= user_story.positive_votes_count.to_farsi %>
         </td>
         <td title="تعداد نظر منفی">
-          <i class='icon-thumbs-down'></i>
+          <i class='fa fa-thumbs-o-down'></i>
           <%= user_story.negative_votes_count.to_farsi %>
         </td>
       </tr>

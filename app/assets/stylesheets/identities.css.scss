@@ -4,7 +4,7 @@
 
 /* signin */
 #services_signin {
-  div { 
+  div {
     overflow:auto;
     margin-bottom: 40px;
   }
@@ -12,31 +12,31 @@
 
 /* signup: create new account */
 #services_new {
-  input { 
-    margin-right: 20px; 
+  input {
+    margin-right: 20px;
   }
 }
 
-.identity_userdata { 
+.identity_userdata {
   font-size: 13px;
 }
 
 /* the list with the available services that consist of icons and text */
-#services_list { 
-  margin: 20px 0; 
-  padding: 0; 
-  list-style: none; 
-  li { 
-    display: inline; 
-    float: right; 
-    margin-right: 25px; 
-    margin-bottom: 20px; 
-    width: 100px; 
-    text-align: center; 
+#services_list {
+  margin: 20px 0;
+  padding: 0;
+  list-style: none;
+  li {
+    display: inline;
+    float: right;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    width: 100px;
+    text-align: center;
   }
-  img { 
-    display: block; 
-    margin-left: auto; 
-    margin-right: auto; 
+  img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
 }

@@ -32,7 +32,7 @@
     <% else %>
       <div class="btn-group pull-left">
         <a class="btn dropdown-toggle" data-toggle="dropdown" id="user-menu" href="<%= user_path(current_user) %>">
-          <%= image_tag avatar_url(current_user) %>
+          <%= image_tag avatar_url(current_user), alt: 'avatar' %>
           <%= truncate current_user.full_name, length: 16 %>
           <% if unread_messages > 0 %>
             <span class="label label-important"><%= unread_messages.to_farsi %></span>

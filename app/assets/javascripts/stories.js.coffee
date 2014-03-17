@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 @load_pages = (divID='#stories', messageReplace='در حال دریافت...') ->
-  if $("#{divID}").next('.pagination').length
+  if $("#{divID}").length && $('.pagination').length
     $(window).scroll ->
       url = $('.pagination a[rel="next"]').attr('href')
       if url && $(window).scrollTop() > $(document).height() - $(window).height() - 2500
@@ -18,9 +18,11 @@
     $.get($("#stories").data('url'), after: $('.story').first().data('timestamp'))
 
   addStories: (stories) ->
-    if stories.length > 0
+    stories_number = stories.match(/<article/gi)
+    if stories_number.length
       $("#stories").prepend($(stories).hide())
       $("#show_stories").show()
+      Tinycon.setBubble(stories_number.length)
     @poll()
 
   showStories: (e) ->
@@ -28,6 +30,7 @@
     $('.story').show()
     $('#stories hr').show()
     $('#show_stories').hide()
+    Tinycon.setBubble(0)
 
 @popitup = (url) ->
   newwindow = window.open(url,'name','height=600,width=600')
@@ -60,7 +63,8 @@ jQuery ->
   #toggle voters div to show/hide list of voters
   $(document).on('click', 'a.toggle-voters', (e) ->
     e.preventDefault()
-    $(this).parent().parent().parent().next("div.row").slideToggle()
+    id = $(this).attr('data-id')
+    $("div[data-id=#{id}]").slideToggle()
   )
 
   # Show optins when clicking voting button

@@ -1,15 +1,36 @@
 #encoding: utf-8
+# == Schema Information
+#
+# Table name: stories
+#
+#  id                   :integer          not null, primary key
+#  title                :string(255)
+#  content              :text
+#  publish_date         :datetime
+#  user_id              :integer
+#  slug                 :string(255)
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  comments_count       :integer          default(0)
+#  view_counter         :integer          default(0)
+#  positive_votes_count :integer          default(0)
+#  negative_votes_count :integer          default(0)
+#  source               :string(255)
+#  publisher_id         :integer
+#  total_point          :integer          default(0)
+#  hide                 :boolean          default(FALSE)
+#  deleted_at           :datetime
+#  remover_id           :integer
+#
+
 
 class Story < ActiveRecord::Base
   acts_as_paranoid
   acts_as_textcaptcha
-  extend FriendlyId
+  include FriendlyId
 
   HIDE_THRESHOLD = -8
   CONTENT_MAX_LENGTH = 1500
-
-  attr_accessible :content, :publish_date, :title, :source,
-    :tag_names, :view_counter, :publisher_id, :tag_ids
 
   belongs_to :remover, class_name: "User"
   belongs_to :publisher, class_name: "User"
@@ -21,17 +42,19 @@ class Story < ActiveRecord::Base
   has_many :votes, as: :voteable
   belongs_to :user, counter_cache: true
 
-  scope :not_approved, where(:publish_date => nil)
-  scope :approved, where("publish_date", present?)
+  scope :not_approved, -> { where(:publish_date => nil) }
+  scope :approved, -> { where("publish_date", present?) }
 
   before_validation :smart_add_url_protocol
+  after_save :assign_tags_to_story, :order_tags
 
   validates_length_of :title, maximum: 100, minimum: 10
   validates_length_of :content, minimum: 250, maximum: CONTENT_MAX_LENGTH
-  validates  :title, :content, presence: true
+  validates :title, :content, presence: true
   validates :source, allow_blank: true, uri: true
 
   attr_reader :tag_names
+  attr_accessor :preview_tags
 
   searchable do
     integer :id
@@ -43,6 +66,12 @@ class Story < ActiveRecord::Base
     time :publish_date
     time :created_at
     boolean :hide
+    boolean :approved do
+      self.approved?
+    end
+    string :tags_name, :multiple => true do
+      tags.map(&:name)
+    end
     text :user do
       user.full_name if user.present?
       user.email if user.present?
@@ -61,31 +90,28 @@ class Story < ActiveRecord::Base
   end
 
   def tag_names=(tokens)
-    # self.tag_ids = Tag.ids_from_tokens(tokens)
     tags_array = tokens.split(",")
-    self.tags.clear
+    self.preview_tags = []
     tags_array.each do |tag|
-      found_tag = Tag.find_by_name(tag.strip)
-      if !found_tag.blank?
-        self.tags << found_tag if !self.tags.include?(found_tag)
-      else
-        self.tags << Tag.create!(name: tag.strip) if tag.strip.size != 0
-      end
+       if tag.strip.size != 0
+         the_tag = Tag.where(name: tag.strip).first_or_initialize
+         self.preview_tags << the_tag
+       end
     end
   end
 
   def mark_as_published(user, url)
-    self.update_attributes({publish_date: Time.zone.now, publisher: user}, without_protection: true)
+    self.update({publish_date: Time.zone.now, publisher: user})
 
     # provide tweet content
     if self.tags && self.tags.first
-      tweet_content = "#{self.title} ##{self.tags.first.name}"
+      tweet_content = "#{self.title} ##{self.tags.first.name.gsub(/ /, '_')}"
     else
       tweet_content = "#{self.title}"
     end
 
     # conditional due to error on request user spec
-    Rails.env.production? ? Tweet.tweet(Twitter::Client.new, tweet_content, url) : true
+    Rails.env.production? ? Tweet.tweet(tweet_content, url) : true
   end
 
   def user_voted?(user)
@@ -97,11 +123,7 @@ class Story < ActiveRecord::Base
   end
 
   # FriendlyId, TODO: Move to it's own method
-  friendly_id :title_foo, use: [:slugged, :history]
-
-  def title_foo
-    "#{title}"
-  end
+  friendly_id :title, use: [:slugged, :history]
 
   def normalize_friendly_id(string)
     sep = "-"
@@ -129,6 +151,23 @@ protected
   end
 
 private
+  # assignes previews_tags to tags= and makes relations
+  # runs after save hook
+  def assign_tags_to_story
+    self.tags = self.preview_tags if self.preview_tags
+  end
+
+  # add index to each tagging relation based on users tags order
+  # runs after save hook
+  def order_tags
+    return if preview_tags.nil?
+    self.preview_tags.each.with_index(1) do |tag, index|
+      tagging = self.taggings.where(tag_id: tag.id).first
+      tagging.position = index
+      tagging.save
+    end
+  end
+
   def calculate_count(tag)
     tag.update_attribute :stories_count, tag.stories.count
   end

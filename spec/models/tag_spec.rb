@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: tags
+#
+#  id                     :integer          not null, primary key
+#  name                   :string(255)
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  stories_count          :integer          default(1)
+#  thumbnail_file_name    :string(255)
+#  thumbnail_content_type :string(255)
+#  thumbnail_file_size    :integer
+#  thumbnail_updated_at   :datetime
+#
+
 require 'spec_helper'
 
 describe Tag do
@@ -19,9 +34,5 @@ describe Tag do
           allowing('image/jpeg', 'image/jpg', 'image/png')}
     it {should validate_attachment_size(:thumbnail).
           less_than(100.kilobytes).greater_than(0.kilobytes)}
-    it {should_not allow_mass_assignment_of(:thumbnail_file_name)}
-    it {should_not allow_mass_assignment_of(:thumbnail_content_type)}
-    it {should_not allow_mass_assignment_of(:thumbnail_file_size)}
-    it {should_not allow_mass_assignment_of(:thumbnail_updated_at)}
   end
 end

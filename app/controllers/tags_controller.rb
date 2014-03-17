@@ -20,7 +20,7 @@ class TagsController < ApplicationController
   end
 
   def create
-    @tag = Tag.new(params[:tag])
+    @tag = Tag.new(tag_params)
 
     respond_to do |format|
       if @tag.save
@@ -39,17 +39,31 @@ class TagsController < ApplicationController
     end
   end
 
+  def destroy_multiple
+    Tag.destroy params[:tags] unless params[:tags].nil?
+
+    respond_to do |format|
+      format.html { redirect_to tags_path, notice: t('controllers.tags.destroy_multiple.flash.success') }
+    end
+  end
+
   def edit
   end
 
   def update
 
     respond_to do |format|
-      if @tag.update_attributes(params[:tag])
+      if @tag.update_attributes(tag_params)
         format.html { redirect_to tags_path, notice: t('controllers.tags.update.flash.success') }
       else
         format.html { render action: 'edit' }
       end
     end
   end
+
+  private
+
+    def tag_params
+      params.require(:tag).permit(:name, :thumbnail, :tags)
+    end
 end

@@ -1,4 +1,17 @@
 # encoding: utf-8
+# == Schema Information
+#
+# Table name: votes
+#
+#  id            :integer          not null, primary key
+#  user_id       :integer
+#  rating_id     :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  voteable_id   :integer
+#  voteable_type :string(255)
+#
+
 require 'spec_helper'
 
 describe Vote do
@@ -12,8 +25,6 @@ describe Vote do
     let(:story)   { FactoryGirl.create(:story) }
     let(:rating)  { FactoryGirl.create(:rating) }
     let(:user)    { FactoryGirl.create(:user) }
-
-    it {should validate_uniqueness_of(:voteable_id)}
 
     it 'checks for uniquness' do
 
@@ -30,8 +41,6 @@ describe Vote do
       end
 
       vote1.save
-      vote1.id.should eq(1)
-
       vote2.save
       vote2.id.should be_nil
     end

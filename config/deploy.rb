@@ -1,132 +1,63 @@
-require "bundler/capistrano"
-require "delayed/recipes"
-require 'capistrano/maintenance'
+# config valid only for Capistrano 3.1
+lock '3.1.0'
 
-# recipes for whenever gem
-set :whenever_command, "bundle exec whenever"
-set :whenever_environment, defer { "production" }
-require "whenever/capistrano"
+set :application, 'nerdnews'
+set :repo_url, 'git@github.com:jnaqsh/nerdnews.git'
 
-server "server.jnaqsh.com", :web, :app, :db, primary: true
+# Default branch is :master
+#ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
-set :application, "nerdnews"
-set :user, "deployer"
-set :deploy_to, "/home/#{user}/apps/#{application}"
-set :deploy_via, :remote_cache
-set :use_sudo, false
+# Default deploy_to directory is /var/www/my_app
+set :deploy_to, '/home/deployer/apps/nerdnews'
+set :rails_env, "production"
 
-# rbenv
-set :default_environment, {
-  "PATH" => "/home/#{user}/.rbenv/shims:/home/#{user}/.rbenv/bin:$PATH",
-}
+# Default value for :scm is :git
+# set :scm, :git
 
-set :scm, "git"
-set :repository, "https://github.com/jnaqsh/#{application}.git"
-set :branch, "master"
+# Default value for :format is :pretty
+# set :format, :pretty
 
-set :rails_env, "production" #added for delayed job
+# Default value for :log_level is :debug
+# set :log_level, :debug
 
-default_run_options[:pty] = true
-ssh_options[:forward_agent] = true
+# Default value for :pty is false
+# set :pty, true
 
-after "deploy", "deploy:cleanup" # keep only the last 5 releases
-after "deploy:update", "delayed_job:restart"
-after "deploy:stop",    "delayed_job:stop"
-after "deploy:start",   "delayed_job:start"
-after "deploy:start", "solr:start"
-after "deploy:stop", "solr:stop"
+set :rbenv_type, :user # or :system, depends on your rbenv setup
+set :rbenv_ruby, '2.1.1'
+set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
+set :rbenv_map_bins, %w{rake gem bundle ruby rails}
+set :rbenv_roles, :all # default value
+
+# Default value for :linked_files is []
+set :linked_files, %w{config/database.yml config/application_configs.yml config/sunspot.yml config/textcaptcha.yml config/dropbox.yml config/dropbox_backup.yml config/twitter.yml}
+
+# Default value for linked_dirs is []
+set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system db/db_backup solr/production solr/pids}
+
+# Default value for default_env is {}
+set :default_env, { path: "~/.rbenv/shims:~/.rbenv/bin:$PATH" }
+
+# Default value for keep_releases is 5
+set :keep_releases, 5
 
 namespace :deploy do
-  desc "reload the database with seed data"
-  task :seed do
-    run "cd #{current_path}; bundle exec rake db:seed RAILS_ENV=#{rails_env}"
-  end
-
-  desc 'Start Application'
-  task :start, :roles => :app do
-    run "touch #{current_release}/tmp/restart.txt"
-  end
-
-  task :stop, :roles => :app do
-    # Do nothing.
-  end
-
-  desc "Restart Application"
-  task :restart, :roles => :app do
-    run "touch #{current_release}/tmp/restart.txt"
-  end
-
-  task :setup_config, roles: :app do
-    sudo "ln -nfs #{current_path}/config/nginx.conf /opt/nginx/sites-enabled/#{application}"
-    run "mkdir -p #{shared_path}/config"
-    run "mkdir -p #{shared_path}/db"
-    run "mkdir -p #{shared_path}/db_backup"
-    put File.read("config/database.example.yml"), "#{shared_path}/config/database.yml"
-    put File.read("config/application_configs.example.yml"), "#{shared_path}/config/application_configs.yml"
-    put File.read("config/sunspot.example.yml"), "#{shared_path}/config/sunspot.yml"
-    put File.read("config/textcaptcha.example.yml"), "#{shared_path}/config/textcaptcha.yml"
-    put File.read("config/dropbox.example.yml"), "#{shared_path}/config/dropbox.yml"
-    put File.read("config/dropbox_backup.example.yml"), "#{shared_path}/config/dropbox_backup.yml"
-    put File.read("config/twitter.example.yml"), "#{shared_path}/config/twitter.yml"
-    run "touch #{shared_path}/db/under_construction_mails.txt"
-    puts "Now edit the config files in #{shared_path}."
-  end
-  after "deploy:setup", "deploy:setup_config"
-
-  task :symlink_config, roles: :app do
-    run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
-    run "ln -nfs #{shared_path}/config/application_configs.yml #{release_path}/config/application_configs.yml"
-    run "ln -nfs #{shared_path}/config/sunspot.yml #{release_path}/config/sunspot.yml"
-    run "ln -nfs #{shared_path}/config/textcaptcha.yml #{release_path}/config/textcaptcha.yml"
-    run "ln -nfs #{shared_path}/config/twitter.yml #{release_path}/config/twitter.yml"
-    run "ln -nfs #{shared_path}/config/dropbox.yml #{release_path}/config/dropbox.yml"
-    run "ln -nfs #{shared_path}/config/dropbox_backup.yml #{release_path}/config/dropbox_backup.yml"
-    run "ln -nfs #{shared_path}/db/under_construction_mails.txt #{release_path}/db/under_construction_mails.txt"
-    run "ln -nfs #{shared_path}/db_backup #{release_path}/db/db_backup"
-  end
-  after "deploy:finalize_update", "deploy:symlink_config"
-
-  desc "Make sure local git is in sync with remote."
-  task :check_revision, roles: :web do
-    unless `git rev-parse HEAD` == `git rev-parse origin/master`
-      puts "WARNING: HEAD is not the same as origin/master"
-      puts "Run `git push` to sync changes."
-      exit
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      execute :touch, release_path.join('tmp/restart.txt')
     end
   end
 
-  before "deploy", "deploy:check_revision"
+  after :publishing, :restart
+  after :publishing, 'delayed_job:restart'
+  after :publishing, 'solr:restart'
 
-  desc "build missing paperclip styles"
-  task :build_missing_paperclip_styles, :roles => :app do
-    run "cd #{release_path}; RAILS_ENV=production bundle exec rake paperclip:refresh:missing_styles"
-  end
-
-#  after "deploy:migrate", "deploy:build_missing_paperclip_styles"
-end
-
-namespace :deploy do
-  task :setup_solr_data_dir do
-    run "mkdir -p #{shared_path}/solr/data"
+  after :restart, :clear_cache do
+    on roles(:web), in: :groups, limit: 3, wait: 10 do
+      within release_path do
+        execute :'bin/rake', 'tmp:clear'
+      end
+    end
   end
 end
-
-namespace :solr do
-  desc "start solr"
-  task :start, :roles => :app, :except => { :no_release => true } do
-    run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec sunspot-solr start --port=8983 --data-directory=#{shared_path}/solr/data --pid-dir=#{shared_path}/pids --solr-home=#{current_path}/solr"
-  end
-  desc "stop solr"
-  task :stop, :roles => :app, :except => { :no_release => true } do
-    run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec sunspot-solr stop --port=8983 --data-directory=#{shared_path}/solr/data --pid-dir=#{shared_path}/pids --solr-home=#{current_path}/solr"
-  end
-  desc "reindex the whole database"
-  task :reindex, :roles => :app do
-    stop
-    run "rm -rf #{shared_path}/solr/data"
-    start
-    run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec rake sunspot:solr:reindex"
-  end
-end
-
-after 'deploy:setup', 'deploy:setup_solr_data_dir'

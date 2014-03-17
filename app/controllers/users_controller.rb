@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class UsersController < ApplicationController
-  load_and_authorize_resource
+  authorize_resource
   layout 'user_profile', only: [:show, :posts, :comments, :favorites, :activity_logs]
 
   # GET /users
@@ -28,13 +28,6 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @stories = @user.stories.approved.order('created_at desc').page(params[:page])
-
-    user_path = Rails.env.production? ? user_path(@user).downcase : user_path(@user) #monkey patch due to error in production (downcase)
-
-    if request.path != user_path
-      redirect_to @user, status: :moved_permanently
-      return
-    end
 
     respond_to do |format|
       format.html # show.html.erb
@@ -68,14 +61,12 @@ class UsersController < ApplicationController
       delete_sessions
       redirect_to root_url, flash: { error: t('controllers.users.create.flash.canceled') }
     else
-      @user = User.new(params[:user])
+      @user = User.new(params.require(:user).permit(:full_name, :email))
       @providers = Identity.providers
 
-      if session[:authhash].present?
-        @user.identities.build(provider: session[:authhash][:provider], uid: session[:authhash][:uid])
-      end
+      build_identity_if_used_openid(@user)
 
-      @user.password, @user.password_confirmation = SecureRandom.urlsafe_base64
+      @user.password = @user.password_confirmation = SecureRandom.urlsafe_base64
 
       respond_to do |format|
         if @user.save
@@ -127,7 +118,7 @@ class UsersController < ApplicationController
       redirect_to @user, flash: { error: t('controllers.users.update.flash.canceled') }
     else
       respond_to do |format|
-        if @user.update_attributes(params[:user])
+        if @user.update(user_params)
           record_activity %Q(پروفایل خود را ویرایش کرد)
           format.html { redirect_to @user, notice: t('controllers.users.update.flash.success') }
         else
@@ -188,6 +179,7 @@ class UsersController < ApplicationController
   end
 
   def activity_logs
+    @user = User.find(params[:id])
     @activity_logs = @user.activity_logs.order('created_at desc').page(params[:page])
 
     respond_to do |format|
@@ -212,4 +204,9 @@ class UsersController < ApplicationController
       end
     end
   end
+
+  private
+    def user_params
+      params.require(:user).permit(:email, :full_name, :website, :password, :role_ids, :password_confirmation, :favorite_tags, :email_visibility)
+    end
 end

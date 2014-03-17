@@ -8,3 +8,4 @@
 app_config = YAML.load(File.read(Rails.root.join('config', 'application_configs.yml')))
 
 Nerdnews::Application.config.secret_token = app_config["secret_token"]
+Nerdnews::Application.config.secret_key_base = app_config["secret_token"]

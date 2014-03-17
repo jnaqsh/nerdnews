@@ -1,3 +1,5 @@
+<% tags = params[:tags] || @story.tags %>
+
 <%= simple_form_for @story, :html => { :class => 'form-horizontal' } do |f| %>
   <%= f.input :title,
               input_html: {class: "span6"},
@@ -14,7 +16,7 @@
                             'data-maxlength' => Story::CONTENT_MAX_LENGTH},
               placeholder: t('.content_placeholder')%>
 
-  <%= f.input :tag_names, input_html: {data: {tags: @story.tags}, class: "span6", value: ' '} %>
+  <%= f.input :tag_names, input_html: {data: {tags: tags}, class: "span6", value: ' '} %>
 
   <%#= f.association :tags, collection: [], input_html: {data: {tags: @story.tags}, class: "span6", multiple: ' '} %>
 

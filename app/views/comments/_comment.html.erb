@@ -2,7 +2,7 @@
 <% status = hide_comment?(comment) %>
 <div class="comment <%= "grey-out" if status %>" id="comment_<%= comment.id %>">
   <div>
-    <%= image_tag avatar_url(comment, 32), class: 'pull-right img-polaroid clearfix' %>
+    <%= image_tag avatar_url(comment, 32), class: 'pull-right img-polaroid clearfix', alt: 'avatar' %>
   </div>
 
   <div class="main">
@@ -17,7 +17,7 @@
 
       <% if comment.parent.present? %>
         <small class='muted'>
-        <i class='icon-arrow-left'></i>
+        <i class='fa fa-arrow-left'></i>
         در جواب
         <%= comment.parent.name %>
       </small>
@@ -28,13 +28,13 @@
     <h5 class="muted">
       <small>
         <span>
-          <i class='icon-calendar'></i>
+          <i class='fa fa-calendar'></i>
             <%= link_to story_path(comment.story, :anchor => "comment_#{comment.id}") do %>
             <%= time_ago_in_words(comment.created_at).to_farsi + ' قبل' %>
             <% end %>
         </span>
         <% if comment.website.present? %>
-          <i class='icon-link'></i>
+          <i class='fa fa-link'></i>
           <%= link_to 'وب‌سایت', comment.website %>
         <% end %>
       </small>
@@ -56,9 +56,8 @@
         <div class='span3 thumbs-up-list' id='thumbs-up-list-<%= comment.id %>'>
           <ul>
             <% Rating.positive('comments').each do |rating| %>
-              <li class='icon-hand-left'>
-                <%= link_to rating.name, story_comment_votes_path(comment.story, comment, rating_id: rating, positive: true),
-                  method: :post, remote: true %>
+              <li class='fa fa-hand-o-left'>
+                <%= link_to rating.name, story_comment_votes_path(comment.story, comment, rating_id: rating, positive: true), method: :post, remote: true %>
               </li>
             <% end %>
           </ul>
@@ -67,7 +66,7 @@
         <div class='span3 thumbs-down-list' id='thumbs-down-list-<%= comment.id %>'>
           <ul>
             <% Rating.negative('comments').each do |rating| %>
-              <li class='icon-hand-left'>
+              <li class='fa fa-hand-o-left'>
                 <%= link_to rating.name, story_comment_votes_path(comment.story, comment, rating_id: rating), method: :post, remote: true %>
               </li>
             <% end %>
@@ -86,9 +85,7 @@
 
             <% if can? :destroy, comment %>
               <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                [comment.story, comment], :method => :delete,
-                :confirm => t('.confirm', :default => t("helpers.links.confirm",
-                  :default => 'Are you sure?')) %>
+                [comment.story, comment], :method => :delete, data: {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))} %>
             <% end %>
           </small>
         </div>

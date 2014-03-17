@@ -5,6 +5,8 @@ class MypageController < ApplicationController
     @stories = Story.search(:include => [:tags, :user, :publisher, {:votes => [:rating, :user]} ]) do
       fulltext params[:search]
       without(:hide, true)
+      without(:approved, false)
+      with(:tags_name).any_of(current_user.favored_tags.to_a)
       keywords("#{favorite_tags.join(' ')} #{current_user.email}") {minimum_match 1}
       order_by :created_at, :desc
       order_by :publish_date, :desc
@@ -17,7 +19,7 @@ class MypageController < ApplicationController
 
     respond_to do |format|
       if !@stories || @stories.empty?
-        format.html { flash.now[:notice] = t('.controllers.mypage.flash.add_tags') }
+        format.html { flash.now[:notice] = t('controllers.mypage.flash.add_tags') }
       else
         format.html
       end
@@ -28,6 +30,6 @@ class MypageController < ApplicationController
   private
 
   def favorite_tags
-    current_user.favorite_tags ? current_user.favored_tags.to_a : []
+    !current_user.favorite_tags.empty? ? current_user.favored_tags.to_a : []
   end
 end
