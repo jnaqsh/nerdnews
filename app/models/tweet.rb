@@ -14,7 +14,7 @@ class Tweet
 
   def self.tiny_url(available_length, url)
     return url if url.length < available_length
-    string = "http://is.gd/api.php?longurl=" + CGI::escape(url)
+    string = "https://is.gd/api.php?longurl=" + CGI::escape(url)
     open(string).read.strip
   rescue StandardError => e
     puts "Error in tiny_url: #{e.message}\n#{e.backtrace}"
