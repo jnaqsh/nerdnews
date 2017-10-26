@@ -75,14 +75,6 @@ Nerdnews::Application.configure do
 
   config.action_mailer.default_url_options = {host: "nerdnews.ir"}
 
-  config.paperclip_defaults = {
-    :storage => :dropbox,
-    :dropbox_credentials => "#{Rails.root}/config/dropbox.yml",
-    :dropbox_options => {
-      path: proc { |style| "#{self.class.to_s.downcase}_#{id}_#{self.thumbnail.name.to_s}#{File.extname(self.thumbnail.original_filename).downcase}" }
-    }
-  }
-
   config.middleware.use ExceptionNotification::Rack,
   :email => {
     :email_prefix => "[NerdNews] ",
